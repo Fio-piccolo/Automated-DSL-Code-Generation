@@ -118,5 +118,3 @@ Files containing prompts and rules:
 ## 📦 LAST UPDATE
 ```
 Fio250403
-
----

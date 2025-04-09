@@ -15,7 +15,7 @@ You can install all required dependencies in one of the following ways:
 ### ✅ Option 1: Using the install script
 
 ```bash
-python install_env.py
+python env_setup.py
 ```
 ### ✅ Option 2: Using requirements.txt
 Alternatively, you can install the dependencies using the requirements.txt file:

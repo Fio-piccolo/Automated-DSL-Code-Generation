@@ -10,7 +10,8 @@ git fetch
 git checkout main
 
 git add .
-git commit -m "Cy_25_04_09_4:10"
+git commit -m "Cy_25_04_09_4:13"
+git push
 git push -u origin main
 
 tree /f

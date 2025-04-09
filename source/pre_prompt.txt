@@ -1,0 +1,4 @@
+{pre_content}
+{examples}
+##Task need to write
+x:{input_x}y:{ans_y}

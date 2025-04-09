@@ -1,0 +1,77 @@
+<Literal>         ::= <Number> | <Decimal> | <BoolConst> | <HexConst> | <BinConst> | <StringConst> | <Time>
+<Number>          ::= '0' | [1-9][0-9]*
+<Decimal>         ::= <Number> '.' [0-9]+
+<BoolConst>       ::= 'true' | 'false'
+<HexConst>        ::= '0x' [0-9a-fA-F]+
+<BinConst>        ::= '0' | '1'
+<StringConst>     ::= '"' (可打印字符)* '"'
+<Time>            ::= <Number> ('s' | 'ms' | 'us')
+<Note>            ::= '/*' <StringConst> '*/'
+<Identifier>      ::= [a-zA-Z_] [a-zA-Z0-9_]*
+<DataType>        ::= 'Int' | 'Unsigned Int' | 'Float' | 'Double' | 'Bool' | 'String' | 'TR32' <DataType>
+<ArithmeticSymbol> ::= '+' | '-' | '*' | '/' | '%' | '^'
+<LogicSymbol>      ::= 'and' | 'or' | 'not'
+<CompareSymbol>    ::= '<' | '<=' | '==' | '>=' | '>' | '!='
+<BoolExpr>        ::= <SingleBoolExpr> (('and' | 'or') <SingleBoolExpr>)*
+<SingleBoolExpr>  ::= <BoolConst> | '(' <Identifier> <CompareSymbol> <Literal> ')'
+
+// 系统组成运行平台
+<SystemDef>       ::= 'System' '{' <CompDef>+ <ControlDef> <ConnectDef>* '}'
+<CompDef>         ::= 'Device' <SubType> <Identifier> '{' <CompAttr> '}'
+<SubType>         ::= 'Gyro3F' | 'DSS' | 'JET' | 'ExtComputer'  // 示例类型
+<CompAttr>        ::= ('GroupNum' ':' <UNSIGNEDNUMBER>)? <PortDef>+ ('ResponseTime' ':' <Time>)?
+<PortDef>         ::= 'Port' <PortName> '(' <HEX_CONST> ')' ':' <PortAttr> (',' <PortAttr>)*
+<PortAttr>        ::= <Identifier> ',' <Identifier>  // 数据名与协议表
+
+// 控制计算机定义
+<ControlDef>      ::= 'Controller' <Identifier> '{' <TimerDef> <ControlPeriod> <InterruptDef> '}'
+<TimerDef>        ::= 'Timer' <Identifier> '{' 'Interval' ':' <Time> 'RegAddr' ':' <HEX_CONST> '}'
+<ControlPeriod>   ::= 'ControlPeriod' ':' <Time>
+<InterruptDef>    ::= 'Interrupt' <Identifier> '{' 'Trigger' ':' <TimerDef> '}'
+
+// 数据声明
+<DataDeclaration> ::= ('DeviceDataDeclaration' | 'BusinessDataDeclaration') '{' <VarDef>+ '}'
+<VarDef>          ::= ('TR32' <DataType>)? <Identifier> ('[' <Number> ']')? (<TransTable>)? (':' <InitValue>)? ';'
+<TransTable>      ::= <Identifier>  // 转换表引用
+<InitValue>       ::= <Literal> | <Identifier>
+
+// 依赖关系
+<Dependencies>    ::= 'Dependencies' '{' (<DataDependency> | <ControlDependency>)+ '}'
+<DataDependency>  ::= <Identifier> '{' <DataSet> '}' 'DependsOn' <Identifier> ';'
+<ControlDependency> ::= <Identifier> '{' <DeviceSet> '}' 'DependsOn' <Identifier> ';'
+<DataSet>         ::= <Identifier> (',' <Identifier>)*
+<DeviceSet>       ::= <Identifier> (',' <Identifier>)*
+
+// 操作性语句
+<AutomicFunc>     ::= <TimeConstraint>? (
+    <InitFunc> | <SetFunc> | <GetDataFunc> | <SendDataFunc> |
+    <ComputeFunc> | <ProTMFunc> | <ProTCFunc>
+) <ReqCapByForm>? <TimeConsDef>?
+<TimeConstraint>  ::= ('At' '(' <Time> (',' 'Period')? ')' |
+                      'In' '(' <Time> | '[' <Time> ',' <Time> ']' ')' |
+                      'After' '(' <Time> | '[' <Time> ',' <Time> ']' ')' |
+                      'Over' '(' <Time> ',' ('c' | 'nc') ',' <Number> ')')
+<ReqCapByForm>    ::= 'ReqCapByTable' <Identifier> |
+                      'ReqCapByFormula' <Identifier> |
+                      'ReqCapByNL' <String> |
+                      'ReqCapByPseudoCode' <Identifier> |
+                      'ReqCapByFlowChart' <Identifier>
+<TimeConsDef>     ::= 'Finished' 'Within' <Time>
+
+// 原子指令模板
+<InitFunc>        ::= 'Init' <PortName> '{' <Config> '}'
+<SetFunc>         ::= 'Set' <Identifier> '=' <Expression>
+<GetDataFunc>     ::= 'GetData' <Identifier> '{' <DataSet> '}'
+<SendDataFunc>    ::= 'SendData' <Identifier> '{' <DataSet> '}'
+<ComputeFunc>     ::= ('CalEnv' | 'ProVId' | 'DetAtt' | 'CalTar' | 'CalCtrl' | 'SwitchMode')
+                      <OutputData> <InputData>
+<ProTMFunc>       ::= 'ProTM' <Identifier> '{' <DataSet> '}'
+<ProTCFunc>       ::= 'ProTC' <Identifier> '{' <DataSet> '}'
+
+// 组合语句
+<CompositeFunc>   ::= 'Composite' <Identifier> '{' <Statement>+ '}' <TimeConsDef>?
+<Statement>       ::= <AutomicFunc> ';' | <CompositeFunc> | <IfStatement> | <Switch> | <Loop>
+<IfStatement>     ::= 'If' '(' <BoolExpr> ')' '{' <Statement>+ '}' ('Else' '{' <Statement>+ '}')?
+<Switch>          ::= 'Switch' '(' <Identifier> ')' '{' <Case>+ '}'
+<Case>            ::= 'Case' <Literal> ':' '{' <Statement>+ '}'
+<Loop>            ::= 'While' '(' <BoolExpr> ')' '{' <Statement>+ '}'

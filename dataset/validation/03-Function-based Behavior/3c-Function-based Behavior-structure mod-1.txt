@@ -1,0 +1,2 @@
+
+该系统需求描述了一个车辆和挂车的连接结构以及连接行为。系统包含车辆（Vehicle）和挂车（Trailer），其中车辆框架（VehicleFrame）包含一个牵引球（HitchBall），而挂车框架（TrailerFrame）包含一个挂车耦合器（TrailerCoupler）。定义了一个连接结构TrailerHitch，其一端为牵引球，另一端为挂车耦合器。在系统中，vehicle-trailer system使用了一个TrailerHitch连接，将车辆的牵引球连接到挂车的挂车耦合器。行为部分定义了连接和断开挂车的操作：首先，通过connect trailer to vehicle动作，创建一个TrailerHitch连接，将挂车连接到车辆；然后，通过destroy connection of trailer to vehicle动作销毁连接对象；最后，通过disconnect trailer from vehicle动作将TrailerHitch连接设置为null，以断开挂车和车辆的连接。整个需求描述了从连接到断开挂车的过程，清晰地定义了各部件的结构关系和连接管理的行为。

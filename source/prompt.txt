@@ -1,0 +1,98 @@
+You are an expert on Domain Specific Language Generation, and you need to write formal requirements with a domain-specific language for the given natural language requirements. First, you should write a grammar that contains all the necessary BNF rules. Then, you should write formal requirements that conform to your predicted rules.
+G: 
+<Literal>         ::= <Number> | <Decimal> | <BoolConst> | <HexConst> | <BinConst> | <StringConst> | <Time>
+<Number>          ::= '0' | [1-9][0-9]*
+<Decimal>         ::= <Number> '.' [0-9]+
+<BoolConst>       ::= 'true' | 'false'
+<HexConst>        ::= '0x' [0-9a-fA-F]+
+<BinConst>        ::= '0' | '1'
+<StringConst>     ::= '"' (可打印字符)* '"' 
+<Time>            ::= <Number> ('s' | 'ms' | 'us')
+<Note>            ::= '/*' <StringConst> '*/'
+<Identifier>      ::= [a-zA-Z_] [a-zA-Z0-9_]* 
+<DataType>        ::= 'Int' | 'Unsigned Int' | 'Float' | 'Double' | 'Bool' | 'String' | 'TR32' <DataType>
+<ArithmeticSymbol> ::= '+' | '-' | '*' | '/' | '%' | '^'
+<LogicSymbol>      ::= 'and' | 'or' | 'not'
+<CompareSymbol>    ::= '<' | '<=' | '==' | '>=' | '>' | '!='
+<BoolExpr>        ::= <SingleBoolExpr> (('and' | 'or') <SingleBoolExpr>)*
+<SingleBoolExpr>  ::= <BoolConst> | '(' <Identifier> <CompareSymbol> <Literal> ')'
+
+// 系统组成运行平台
+<SystemDef>       ::= 'System' '{' <CompDef>+ <ControlDef> <ConnectDef>* '}'
+<CompDef>         ::= 'Device' <SubType> <Identifier> '{' <CompAttr> '}'
+<SubType>         ::= 'Gyro3F' | 'DSS' | 'JET' | 'ExtComputer'  // 示例类型
+<CompAttr>        ::= ('GroupNum' ':' <UNSIGNEDNUMBER>)? <PortDef>+ ('ResponseTime' ':' <Time>)?
+<PortDef>         ::= 'Port' <PortName> '(' <HEX_CONST> ')' ':' <PortAttr> (',' <PortAttr>)*
+<PortAttr>        ::= <Identifier> ',' <Identifier>  // 数据名与协议表
+
+// 控制计算机定义
+<ControlDef>      ::= 'Controller' <Identifier> '{' <TimerDef> <ControlPeriod> <InterruptDef> '}'
+<TimerDef>        ::= 'Timer' <Identifier> '{' 'Interval' ':' <Time> 'RegAddr' ':' <HEX_CONST> '}'
+<ControlPeriod>   ::= 'ControlPeriod' ':' <Time>
+<InterruptDef>    ::= 'Interrupt' <Identifier> '{' 'Trigger' ':' <TimerDef> '}'
+
+// 数据声明
+<DataDeclaration> ::= ('DeviceDataDeclaration' | 'BusinessDataDeclaration') '{' <VarDef>+ '}'
+<VarDef>          ::= ('TR32' <DataType>)? <Identifier> ('[' <Number> ']')? (<TransTable>)? (':' <InitValue>)? ';'
+<TransTable>      ::= <Identifier>  // 转换表引用
+<InitValue>       ::= <Literal> | <Identifier>
+
+// 依赖关系
+<Dependencies>    ::= 'Dependencies' '{' (<DataDependency> | <ControlDependency>)+ '}'
+<DataDependency>  ::= <Identifier> '{' <DataSet> '}' 'DependsOn' <Identifier> ';'
+<ControlDependency> ::= <Identifier> '{' <DeviceSet> '}' 'DependsOn' <Identifier> ';'
+<DataSet>         ::= <Identifier> (',' <Identifier>)*
+<DeviceSet>       ::= <Identifier> (',' <Identifier>)*
+
+// 操作性语句
+<AutomicFunc>     ::= <TimeConstraint>? ( 
+    <InitFunc> | <SetFunc> | <GetDataFunc> | <SendDataFunc> | 
+    <ComputeFunc> | <ProTMFunc> | <ProTCFunc> 
+) <ReqCapByForm>? <TimeConsDef>?
+<TimeConstraint>  ::= ('At' '(' <Time> (',' 'Period')? ')' | 
+                      'In' '(' <Time> | '[' <Time> ',' <Time> ']' ')' | 
+                      'After' '(' <Time> | '[' <Time> ',' <Time> ']' ')' | 
+                      'Over' '(' <Time> ',' ('c' | 'nc') ',' <Number> ')')
+<ReqCapByForm>    ::= 'ReqCapByTable' <Identifier> | 
+                      'ReqCapByFormula' <Identifier> | 
+                      'ReqCapByNL' <String> | 
+                      'ReqCapByPseudoCode' <Identifier> | 
+                      'ReqCapByFlowChart' <Identifier>
+<TimeConsDef>     ::= 'Finished' 'Within' <Time>
+
+// 原子指令模板
+<InitFunc>        ::= 'Init' <PortName> '{' <Config> '}'
+<SetFunc>         ::= 'Set' <Identifier> '=' <Expression>
+<GetDataFunc>     ::= 'GetData' <Identifier> '{' <DataSet> '}'
+<SendDataFunc>    ::= 'SendData' <Identifier> '{' <DataSet> '}'
+<ComputeFunc>     ::= ('CalEnv' | 'ProVId' | 'DetAtt' | 'CalTar' | 'CalCtrl' | 'SwitchMode') 
+                      <OutputData> <InputData>
+<ProTMFunc>       ::= 'ProTM' <Identifier> '{' <DataSet> '}'
+<ProTCFunc>       ::= 'ProTC' <Identifier> '{' <DataSet> '}'
+
+// 组合语句
+<CompositeFunc>   ::= 'Composite' <Identifier> '{' <Statement>+ '}' <TimeConsDef>?
+<Statement>       ::= <AutomicFunc> ';' | <CompositeFunc> | <IfStatement> | <Switch> | <Loop>
+<IfStatement>     ::= 'If' '(' <BoolExpr> ')' '{' <Statement>+ '}' ('Else' '{' <Statement>+ '}')?
+<Switch>          ::= 'Switch' '(' <Identifier> ')' '{' <Case>+ '}'
+<Case>            ::= 'Case' <Literal> ':' '{' <Statement>+ '}'
+<Loop>            ::= 'While' '(' <BoolExpr> ')' '{' <Statement>+ '}'
+
+x: 陀螺数据采集。调用条件为：160ms周期调用，输入为串口操作地址，输出为加电状态和角速度模拟量。处理逻辑为：控制软件每周期通过异步串口向陀螺发送两字节取数指令0xEB91，然后软件通过异步串口接收陀螺测量数据，发送指令与接收数据使用的串口地址为0x881A。从发送取数指令到从异步串口读取数据的时间间隔要大于5ms。软件需要对采集数据的长度、帧头、校验和进行判断。
+G(x):
+<GetDataFunc>     ::= 'GetData' <Identifier> '{' <DataSet> '}'
+<Identifier>      ::= [a-zA-Z_] [a-zA-Z0-9_]*
+<DataSet>         ::= <Identifier> (',' <Identifier>)*
+<AutomicFunc>     ::= <TimeConstraint>? ( 
+    <InitFunc> | <SetFunc> | <GetDataFunc> | <SendDataFunc> | 
+    <ComputeFunc> | <ProTMFunc> | <ProTCFunc> 
+) <ReqCapByForm>? <TimeConsDef>?
+<ReqCapByForm>    ::= 'ReqCapByTable' <Identifier> | 
+                      'ReqCapByFormula' <Identifier> | 
+                      'ReqCapByNL' <String> | 
+                      'ReqCapByPseudoCode' <Identifier> | 
+                      'ReqCapByFlowChart' <Identifier>
+y:GetData gyro1 {deltG[9],GyroPowerState[9]} ReqCapByTable Gyro_TransTable;
+
+x: 太阳敏感器数据采集。调用条件为160ms周期调用。输入为AD采集寄存器地址。输出为部件加电状态、太阳可见标志及测量角度。处理逻辑为通过对角度模拟量进行AD转换得到12位的角度数据（偏移二进制码，范围0x000~0xFFF，最小码位对应5/2048），通过锁存器电路对SP信号与电源状态信号进行采集。
+G(x):

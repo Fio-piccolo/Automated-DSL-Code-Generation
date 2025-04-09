@@ -57,7 +57,7 @@ requirement.txt
 
 ├─reminder
 │  └─command.txt
-|
+
 ├─results
 │  └─relation
 │      └─gpt-4

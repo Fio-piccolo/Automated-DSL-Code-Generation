@@ -113,6 +113,8 @@ Files containing prompts and rules:
 - **prompt.txt**: Main prompt for model inference.
 - **rules.txt**: Rules for prompt handling.
 
+---
+
 ## 📦 LAST UPDATE
 
 **Fio250403**

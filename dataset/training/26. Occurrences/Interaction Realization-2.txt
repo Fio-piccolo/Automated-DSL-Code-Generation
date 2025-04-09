@@ -1,5 +1,0 @@
-系统应定义一个巡航控制交互实现流程，以实现驾驶员和车辆部件之间的端口连接和消息流动。驾驶员组件`driver_b`配置了`setSpeedPort`端口，用于输出“设定速度”消息（SetSpeed），并通过`driverToVehicleInterface`接口连接至车辆组件`vehicle_b`的`setSpeedPort`端口，以将“设定速度”消息传输至车辆。
-
-在车辆组件`vehicle_b`中，`setSpeedPort`绑定到巡航控制器`cruiseController_b`的`setSpeedPort`端口，从而使“设定速度”消息进入巡航控制器。巡航控制器同时拥有两个其他端口：`sensedSpeedPort`接收“检测到的速度”消息（SensedSpeed），`fuelCommandPort`用于输出“燃料指令”消息（FuelCommand）。车辆中的速度计组件`speedometer_b`通过其`out`端口` sensedSpeedPort`向巡航控制器的`sensedSpeedPort`端口发送“检测到的速度”消息；同样，巡航控制器通过其`fuelCommandPort`端口将“燃料指令”消息发送至发动机组件`engine_b`的`fuelCommandPort`端口。
-
-在交互实例`cruiseControlInteraction_b`中，事件映射如下：驾驶员的“设定速度”发送事件关联到巡航控制器的“设定速度”接收事件，速度计的“检测到的速度”发送事件关联到巡航控制器的“检测到的速度”接收事件，巡航控制器的“燃料指令”发送事件关联到发动机的“燃料指令”接收事件。该交互流程通过端口和消息流确保了巡航控制的消息传递和执行顺序，使得系统在不同部件之间实现协调和一致的巡航控制功能。

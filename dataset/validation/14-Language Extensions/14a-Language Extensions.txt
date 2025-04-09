@@ -1,2 +1,0 @@
-
-该系统需求描述了一个自定义语言扩展，用于为系统部件添加分类级别的元数据。User Defined Extensions包中定义了枚举ClassificationLevel，包括“未分类”（uncl）、“机密”（conf）和“绝密”（secret）三个级别。同时定义了元数据类型Classified，其中引用了SysML::PartUsage类型的注释元素，并设置了classificationLevel属性以指定分类级别。在此模型中，部件part_X和part_Y均应用了Classified元数据，并将其classificationLevel设置为“机密”（conf）。part_X使用完整的元数据语法，part_Y则采用了简化的@注释符号，两者效果相同。这一语言扩展为系统提供了灵活的分类管理机制，使得可以通过元数据对部件进行安全级别的标注。

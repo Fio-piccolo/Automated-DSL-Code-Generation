@@ -1,0 +1,15 @@
+--task relation --train_dir dataset/training.json --test_dir dataset/test.json --shot_dir dataset/examples.json --shot_num 3 --prompt_dir source/pre_prompt.txt --model gpt-4 --output_dir results/
+
+
+git config --global user.email "Fio-piccolo@outlook.com"
+
+git config --global user.name "Fio-piccolo"
+git remote add origin https://github.com/Fio-piccolo/Automated-DSL-Code-Generation.git
+
+git fetch
+git checkout main
+
+git commit -m "Cy_25_04_09_3:00"
+git push -u origin main
+
+tree /f

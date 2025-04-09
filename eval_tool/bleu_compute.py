@@ -13,13 +13,13 @@ def calculate_bleu_scores(reference_strs, candidate_str):
     return bleu_score, bleu_1gram, bleu_2gram
 
 # 示例用法
-references = [
-    'this is a great test ?',
-    'there are tests'
-]
-candidate = 'this is a nice tests'
-
-bleu, bleu_1gram, bleu_2gram = calculate_bleu_scores(references, candidate)
-print(f'BLEU score: {bleu:.4f}')
-print(f'1-gram BLEU score: {bleu_1gram:.4f}')
-print(f'2-gram BLEU score: {bleu_2gram:.4f}')
+# references = [
+#     'this is a great test ?',
+#     'there are tests'
+# ]
+# candidate = 'this is a nice tests'
+#
+# bleu, bleu_1gram, bleu_2gram = calculate_bleu_scores(references, candidate)
+# print(f'BLEU score: {bleu:.4f}')
+# print(f'1-gram BLEU score: {bleu_1gram:.4f}')
+# print(f'2-gram BLEU score: {bleu_2gram:.4f}')

@@ -1,5 +1,5 @@
 [
   {
-    "predict": "package 'Vehicle Configuration Example' {\n\tpublic import 'Part Definition Example'::*;\n\t\n\tpart def Vehicle {\n\t\t:>> mass = 1750.0;\n\t\tpart frontAxle :> Axle {\n\t\t\tpart wheel[2] :> Wheel;\n\t\t}\n\t\tpart rearAxle :> Axle {\n\t\t\tpart wheel[2] :> Wheel;\n\t\t}\n\t}\n\t\n\tpart def VehicleVariant :> Vehicle {\n\t\t:>> mass = 2000.0;\n\t\tpart frontAxle :> SteeringAxle {\n\t\t\tpart leftWheel :> Wheel;\n\t\t\tpart rightWheel :> Wheel;\n\t\t}\n\t\tpart rearAxle {\n\t\t\tpart leftWheel :> Wheel;\n\t\t\tpart rightWheel :> Wheel;\n\t\t}\n\t}\n}"
+    "predict": "package 'Vehicle Configuration Example' {\n\t\n\tpart def Vehicle {\n\t\t:>> mass = 1750.0;\n\t\tpart frontAxle :> Axle {\n\t\t\tpart wheel[2] :> Wheel;\n\t\t}\n\t\tpart rearAxle :> Axle {\n\t\t\tpart wheel[2] :> Wheel;\n\t\t}\n\t}\n\t\n\tpart def SteeringAxle :> Axle {\n\t\tpart wheel[2] :> Wheel;\n\t}\n\t\n\tpart def VehicleVariant :> Vehicle {\n\t\t:>> mass = 2000.0;\n\t\tpart frontAxle :> SteeringAxle {\n\t\t\tpart wheel[2] :> Wheel {\n\t\t\t\tpart leftWheel :> wheel[1];\n\t\t\t\tpart rightWheel :> wheel[2];\n\t\t\t}\n\t\t}\n\t\tpart rearAxle :> Axle {\n\t\t\tpart wheel[2] :> Wheel {\n\t\t\t\tpart leftWheel :> wheel[1];\n\t\t\t\tpart rightWheel :> wheel[2];\n\t\t\t}\n\t\t}\n\t}\n}"
   }
 ]

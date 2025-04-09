@@ -1,7 +1,30 @@
 # Automated-DSL-Code-Generation
-Fio_testo
-## Enviroment
-pip install tree-sitter==0.23.1
-pip install codebleu
-pip install codebleu
-pip install rouge_score
+
+## 📦 Module Name
+
+**Fio_testo**
+
+---
+
+## 🐍 Environment Requirements
+
+- **Python version**: 3.12.2 (recommended)
+- **pip**: ≥ 23.0
+- OS support: Windows / macOS / Linux
+
+---
+
+## 🔧 Environment Setup
+
+You can install all required dependencies in one of the following ways:
+
+### ✅ Option 1: Using the install script
+
+bash
+python install_env.py
+
+### ✅ Option 2: Using requirements.txt
+Alternatively, you can install the dependencies using the requirements.txt file:
+
+bash
+pip install -r requirements.txt

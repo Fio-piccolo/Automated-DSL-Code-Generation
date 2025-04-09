@@ -1,14 +1,5 @@
 # Automated-DSL-Code-Generation
 
-<<<<<<< HEAD
-## 📦 Module Name
-
-**Fio_testo**
-
----
-
-=======
->>>>>>> b67ff815d2e7c0f9126777e756b7c5bee97c8118
 ## 🐍 Environment Requirements
 
 - **Python version**: 3.12.2 (recommended)
@@ -25,8 +16,6 @@ You can install all required dependencies in one of the following ways:
 
 ```bash
 python install_env.py
-<<<<<<< HEAD
-=======
 ```
 ### ✅ Option 2: Using requirements.txt
 Alternatively, you can install the dependencies using the requirements.txt file:
@@ -139,4 +128,3 @@ Files containing prompts and rules:
 ## 📦 LAST UPDATE
 ```
 Fio250403
->>>>>>> b67ff815d2e7c0f9126777e756b7c5bee97c8118

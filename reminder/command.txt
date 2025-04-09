@@ -9,6 +9,7 @@ git remote add origin https://github.com/Fio-piccolo/Automated-DSL-Code-Generati
 git fetch
 git checkout main
 
+git add .
 git commit -m "Cy_25_04_09_3:00"
 git push -u origin main
 

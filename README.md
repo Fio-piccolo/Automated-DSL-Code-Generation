@@ -38,22 +38,23 @@ env_setup.py
 new_gpt_inference.py
 README.md
 requirement.txt
+
 ├─dataset
 │  ├─data_process.py
 │  ├─examples.json
 │  ├─test.json
 │  └─training.json
-|
+
 ├─eval_tool
 │  ├─bleu_compute.py
 │  ├─codebleu_compute.py
 │  └─rough_compute.py
-│  
+
 ├─reference
 │  ├─compute_rough.py
 │  ├─cy_old_gpt_inference.py
 │  └─gpt_inference（base）.py
-|
+
 ├─reminder
 │  └─command.txt
 |
@@ -62,10 +63,10 @@ requirement.txt
 │      └─gpt-4
 │          └─fold_0
 │              └─3.json
-|
+
 ├─script
 │  └─run_inference.sh
-|
+
 └─source
    ├─pre_prompt.txt
    ├─prompt.txt

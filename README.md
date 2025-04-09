@@ -117,6 +117,6 @@ Files containing prompts and rules:
 
 ## 📦 LAST UPDATE
 ```
-**Fio250403**
+Fio250403
 
 ---

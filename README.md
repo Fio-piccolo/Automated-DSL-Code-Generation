@@ -72,7 +72,7 @@ requirement.txt
    └─rules.txt
 ```
 
-## Directory Overview
+## 📂 Directory Overview
 
 - **env_setup.py**: Script to set up the environment.
 - **new_gpt_inference.py**: GPT inference implementation.

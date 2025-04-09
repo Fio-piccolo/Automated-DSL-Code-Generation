@@ -1,11 +1,5 @@
 # Automated-DSL-Code-Generation
 
-## 📦 Module Name
-
-**Fio_testo**
-
----
-
 ## 🐍 Environment Requirements
 
 - **Python version**: 3.12.2 (recommended)
@@ -118,6 +112,12 @@ Files containing prompts and rules:
 - **pre_prompt.txt**: Predefined prompts for the model.
 - **prompt.txt**: Main prompt for model inference.
 - **rules.txt**: Rules for prompt handling.
+
+## 📦 LAST UPDATE
+
+**Fio250403**
+
+---
 
 ```
 

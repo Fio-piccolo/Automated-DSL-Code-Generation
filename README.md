@@ -22,9 +22,10 @@ You can install all required dependencies in one of the following ways:
 
 ```bash
 python install_env.py
-
+```
 ### ✅ Option 2: Using requirements.txt
 Alternatively, you can install the dependencies using the requirements.txt file:
 
 ```bash
 pip install -r requirements.txt
+```

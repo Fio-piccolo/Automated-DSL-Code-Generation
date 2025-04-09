@@ -116,11 +116,7 @@ Files containing prompts and rules:
 ---
 
 ## 📦 LAST UPDATE
-
+```
 **Fio250403**
 
 ---
-
-```
-
-This structure provides a clean overview of the project components and their roles.

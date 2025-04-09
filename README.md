@@ -24,7 +24,8 @@ Alternatively, you can install the dependencies using the requirements.txt file:
 pip install -r requirements.txt
 ```
 
-## 🐍 Run new_gpt_inference
+## 🔑 Run new_gpt_inference
+
 ### Argument
 ```bash
 --task relation --train_dir dataset/training.json --test_dir dataset/test.json --shot_dir dataset/examples.json --shot_num 3 --prompt_dir source/pre_prompt.txt --model gpt-4 --output_dir results/

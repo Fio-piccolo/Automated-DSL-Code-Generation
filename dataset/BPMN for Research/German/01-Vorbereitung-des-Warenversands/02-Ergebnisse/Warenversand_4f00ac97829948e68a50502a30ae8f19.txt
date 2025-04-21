@@ -1,0 +1,14 @@
+该业务流程主要围绕Computerversand Berlin展开，涵盖了多个环节和决策点，涉及仓储、物流管理以及秘书工作等多个方面，通过一系列有序的任务和决策，确保业务的顺利进行，具体如下：
+1. 流程开始于“Bestellung aufnehmen”（接收订单）任务，此任务完成后，流程进入并行路径。
+2. 一条路径是检查订单数量是否大于x：
+    - 若数量大于x，执行“Angebote von Spediteuren anfordern”（向运输商请求报价）任务。
+    - 若数量不大于x，则执行“Paketschein ausfüllen”（填写包裹单）任务。
+3. 另一条路径是判断是否需要保险：
+    - 如果需要保险，执行“Versicherung abschließen”（购买保险）任务。
+    - 如果不需要保险，则跳过此任务。
+4. 完成上述任务或决策后，流程汇聚到一个并行网关。
+5. 接下来执行“Ware verpacken”（包装货物）任务。
+6. 之后是“Ware zur Abholung bereitstellen”（准备货物以供取货）任务。
+7. 完成该任务后，流程到达结束事件，标志着整个业务流程的结束。
+
+在流程中，每个任务都有明确的责任人或归属部门，例如“Ware verpacken”和“Ware zur Abholung bereitstellen”任务归属于“Lager”（仓库）部门；“Versicherung abschließen”任务由“Logistikleiter”（物流主管）负责；而“Bestellung aufnehmen”、“Paketschein ausfüllen”、“Angebote von Spediteuren anfordern”、“Spediteur auswählen”、“Spediteur beauftragen”等任务则与“Sekretariat”（秘书）相关。通过这样的流程安排，实现了各部门之间的协同工作，确保业务流程的高效运作。

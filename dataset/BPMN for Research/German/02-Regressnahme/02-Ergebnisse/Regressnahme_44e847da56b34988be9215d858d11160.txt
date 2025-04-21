@@ -1,0 +1,9 @@
+业务需求如下：
+1. 当“Regressverdacht gemeldet”（退回嫌疑已报告）这个起始事件触发后，进入“Regress prüfen”（检查退回）任务。
+2. 在“Regress prüfen”任务完成后，流程进入“Besteht Regressanspruch?”（是否存在退回索赔？）这个排他网关。
+3. 如果排他网关判定存在退回索赔（“ja”路径），则执行“Zahlungsaufforderung senden”（发送付款请求）任务；若不存在退回索赔（“nein”路径），则执行“Vorgang abschließen”（完成流程）任务。
+4. 在“Zahlungsaufforderung senden”任务完成后，触发“Wiedervorlage umgestellt”（重新提交已更改）这个中间抛出事件。
+5. “Wiedervorlage umgestellt”事件触发后，流程进入“Antwort von VN”（来自VN的回复）这个排他事件网关。
+6. 若在“Antwort von VN”网关中，接收到“Rückzahlung erhalten”（收到退款）的中间捕获事件，则执行“Geldeingang verbuchen”（记录资金收入）任务；若接收到“Wiedervorlage ZP erreicht”（重新提交ZP已达成）的中间捕获事件，则先等待一段时间（由定时器事件定义），之后执行“Inkasso beauftragen”（委托收款）任务；若接收到“Widerspruch erhalten”（收到异议）的中间捕获事件，则先执行“Widerspruch prüfen”（检查异议）任务，之后根据“Widerspruch gerechtfertigt?”（异议是否合理？）这个排他网关的判定结果，若合理（“ja”路径），则执行“Vorgang abschließen”（完成流程）任务，若不合理（“nein”路径），则也执行“Inkasso beauftragen”（委托收款）任务。
+7. 在执行“Inkasso beauftragen”任务时，会有一个文本注释询问“offen was passiert, wenn Inkasso beauftragt wird: Endereignis?”（委托收款时会发生什么：结束事件？）。
+8. 整个流程最终会到达“Vorgang abschließen”（完成流程）或“Vorgang abgeschlossen”（流程已完成）的结束事件。

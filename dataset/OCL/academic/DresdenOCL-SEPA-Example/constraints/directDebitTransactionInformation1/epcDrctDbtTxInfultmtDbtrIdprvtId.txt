@@ -1,0 +1,3 @@
+The requirement goes as follows: 
+
+In the context of Direct Debit Transaction Information 1, there could be only one occurrence of private identification for the ultimate debtor of Direct Debit Transaction Information. It should either be undefined or the size of 'private Identification' of 'ultimate debtor' should be less than or equal to one, according to the SEPA B2B Direct Debit C2B Implementation Guidelines Version 1.3., referring to row 20 on page13.

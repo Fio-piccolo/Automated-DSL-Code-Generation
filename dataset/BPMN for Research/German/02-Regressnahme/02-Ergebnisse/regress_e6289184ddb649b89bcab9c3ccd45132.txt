@@ -1,0 +1,2 @@
+业务需求如下：
+该业务流程主要围绕“Regressannahme”展开，起始于一个开始事件。开始后，进入“Regress prüfen”任务进行检查。检查后通过一个并行网关分成两条路径，一条路径进入“Wiedervorlagefrist abgelaufen”中间捕获事件，当此期限到期后进入“Geld eingegangen”任务；另一条路径进入“Zahlungsaufforderung an VN”中间抛出事件并发送支付请求给VN。之后，“Geld eingegangen”任务完成后通过一个并行网关再次分支，根据不同条件进入不同任务。如果“Widerspruch gerechtfertigt”任务通过，进入一个排他网关进行判断，若“Widerspruch nicht gerechtfertigt”，则进入“Weitergabe an Inkasso”任务；若“Regress berechtigt”，则回到并行网关；若“Regress nicht berechtigt”，则进入结束事件。若VN回应拒绝，进入“VN widerspricht”任务，完成后进入排他网关，之后根据不同判断结果分别进入不同的结束事件。同时，在流程中还有一些条件判断和流向的定义，以确保整个业务流程的顺利进行和不同情况的正确处理。

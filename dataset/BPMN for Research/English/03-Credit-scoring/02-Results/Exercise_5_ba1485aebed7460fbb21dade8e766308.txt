@@ -1,0 +1,19 @@
+银行（Bank）和舒法（Schufa）两个参与方协同处理信贷评分请求业务流程。
+
+### 银行（Bank）流程
+1. 当银行收到来自“Banking Frontend”的“Request Received”消息事件触发开始事件（sid-EFEE38B5-CEB9-415E-B1F8-535C73F32708）后，发起“Request Credit Score”任务（sid-31299BC0-57F3-473E-9809-EE9C34BF61B1），请求舒法提供信用评分。
+2. 任务完成后，流程进入事件驱动网关（sid-ADFDAA59-D23C-4F88-859F-FCF01D6A6675），根据不同情况进行分支：
+   - 若出现“Delay Message Shown”中间捕获事件（sid-D12A568C-07AC-45BB-81BF-5867065578AB），可能表示有延迟消息相关情况。
+   - 若出现“Result Received”中间捕获事件（sid-4C45620F-CAD0-456B-B4D4-A398395D1047），表示收到舒法的结果。
+3. 之后通过排他网关（sid-B4B13C0B-B369-45A0-A702-13F10320B5E6）汇聚结果，并根据条件走向：
+   - 若满足条件走向“Send Rating Info”结束事件（sid-0A80B17E-21EA-4D38-92D6-75718C519FD9），发送评级信息给相关方。
+   - 若出现“Result Received”中间捕获事件（sid-BB42F902-5E68-4EA9-8F9D-ABFB7598642A），同样经过排他网关（sid-B4B13C0B-B369-45A0-A702-13F10320B5E6）走向结束。
+
+### 舒法（Schufa）流程
+1. 当舒法收到来自银行的“Request Received”消息事件触发开始事件（sid-E592ED62-A79B-4D37-AEC6-4FF75A202B02）后，先执行“Compute First Quick Scoring”任务（sid-C873AA95-38FD-4A44-97C7-96C6A8EDB8DE）。
+2. 然后根据情况，通过排他网关（sid-6A8FDF1B-8F82-4892-B61B-7498EC9AF858）判断是立即结果还是非立即结果：
+   - 若为立即结果，触发“Result Produced”中间抛出事件（sid-43E39BC4-1E72-4090-960A-A7A734504CD6），发送结果给银行。
+   - 若非立即结果，触发“Delay Message Produced”中间抛出事件（sid-C37A6723-901B-4DBA-B31C-D2890A40E8AF），并执行“Perform Level 2 Scoring”任务（sid-172083D5-3333-4088-BEFC-58A997EDCCCA），之后再触发“Result Produced”中间抛出事件（sid-8824732C-1613-4C40-91B4-6338CF437B09）发送结果。
+3. 最后通过排他网关（sid-863BF9B7-E5EF-4B97-BA7D-4C41F626040F）汇聚结果，走向“End Request”结束事件（sid-09CBD991-4ABF-4008-8B53-A5E389051E76）。
+
+同时，银行与舒法之间通过消息流进行交互，如银行向舒法发送请求，舒法向银行反馈结果等。“Banking Frontend”与银行之间也存在消息流交互，触发银行的流程开始。

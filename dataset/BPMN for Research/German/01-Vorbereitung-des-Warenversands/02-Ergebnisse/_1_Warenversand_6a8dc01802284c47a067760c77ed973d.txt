@@ -1,0 +1,9 @@
+该BPMN流程描述了一个货物运输（Warenversand）的业务流程，主要涉及仓库工人（Lagerarbeiter）、秘书处（Sekretariat）和物流经理（Logisitikleiter）三个角色。流程从收到运输订单开始，经过一系列任务和决策，最终完成货物交付。具体业务逻辑如下：
+1. **开始与并行任务启动**：流程从“Versanauftrag erhalten”（收到运输订单）开始，随后通过并行网关（sid-F6FFD5AD）将流程分为两条并行路径。
+2. **确定货物数量**：秘书处的“Menge bestimmen”（确定数量）任务，之后通过“Menge?”（数量？）排他网关进行判断，根据数量大小决定后续流程。
+    - **小数量货物处理**：如果是小数量（“kleine Menge”序列流），进入“Paketschein ausfüllen”（填写包裹单）任务。
+    - **大数量货物处理**：如果是大数量（“große Menge”序列流），进入“Angebote einholen”（获取报价）任务，之后依次进行“Angebot auswählen”（选择报价）和“Spediteur beauftragen”（委托运输商）任务。
+3. **保险相关处理**：完成包裹单填写后，经过“Versicherung nötig?”（需要保险？）排他网关判断是否需要保险。
+    - **不需要保险**：若不需要（“Nein”序列流），直接进入“Ware verpaken”（包装货物）任务。
+    - **需要保险**：若需要（“Ja”序列流），物流经理执行“Versicherung abschließen”（完成保险）任务，之后流程合并。
+4. **货物包装与交付准备**：货物包装完成后，仓库工人执行“Ware ist zur Abholung bereit stellen”（准备好货物以供取货）任务，最后流程到达“Ende”（结束）事件，整个货物运输流程结束。

@@ -1,0 +1,3 @@
+The requirement is as follows:
+
+In the context of the 'DirectDebitTransactionInformation1' package within the 'isoStdIso20022TechXsdPain00800101' model, there is a constraint specified as 'EPC_InstdAmtEURO'. This constraint ensures that the currency of the instructed amount in direct debit transaction information (identified as 'instdAmt.ccy') should be set to EUR (Euro). This stipulation is based on row 18 on page 9 of the SEPA B2B Direct Debit C2B Implementation Guidelines.

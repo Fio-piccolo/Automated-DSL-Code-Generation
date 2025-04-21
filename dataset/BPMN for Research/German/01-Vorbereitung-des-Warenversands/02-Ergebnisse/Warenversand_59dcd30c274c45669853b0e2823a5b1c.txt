@@ -1,0 +1,7 @@
+流程从“Waren zum Versand bereit”（货物准备发货）的开始事件启动。随后通过并行网关分成两条并行路径：一条路径是仓库工人执行“Lagerarbeiter verpackt Ware”（仓库工人包装货物）任务，完成后流向汇聚并行网关；另一条路径先经过一个排他网关，根据条件“Bestellung > X”（订单大于X）和“Bestellung < X”（订单小于X）进行分支判断。
+
+若满足“Bestellung > X”，则经过一个包含网关，继续分成四条分支，分别是三个任务“Offerte Spediteur 1”（向运输商1询价）、“Offerte Spediteur 2”（向运输商2询价）、“Offerte Spediteur 3”（向运输商3询价）以及一条空分支。这三个询价任务完成后，通过汇聚包含网关，再流向汇聚并行网关。
+
+若满足“Bestellung < X”，则经过另一个排他网关，若判断为“keine Versicherung nötig”（无需保险），直接流向后续的汇聚排他网关；若需要保险，则执行“Logistikleiter schliesst Versicherung ab”（物流经理办理保险）任务，完成后也流向该汇聚排他网关。
+
+最后，并行路径在汇聚并行网关汇合，接着执行“Versand über Post”（通过邮政发货）任务，最终到达“Ware beim Kunden”（货物到达客户处）的结束事件。

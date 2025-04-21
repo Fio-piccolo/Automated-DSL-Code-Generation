@@ -1,0 +1,6 @@
+业务需求如下：
+首先有一个协作（collaboration），其中包含一个参与者（participant），该参与者关联一个流程（process）。流程中有多个车道（lane），分别代表不同的角色，如 Spediteure（发货人）、Sekretariat（秘书处）、Lagerarbeiter（仓库工人）、Logistikleiter（物流主管）。
+流程中包含多个任务（task），每个任务都有特定的名称和完成数量，例如 Spediteur 1: Angebotsabgabe（发货人 1：提交报价）等。任务之间通过序列流（sequenceFlow）连接，形成了一个流程的执行路径。
+在流程中还有一些网关（gateway），如 exclusiveGateway（排他网关）和 parallelGateway（并行网关），用于控制流程的分支和合并。
+流程从开始事件（startEvent）开始，经过一系列任务和网关的处理，最终到达结束事件（endEvent）。例如，开始事件“Bestellungseingang”（订单输入）后，会根据不同的条件通过排他网关“Menge klein?”（数量小？）进行分支，分别进入不同的任务流程。
+整个流程描述了一个货物从订单输入到发货的过程，涉及到多个角色的参与和不同任务的执行。

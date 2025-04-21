@@ -1,0 +1,18 @@
+该业务流程围绕货物运输展开，始于“Ware zu versenden”事件，涉及多个任务和决策点，以完成货物的保险购买、运输安排及交付。具体步骤如下：
+1. 起始点为“Ware zu versenden”，货物待发送。
+2. 首先由“Logistikleiter”角色执行“Versicherung abschliessen”任务，为货物购买保险。
+3. 之后进入并行网关，流程在此分支。
+   - 一个分支中，“Lagerarbeiter”进行“Versandart klären”任务，明确运输方式。
+   - 另一个分支中，进入“Menge?”排他网关，根据货物数量决策。
+     - 若数量大，执行“3 Speditionsangebote einholen”任务，获取三份运输报价。
+     - 若数量小，执行“Versicherungs-notwendikkeit klären”任务，确认保险必要性。
+4. “Versicherungs-notwendikkeit klären”任务完成后，进入“Versicherung nötig?”排他网关。
+   - 若需要保险，回到“Versicherung abschliessen”任务，再次确认保险。
+   - 若不需要保险，流程继续。
+5. 接着执行“Ware ist zur Abholung bereit”任务，通知货物可提取。
+6. 之后到达结束事件，流程结束。
+7. 在流程中，还涉及其他任务：
+   - “Paketschein ausfüllen”任务，填写包裹单。
+   - “Angebot auswählen”任务，选择运输报价。
+   - “Spediteur beauftragen”任务，委托运输商。
+8. 这些任务之间通过顺序流和排他网关进行逻辑连接，确保流程的顺利进行和决策的正确执行。

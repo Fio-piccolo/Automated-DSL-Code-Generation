@@ -1,0 +1,5 @@
+Name: Papers-researchers
+Tool: Papyrus ( .di and .notation hold the representation of the diagram
+Description: Relationship between researchers and the papers they write or review
+Notes: 
+

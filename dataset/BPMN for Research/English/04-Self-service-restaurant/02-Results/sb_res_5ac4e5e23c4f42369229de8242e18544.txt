@@ -1,0 +1,48 @@
+The business process described in the BPMN diagram outlines the steps involved in a guest dining experience at a restaurant, involving three main participants: the Guest, the Employee, and the Chef. Here is a natural language description of the business logic:
+
+---
+
+**Guest's Experience:**
+
+1. **Feeling Hungry:** The process begins when the guest feels hungry.
+2. **Enter the Restaurant:** The guest enters the restaurant.
+3. **Choose Dish:** The guest selects a dish from the menu.
+4. **Place Order:** The guest places their order.
+5. **Pay the Order:** The guest pays for their meal.
+6. **Wait Until Buzzer Rings:** The guest waits until a buzzer rings, indicating their meal is ready.
+7. **Pick Up the Meal:** Upon hearing the buzzer, the guest picks up their meal.
+8. **Eat the Meal:** The guest eats the meal.
+9. **Hunger Satisfied:** The process ends when the guest's hunger is satisfied.
+
+**Employee's Role:**
+
+1. **Receive Order:** An employee receives the guest's order.
+2. **Enter Order into System:** The employee enters the order into the system.
+3. **Collect Money:** The employee collects payment from the guest.
+4. **Set Up the Buzzer:** The employee sets up the buzzer system.
+5. **The Order Finished and Placed in the Hatch:** Once the meal is ready, the employee places it in the service hatch.
+6. **Set Off the Buzzer:** The employee activates the buzzer to notify the guest.
+7. **Call Guest (Optional):** If the guest does not appear within five minutes, the employee calls the guest to remind them.
+8. **Hand Over the Meal:** When the guest arrives at the service hatch, the employee hands over the meal.
+9. **End of Process:** The process concludes once the meal is handed over.
+
+**Chef's Responsibilities:**
+
+1. **Order New Meal:** The chef receives a new meal order.
+2. **Prepare the Meal:** The chef prepares the meal according to the order.
+3. **Serve in Service Hatch:** Once prepared, the chef places the meal in the service hatch.
+4. **Inform Meal is Ready:** The chef notifies the employee that the meal is ready.
+5. **End of Process:** The chef's role in the process ends after notifying the employee.
+
+**Message Flows Between Participants:**
+
+- The **Guest** sends an order to the **Employee**.
+- The **Employee** sends the order details to the **Chef**.
+- The **Chef** notifies the **Employee** when the meal is ready.
+- The **Employee** triggers the buzzer to notify the **Guest** that the meal is ready.
+- The **Employee** may call the **Guest** if they do not appear promptly.
+- The **Guest** collects the meal from the service hatch, completing the process.
+
+---
+
+This description captures the sequence of activities, decision points (e.g., waiting for the buzzer or the guest to appear), and interactions between the participants in the restaurant dining process.

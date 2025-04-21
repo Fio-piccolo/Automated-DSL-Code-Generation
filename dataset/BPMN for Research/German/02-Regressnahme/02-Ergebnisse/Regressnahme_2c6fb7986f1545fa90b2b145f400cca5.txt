@@ -1,0 +1,2 @@
+业务需求如下：
+该流程主要围绕“Regressnahme”（退回）展开。首先有一个开始事件，即存在将物品退回的可能性。接着进入“Überprüfung der Regressmeldung”（退回消息审核）任务，审核通过后进入排他网关。若选择“kein Regress nehmen”（不退回），则流程直接结束；若选择“Regress nehmen”（退回），则进入“Zahlungsaufforderung zustellen”（发送付款要求）任务，之后进行“Vorgang auf Wiedervorlage setzen”（流程恢复）任务，再进入事件驱动网关。该网关会根据不同条件产生分支，若出现“Widerspruchsfrist Abgelaufen”（异议期限到期），则进入“Übergabe Inkassobüro”（移交催款办公室）任务；若出现“Zahlungs Eingang”（付款收到），则进入“Geld verbuchen”（资金入账）任务；若出现“Eingang Widerspruch”（收到异议），则进入“Widerspruch prüfen”（审核异议）任务。审核异议通过后，若异议合理则流程结束，若异议不合理则进入“Übergabe Inkassobüro”任务，最终完成整个流程。

@@ -1,0 +1,12 @@
+该BPMN流程主要描述了货物发送（Warenversand）的业务流程，涉及仓库工人（Lagerarbeiter）、物流主管（Logistikleiter）和秘书处（Sekretariat）三个角色，具体业务逻辑如下：
+1. **流程开始**：由“Ware zu versenden”（待发送货物）这个开始事件启动流程。
+2. **并行处理**：通过“parallelGateway”（并行网关）将流程分为两条并行路径。
+    - **路径一：货物包装与准备**
+        - 仓库工人负责执行“Ware verpacken”（包装货物）任务，完成后将包装好的货物传递给“Verpackte Ware bereitstellen”（提供包装好的货物）任务，最后到达“Ware zur Abholung bereitgestellt”（货物准备好可供取货）结束事件。
+    - **路径二：确定运输方式与相关操作**
+        - 秘书处执行“Versandart klären”（确定运输方式）任务。
+        - 通过“exclusiveGateway”（排他网关）“Sonderversand”（特殊运输）根据条件进行分支：
+            - 若为“Nein”（否），则执行“Angebote von 3 versch. Spediteuren einholen”（从3家不同的货运代理获取报价）任务。
+            - 若为“Ja”（是），则通过“inclusiveGateway”（包容网关）继续分支：
+                - 若需要保险，执行“Versicherung abschliessen”（签订保险）任务，之后到达“Vers. abgeschlossen”（保险完成）结束事件。
+                - 同时，无论是否需要保险，都要执行“Paketschein ausfüllen”（填写包裹单）任务，之后执行“Spediteur beauftragen”（委托货运代理）任务。

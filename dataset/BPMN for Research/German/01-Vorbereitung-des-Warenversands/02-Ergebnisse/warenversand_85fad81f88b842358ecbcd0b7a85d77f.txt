@@ -1,0 +1,5 @@
+为了生成上述BPMN代码，所需的自然语言描述如下：
+
+该流程描述了货物运输和保险的处理过程，涉及Sekretariat、Lager和Logistikleiter三个部门。流程从开始事件启动，首先由Sekretariat执行“Ware zum Versand”任务。随后，根据条件进入排他网关，选择Sonderversand或Postversand路径。
+
+在Sonderversand路径中，Sekretariat会执行“Angebote einholen”任务，然后并行联系多个供应商，处理各自的报价，并选择最优供应商。在Postversand路径中，Sekretariat执行“Paketschein ausfüllen”任务，随后进入包含网关，处理“Ware verpacken”和“Ware zur Abholung bereit”任务。如果需要，还会执行“Versicherung erforderlich”和“Ware versichern”任务。流程在“Ware zur Abholung bereit”完成后结束。

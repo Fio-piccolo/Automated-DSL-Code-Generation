@@ -1,0 +1,5 @@
+When a probable recourse against an insurant is detected, the Recourse Clerk checks the case. If recourse is not possible, the clerk closes the case. If recourse is possible, the clerk sends a request for payment to the insurant and issues a reminder.
+After sending the reminder, the process waits at an event-based gateway for one of three events: receiving a disagreement letter from the insurant, the reminder deadline being reached, or receiving the money.
+If a disagreement letter is received, the clerk checks the reasoning. If the insurant's reasoning is valid, the case is closed. If not, the case is forwarded to a collection agency.
+If the reminder deadline is reached without receiving money, the case is also forwarded to the collection agency.
+If money is received, the clerk makes a booking and closes the case. The process ends when the case is closed or forwarded to the collection agency.

@@ -1,0 +1,10 @@
+当“Ware steht zum Versand”这个事件触发后，流程进入一个并行网关“Große oder kleine grosse Menge?”。从该并行网关分出两条路径：一条到任务“Angebotseinholung zum Versand”，另一条到另一个并行网关。
+- 如果进入“Angebotseinholung zum Versand”任务，完成该任务后，流程进入一个排他网关“Große oder kleine grosse Menge?”。如果是“Große Menge”，则走向“Große Menge - Speditionsversand”路径，进入“Angebotseinholung zum Versand”任务；如果是“kleine Menge”，则走向“kleine Menge - Postversand”路径，进入另一个并行网关。
+- 并行网关分出两条路径，一条到任务“Paketschein ausfüllen”，完成后进入另一个并行网关。该并行网关又分出两条路径，一条到排他网关“Versicherung notwendig?”。
+- 如果“Versicherung notwendig?”排他网关判断结果为“NEIN”，则进入“Versicherung notwendig?”并行网关；如果为“JA”，则进入“Versandversicherung abschliessen”任务。
+- “Paketschein ausfüllen”任务完成后进入“Versicherung notwendig?”排他网关，“Versandversicherung abschliessen”任务完成后进入“sid-FCE5FF60-3C1B-4526-A426-AD74AB35F242”排他网关。
+- “sid-FCE5FF60-3C1B-4526-A426-AD74AB35F242”排他网关的两条路径分别进入“sid-B672D353-471F-48E6-8D17-D1C514CB2B5D”和“sid-DBDBEF1E-58CF-4E9C-8A04-40FCEBD90359”两个并行网关。
+- “sid-DBDBEF1E-58CF-4E9C-8A04-40FCEBD90359”并行网关的两条路径汇合后进入任务“Beauftragung der Spedition”，完成后进入“sid-B672D353-471F-48E6-8D17-D1C514CB2B5D”排他网关。
+- “sid-B672D353-471F-48E6-8D17-D1C514CB2B5D”排他网关的两条路径汇合后进入任务“Auswahl Angebot”，完成后进入任务“Beauftragung der Spedition”。
+- 另一条并行路径上，从“Große oder kleine grosse Menge?”并行网关分出的另一条路径进入任务“Ware verpacken”，完成后触发“Ware versandbereit”中间事件，该事件触发后进入“sid-DBDBEF1E-58CF-4E9C-8A04-40FCEBD90359”并行网关。
+- “sid-DBDBEF1E-58CF-4E9C-8A04-40FCEBD90359”并行网关的两条路径汇合后进入任务“Bereitstellung der Ware zur Abholung”，完成后进入“sid-E2070A6A-2BA1-4F3F-A135-CD4965D92E4A”，最终到达结束事件。

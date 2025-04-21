@@ -1,0 +1,5 @@
+业务流程起始于“Ware zu versenden”（待发货）事件。随后进入“Versandart klären”（明确运输方式）任务，完成该任务后，流程通过“Menge?”（数量？）排他网关进行分支。若数量大，流程进入“3 Speditionsangebote einholen”（获取3个运输报价）任务；若数量小，则进入“Versicherungsnotwendigkeit prüfen”（检查保险需求）任务。
+
+完成“3 Speditionsangebote einholen”任务后，进行“Angebot auswählen”（选择报价）任务，接着是“Spediteur beauftragen”（委托承运人）任务。完成“Versicherungsnotwendigkeit prüfen”任务后，流程通过“Versicherung nötig?”（需要保险？）排他网关进行分支。若需要保险，进入“Versicherung abschließen”（购买保险）任务；若不需要保险，则直接进行后续流程。
+
+完成“Versicherung abschließen”任务或跳过保险购买流程后，流程会进行一些并行操作。其中包括“Ware verpacken”（包装货物）任务、“Ware bereitstellen”（准备货物）任务以及一些其他相关任务。这些并行任务完成后，会通过并行网关进行汇聚，最终到达“Ware bereitgestellt”（货物已准备好）结束事件，标志着整个业务流程的完成。在这个过程中，“Sekretariat”（秘书处）、“Logistikleiter”（物流经理）、“Lagerarbeiter”（仓库工人）等不同角色参与到各自负责的任务环节中。

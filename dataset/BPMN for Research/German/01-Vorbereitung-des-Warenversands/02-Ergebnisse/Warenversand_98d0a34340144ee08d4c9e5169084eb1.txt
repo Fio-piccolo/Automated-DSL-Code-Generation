@@ -1,0 +1,7 @@
+业务需求如下：该业务流程围绕货物运输（Warenversand）展开，涉及多个角色和一系列任务环节，具体如下：
+1. 流程起始于“Start Warenversand”（开始货物运输）事件，由此触发后续流程。
+2. 首先进入“Auftragsklärung (groß/klein)”（订单确认（大/小））任务，完成相关订单情况的梳理确认工作，之后根据不同情况进行分流。
+3. 经过一个“ExclusiveGateway”（排他网关）进行判断分支，若满足某种条件（可能与订单规模等相关，此处未明确）走一条分支，先经过一个“ParallelGateway”（并行网关）进行并行任务分支，其中一个分支执行“Paketschein ausfüllen”（填写包裹单）任务，完成后接着进行“Versicherung?”（保险？）任务，再经过一个“ExclusiveGateway”进行判断，若结果为“ja”（是）则执行“Versicherung abschliessen”（完成保险）任务，之后经过一个“ExclusiveGateway”进行汇聚处理；另一个分支执行“Angebote einholen”（收集报价）任务，完成后经过一个“ParallelGateway”进行并行分支，其中各分支分别执行“Angebote abgeben”（给出报价）任务，之后这些分支再经过“ParallelGateway”进行汇聚处理，汇聚后执行“Angebot auswählen”（选择报价）任务，完成后进入下一步。
+4. 上述步骤处理完成后，执行“Spediteur beauftragen”（委托运输商）任务。
+5. 与此同时，另一条从最初“ExclusiveGateway”分支出来的路线执行“Ware verpacken”（包装货物）任务，完成后与之前经过汇聚处理后的流程再次经过“ParallelGateway”进行汇聚处理，之后执行“Ware zur Abholung bereit”（准备提货）任务，最后到达流程结束事件。
+6. 整个流程涉及多个角色参与，包括“Sekretariat”（秘书处）负责诸多流程环节中的任务，“Logistikleiter”（物流主管）、“Logistik”（物流）、“Spediteur”（运输商，有多个相关角色）等也分别在不同环节承担相应任务，各环节通过不同的网关进行条件判断、分支和汇聚操作，以确保整个货物运输业务流程的有序推进。

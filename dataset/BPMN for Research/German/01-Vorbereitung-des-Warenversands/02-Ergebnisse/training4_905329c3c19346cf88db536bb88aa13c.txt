@@ -1,0 +1,7 @@
+当货物需要发送时（Ware ist zu versenden），流程开始。首先进入并行网关（ABF4D4CB），流程分为两条路径。
+
+一条路径是“Sekretariat”（秘书处）负责的“Versand - abwicklung klären”（澄清发货处理）任务，之后进入“Große Menge?”（大量货物？）的排他网关。若为“Ja”（是），则进行“3 Angebote einholen”（获取3个报价）、“Angebot auswählen”（选择报价）、“Spediteur beauftragen”（委托运输商）任务；若为“Nein”（否），则进行“Paketschein ausfüllen”（填写包裹单）任务，接着进行“Versicherung prüfen”（检查保险）任务，再进入“Versicherung erforderlich?”（需要保险？）的排他网关。若“Ja”（是），“Logistikleiter”（物流经理）进行“Versicherung abschließen”（签订保险）任务；若“Nein”（否），则直接进入后续流程。
+
+另一条路径是“Laegerarbeiter”（仓库工人）负责的“Ware Verpacken”（包装货物）任务。
+
+之后，两条路径分别的流程在“75B85102”（排他网关，汇聚）、“A11BE6A0”（排他网关，汇聚）、“972CDE07”（并行网关，汇聚）处汇合，最后“Laegerarbeiter”进行“Ware zur Abholung bereitstellen”（准备货物以便取货）任务，流程结束（Ware ist bereitgestellt）。

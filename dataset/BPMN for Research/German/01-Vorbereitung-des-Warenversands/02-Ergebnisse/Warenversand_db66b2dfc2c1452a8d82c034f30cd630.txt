@@ -1,0 +1,26 @@
+业务需求如下：
+1. 流程开始于“Ware versandbereit”事件。
+2. 秘书检查货物数量/种类，检查通过后进入排他网关。
+3. 排他网关根据条件有两个分支：
+   - 若选择“Sonderversand”，则由物流员工获取快递报价。
+   - 若选择“Packetversand”，则进行其他操作（此处未明确）。
+4. 物流员工获取报价后，进入中间捕获事件“Angebote eingegangen”。
+5. 之后选择一个报价，由秘书委托快递。
+6. 委托快递后，进入“Ware versenden”子流程。
+7. 子流程结束后，进入结束事件。
+8. 在子流程中，并行网关等待三个输入：
+   - 快递员打包货物后提供的“Ware zur Abholung bereitstellen”。
+   - 保险完成的“Versicherung abschliessen”。
+   - 选择报价后委托快递的相关操作。
+9. 并行网关的输出进入“Paketschein ausfüllen”任务。
+10. “Paketschein ausfüllen”任务后，进入排他网关，根据条件有两个分支：
+    - 若选择“keine Versicherung erforderlich”，则进入相关流程（此处未明确）。
+    - 若选择“Versicherung”，则进行保险操作。
+11. 保险操作完成后，流程继续进行到并行网关的汇合。
+12. 并行网关汇合后，进行“Ware zur Abholung bereitstellen”任务。
+13. “Ware zur Abholung bereitstellen”任务后，进入“Ware versenden”子流程，子流程结束后进入结束事件。
+14. 货物准备好发货时，有两个并行操作：
+    - 物流员工进行货物包装。
+    - 进行“Versicherung abschliessen”操作。
+15. 货物包装完成后进入并行网关的汇合，汇合后进行“Ware zur Abholung bereitstellen”任务。
+16. “Ware zur Abholung bereitstellen”任务后进入“Ware versenden”子流程，子流程结束后进入结束事件。

@@ -1,0 +1,9 @@
+该业务流程主要围绕货物运输展开，起始于发货流程，经过多个环节的处理，最终完成货物准备，可供取货。具体流程如下：
+1. **发货**：从“Start”开始，进入“Versand grosse Menge”任务。
+2. **判断**：完成“Versand grosse Menge”任务后，通过“exclusiveGateway”进行判断，如果条件为“nein”，则进入“Angebote einholen ”任务；如果条件为其他，流程走向不同。
+3. **获取报价**：执行“Angebote einholen ”任务，之后进入“Standard-Paketschein ausfüllen”任务。
+4. **比较报价**：完成“Standard-Paketschein ausfüllen”任务后，进入“Angebote vergleichen”任务，比较报价后，进行订单分配。
+5. **订单分配**：经过“exclusiveGateway”判断后，可能会进入“Warenübergabe ”任务，同时可能触发保险相关任务，如“Versicherung&#10;erforderlich”和“Versicherung abschliessen”。
+6. **准备发货**：完成“Warenübergabe ”任务后，进入“Waren zum Versand vorbereiten”任务，准备好货物后，流程结束，货物处于“Ware zur Abholung bereit”状态。
+
+该流程涉及多个角色，包括秘书处、物流供应商、物流经理和仓库工人等，每个角色在不同的环节中承担相应的职责。

@@ -1,0 +1,11 @@
+1.流程从开始事件开始。
+2.流程进入并行网关，分支为两个任务："Sekretariat klärt"和"Lagerarbeiter pakt"。
+3."Sekretariat klärt"任务完成后，流程进入一个排他网关。
+4.根据排他网关的条件判断，流程可能进入以下两个任务之一：
+   - 如果是小批量（kleine Menge），则进入"Paketschein ausfüllen"任务。
+   - 如果是大批量（große Menge），则进入"3 Angebote einholen"任务。
+5."Paketschein ausfüllen"任务完成后，进入"ggf. Versicherung"任务。
+6."3 Angebote einholen"任务完成后，进入"Spediteur beauftragen"任务。
+7."ggf. Versicherung"任务完成后，也进入"Spediteur beauftragen"任务。
+8."Lagerarbeiter pakt"任务完成后，也进入"Spediteur beauftragen"任务。
+9."Spediteur beauftragen"任务完成后，流程进入结束事件。

@@ -1,0 +1,15 @@
+该业务流程主要围绕货物发送展开，具体步骤如下：
+1. 以“Ware zu versenden”作为开始事件启动流程。
+2. 执行“Ware verpacken”任务，对货物进行包装。
+3. 进入“Alles vorbereitet?”的排他网关进行判断。
+4. 若满足条件，执行“Ware bereitstellen”任务，准备好货物。
+5. 由秘书处执行“Versand klären”任务，明确运输细节。
+6. 到达“Menge?”的排他网关，根据数量情况进行分支。
+7. 若数量大于等于3，执行“Angebot auswählen”任务，选择报价。
+8. 若数量小于某个值，考虑保险相关，执行“Versicherung?”的包容网关。
+9. 若需要保险，执行“Versicherung abschließen”任务，完成保险事宜。
+10. 执行“Spediteur beauftragen”任务，委托运输商。
+11. 执行“Paketschein ausfüllen”任务，填写包裹单。
+12. 执行“Post beauftragen”任务，委托邮局。
+13. 执行“Angebot einholen”任务，获取报价。
+14. 流程汇聚到“Alles vorbereitet?”的排他网关，完成相关准备后，继续后续流程。

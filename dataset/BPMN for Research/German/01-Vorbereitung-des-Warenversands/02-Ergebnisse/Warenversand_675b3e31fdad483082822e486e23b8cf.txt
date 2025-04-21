@@ -1,0 +1,3 @@
+在“Paketversand”流程中，当“Ware soll versendet werden.”这个起始事件被触发后，首先进入“Menge der Ware bestimmen”任务，确定货物数量。接着进入“Menge?”排他网关，根据货物数量的大小（“Klein”或“Groß”）决定后续流程走向：若为“Klein”，进入“Paketschein ausfüllen”任务；若为“Groß”，进入“Angebote  anfordern”任务。
+“Angebote  anfordern”任务完成后进入“2436B3FE-EFBA-4C93-852E-C0BE6DE4CF71”并行网关，同时向“Spediteur 1”、“Spediteur 2”和“Lagerarbeiter”分配任务，分别创建报价（“Angebot erstellen”任务）、包装货物（“Ware verpacken”任务）等。并行执行完成后，进入“D409EBA3-E104-47A9-B1BC-D580C670136E”收敛网关等待各分支完成。
+当所有并行任务完成后，进入“Günstigtes Angebot auswählen”任务选择最优惠报价，之后进入“Spediteur beauftragen”任务委托发货，接着进入“Paketschein ausfüllen”任务填写包裹单。另外，还有一个“Versicherung notwendig?”排他网关，根据保险需求决定后续流程。

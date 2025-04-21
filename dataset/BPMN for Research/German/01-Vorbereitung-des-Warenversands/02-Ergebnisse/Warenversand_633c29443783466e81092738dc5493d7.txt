@@ -1,0 +1,7 @@
+当需要将货物发送时，流程从“Ware soll versendet werden”（货物应被发送）这个开始事件启动。首先，“Sekretariat”（秘书处）会执行“prüfen auf Sonderversand”（检查是否为特殊运输）任务。接着进入一个排他网关，根据条件分流，若为小批量货物，进入“standardisierten Paketschein ausfüllen”（填写标准化装箱单）任务；若为大批量货物，则进入“Angebote bei drei Spediteuren einholen”（向三家货运代理询价）任务。
+
+填写标准化装箱单任务完成后，进入一个并行网关，分支分别指向后续任务。检查是否需要保险的任务会判断货物是否需要保险，若需要保险，进入“Versicherung abschließen”（完成保险）任务；若不需要保险，则进入另一个排他网关进行其他处理。
+
+在询价任务完成后，进入“Spediteur auswählen”（选择货运代理）任务，然后进入一个排他网关，根据不同条件分别向三家货运代理发出委托任务。这些委托任务完成后，进入一个汇聚排他网关，完成后进入另一个汇聚排他网关。
+
+在完成保险任务或其他相关任务后，进入“Ware verpacken”（包装货物）任务，之后进入一个并行网关，分支汇聚后，进入“Ware zur Abholung bereitstellen”（准备货物待取）任务，最终到达“Ware zur abolung bereit”（货物准备好待取）这个结束事件。

@@ -1,0 +1,9 @@
+业务流程从开始事件启动，由Sekretariat（秘书处）执行“Ware prüfen”（检查货物）任务。检查完成后，通过并行网关分叉为两条并行路径：
+
+路径一：进入排他网关，随后由Sekretariat执行“Normalversand”（普通运输）任务。该任务分为两个分支：  
+- 分支1：执行“Paketschein”（准备包裹单）任务，完成后进入“Versicherung ja/nein”（是否投保）排他网关。若选择投保（由Logistikleiter（物流主管）执行“Versicherung abschließen”（完成保险）任务），或不投保，则均汇合至后续排他网关；  
+- 分支2：执行“Sonderversand”（特殊运输）任务，随后依次执行“Angebote einholen”（获取报价）→通过并行网关分叉为Spedition（货运公司）的三个并行任务“Angebot 1”“Angebot 2”“Angebot 3”→并行汇合后，由Sekretariat执行“Angebote prüfen”（检查报价）→“Günstiges Angebot auswählen”（选择最优报价）→“Spedition beauftragen”（委托货运公司）→汇合至后续排他网关。
+
+路径二：由Lager（仓库）并行执行“Ware vorbereiten”（准备货物）→“Ware verpacken”（包装货物）→通过并行网关汇合后执行“Ware bereitstellen”（提供货物）→最终到达结束事件。
+
+所有分支路径最终通过排他网关和并行网关汇合，确保仓库完成货物准备、包装及提供后，流程结束。

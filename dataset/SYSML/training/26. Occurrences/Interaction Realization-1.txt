@@ -1,0 +1,3 @@
+系统应定义一个巡航控制交互的实现流程，以具体化各部件的行为与消息传递，确保驾驶员与车辆部件之间的顺序交互。驾驶员组件driver_a包含一个行为，用于发送“设定速度”消息（SetSpeed）至车辆组件vehicle_a。在车辆组件中，巡航控制器cruiseController_a包含控制器行为，首先接收“设定速度”消息，然后依次接收“检测到的速度”消息（SensedSpeed），并发送“燃料指令”消息（FuelCommand）至发动机engine_a。
+
+速度计组件speedometer_a通过其行为将“检测到的速度”消息发送至巡航控制器。发动机engine_a通过其行为接收“燃料指令”消息，完成整个交互流程。每个消息传递都在事件关联中明确映射：setSpeedSent到setSpeedReceived，sensedSpeedSent到sensedSpeedReceived，以及fuelCommandSent到fuelCommandReceived。该实现流程确保驾驶员和车辆组件之间的交互顺序和逻辑一致，为巡航控制功能的实际运行提供基础。

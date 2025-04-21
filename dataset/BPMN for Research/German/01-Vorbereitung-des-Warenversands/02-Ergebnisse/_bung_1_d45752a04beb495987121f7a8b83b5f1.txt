@@ -1,0 +1,12 @@
+1. 收到发货订单（由“Versandauftrag erhalten”起始事件触发）。
+2. 并行处理两个任务：
+    - 检查数量（“Menge prüfen”任务），根据数量判断（通过“Menge?”排他网关）：
+        - 若为小数量（“kleine Menge”），填写包裹单（“Paketschein ausfüllen”任务），然后检查保险需求（“Versicherungsbedarf prüfen”任务）。
+        - 若为大数量（“große Menge”），获取报价（“Angebote einholen”任务），选择报价（“Angebot auswählen”任务），选择货运公司（“Spedition auswählen”任务）。
+    - 包装货物（“Ware Verpacken”任务）。
+3. 包装货物完成后，与检查数量流程汇合（通过并行网关“643F25E6”）。
+4. 准备货物供取货（“Ware zur Abholung bereitstellen”任务），然后流程结束（“E95CABD4”结束事件）。
+5. 在检查保险需求（“Versicherungsbedarf prüfen”任务）后，判断是否需要保险（通过“Versicherung erforderlich?”排他网关）：
+    - 若需要保险（“ja”），签订保险（“Versicherung abschließen”任务）。
+    - 若不需要保险（“nein”）。
+6. 签订保险任务和不需要保险的分支汇合（通过排他网关“83012916”），然后与选择货运公司的分支汇合（通过排他网关“779B3011”），最后与包装货物汇合（通过并行网关“643F25E6”）。

@@ -1,0 +1,20 @@
+前端接收到“Scoring request received”的评分请求后，将请求发送给银行的信用评分流程（credit scoring (bank)）以及信用保护机构的评分流程（Scoring (Credit protection agency)）。
+
+在银行的信用评分流程中：
+1. 从“Scoring request received”开始事件启动流程。
+2. 进入“request computation of scroring”任务，计算评分请求。
+3. 进入“eventBasedGateway”排他网关，根据不同情况分支：
+   - 若接收到“Level 1 scoring received”事件，进入“Level 1 scoring received”中间捕获事件。
+   - 若接收到“delay message received”事件，进入“delay message received”中间捕获事件并触发“report delay”任务，之后进入“Level 2 Scoring received”中间捕获事件。
+4. “Level 1 scoring received”中间捕获事件触发后，进入“Exclusive Gateway”排他网关进行判断，结果进入相应分支。
+5. “Level 2 Scoring received”中间捕获事件触发后，进入“Exclusive Gateway”排他网关进行判断，结果进入相应分支。
+6. 两个排他网关的结果在“Exclusive Gateway”汇聚后，进入“send credit score”任务，最终到达“scoring reques fulfilled”结束事件。
+
+在信用保护机构的评分流程中：
+1. 从“computing scroring requested”开始事件启动流程。
+2. 进入“cumpute credit score (level 1)”任务，计算一级信用评分。
+3. 进入“available?”排他网关，根据结果分支：
+   - 若符合条件，进入“send level 1 scoring”任务发送一级评分。
+   - 若不符合条件，进入“report delay”任务。
+4. “report delay”任务完成后，进入“compute Level 2 scoring”任务计算二级评分，之后进入“send scoring”任务发送评分。
+5. 两个发送评分任务的结果在“Exclusive Gateway”汇聚后，到达“scoring request completed”结束事件。

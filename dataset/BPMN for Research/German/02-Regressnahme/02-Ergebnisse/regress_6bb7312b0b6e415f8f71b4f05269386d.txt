@@ -1,0 +1,17 @@
+业务需求如下：
+1. 流程开始于“Info über mögliche Regressnahme”事件，该事件触发后续流程。
+2. 接着执行“Regress prüfen”任务，检查是否可追溯。
+3. 若可追溯，通过“Regress möglich”的排他网关进行分支：
+    - 若判断为“JA”，则并行执行“Vorgang auf Wiedervorlage legen”任务和“Zahlungsaufforderung versenden”任务。
+    - 若判断为“NEIN”，则执行后续其他流程（文档未详细说明）。
+4. “Vorgang auf Wiedervorlage legen”任务完成后，进入后续流程。
+5. “Zahlungsaufforderung versenden”任务完成后，等待“Geld eingegangen”中间捕获事件。
+6. 当收到“Geld eingegangen”消息后，执行“Eingang verbuchen”任务。
+7. 执行“Vorgang schließen”任务，然后流程结束于“Regressnahme bearbeitet”事件。
+8. 若在执行过程中出现“VN widerspricht”（客户提出异议），则执行“Widerspruch prüfen”任务。
+9. 对于“Widerspruch prüfen”任务的结果，若判断为“JA”，则继续执行后续流程（文档未详细说明）。
+10. 若判断为“NEIN”，通过“Widerspruch gerechtfertigt”的排他网关进行分支：
+    - 若判断为“JA”，则继续执行后续流程（文档未详细说明）。
+    - 若判断为“NEIN”，则执行“An Inkasso abgeben”任务，之后进入后续流程。
+11. “An Inkasso abgeben”任务完成后，等待“Wiedervorlage Frist abgelaufen”中间捕获事件（文档未详细说明后续处理）。
+12. 整个流程中存在多个并行网关和排他网关，用于控制流程的分支和汇合，确保业务逻辑的正确执行。

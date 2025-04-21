@@ -1,0 +1,5 @@
+该业务流程围绕计算机硬件相关业务展开。首先是一个开始事件，启动整个流程。接着进入一个子流程，用于确定货物数量。之后通过一个排他网关，根据不同条件进行分支。
+
+若走“normaler Postversand”路径，会执行“standarisierter Paketschein ausfüllen”任务，然后再次经过一个排他网关进行分支。若走“SonderVersand”路径，则流程走向不同。
+
+在各个分支中，会有不同的任务执行，比如“Angebot holen”“Spediteur beauftragen”“Ware verpacken”“Ware zur Abholung bereit stellen”等。最终，流程会汇聚到一个结束事件。整个流程涉及多个角色，包括秘书处、不同的发货人以及物流经理、仓库工人等，各角色在不同环节执行相应任务，以完成计算机硬件业务的一系列操作。

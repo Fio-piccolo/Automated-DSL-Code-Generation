@@ -1,0 +1,8 @@
+该业务流程主要围绕货物运输展开，涉及多个环节和决策点。具体如下：
+1. 起始阶段：“Ware zum Versand”事件触发流程开始。
+2. 运输方式决策：通过“Versandart?”排他网关，根据不同情况选择“Postversand”（邮政运输）或“Sonderversand”（特殊运输）。
+3. 邮政运输分支：若选择邮政运输，需填写“Paketschein für Postversand ausfüllen”（填写邮政包裹单），之后流程汇聚到“Spediteur beauftragen”（委托运输商）环节。
+4. 特殊运输分支：若选择特殊运输，需获取“Angebote für Spedition einholen”（获取运输报价），然后从报价中选择合适的报价进行“Angebot auswählen”（选择报价），最后委托运输商“Spediteur beauftragen”。
+5. 保险决策：在运输前，通过“Versicherung notwendig?”排他网关判断是否需要保险。若需要，则执行“Versicherung abschliessen”（购买保险）操作。
+6. 货物包装：无论选择哪种运输方式，货物都需进行“Ware verpacken”（包装货物）操作。
+7. 结束阶段：所有操作完成后，货物达到“Ware versandbereit”（货物可运输）状态，流程结束。

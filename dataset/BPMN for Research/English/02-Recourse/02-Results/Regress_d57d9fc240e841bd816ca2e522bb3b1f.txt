@@ -1,0 +1,5 @@
+业务流程开始于“Risk of regress reported”的开始事件，由保险参与方（Policy holder）的人员触发。随后流程进入“Check the case”任务，在此任务中会对相关案例进行检查。接着到达“Close case?”的排他网关，根据判断结果分为两条路径：如果选择“No”，则进入“Send payment request”任务，发送支付请求；如果选择“Yes”，则进入后续流程。
+
+“Send payment request”任务完成后，进入“Set reminder”任务设置提醒。提醒触发后到达“EventBasedGateway”，根据不同的触发条件分为三条路径：如果满足某条件则进入“Account receipt”任务进行账户收款；如果不满足该条件且满足其他条件则进入其他流程。
+
+“Account receipt”任务完成后，进入“Close case”任务关闭案例。如果在之前的流程中，对于某些情况判断为“No”或“Yes”等不同结果，会分别进入相应的后续流程，如“Claim justified”的排他网关判断后进入不同路径，最终都可能会进入到“Close the case”任务关闭案例，流程结束。整个流程中还包含了各种中间捕获事件，如“Reminder activated”“Money received”“PH disagrees”等，用于在特定条件触发时进行相应的流程处理。

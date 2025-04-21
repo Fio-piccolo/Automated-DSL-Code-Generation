@@ -1,0 +1,16 @@
+该业务流程是关于货物发货的流程，具体如下：
+1. 以“Ware zur Versendung”作为起始事件，开启流程。
+2. 流程开始后，首先执行“Angebote von 3 Speditieuren einholen”任务，即从3个托运人那里获取报价。
+3. 接着进入“Kleine oder Große Menge?”的排他网关，根据货物数量进行判断：
+    - 若为大量货物，则走“große Menge = Sonderversand”的序列流，进入“Angebote von 3 Speditieuren einholen”任务，之后进入“Welches Angebot?”的排他网关。
+    - 若为小量货物，则走“Kleine Menge = Standardversand”的序列流，执行“standardisierten Paketschein ausfüllen”任务，即填写标准化包裹单，之后进入“Versicherung notwendig?”的排他网关。
+4. 在“Welches Angebot?”的排他网关中：
+    - 若选择“Spediteur 1”，则执行“Spediteur 1 beauftragen”任务，即委托托运人1。
+    - 若选择“Spediteur 2”，则执行“Spediteur 2 beauftragen”任务，即委托托运人2。
+    - 若选择“Spediteur 3”，则执行“Spediteur 3 beauftragen”任务，即委托托运人3。
+5. 执行完委托任务后，进入“Versicherung notwendig?”的排他网关：
+    - 若回答“ja”，则执行“Versicherung abschließen”任务，即完成保险。
+    - 若回答“nein”，则流程继续向下。
+6. 完成保险或无需保险后，执行“Ware zur Abholung bereitstellen”任务，即准备好货物以供取货。
+7. 接着执行“Verpacken der Ware”任务，即包装货物。
+8. 之后流程汇聚，最终以“Ende”作为结束事件，完成整个发货流程。

@@ -1,0 +1,11 @@
+业务需求如下：
+1. 流程开始于“Es besteht evtl. Regressanspruch”事件。
+2. 首先执行“Regressanspruch prüfen”任务。
+3. 检查是否存在退回请求，若存在，执行“Zahlungsaufforderung versenden”任务；若不存在，流程汇聚到“Vorgang schließen”任务。
+4. 执行“Zahlungsaufforderung versenden”任务后，执行“Vorgang auf Wiedervorlage setzen”任务。
+5. “Vorgang auf Wiedervorlage setzen”任务完成后，通过一个排他网关进行分支。
+6. 若有消息“Widerspruch erhalten”，则执行“Widerspruch prüfen”任务。
+7. “Widerspruch prüfen”任务完成后，通过一个排他网关判断是否有合理的拒付理由。
+8. 若有合理拒付理由，将其转交给收账服务提供商；若没有，则继续流程。
+9. 若收到“Zahlung erhalten”消息，执行“Eingang verbuchen”任务；若在规定时间内未收到付款，则执行“An Inkassodienstleister übergeben”任务。
+10. 当所有相关任务都完成后，执行“Vorgang schließen”任务，流程结束于“Vorgang geschlossen”事件。

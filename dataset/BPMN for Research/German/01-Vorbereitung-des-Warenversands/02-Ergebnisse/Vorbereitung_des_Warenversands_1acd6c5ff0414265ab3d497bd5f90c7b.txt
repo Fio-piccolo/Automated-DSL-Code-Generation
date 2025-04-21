@@ -1,0 +1,9 @@
+当需要发送货物时，首先触发“Ware soll versendet werden”（货物应被发送）的开始事件。接着进入“Versandart klären”（澄清运输方式）任务，完成该任务后，流程会通过一个排他网关判断是否为特殊运输。如果是特殊运输（回答“ja”），则进入“3 Angebote einholen”（获取3个报价）任务；若不是特殊运输（回答“nein”），则直接进入“Standardisierten Paketschein ausfüllen”（填写标准化包裹单）任务。
+
+完成“Standardisierten Paketschein ausfüllen”任务后，会到达另一个排他网关，判断是否需要保险。若需要保险（回答“ja”），则进入“Versicherung abschließen”（完成保险）任务；若不需要保险（回答“nein”），则跳过此步骤。
+
+完成“3 Angebote einholen”任务后，进入“1 Angebot auswählen”（选择1个报价）任务，然后再进入“Spediteur beauftragen”（委托承运人）任务。
+
+在完成相关任务后，流程会汇聚到一个并行网关。同时，在判断是否需要保险的排他网关处，若需要保险，完成保险任务后也会流向这个并行网关。另外，在流程开始时，会经过一个并行网关的分支，其中一个分支进入“Ware verpacken”（包装货物）任务，完成后也会流向这个并行网关。
+
+最后，所有任务完成后，经过“Ware zur Abholung bereitstellen”（准备好货物以供取货）任务，到达“Ware zur Abholung bereitgestellt”（货物已准备好以供取货）的结束事件。

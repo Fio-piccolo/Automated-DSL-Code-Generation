@@ -1,0 +1,11 @@
+该业务流程描述的是货物发送流程，涉及物流经理、秘书处和仓库工人三类角色。流程从“Ware soll versendet werden（货物应被发送）”开始，秘书处首先执行“Versand kategorisieren（对发货进行分类）”任务。
+
+然后流程通过并行网关分为两条并行路径：
+ - 其中一条路径由仓库工人执行“Ware verpacken（包装货物）”任务。
+ - 另一条路径，秘书处根据“Menge?（数量？）”的判断结果走不同分支：如果数量大（gross），则执行“Angebot von 3 Spediteuren einholen（从3家货运代理处获取报价）”，之后选择最便宜的报价“Günstigstes Angebot auswählen”，最后“Spediteur beauftragen（委托货运代理）”；如果数量小（klein），则执行“Paketschein ausfüllen（填写包裹单）”。
+
+完成包裹单填写后，进入物流经理的任务环节，物流经理首先进行“Versicherung entscheiden（决定保险事宜）”，然后通过排他网关判断“Versicherung notwendig（是否需要保险）”：
+ - 如果需要（ja），则执行“Versicherung abschließen（签订保险）”。
+ - 如果不需要（nein），则直接进入后续流程。
+
+上述不同分支的流程最终通过排他网关和并行网关汇聚，最后由仓库工人执行“Ware bereitstellen（准备货物）”，流程结束于“Ware steht bereit（货物已准备好）”。

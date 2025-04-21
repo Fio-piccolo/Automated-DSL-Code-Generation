@@ -1,0 +1,3 @@
+The requirements are as follows:
+
+In the context of a DirectDebitTransaction1 in isoStdIso20022TechXsdPain00800101 package, there should be only one 'Private Identification' allowed for 'Creditor Schemes'. This rule is maintained by checking either the 'Creditor Schemes' is undefined or the size of 'Private Identification' in 'Creditor Schemes' should not exceed 1. This rule is in accordance with the SEPA B2B Direct Debit C2B Implementation Guidelines, specifically referring to row 3 of page 12.

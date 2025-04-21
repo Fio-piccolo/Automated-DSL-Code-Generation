@@ -1,0 +1,3 @@
+Banking Frontend接收Scoring Request（评分请求）后，向Scoring (Credit Agency)发送消息触发其流程开始。Scoring (Credit Agency)流程中，首先由名为“Scoring Request received”的开始事件接收请求，然后执行“Do first quick scoring (Level 1)”任务。接着进入排他网关，根据不同分支分别执行后续任务，如“sid-339363A8-0839-45A5-BB53-658B74E3D40C”等任务，最后通过“sid-0643C973-1D5C-4A8C-8DDE-0B65E589CB58”结束事件结束流程。
+
+同时，Banking Frontend接收Scoring Request后，向Scoring (Bank)发送消息触发其流程开始。Scoring (Bank)流程中，首先由名为“Scoring Request received”的开始事件接收请求，执行“Request Credit Score”任务，然后进入事件型排他网关，根据不同分支分别执行后续任务，如“sid-D81C9E82-48AA-42E6-8E51-D382B167DA5A”和“sid-6B6603D6-98DD-44D3-9630-D85B74672EB0”等中间捕获事件相关任务，最后通过“sid-533054A6-7241-483B-9EF3-053C1ABD0344”结束事件结束流程。两个流程间还存在一些消息流交互。

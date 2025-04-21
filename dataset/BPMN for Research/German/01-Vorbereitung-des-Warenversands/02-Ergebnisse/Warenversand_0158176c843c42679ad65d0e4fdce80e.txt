@@ -1,0 +1,7 @@
+该业务流程主要围绕货物运输展开，具体如下：
+1. 流程开始于“Ware soll versendet werden”事件，表示货物需要被发送。
+2. 接着进入“große Menge?”排他网关，用于判断货物数量是否为大量。
+    - 如果是大量，流程会进入“Sonderversand”中间捕获事件。之后，需要获取三家不同运输商的报价，进入“Einholen von 3 Angeboten bei untersch. Spediteuren”任务。完成报价获取后，进入“3 Angebote”中间捕获事件。满足条件后，进行“Auswahl und Beauftragung”任务，然后进入包含网关。最后进行“Verpackung der Ware”任务，再通过并行网关，最终到达“Abholung”结束事件。
+    - 如果不是大量，流程会进入“norm. Postversand”中间捕获事件。之后，进行“Ausfüllung des stand. Paketscheins”任务，接着进入“Versicherung?”排他网关。
+        - 若需要保险，进入“Abschluss der Versicherung”任务，完成后回到开始节点重新开始流程。
+        - 若不需要保险，则直接进入包含网关，后续流程与大量货物情况相同，即进行“Verpackung der Ware”任务，再通过并行网关，最终到达“Abholung”结束事件。

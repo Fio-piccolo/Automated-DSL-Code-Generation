@@ -1,0 +1,2 @@
+业务需求如下：
+一个名为“Warenversand-Prozess”的业务流程，由多个参与者（如 Sekretariat、Spediteur、Lagerarbeiter、Logistikleiter）参与。流程从“Start”开始事件开始，然后进入“Klärung Versand”任务，接着根据“特殊运输？”的排他网关决定是否进行“特殊运输处理”（如果是则回到“Angebote einholen”任务，否则进入后续流程）。之后依次经过“Angebote einholen”“Angebot 1”“Angebot 2”“Angebot 3”等任务，每个任务完成后通过相应的序列流连接到下一个节点。在某些节点会有排他网关或包含网关进行分支或合并流程，最终流程到达“Spediteur beauftragen”任务，之后进入“Ware bereitstellen”任务，再经过“Verpackung”“Versicherung erforderlich”等任务，最后到达“End”结束事件。整个流程中各个参与者在不同的任务节点进行相应的操作，通过序列流连接各个节点，完成货物运输的流程。

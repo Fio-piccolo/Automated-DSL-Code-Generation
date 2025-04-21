@@ -1,0 +1,16 @@
+业务需求如下：
+1. 流程开始于一个起始事件，该事件触发后续流程。
+2. 首先执行“Regressfähigkeit prüfen”任务。
+3. 任务完成后，进入排他网关，根据条件判断走不同路径。如果条件为“ja”，则执行“Zahlungsaufforderung senden an VN”任务；如果条件为“nein”，则直接执行“Vorgang schließen”任务。
+4. “Zahlungsaufforderung senden an VN”任务完成后，进入事件驱动网关，再次根据不同条件分支。
+    - 如果“Zahlung eingegangen”事件发生，执行“Zahlungseingang buchen”任务。
+    - 如果等待“Wiedervorlage”超时，执行“Vorgang schließen”任务。
+    - 如果“Widerspruch eingegangen”事件发生，执行“Prüfen des Widerspruchs”任务。
+5. “Prüfen des Widerspruchs”任务完成后，进入排他网关，根据判断结果走不同路径。
+    - 如果判断结果为“berechtigt”，执行“Vorgang schließen”任务。
+    - 如果判断结果为“nicht berechtigt”，执行“Inkassobüro beautragen”任务。
+6. “Inkassobüro beautragen”任务和等待“Wiedervorlage”超时后的“Vorgang schließen”任务完成后，进入汇聚排他网关。
+7. “Zahlungseingang buchen”任务完成后，执行“Vorgang schließen”任务。
+8. 两个“Vorgang schließen”任务完成后，根据最终结果进入不同的结束事件。
+    - 如果流程成功完成，进入“Vorgang geschlossen”结束事件。
+    - 如果流程未成功完成，进入“Vorgang bleibt offen”结束事件。

@@ -1,0 +1,8 @@
+The requirements are as follows:
+
+1. For all instances of class A2, the "at" attribute of each instance must be greater than the "at" attribute of its corresponding instance in class A1.
+2. For all instances of class A3, the "at" attribute of each instance must be greater than the "at" attribute of its corresponding instance in class A2.
+3. This pattern continues up to class A100, where for all instances of A100, the "at" attribute of each instance must be greater than the "at" attribute of its corresponding instance in class A99.
+4. Finally, for all instances of class A1, the "at" attribute of each instance must be greater than or equal to the "at" attribute of its corresponding instance in class A100. 
+
+In other words, each class from A2 to A100 must have an "at" value greater than its predecessor, with the exception of A1, which must have an "at" value greater than or equal to that of A100.

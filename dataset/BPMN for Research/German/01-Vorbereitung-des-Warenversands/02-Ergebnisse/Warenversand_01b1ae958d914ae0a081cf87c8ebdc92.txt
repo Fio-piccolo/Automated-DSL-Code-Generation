@@ -1,0 +1,13 @@
+该业务流程围绕货物运输展开，首先进行运输准备，接着根据运输方式的不同分支进行后续操作，包括选择物流公司、创建包装清单、获取保险报价、采购货物等，然后并行处理货物准备和保险办理，最后完成货物包装并交付，整个流程涉及多个部门协作，确保货物顺利运输。具体如下：
+1. **准备阶段**：当需要进行货物运输时，流程从“Vorbereitung Warenversand erforderlich”（运输准备）这个开始事件启动。
+2. **运输方式确定**：
+    - 首先进入“klären Versand-abwicklung”（澄清运输流程）任务，完成后到达“Versand-art?”（运输方式？）这个排他网关。
+    - 若选择“Postversand”（邮政运输），则进入“Standard Packschein erstellen”（创建标准包装清单）任务；若选择“Sonderversand Grossmenge”（大批量特殊运输），则进入“Angbote einholen”（获取报价）任务。
+3. **物流公司选择与后续操作**：
+    - 完成报价获取或包装清单创建后，进入“Versicherung erforderlich”（是否需要保险）排他网关。
+    - 若不需要保险，直接进入“Ware zum Versand / Abholung bereitstellen”（准备货物进行运输/取货）任务；若需要保险，则先进行“Versicherung abschliessen”（完成保险）任务，之后再进入“Ware zum Versand / Abholung bereitstellen”任务。
+4. **货物准备并行处理**：
+    - 在进行保险相关操作的同时，并行进行货物准备工作。
+    - 从“Versicherung erforderlich”排他网关开始，若不需要保险，直接进入“Ware zum Versand / Abholung bereitstellen”任务；若需要保险，完成保险任务后进入“Ware zum Versand / Abholung bereitstellen”任务。
+    - “Ware zum Versand / Abholung bereitstellen”任务完成后，货物准备并行分支中的“Ware verpacken”（包装货物）任务开始，完成后进入结束事件。
+5. **结束阶段**：所有任务完成后，流程到达结束事件，业务流程结束。

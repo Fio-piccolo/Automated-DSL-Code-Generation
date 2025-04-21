@@ -1,0 +1,20 @@
+### 整体业务流程概述
+该BPMN流程定义涉及三个主要参与者：Banking Frontend、Scoring和Credit protection agency，主要描述了从Banking Frontend发起评分请求开始，经过Scoring和Credit protection agency处理，最终完成评分及相关结果发送的业务流程。
+
+### 详细流程描述
+1. **Banking Frontend发起评分请求**：
+   - Banking Frontend向Scoring发送评分请求消息，触发Scoring流程中的“start scoring”开始事件。
+2. **Scoring流程处理**：
+   - 接收到请求后，进入“Scoring Request”任务，处理评分请求。
+   - 然后进入“answer?”事件驱动网关，根据是否收到即时答案决定流程走向：
+     - 如果收到即时答案，进入“immediate answer”中间捕获事件，然后进入“Send result”任务，最终到达“scoring done”结束事件。
+     - 如果未收到即时答案，进入“message delayed”中间捕获事件，进入“Start level 2 request”任务，然后进入“Sent delay notification”任务，接着再次回到“answer?”网关进行判断。
+   - 在“answer?”网关判断后，若未收到即时答案，继续执行相关任务，最终到达“Scoring abgeschlossen done”结束事件。
+3. **Credit protection agency处理流程**：
+   - Credit protection agency接收到“request for schufa”消息，触发“Start First Scoring”任务。
+   - 进入“Delay?”排他网关，根据是否有延迟决定走向：
+     - 如果有延迟，进入“Send delay notification”任务，然后继续后续流程，最终到达“done”结束事件。
+     - 如果无延迟，进入“Level 2 scoring”任务，再进入“send result”任务，最终到达“done”结束事件。
+
+### 消息流转
+- 消息在各参与者及任务之间通过messageFlow进行传递，如Banking Frontend与Scoring之间、Scoring内部各任务之间、Credit protection agency内部各任务之间等，完成数据和指令的交互，推动整个业务流程的进行。

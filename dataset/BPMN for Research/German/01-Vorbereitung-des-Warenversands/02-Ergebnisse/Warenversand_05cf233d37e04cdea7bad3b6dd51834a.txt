@@ -1,0 +1,13 @@
+1. 流程开始于“Ware soll versendet werden”（货物应被发送）的起始事件。
+2. 接着进入并行网关，流程在这里分支。
+3. 一条路径是去执行“Paketschein ausfüllen”（填写包裹单）任务，完成后进入“Versicherung erwünscht?”（需要保险吗？）的排他网关。
+    - 如果选择保险，执行“Versicherung abschließen”（完成保险）任务，之后进入一个汇聚的排他网关。
+    - 如果不选择保险，直接进入这个汇聚的排他网关。
+4. 另一条路径是执行“Ware verpacken”（包装货物）任务，然后执行“Spedition anfragen”（询问货运公司）任务，之后进入“Menge betrachten”（检查数量）任务，完成后根据数量情况进入不同任务。
+    - 如果是大量货物，进入“Spedition beauftragen”（委托货运公司）任务。
+    - 如果是正常数量货物，进入“Paketschein ausfüllen”（填写包裹单）任务，后续流程同上述选择保险后的流程。
+5. 执行“Angebot auswählen”（选择报价）任务和“Spedition beauftragen”（委托货运公司）任务后，都进入一个汇聚的排他网关。
+6. 从“Versicherung abschließen”（完成保险）任务、“Ware versenden”（发送货物）任务以及上述汇聚的排他网关出来的流程，最终汇聚到结束事件。
+7. 在执行完“Ware verpacken”（包装货物）任务后，执行“Ware bereitgestellt”（准备好货物）任务，然后进入并行网关。
+8. 从“Spedition anfragen”（询问货运公司）任务出来后执行“Menge betrachten”（检查数量）任务，完成后进入排他网关进行数量判断分支。
+9. 从“Versicherung erwünscht?”（需要保险吗？）排他网关出来后，如果选择不保险，直接进入后续流程直至结束事件；如果选择保险，执行“Versicherung abschließen”（完成保险）任务后再进入后续流程直至结束事件。

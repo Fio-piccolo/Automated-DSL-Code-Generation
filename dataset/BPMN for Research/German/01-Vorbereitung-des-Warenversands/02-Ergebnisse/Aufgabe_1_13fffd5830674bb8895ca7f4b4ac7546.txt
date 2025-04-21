@@ -1,0 +1,26 @@
+1. 开始事件“Ware versenden”启动流程。
+2. 并行网关“139F3DF1”将流程分为两条路径：
+   - 一条路径：
+      - 顺序流“0766D1DE”到任务“Ware verpacken”（由Lagerarbeiter执行）。
+      - 任务“Ware verpacken”完成后，顺序流“993E2454”到并行网关“C887AE8C”。
+   - 另一条路径：
+      - 顺序流“A46F3B7A”到排他网关“5445B5C6”（判断“Menge”）。
+      - 若“Menge”为“kleine”（顺序流“C7745936”）：
+         - 到任务“normaler Postversand”（Sekretariat执行）。
+         - 任务完成后，顺序流“F8553218”到任务“standardisierten Paketschein ausfüllen”（Sekretariat执行）。
+         - 任务完成后，顺序流“625712C6”到排他网关“3ABE7341”（判断“Versicherung”）。
+         - 若“Versicherung”为“nicht erforderlich”（顺序流“0A2C791F”）：
+            - 到排他网关“4272DCC5”。
+         - 若“Versicherung”为“erforderlich”（顺序流“3A07A833”）：
+            - 到并行网关“B1D714C8”，然后到任务“Versicherung abschließen”（Logistikleiter执行）。
+            - 任务完成后，顺序流“890EA7CD”到排他网关“4272DCC5”。
+      - 若“Menge”为“große”（顺序流“8C2C72E3”）：
+         - 到任务“Sonderversand notwendig”（Sekretariat执行）。
+         - 任务完成后，顺序流“248B0829”到任务“3 Angebote einholen von Spediteuren”（Sekretariat执行）。
+         - 任务完成后，顺序流“23111E84”到任务“Angebot auswählen”（Sekretariat执行）。
+         - 任务完成后，顺序流“BC6F1B95”到任务“Spediteur beauftragen”（Sekretariat执行）。
+         - 任务完成后，顺序流“6C30EF35”到排他网关“FC7AD580”。
+3. 排他网关“4272DCC5”汇聚后，顺序流“DF2E5D70”到排他网关“FC7AD580”。
+4. 排他网关“FC7AD580”汇聚后，顺序流“2ED54D52”到并行网关“C887AE8C”。
+5. 并行网关“C887AE8C”汇聚后，顺序流“419E2042”到任务“Ware zur Abholung bereitstellen”（Lagerarbeiter执行）。
+6. 任务“Ware zur Abholung bereitstellen”完成后，顺序流“561BD4E6”到结束事件“E600F7AA”。

@@ -1,0 +1,5 @@
+当“Warenversand steht an”这一事件触发后，流程开始。首先进入“Versandmenge prüfen”任务，对发货数量进行检查。根据检查结果，通过“exclusiveGateway”进行分流：如果发货量小，进入“Versandmenge klein”分支，流向“sid-A85F6DB5-8BBF-4927-A1EB-C68411370CCE”，然后通过另一个“exclusiveGateway”，若满足条件则进入“Versandmenge groß”分支，进入“Angebote von Spedition einholen”任务，之后依次进行“Speditionsangebot auswählen”、“Paketschein ausfüllen”任务，再通过“parallelGateway”分流，一部分流向“Ware verpacken”任务，另一部分返回“Versandmenge prüfen”任务；若发货量不小，则直接进入“Versandmenge groß”分支，进入“Angebote von Spedition einholen”任务，后续流程类似。
+
+在“Versandmenge prüfen”任务完成后，无论发货量大小，都会经过“exclusiveGateway”判断是否需要保险：若需要保险，进入“Versicherung abschließen”任务，之后进入“exclusiveGateway”进行分流；若不需要保险，也会进入“exclusiveGateway”进行相应分流。
+
+完成上述任务后，物料会被“Ware zur Abholung bereitstellen”准备好，最后到达“endEvent”结束整个“Warenversand”流程。同时，“Logistikleiter”、“Sekretariat”和“Lagerarbeiter”不同岗位的人员分别负责相应任务的处理。

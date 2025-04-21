@@ -1,0 +1,19 @@
+业务需求如下：
+1. 流程起始于“Ware zum Versand”事件，货物准备好进行运输。
+2. 经由并行网关“Diverging”，流程分为两路：一路是准备包装货物，另一路是进行其他相关操作（如检查运输方式等）。
+3. 包装工人进行“Ware verpacken”（包装货物）任务。
+4. 包装好的货物进行“Ware zur Abholung bereitstellen”（准备好货物以便取货）任务。
+5. 之后到达结束事件。
+6. 对于其他相关操作路径：
+   - 经由并行网关“Diverging”后，一路进行“Versandart prüfen”（检查运输方式）任务。
+   - 另一路在“Kleine Menge”（小批量）或“Große Menge”（大批量）条件分支下：
+     - 若选择“Kleine Menge”，进行“Paketschein ausfüllen”（填写包裹单）任务。
+     - 若选择“Große Menge”，后续流程未明确展示。
+   - 填写包裹单后，进行“Angebote einholen”（获取报价）任务。
+   - 获取报价后，进行“Angebot auswählen”（选择报价）任务。
+   - 选择报价后，“Spediteur beauftragen”（委托运输商）任务。
+   - 同时，根据业务规则判断是否需要购买保险：
+     - 若需要，进行“Versicherung abschließen”（购买保险）任务，然后再回到与其他任务汇聚的流程。
+     - 若不需要，直接进入与其他任务汇聚的流程。
+7. 所有相关任务完成后，通过汇聚网关“Converging”，最终流程结束。
+8. 流程中涉及“Paketschein”（包裹单）数据对象。

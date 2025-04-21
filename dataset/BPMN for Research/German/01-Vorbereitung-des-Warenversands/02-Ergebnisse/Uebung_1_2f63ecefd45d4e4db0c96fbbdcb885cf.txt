@@ -1,0 +1,13 @@
+该业务流程是关于“PC-Händler”（电脑经销商）的业务流程，整体是从有货物要发运开始，经过一系列任务和决策节点，最终完成货物准备交付的过程。具体步骤如下：
+1. 以“Ware zu versenden”（有货物要发运）作为起始事件开启流程。
+2. 进入“Versandart klären”（明确运输方式）任务，由秘书处负责，完成后进入“Menge?”（数量？）这个排他网关。
+3. 在排他网关“Menge?”处，根据数量情况进行分支：
+    - 如果数量大，进入“3 Speditionsangebote einholen”（获取3个运输报价）任务，由秘书处完成。
+    - 如果数量小，进入“Versicherung nötig? prüfen”（检查是否需要保险）任务，由秘书处完成。
+4. 完成“3 Speditionsangebote einholen”任务后，进入“Angebot auswählen”（选择报价）任务，由秘书处完成，之后进入“Spediteur beauftragen”（委托运输商）任务，还是由秘书处完成。
+5. 完成“Versicherung nötig? prüfen”任务后，进入“Versicherung nötig?”（是否需要保险）这个排他网关：
+    - 若选择“JA”（是），进入“Versicherung abschließen”（购买保险）任务，由物流经理完成。
+    - 若选择“NEIN”（否），则直接进入后续流程。
+6. “Spediteur beauftragen”任务完成后，进入“Standardisierter Paketschein ausfüllen”（填写标准化包裹单）任务，由秘书处完成，同时“Versicherung abschließen”任务完成后也进入此任务。
+7. 两个任务完成后，都进入“Ware verpacken”（包装货物）任务，由仓库工人完成，之后进入“Ware bereitstellen”（准备货物）任务，同样由仓库工人完成。
+8. 完成“Ware bereitstellen”任务后，到达流程终点“Ware bereitgestellt”（货物已准备好）结束事件。

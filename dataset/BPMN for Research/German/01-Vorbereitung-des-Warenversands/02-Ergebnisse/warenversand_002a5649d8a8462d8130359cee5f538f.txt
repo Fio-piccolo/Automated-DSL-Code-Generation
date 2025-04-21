@@ -1,0 +1,8 @@
+该业务流程主要围绕货物发送展开，涉及确定发货量、获取报价、选择快递、包装货物、准备货物、购买保险以及最终发货等一系列操作，由不同角色协同完成。具体如下：
+1. **发货准备**：“Ware zu versenden”（待发货）事件触发流程，进入“Versandmenge bestimmen”（确定发货量）任务。
+2. **获取报价**：完成发货量确定后，通过“exclusiveGateway”（排他网关）进行分支，并行启动“Angebot 1 einholen”（获取报价1）、“Angebot 2 einholen”（获取报价2）和“Angebot 3 einholen”（获取报价3）三个任务。
+3. **选择快递**：待三个报价获取任务完成，进入“parallelGateway”（并行网关）汇聚节点，之后执行“Günstigsten Spediteur beauftragen”（委托最便宜的快递公司）任务。
+4. **包装货物**：在获取报价的同时，“Versandmenge bestimmen”任务完成后，流程通过另一个“exclusiveGateway”分支，执行“Paketschein ausfüllen”（填写包裹单）任务，完成后可能进入不同路径，一是通过“via Spedition”（通过快递公司）发货，二是通过“via normaler Post”（通过普通邮政）发货。
+5. **准备货物**：若选择通过快递公司发货，执行“Ware verpacken”（包装货物）任务，之后是“Ware bereitstellen”（准备货物）任务。若选择普通邮政发货，可能无需执行某些特定任务（从流程图推测）。
+6. **购买保险**：准备货物任务完成后，进入“Versicherung abschließen”（购买保险）任务，完成后根据条件判断进入不同后续流程。
+7. **发货完成**：经过一系列任务和判断后，最终到达“Ware verschickt”（货物已发送）的结束事件，标志整个流程结束。

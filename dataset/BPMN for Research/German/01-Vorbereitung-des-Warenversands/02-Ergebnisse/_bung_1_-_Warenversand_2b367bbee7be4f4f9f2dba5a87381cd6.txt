@@ -1,0 +1,9 @@
+这是一个零售商的业务流程。流程从一个开始事件启动。首先进入一个并行网关，分支路径分别通向仓库包装货物以及获取报价和选择货运代理等操作。
+
+在仓库方面，首先是“Ware verpacken（包装货物）”任务，完成后进入“Ware zur Abholung bereitstellen（准备货物取货）”任务。
+
+对于订单的后续处理，通过一个排他网关进行判断：
+- 如果是大量货物（Grosse Menge），则执行“Sonderversand（特殊运输）”任务，之后依次进行“Angebot einholen und Spediteur auswählen（获取报价并选择货运代理）”、“Art des Versandes abklären（明确运输方式）”等操作。
+- 如果是小量货物（Kleine Menge），则执行“Postversand（邮政运输）”任务，后续同样有一系列相关操作。
+
+在处理完订单的运输相关事务后，有一个并行网关汇聚，之后分别处理保险相关事宜（Versicherung abschliessen（完成保险））以及其他事务，最后通过另一个排他网关判断是否需要保险，若不需要保险（Keine Versicherung notwendig），流程结束于结束事件；若需要保险，完成保险流程后也结束于结束事件。同时，“Ware zur Abholung bereitstellen”任务还会与开始事件后的流程通过一条路径相连。

@@ -1,0 +1,15 @@
+业务需求如下：
+1. 流程从“Meldung Regressprüfung”开始。
+2. 首先执行“Regress prüfen”任务。
+3. 之后通过“exclusiveGateway”进行分支判断：
+   - 若条件满足，执行“Vorgang schließen”任务，之后可能走向“Kein Geld”结束事件。
+   - 若另一条件满足，执行“Zahlungsaufforderung an VN senden”任务，然后流程通过“eventBasedGateway”再次分支：
+     - 若满足特定条件，等待“Wiedervorlagefrist abgelaufen”（宽限期到期）事件。
+     - 若满足另一特定条件，等待“Geld eingegangen”（款项已收到）事件。
+     - 若满足其他条件，等待“Widerspruch eingegangen”（收到异议）事件。
+4. 当“Wiedervorlagefrist abgelaufen”事件触发后，流程继续。
+5. 当“Geld eingegangen”事件触发且条件满足时，执行“Geldeingang verbuchen und Vorgang schließen”任务，之后可能走向“Geld direkt”结束事件。
+6. 当“Widerspruch eingegangen”事件触发后，执行“Widerspruch prüfen”任务，然后通过“exclusiveGateway”再次分支：
+   - 若判断为合理，执行相关任务后可能走向“Geld über Inkasso”结束事件。
+   - 若判断为不合理，执行其他相关任务。
+7. 流程中多个任务完成后会通过“exclusiveGateway”或其他网关进行汇聚，最终走向相应的结束事件。

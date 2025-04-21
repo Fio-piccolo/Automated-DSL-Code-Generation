@@ -1,0 +1,12 @@
+业务需求如下：
+1. 流程开始于“是否进行退回（VN in Regress nehmen?）”的起始事件，该事件会触发后续流程。
+2. 接着进入“检查是否存在可能性（Prüfung, ob Möglichkeit besteht）”任务，完成此任务后，流程流向排他网关（ExclusiveGateway）。
+3. 在排他网关处，根据条件判断，若结果为“是（ja）”，则进入“发送付款请求（Zahlungsaufforderung verschicken）”任务；若结果为“否（nein）”，则进入“关闭流程（Vorgang schließen）”任务。
+4. “发送付款请求”任务完成后，进入事件驱动网关（EventBasedGateway）。
+5. 从事件驱动网关出发，若接收到“VN 拒绝（VN widerspricht）”的中间捕获事件，则进入“检查拒绝（Widerspruch prüfen）”任务。
+6. “检查拒绝”任务完成后，再次经过排他网关，根据条件判断，若结果为“合理（gerechtfertigt）”，则进入“关闭流程”任务；若结果为“不合理（nicht gerechtfertigt）”，则进入“向收款机构交付（Abgabe an Inkasso）”任务。
+7. “向收款机构交付”任务完成后，流程到达“案件已交付（Fall abgegeben）”的结束事件。
+8. 从事件驱动网关出发，若接收到“4周后重新提交（Wiedervorlage 4 Wochen）”的中间捕获事件，流程进入相关处理流程。
+9. 从事件驱动网关出发，若接收到“款项已收到（Geld eingegangen）”的中间捕获事件，并满足特定条件，则进入“记录款项（Geld verbuchen）”任务。
+10. “记录款项”任务完成后，与其他相关任务的流程汇聚到排他网关，完成汇聚后进入“关闭流程”任务。
+11. 上述两个“关闭流程”任务完成后，分别到达“流程已关闭（Vorgang geschlossen）”的结束事件。

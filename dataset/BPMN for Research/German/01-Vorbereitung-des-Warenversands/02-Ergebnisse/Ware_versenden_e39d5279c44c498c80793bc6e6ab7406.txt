@@ -1,0 +1,15 @@
+该业务流程围绕货物发送展开，从货物准备发货开始，历经多个环节，最终实现货物发送。具体流程如下：
+1. 货物准备发货：流程起始于“Ware soll versendet werden”（货物准备发货）的开始事件。
+2. 确定运输负责人：由“Klärung, wer den Versand übernimmt Versand”（确定谁负责运输）任务明确运输负责人。
+3. 分情况处理运输：
+    - 若货物量大：通过“große Mengen”（大量）的顺序流，进入“3 Angebote bei Spediteuren einholen”（向多家物流公司获取报价）任务，获取多家物流公司的报价。
+    - 若货物量小：经由“kleine Mengen”（少量）的顺序流，执行“Paketschein ausfüllen”（填写包裹单）任务，填写包裹单。
+4. 选择物流公司：完成报价获取或包裹单填写后，分别进行“ein Angebot auswählen”（选择一个报价）任务，从多个报价中选择一个物流公司。
+5. 委托物流公司：选中物流公司后，执行“Spediteur beauftragen”（委托物流公司）任务，委托该物流公司进行运输。
+6. 检查保险需求：在运输前，执行“Prüfen, ob Versicherung erforderlich”（检查是否需要保险）任务，检查货物运输是否需要保险。
+7. 处理保险情况：
+    - 若需要保险：通过“ja”（是）的顺序流，执行“Versicherung abschließen”（购买保险）任务，购买货物运输保险。
+    - 若不需要保险：经由“nein”（否）的顺序流，直接进入后续流程。
+8. 包装货物：完成保险处理后，进行“Ware verpacken”（包装货物）任务，对货物进行包装。
+9. 摆放货物：包装好的货物进入“Ware breitstellen”（摆放货物）任务，进行货物的摆放。
+10. 货物发送：最后，货物完成摆放后，通过“Ware versandt”（货物发送）的结束事件实现货物的发送。

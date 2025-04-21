@@ -1,0 +1,1 @@
+业务需求如下：首先开始事件“Bestellung liegt vor”，触发任务“Versand klären”，完成后进入排他网关“Menge?”，根据不同的流出路径进行不同的操作。若通过“ja”路径，触发任务“Angebot 1 einholen”等一系列并行任务；若通过“nein”路径，触发其他相关任务。之后通过并行网关“Diverging”和“Converging”进行流程的并行和合并，依次执行各个任务，如“Angebot auswählen”“Spediteur beauftragen”等，最终到达结束事件“Ware abgeholt”。整个流程包含了订单处理过程中的各种操作和决策，如发货确认、获取报价、选择保险等。

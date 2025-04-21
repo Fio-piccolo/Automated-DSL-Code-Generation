@@ -1,0 +1,9 @@
+该业务流程从开始事件启动，首先进入“Ware soll versendet werden”任务，之后通过并行网关“sid-4EF3447F-51EC-480F-B557-7578CE26418C”分为三条路径，分别进入“Spediteur 1”、“Spediteur 2”、“Spediteur 3”任务。同时，从“Angebote einholen”任务的输出连接到并行网关“sid-4EF3447F-51EC-480F-B557-7578CE26418C”。
+
+“Angebote einholen”任务执行后，进入并行网关“sid-4EF3447F-51EC-480F-B557-7578CE26418C”，然后进入“günstigstes Angebot auswählen ”任务，接着通过排他网关“sid-60983533-9E1C-4B20-BEA5-E3998EFDD44C”判断是否需要保险，若需要保险则进入“Versicherung Ja”任务，之后完成“Versicherung abschließen”任务；若不需要保险则进入“Versicherung Nein”任务。
+
+在“Ware bereitgestellt”任务执行后，进入“Ware verpacken”任务，之后进入“Paketschein ausfüllen”任务。
+
+另外，从“Ware soll versendet werden”任务通过并行网关“sid-D4B1B899-E26D-4CE7-9F12-8BAA4E7129F4”分为两条路径，分别进入“Sonderversand”和“Postversand”任务。
+
+最后，各个路径经过相应的任务处理后，通过不同的并行网关和排他网关进行流程汇聚，最终到达结束事件。

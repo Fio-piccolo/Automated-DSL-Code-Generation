@@ -1,0 +1,9 @@
+流程开始于“Ware soll versendet werden”（货物需要发送）。接着进入“Versand prüfen”（检查发货）任务。然后通过并行网关，分为两条路径：一条是“Lagerarbeiter”（仓库工人）执行“Ware verpacken”（包装货物）任务；另一条是“Sekretariat”（秘书处）执行“Angebote einholen”（获取报价）任务。
+
+在“Angebote einholen”任务后，执行“Spediteur beauftragen”（委托运输商）任务。同时，“Sekretariat”还执行“Paketschein ausfüllen”（填写包裹单）和“Versicherungsbedarf feststellen”（确定保险需求）任务。
+
+在“Versicherungsbedarf feststellen”任务后，通过“Versicherung nötig?”（需要保险吗？）网关。如果需要保险，“Logistikleiter”（物流经理）执行“Versicherung abschließen”（办理保险）任务。无论是否需要保险，流程都会经过“Versicherung abschließen”任务后的网关。
+
+最后，通过并行网关合并路径，执行“Ware zur Abholung bereitstellen”（准备货物以便取货）任务，流程结束。
+
+此外，流程中还有一些消息流，如“Angebote einholen”任务与“Spediteur”（运输商）之间的消息流，以及“Spediteur beauftragen”任务与“Spediteur”之间的消息流。

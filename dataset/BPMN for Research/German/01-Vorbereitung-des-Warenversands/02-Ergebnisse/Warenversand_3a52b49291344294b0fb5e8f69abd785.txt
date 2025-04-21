@@ -1,0 +1,12 @@
+该业务流程是关于货物运输的流程，具体如下：
+1. 当有货物需要运输时，流程开始。
+2. 首先由相关人员创建报价（“Angebot erstellen”）。
+3. 创建报价后，检查货物数量是否为大量（通过“Große Menge?”这个排他网关判断）：
+    - 如果数量不是大量，直接选择报价并委托运输商（“Angebot auswählen & Spediteur beauftragen”）。
+    - 如果数量是大量，则进行以下操作：
+        - 填写包裹单（“Paketschein ausfüllen”）。
+        - 同时，根据条件判断是否需要购买保险：
+            - 如果需要保险，购买保险（“Versicherung abschließen”）。
+            - 如果不需要保险，则跳过此步骤。
+        - 之后，进行货物包装（“Ware verpacken”）、准备运输货物（“Speditionsware bereitstellen”）、从仓库提货并交给运输商（“Ware abholen und zur Post bringen”），最后货物被发送（“Ware versendet”）。
+4. 运输商收到货物后，将货物发货（“Ware versendet”），流程结束。

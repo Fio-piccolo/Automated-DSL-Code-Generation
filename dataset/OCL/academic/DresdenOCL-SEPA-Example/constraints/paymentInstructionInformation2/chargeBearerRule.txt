@@ -1,0 +1,3 @@
+The requirements are as follows: 
+
+If the field 'ChargeBearer' is present within the 'PaymentInstructionInformation2' context, then the field 'ChargeBearer' within 'DirectDebitTransactionInformation' context is not allowed to be present. Conversely, if the field 'ChargeBearer' within 'DirectDebitTransactionInformation' context is present, then the field 'ChargeBearer' within 'PaymentInstructionInformation2' context is not permitted to exist. Both 'DirectDebitTransactionInformation/ChargeBearer' and 'ChargeBearer' within 'PaymentInstructionInformation2' context can be absent.

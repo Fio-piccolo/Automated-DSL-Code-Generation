@@ -1,0 +1,8 @@
+该业务流程围绕货物发送展开，涵盖保险购买、数量检查、包装等环节，各环节依据不同条件流转，最终使货物准备好交付。具体如下：
+1. 流程启动于“Ware soll versendet werden”（货物应被发送）的开始事件。
+2. 首先进入“Versicherung abschließen!”（购买保险）任务，完成后进入汇聚的排他网关。
+3. 若有特殊运输需求，走“Ja”（是）路径，进入“Angebote auswählen”（选择报价）任务，之后经排他网关汇聚，再到“Menge prüfen”（检查数量）任务；若无特殊运输需求，走“Nein”（否）路径，进入“normaler Postversand”（普通邮政运输）任务。
+4. “normaler Postversand”任务后是“Paketschein ausfüllen”（填写包裹单）任务。
+5. “Paketschein ausfüllen”任务后进入“Versicherung notwendig?”（需要保险吗？）的排他网关，若回答“Ja”（是），返回“Versicherung abschließen!”任务；若回答“nein”（否），进入汇聚的排他网关。
+6. 接着进入并行网关，一路进入“Ware verpacken”（包装货物）任务，完成后进入并行汇聚网关；另一路进入“Menge prüfen”任务。
+7. “Menge prüfen”任务完成后，根据条件流转，最终所有流程汇聚到“Ware zur Abholung bereit”（货物准备好取货）的结束事件。

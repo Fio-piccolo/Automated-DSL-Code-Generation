@@ -1,0 +1,5 @@
+业务需求如下：
+首先，从“Warenversand muss vorbereitet werden”的开始事件开始，流程进入到“Versandart wählen”任务，然后根据选择的不同情况进行分支。若选择“große Menge”，流程进入“Angebote einholen”任务；若选择“kleine Menge”，流程进入“Versicherung beauftragen”任务。
+在“Angebote einholen”任务后，流程进入到平行网关，有三个分支，分别对应“Spediteur 1”“Spediteur 2”“Spediteur 3”的任务，每个任务完成后都汇聚到一个并行网关。
+在“Versicherung beauftragen”任务后，流程进入到排他网关，根据“Versicherung notwendig”或“Versicherung nicht notwendig”的判断进行分支，分别进入不同的任务。
+各个任务之间通过序列流连接，形成了复杂的流程，最终到达“Ware zur Abholung bereit”的结束事件。同时，存在一些关联用于表示相关人员或信息，但没有单独的 Lane 来表示。

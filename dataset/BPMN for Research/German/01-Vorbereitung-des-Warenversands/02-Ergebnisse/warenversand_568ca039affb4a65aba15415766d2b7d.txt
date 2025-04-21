@@ -1,0 +1,11 @@
+流程从“Ware soll versendet werden”（货物将运往何处）的开始事件启动。然后通过并行网关分为两条并行路径：一条是“Ware verpacken”（包装货物）任务，另一条是“Versandart klären”（明确运输方式）任务。
+
+“Versandart klären”任务完成后，流程进入一个排他网关，根据条件分为“Sonderversand”（特殊运输）和“normaler Versand”（普通运输）两条分支。
+
+若走“Sonderversand”分支，将执行“Angebot anfragen”（询问报价）任务，此任务具有多实例循环特性，之后通过并行网关分为三个并行任务：“Angebot erstellen”（创建报价），这三个任务完成后，通过并行网关汇聚，再执行“Bestes Angebot auswählen”（选择最佳报价）任务，接着是“Spediteur beauftragen”（委托运输商）任务。
+
+若走“normaler Versand”分支，流程通过并行网关分为“Paketschein ausfüllen”（填写包裹单）和“Versicherungs - erfordernis prüfen”（检查保险要求）两个并行任务。“Paketschein ausfüllen”任务完成后与“Versicherungs - erfordernis prüfen”任务的后续流程通过并行网关汇聚。
+
+“Versicherungs - erfordernis prüfen”任务完成后进入另一个排他网关，根据条件分为“erforderlich”（需要）和“nicht erforderlich”（不需要）两条分支。若为“erforderlich”，则执行“Versicherung abschließen”（签订保险）任务，之后与“nicht erforderlich”分支在排他网关汇聚，再与“Paketschein ausfüllen”任务的后续流程通过并行网关汇聚。
+
+所有分支最终通过并行网关和排他网关的汇聚，执行“Ware zur Abholung bereitstellen”（准备货物以供取货）任务，最后流程在结束事件结束。

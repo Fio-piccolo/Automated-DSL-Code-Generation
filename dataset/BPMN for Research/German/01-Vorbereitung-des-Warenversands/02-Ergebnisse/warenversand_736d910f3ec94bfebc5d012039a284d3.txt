@@ -1,0 +1,17 @@
+该BPMN流程描述了硬件处理的业务流程，具体如下：
+
+1. **开始**：流程从“Ware soll versendet werden”（货物需要发货）开始。
+2. **并行处理**：流程进入并行网关，分为两个并行路径。
+    - **路径一：包装货物**
+        - 首先进行“Prüfung der Warenmenge”（货物数量检查）。
+        - 根据货物数量大小，通过排他网关“Wie groß ist Warenmenge?”（货物数量是多少？）进行判断：
+            - 如果是小批量货物，进行“standardisierten Paketschein ausfüllen”（填写标准包裹单）。
+            - 如果是大批量货物，进行“Einholen der 3 Angebote”（获取3个报价），然后选择最便宜的报价“günstigstes Angebot auswählen”（选择最便宜的报价），根据选择的报价，分别委托不同的货运公司“beauftragt Spediteur 1”（委托货运公司1）、“beauftrag Spediteur 2”（委托货运公司2）或“beauftragt Spediteur 3”（委托货运公司3）。
+        - 接着进行“Prüfung ob Versicherung der Ware notwendig”（检查是否需要货物保险），通过排他网关“Versicherung notwendig?”（是否需要保险？）进行判断：
+            - 如果不需要保险，直接进入下一步。
+            - 如果需要保险，进行“Schliesst Versicherung ab”（办理保险）。
+    - **路径二：包装货物**
+        - 进行“Ware einpacken”（包装货物）。
+3. **合并并行路径**：两个并行路径在并行网关处合并。
+4. **货物准备**：进行“Ware wird bereitgestellt”（货物准备就绪）。
+5. **结束**：流程结束。

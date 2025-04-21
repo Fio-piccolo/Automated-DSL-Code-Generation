@@ -1,0 +1,6 @@
+业务需求如下：
+该业务流程主要围绕一个业务事件展开，起始于“Meldg: Regress mgl”事件，触发后进入“Prüfung”任务环节。在此任务完成后，流程流转至“Regress möglich?”的排他网关进行条件判断。
+若判断结果为肯定（“Ja”），则进入“Zahlungsaufforderung an VN senden”任务，随后在“Geld eingegangen?”的排他网关再次进行判断。若款项已到账（“Ja”），则执行“Geldeingang buchen”任务，之后进入“Versand Zahlungsauf - forderung an VN ”环节；若未到账（“Nein”），则直接进入该环节。
+在“Versand Zahlungsauf - forderung an VN ”环节之后，存在两种可能情况：若收到供应商的回应为“Ja”，则供应商会进行款项支付，流程进入“Wiedervorlage in 3 Tagen”的中间捕获事件，并在3天后触发后续流程；若收到的回应为“Nein”，即供应商有异议，则进入“Widerspruch erhalten”的中间捕获事件。
+当出现异议时，需要对异议进行检查，即执行“Widerspruch prüfen”任务。若异议被判定为合理（“Ja”），则执行“Zahlungsaufforderung stornieren”任务；若异议不合理（“Nein”），则不进行此操作。
+若款项已成功到账并完成相关操作后，会进入“Forgang schliessen”任务，随后流程结束。整个流程通过多个任务、网关以及中间捕获事件，依据不同的条件和判断，有序地推进业务的处理。

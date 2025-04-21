@@ -1,0 +1,14 @@
+1. 流程开始于“Ware zu versenden”（待发货）事件。
+2. 货物数量检验任务“Warenmenge prüfen”执行后，流程根据货物数量进入不同分支：
+   - 若数量少，执行“Postversand - paketschein ausfüllen”（邮政发货 - 填写包裹单）任务。
+   - 若数量多，流程回到并行网关“parallelGateway”重新分支。
+3. 执行“Postversand - paketschein ausfüllen”任务后，进入“Versicherung erforderlich?”（需要保险吗？）排他网关：
+   - 若回答“Ja”（是），执行“Versicherung abschließen”（购买保险）任务。
+   - 若回答“Nein”（否），则不执行购买保险任务。
+4. 购买保险任务完成后与不购买保险的情况在“BE035964 - 1721 - 46B5 - BA9C - 301F06278EFE”并行网关汇聚，之后流程继续。
+5. 接下来执行“Ware verpacken”（包装货物）任务。
+6. 然后执行“Ware zur Abholung bereitstellen”（准备货物以便取货）任务，流程结束于“EndEvent”。
+7. 同时，在开始事件后，通过并行网关并行执行三个“Angebot einholen Spediteur X”（向第X个托运人获取报价）任务。
+8. 这三个获取报价任务完成后，执行“Angebot auswählen”（选择报价）任务。
+9. 选择报价后再次执行“Ware verpacken”任务，之后与前面包装货物后的流程汇聚。
+10. 最后经过“FA58D26C - 8508 - 4A38 - BBD2 - 0BECE5152F7A”排他网关汇聚后，准备货物以便取货，结束流程。

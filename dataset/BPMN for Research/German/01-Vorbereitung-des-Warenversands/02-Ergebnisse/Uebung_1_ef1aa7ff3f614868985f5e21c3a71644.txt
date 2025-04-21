@@ -1,0 +1,26 @@
+该业务流程围绕货物发货展开，涵盖包装、准备、确定运输量、选择快递公司、获取报价、投保、安排运输等环节，涉及仓储工人、秘书、物流经理等角色，各环节紧密相连，共同确保货物顺利发货。具体如下：
+1. **开始**：以“Ware soll versendet werden”（货物应被发送）事件作为起点。
+2. **仓库工人操作**
+    - 执行“Ware bereitstellen”（准备货物）任务，完成后进入后续流程。
+    - 执行“Ware verpacken”（包装货物）任务，完成后进入后续流程。
+3. **并行处理**：上述两个任务完成后，通过“Converging parallelGateway”（汇聚并行网关）进行并行处理。
+4. **确定运输量**：由秘书执行“Versandmenge ermitteln”（确定运输量）任务，完成后进入“Versandmenge?”（运输量？）环节。
+5. **判断运输量**：在“Versandmenge?”环节，根据运输量的不同进行判断。
+    - 如果运输量大（“Gross”），则由秘书执行“Angebote einholen”（获取报价）任务，完成后进入“Spediteur?”（快递公司？）环节。
+    - 如果运输量小（“Klein”），则直接进入“Spediteur?”环节。
+6. **选择快递公司**：在“Spediteur?”环节，根据不同情况选择快递公司。
+    - 若选择“Spediteur 1”，则由秘书执行“Spediteur 1 beauftragen”（委托快递公司1）任务，完成后进入后续流程。
+    - 若选择“Spediteur 2”，则由秘书执行“Spediteur 2 beauftragen”（委托快递公司2）任务，完成后进入后续流程。
+    - 若选择“Spediteur 3”，则由秘书执行“Spediteur 3 beauftragen”（委托快递公司3）任务，完成后进入后续流程。
+7. **并行处理**：三个委托快递公司的任务完成后，通过“Converging exclusiveGateway”（汇聚排他网关）进行并行处理。
+8. **投保相关**
+    - 物流经理执行“Versicherung Abschliessen”（完成保险）任务，完成后进入后续流程。
+    - 物流经理执行“Versicherungsdaten ermitteln”（确定保险数据）任务，完成后进入“Versicherung?”（保险？）环节。
+9. **判断是否需要保险**：在“Versicherung?”环节，根据判断结果进行不同操作。
+    - 如果不需要保险（“Nein”），则直接进入后续流程。
+    - 如果需要保险（“Ja”），则执行“完成保险”任务，完成后进入后续流程。
+10. **并行处理**：上述两个与保险相关的任务完成后，通过“Converging exclusiveGateway”（汇聚排他网关）进行并行处理。
+11. **填写包裹单**：由秘书执行“Paketschein ausfuellen”（填写包裹单）任务，完成后进入后续流程。
+12. **选择快递公司**：由秘书执行“Spediteur auswaehlen”（选择快递公司）任务，完成后进入后续流程。
+13. **并行处理**：上述两个任务完成后，通过“Converging parallelGateway”（汇聚并行网关）进行并行处理。
+14. **结束**：以“Ware bereitgestellt”（货物已准备好）事件作为终点，表示整个业务流程结束。

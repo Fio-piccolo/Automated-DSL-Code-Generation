@@ -1,0 +1,1 @@
+业务需求如下：从开始事件开始，先确定数量（通过“Menge bestimmen”任务），根据数量判断是小量（“große Menge”条件）还是大量（“kleine Menge”条件），若为小量则进行“Angebot 1 prüfen”等一系列针对少量的操作，若为大量则进行“Angebote einholen”等一系列针对大量的操作，然后通过各种网关和任务进行并行或顺序的流程处理，如创建不同的询价、检查报价等，最终选择合适的报价并委托给快递公司（“Spediteur beauftragen”任务），完成整个业务流程。

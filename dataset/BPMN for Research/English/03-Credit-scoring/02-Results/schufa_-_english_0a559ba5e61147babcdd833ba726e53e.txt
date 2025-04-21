@@ -1,0 +1,21 @@
+### 整体业务流程概述
+该BPMN流程主要涉及银行前端（Banking Frontend）、银行评分部门（Scoring (Bank)）和信用机构评分部门（Scoring (Credit Agency)）之间关于评分请求的业务处理流程。银行前端发起评分请求，信用机构评分部门接收请求后进行评分，并将结果反馈给银行评分部门，银行评分部门根据不同情况进行后续操作，最终完成评分报告的发送。
+
+### 具体业务流程步骤
+
+#### 银行前端（Banking Frontend）
+1. 触发“Scoring request”（评分请求）事件，发送“scoring request”消息给银行评分部门的“Scoring request”开始事件（sid-0F5CD179-DAE3-4D4A-9A93-C14C2BF38E7A）。
+
+#### 银行评分部门（Scoring (Bank)）
+1. “Scoring request”开始事件（sid-0F5CD179-DAE3-4D4A-9A93-C14C2BF38E7A）触发后，执行“Send request to credit agency”（发送请求给信用机构）任务（sid-E2DDFF2D-3312-487F-8AFF-0F5D38F4188F），将评分请求发送给信用机构评分部门。
+2. 发送请求后，触发“Scoring request”中间抛出事件（sid-B3ADE152-01F4-477F-A656-A255E483D68D），等待信用机构评分结果。
+3. 接收到信用机构的“Level 1 scoring result”（一级评分结果）中间捕获事件（sid-C6D7A458-BEEC-4A89-B761-CDF34B57F512）后，进入“Is level 1 result available?”（一级结果是否可用？）排他网关（sid-736F9271-B6F1-4B4F-989A-0B94E5D4B45F）进行判断。
+   - 如果结果可用（走“yes”分支），执行“Send level 1 report”（发送一级报告）中间抛出事件（sid-B1CD4625-5660-46D4-9831-D04D95217DE1），发送一级评分报告，然后进入“Level 1 report sent”（一级报告发送）结束事件（sid-10C3BE7A-1A02-41B8-9283-3B2B43CF2902）。
+   - 如果结果不可用（走“no”分支），执行“Receive level 2 report”（接收二级报告）中间捕获事件（sid-E129B2BF-626D-45F9-859B-7D6056953F3D），接收二级评分报告，然后执行“Send level 2 report”（发送二级报告）中间抛出事件（sid-4CBA3D6D-AA69-4706-BB14-E6DF2332921A），发送二级评分报告，最后进入“Level 2 report sent”（二级报告发送）结束事件（sid-B27B17A7-8825-4A76-9498-59026244205C）。
+
+#### 信用机构评分部门（Scoring (Credit Agency)）
+1. “Scoring request”开始事件（sid-058A67B7-3774-4A6B-BF16-3047571A3972）触发后，执行“Perform level 1 scoring”（执行一级评分）任务（sid-12134A12-42F3-4014-8836-7B86C65A8077）。
+2. 一级评分完成后，进入“Level 1 scoring available”排他网关（sid-1C1CCA11-0359-4936-983E-B081924C2FA2）进行判断。
+   - 如果一级评分可用（走“yes”分支），执行“Prepare Level 1 scoring report”（准备一级评分报告）任务（sid-CCD0EEFB-EDE6-4BA6-B928-FBF18389C9DF），生成并发送一级评分报告，进入“Level 1 scoring sent”（一级评分发送）结束事件（sid-F9625A35-3D36-45DB-A241-97F4790F82AF）。
+   - 如果一级评分不可用（走“no”分支），执行“Inform customer that level 1 scoring not available”（通知客户一级评分不可用）任务（sid-FB4407F6-96FD-416C-90C3-AD4E392BC1D1），发送通知后触发“Level 1 scoring not available notification”（一级评分不可用通知）中间抛出事件（sid-574006FB-06D6-47F9-960F-4310F3EA8884）。
+3. 接收到“Level 1 scoring not available notification”中间抛出事件（sid-574006FB-06D6-47F9-960F-4310F3EA8884）后，执行“Perform level 2 scoring”（执行二级评分）任务（sid-391AF803-4A78-4CD3-B31B-723F3B4E1EAB），完成后执行“Prepare level 2 scoring report”（准备二级评分报告）任务（sid-E952476D-5F48-4818-8E9C-4FC6320CF418），生成并发送二级评分报告，进入“Level 2 scoring sent”（二级评分发送）结束事件（sid-367C4B5A-2146-4289-A147-181290A7FDC8）。

@@ -1,0 +1,14 @@
+业务需求如下：
+1. 首先进行“Regress prüfen”（回归检查）。
+2. 接着执行“Fall prüfen”（案例检查）。
+3. 之后通过“Regress möglich?”（是否可以回归？）这个排他网关进行判断：
+   - 如果条件满足走“是”的路径，执行“Zahlung verbuchen”（记录支付），然后流程结束为“Vorgang geschlossen”（流程关闭）。
+   - 如果条件不满足走“否”的路径，执行“Widerspruch prüfen”（检查异议）。
+4. 针对“Widerspruch prüfen”的结果，通过“Widerspruch gerechtfertigt?”（异议是否合理？）这个排他网关进行判断：
+   - 如果异议合理，执行“Nachricht an VN”（给供应商的消息），然后流程结束为“Vorgang geschlossen”（流程关闭）。
+   - 如果异议不合理，执行“Vorgang an Inkassodienstleister abgegeben”（流程已提交给收账服务提供商），然后流程结束为“Vorgang geschlossen”（流程关闭）。
+5. 同时存在时间相关的流程：
+   - 当“Frist abgelaufen”（期限已过）这个中间捕获事件触发后，执行后续相关任务，最后流程结束为“Vorgang geschlossen”（流程关闭）。
+6. 还存在与供应商交互的流程：
+   - 执行“Zahlungsaufforderung an VN”（向供应商发出付款要求），之后可能会有供应商相关的事件触发，如“VN legt Widerspruch ein”（供应商提出异议）等，然后继续后续流程直至结束。
+7. 另外有一个事件驱动网关，根据接收到的消息等不同情况，分别触发不同的后续流程，如中间捕获事件“Zahlung bestätigt”（付款确认）等，最终流程结束为“Vorgang geschlossen”（流程关闭）。

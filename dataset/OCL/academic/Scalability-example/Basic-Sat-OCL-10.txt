@@ -1,0 +1,14 @@
+The requirements are as follows:
+
+1. Within Package_1 context, for all instances of A2, attribute 'at' should always be greater than or equal to the attribute 'at' of associate A1.
+2. In the same package, for all instances of A3, attribute 'at' should always be greater than or equal to the attribute 'at' of associate A2.
+3. Similarly, for all instances of A4, attribute 'at' should always be greater than or equal to the attribute 'at' of associate A3.
+4. For all instances of A5, attribute 'at' should always be greater than or equal to the attribute 'at' of associate A4.
+5. For all instances of A6, attribute 'at' should always be greater than or equal to the attribute 'at' of associate A5.
+6. For all instances of A7, attribute 'at' should always be greater than or equal to the attribute 'at' of associate A6.
+7. For all instances of A8, attribute 'at' should always be greater than or equal to the attribute 'at' of associate A7.
+8. For all instances of A9, attribute 'at' should always be greater than or equal to the attribute 'at' of associate A8.
+9. For all instances of A10, attribute 'at' should always be greater than or equal to the attribute 'at' of associate A9.
+10. Lastly, for all instances of A1, attribute 'at' should always be greater than or equal to the attribute 'at' of associate A10. 
+
+Essentially, within Package_1, each class 'A' (from A2 to A10) must contain an attribute 'at' value that is no less than the same attribute 'at' of the class 'A' preceding it (starting from A1 for A2) in a sequential numerical order.

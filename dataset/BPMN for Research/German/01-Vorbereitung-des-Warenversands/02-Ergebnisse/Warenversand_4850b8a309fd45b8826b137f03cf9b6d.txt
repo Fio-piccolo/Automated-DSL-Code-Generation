@@ -1,0 +1,11 @@
+该业务流程主要围绕货物运输展开，涉及保险办理、货物包装、准备发货等多个环节，由不同角色协同完成。具体流程如下：
+1. 流程开始于“Ware zum Versand bereit”（货物准备好发货）事件。
+2. 进入“Anfrage”（询价）环节，并行向多个供应商发起询问，获取不同的报价。
+3. 接着进行“Angebot auswählen”（选择报价），从多个报价中挑选合适的。
+4. 之后确定是否需要特殊运输，若需要则进入“Angebote einholen”（获取报价）流程，获取相关报价后继续后续操作；若不需要则直接进入“Paketschein ausfüllen”（填写包裹单）流程。
+5. 填写完包裹单后，进行“Versicherung prüfen”（检查保险）。
+6. 检查保险后判断是否需要保险，若需要则进行“Versicherung abschließen”（购买保险），购买保险后进入“Ware verpacken”（包装货物）环节；若不需要则直接进入“Ware bereitstellen”（准备货物）环节。
+7. 包装好货物后，准备货物，货物准备好后进入“Ware zur Abholung bereit”（货物准备好取货）状态，表示整个发货流程基本完成。
+8. 最后选择货运代理发货。
+
+在这个过程中，不同的任务由“Logisitikleiter”（物流经理）、“Lagerarbeiter”（仓库工人）、“Sekretariat”（秘书）等不同角色在各自的工作区域内协同完成。

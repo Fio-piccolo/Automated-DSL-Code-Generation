@@ -1,0 +1,6 @@
+业务需求如下：
+该流程主要围绕“Regressname - Sachbearbeiter”展开，起始于“Meldung Regress”事件。触发该事件后，进入“Regress prüfen”任务进行检查。检查后通过“VN in Regress nehmen?”排他网关进行决策，如果选择“Ja”，则执行“VN Zahlung-aufforderung senden”任务并发送付款请求，之后执行“Vorgang schließen”任务关闭流程，最终到达“Vorgang geschlossen”结束事件；如果选择“Nein”，则直接执行“Vorgang schließen”任务关闭流程，到达“Vorgang geschlossen”结束事件。
+
+在流程中，还有一个基于事件的排他网关，当有相关事件触发时，会有不同的流向。若发生“Zahlungs-eingang”（收款）事件，进入“Eingang verbuchen”任务进行入账操作；若发生“Widerspruch VN”（客户异议）事件，先执行“Widerspruch prüfen”任务检查异议，然后通过“Berechtig?”排他网关再次决策，如果选择“Ja”，执行“Vorgang an Inkasso geben”任务并将流程交给催款机构，最终到达“Übergabe Inkassobüro”结束事件；如果选择“Nein”，执行“Vorgang auf Wiedervorlage setzen”任务将流程设置为等待客户重新提交，之后回到基于事件的排他网关等待新的事件触发。
+
+另外，当出现“Wiedervorlagefrist abgelaufen”（重新提交期限过期）事件时，执行“Vorgang an Inkasso geben”任务并将流程交给催款机构，最终到达“Übergabe Inkassobüro”结束事件。如果在“Zahlungs-eingang”事件后成功入账，会到达“Vorgang geschlossen mit Geldeinnahme”结束事件，表示流程已关闭且有资金收入。

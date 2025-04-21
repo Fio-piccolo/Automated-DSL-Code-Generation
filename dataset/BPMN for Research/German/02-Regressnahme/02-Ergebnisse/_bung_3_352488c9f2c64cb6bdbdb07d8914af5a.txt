@@ -1,0 +1,10 @@
+业务需求如下：
+1. 流程起始于“möglicher Regress VN”开始事件。
+2. 接着执行“Fall prüfen”任务，检查相关情况。
+3. 之后通过“Regress möglich?”排他网关进行判断，如果回归可行，执行“Zahlungsaufforderung an VN schicken”任务，向相关方发送付款要求；如果回归不可行，则有其他后续流程分支。
+4. 当执行“Zahlungsaufforderung an VN schicken”任务后，流程到达“Exclusive”类型的事件网关，根据不同条件分别走向“Wiedervorlage”（等待重新提交）、“VN widerspricht”（相关方拒绝）、“VN zahlt”（相关方付款）这三个中间捕获事件。
+5. 对于“Wiedervorlage”中间捕获事件，设置了定时器，等待一段时间。
+6. 当发生“VN widerspricht”事件时，执行“Widerspruch püfen”任务，检查拒绝是否合理。
+7. 对于“Widerspruch püfen”任务的结果，通过“Widerpruch ist gerechtfertigt”排他网关判断，如果拒绝合理，执行“Weitergabe an Inkassodienstleister”任务，将相关事宜转交给收账服务提供商；如果拒绝不合理，则有其他后续流程分支。
+8. 当“Wiedervorlage”定时器触发或发生“VN zahlt”事件后，也会执行相应的后续任务，最终到达不同的结束事件，完成整个流程。
+9. 同时，还有一个并行流程，涉及“Zahlungseingang buchen”任务，用于记录付款到账情况。

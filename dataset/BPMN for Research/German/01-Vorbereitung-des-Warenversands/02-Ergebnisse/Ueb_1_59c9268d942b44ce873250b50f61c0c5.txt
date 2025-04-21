@@ -1,0 +1,7 @@
+当收到货物运输请求时，流程开始。首先并行处理两个任务：“Menge prüfen”（检查数量）和“Ware verpacken”（包装货物）。
+
+在“Menge prüfen”任务后，通过“Menge?”（数量？）的排他网关判断。如果数量大（“groß”），则执行“3 Angebote einholen”（获取3个报价）、“Angebot auswählen”（选择报价）、“Spediteur beauftragen”（委托运输商）任务；如果数量小（“Klein”），则执行“Paketschein ausfüllen”（填写包裹单）任务。
+
+“Paketschein ausfüllen”后，进行“Versicherungsbedarf prüfen?”（检查保险需求），通过“Versicherungsbedarf?”（保险需求？）排他网关判断。若不需要保险（“NEIN”），直接进入后续流程；若需要保险（“JA”），则执行“Versicherung abschließen”（签订保险）任务，之后汇合。
+
+上述两个分支（数量大分支和保险判断分支）以及“Ware verpacken”任务完成后，通过并行网关汇合，接着执行“Ware bereitstellen”（准备货物）任务，最后流程结束，下达运输订单（“Versandauftrag erteilt”）。

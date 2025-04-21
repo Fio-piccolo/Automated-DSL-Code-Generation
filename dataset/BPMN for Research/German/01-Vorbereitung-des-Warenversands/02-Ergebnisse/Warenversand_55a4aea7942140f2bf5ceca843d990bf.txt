@@ -1,0 +1,9 @@
+该业务流程描述的是货物发送流程，具体如下：
+1. 流程从“Ware soll versendet werden（货物应被发送）”开始。
+2. 并行开展两个任务：
+   - 任务一：仓库工人进行“Ware verpacken（包装货物）”，完成后触发“Verpackungsvorbereitung abgeschlossen（包装准备完成）”中间事件。
+   - 任务二：秘书进行判断，首先“Zuständigkeit / Versandmenge prüfen（检查权限/发货数量）”，根据检查结果，若为大量货物（große Menge），则“Angebote bei drei Spediteuren einholen（从三家货运公司获取报价）”，之后“Angebot auswählen（选择报价）”，接着“Auftrag erteilen（下达订单）”；若为小量货物（kleine Menge），则并行开展两个子任务：
+     - 子任务一：进行“Paketschein ausfüllen（填写包裹单）”。
+     - 子任务二：“Versicherungserfordernis prüfen（检查保险要求）”，若需要保险（Versicherung erforderlich? 回答为ja），则由物流经理“Versicherung abschließen（签订保险）”，若不需要保险（回答为nein），则不进行保险签订，无论是否签订保险，后续都与填写包裹单的任务合并。
+3. 上述并行任务完成后，合并至“Versandvorbereitungen abgeschlossen（发货准备完成）”中间事件。
+4. 最终流程以“Warenversand in die Wege geleitet（货物发送已启动）”结束。

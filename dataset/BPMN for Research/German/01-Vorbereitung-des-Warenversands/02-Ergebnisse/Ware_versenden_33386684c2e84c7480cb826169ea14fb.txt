@@ -1,0 +1,24 @@
+该业务流程围绕计算机经销商发货展开。首先判断货物数量，若为大量则选择合适的快递公司并填写包裹单；若为小量则直接填写包裹单。之后，判断是否需要购买保险，如需则购买保险，然后进入货物包装环节。包装完成后，将货物交付给快递公司，快递公司接单后创建报价，最后完成发货流程。
+1. 开始事件“Ware zu versenden”触发流程。
+2. 通过平行网关“sid-91370A8F-3D07-46B2-B762-BAAE2AEBE4A7”进行分支：
+    - 一条序列流连接到排他网关“sid-F1095B6C-7618-48B4-82ED-AC32A51C4832”。
+    - 一条序列流连接到任务“Ware verpacken”。
+    - 另一条序列流连接到排他网关“sid-0DF6D650-F92C-4E04-BE30-F05158CBF690”。
+3. 排他网关“sid-F1095B6C-7618-48B4-82ED-AC32A51C4832”根据条件进行分支：
+    - 若条件为“Versicherung notwendig”，则通过序列流连接到任务“Versicherung abschließen”。
+    - 若条件为“keine Versicherung notwendig”，则通过序列流连接到排他网关“sid-3EC29926-D20C-4DFF-A2C8-12F2870E5F60”。
+4. 任务“Versicherung abschließen”完成后，通过序列流连接到排他网关“sid-3EC29926-D20C-4DFF-A2C8-12F2870E5F60”。
+5. 排他网关“sid-0DF6D650-F92C-4E04-BE30-F05158CBF690”根据条件进行分支：
+    - 若条件为“kleine Menge”，则通过序列流连接到任务“Paketschein ausfüllen”。
+    - 若条件为“große Menge”，则通过序列流连接到任务“Spediteur auswählen”。
+6. 任务“Spediteur auswählen”完成后，通过序列流连接到任务“Spediteur beauftragen”。
+7. 任务“Paketschein ausfüllen”完成后，通过序列流连接到排他网关“sid-1198DDAE-6D0D-4AA1-BC8A-CA0A7CE2DF30”。
+8. 任务“Spediteur beauftragen”完成后，通过序列流连接到排他网关“sid-1198DDAE-6D0D-4AA1-BC8A-CA0A7CE2DF30”。
+9. 排他网关“sid-1198DDAE-6D0D-4AA1-BC8A-CA0A7CE2DF30”将两条输入序列流合并后，通过序列流连接到平行网关“sid-918F6A4D-FC94-4B51-9BA2-BC45BAEC7AD1”。
+10. 任务“Ware verpacken”完成后，通过序列流连接到平行网关“sid-918F6A4D-FC94-4B51-9BA2-BC45BAEC7AD1”。
+11. 平行网关“sid-918F6A4D-FC94-4B51-9BA2-BC45BAEC7AD1”将三条输入序列流合并后，通过序列流连接到任务“Ware bereitstellen”。
+12. 任务“Ware bereitstellen”完成后，通过序列流连接到结束事件“Ware bereitgestellt”。
+
+同时，该业务流程还有一个关联的“Spediteur”流程：
+1. 开始事件触发流程，通过序列流连接到任务“Angebot erstellen”。
+2. 任务“Angebot erstellen”完成后，通过序列流连接到结束事件。

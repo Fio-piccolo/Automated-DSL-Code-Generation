@@ -1,0 +1,2 @@
+业务需求如下：
+首先有外部供应商（Externe Lieferanten）和公司 X（FIRMA X）两个参与者。外部供应商收到来自公司 X 的请求（Anfrage liegt vor）后，创建报价（Angebot erstellen），公司 X 收到报价后决定是否接受（Angebot annehmen），若接受则选择报价（Angebot auswählen）并委托发货（Versand beauftragen），同时确定运输方式（Versandweg bestimmen）。在发货过程中，若货物数量大（Große Menge?）则进行标准化包裹单填写（Standardisierten Paketschein ausfüllen）和保险确认（Versicherung klären），若需要保险（Versicherung?）则签订保险（Versicherung abschliessen），最后完成发货（Versand beauftragt）。整个流程中包含多个并行和排他的网关以及任务节点，通过各种序列流进行连接和控制流程的流转。

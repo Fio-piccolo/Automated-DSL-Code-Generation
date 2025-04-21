@@ -1,0 +1,12 @@
+该业务流程主要围绕货物发送展开，从货物待发送的起点开始，经过一系列判断和任务处理，最终以货物发送完成作为结束。具体描述如下：
+1. 流程以“Ware soll versendet werden”事件开始，表示货物需要被发送。
+2. 接下来进入“Ist Sonderversand nötig?”的排他网关，在此判断是否需要特殊运输。
+    - 如果需要特殊运输，流程会进入“Paketschein ausfüllen”任务，即填写包裹单。
+    - 如果不需要特殊运输，则进入“Angebote einholen”任务，去获取报价。
+3. 完成“Angebote einholen”任务后，会触发“Angebote eingeholt”的中间抛出事件。
+4. 之后流程进入“Versicherung erforderlich?”的排他网关，判断是否需要保险。
+    - 若需要保险，会进入“Versicherung abschließen”任务，完成保险事宜。
+    - 若不需要保险，则进入“Spediteur beauftragen”任务，委托运输商。
+5. 在“Spediteur beauftragen”任务后，流程进入一个未命名的排他网关。
+6. 若有“Ware holen”任务（属于“Lagerarbeiter”的工作），则执行该任务，即去仓库取货。
+7. 最后，当所有步骤完成后，流程到达“Ware versandfertig”的结束事件，表示货物已准备好发货。

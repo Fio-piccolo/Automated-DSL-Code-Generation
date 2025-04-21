@@ -1,0 +1,14 @@
+该业务流程为货物发送准备流程，具体如下：
+1. 流程始于“Ware soll versendet werden”（货物需被发送）的起始事件。
+2. 随后进入一个排他网关“ Soder-, oder Normalversand?”（特殊还是正常发送？），根据判断结果产生不同分支：
+    - **特殊发送分支**：
+        - 若为特殊发送，需由物流商执行“Sonderversand”（特殊发送）任务，即向物流商获取报价。
+        - 之后执行“Angebot zustellen”（提交报价）任务。
+        - 提交报价后，由秘书处进行“Offerteingang prüfen”（检查报价输入）任务。
+        - 检查后执行“Entscheid Spediteur mitteilen”（通知物流商决定）任务。
+        - 最后由物流商执行“Auftrag auslösen”（触发订单）任务，然后流程在该分支结束。
+    - **正常发送分支**：
+        - 若为正常发送，流程进入并行网关，并行执行以下任务：
+            - 秘书处执行“Standardisierter Paketschein ausfüllen”（填写标准化包裹单）任务，之后由物流经理执行“Versicherung überprüfen”（检查保险）任务。
+            - 仓库工人执行“Ware verpacken”（包装货物）任务。
+        - 上述并行任务完成后，在并行网关汇聚，之后仓库工人依次执行“Ware versandbereit”（货物准备好发送）和“Ware zur Abholung bereit stellen”（将货物准备好以供取货）任务，然后流程在该分支结束。

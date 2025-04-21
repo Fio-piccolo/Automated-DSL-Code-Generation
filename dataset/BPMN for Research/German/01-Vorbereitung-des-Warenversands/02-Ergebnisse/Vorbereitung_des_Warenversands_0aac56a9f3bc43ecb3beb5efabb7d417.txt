@@ -1,0 +1,16 @@
+该业务流程是关于货物运输的流程，从接收运输订单开始，经过多个步骤，最终完成运输任务。具体步骤如下：
+1. 接收运输订单：流程开始于“Versandauftrag erhalten”（接收运输订单）事件。
+2. 确定运输数量：通过“Versandmenge”（运输数量）排他网关，根据数量多少分为“große Menge”（大量）和“kleine Menge”（少量）两种情况。
+3. 处理少量货物：对于少量货物，执行以下任务：
+    - 填写标准化包裹单：执行“standardisierten Paketschein ausfüllen”（填写标准化包裹单）任务。
+    - 获取报价：从3个托运人处获取报价，执行“Angebote von 3 Spediteuren einholen”（获取3个托运人的报价）任务。
+    - 选择报价：选择一个报价，执行“Angebot auswählen”（选择报价）任务。
+    - 委托托运人：委托选定的托运人，执行“Spediteur beauftragen”（委托托运人）任务。
+4. 处理大量货物：对于大量货物，直接执行获取报价任务。
+5. 等待报价：在“Angebote erhalten”（收到报价）中间抛出事件后等待报价。
+6. 确定保险需求：执行“Versicherungs-bedarf bestimmen”（确定保险需求）任务，判断是否需要保险。
+7. 购买保险（若需要）：如果需要保险，执行“Versicherung abschliessen”（购买保险）任务。
+8. 准备货物：执行“Ware zur Abholung bereitstellen”（准备货物以供取货）任务。
+9. 包装货物：执行“Ware verpacken”（包装货物）任务。
+10. 汇合处理：通过“exclusiveGateway”（排他网关）汇合不同路径的处理结果。
+11. 完成运输任务：流程结束于“Versendungsauftrag beendet”（运输任务完成）结束事件。

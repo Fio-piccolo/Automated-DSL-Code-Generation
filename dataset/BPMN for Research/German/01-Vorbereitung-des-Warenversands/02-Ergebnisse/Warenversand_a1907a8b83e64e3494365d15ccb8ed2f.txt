@@ -1,0 +1,6 @@
+业务需求如下：
+- 首先有一个名为“Händler (Computer Hardware)”的参与者，其内部包含多个车道，如“Sekretariat”“Lagerarbeiter”“Logistikleiter”等，这些车道分别对应着不同的业务环节。
+- 从“StartEvent”开始，根据条件通过“ExclusiveGateway”进行分支，“große Menge”分支进入“task”“Angebote einholen - Spediteur beauftragen”，“kleine Menge”分支进入另一个“task”。
+- “Angebote einholen - Spediteur beauftragen”任务完成后，通过“sequenceFlow”进入“Vergleich Angebot”任务，该任务完成后又进入“Spediteur beauftragen”任务。
+- 同时，另一个“ExclusiveGateway”根据条件“Versicherung erwünscht”或“Versicherung nicht erwünscht”进行分支，分别进入不同的后续流程。
+- “Spediteur 1 - 3”参与者有自己的流程，从“StartEvent”开始创建“Angebot”，然后发送“Angebot”，最后到达“EndEvent”。整个流程中涉及多个任务的完成和数据对象的流转。

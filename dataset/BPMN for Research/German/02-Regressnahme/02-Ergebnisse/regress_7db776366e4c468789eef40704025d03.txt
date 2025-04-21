@@ -1,0 +1,15 @@
+业务需求如下：
+1. 流程从“Regressfall”开始事件启动。
+2. 首先执行“Prüfen ob Regress gerechtfertigt”任务，检查退回是否合理。
+3. 接着通过排他网关，根据条件判断走向：
+    - 若条件为“ja”，则执行“Zahlungsaufforderung”任务，进行付款要求。
+    - 若条件为“nein”，则流程结束于“FAll abgeschlossen”。
+4. 执行“Zahlungsaufforderung”任务后，执行“Wiedervorlage”任务。
+5. 之后通过事件驱动网关，根据不同事件走向：
+    - 若“Geld eingegangen”事件发生，执行“Geldeingang buchen”任务，记录款项进入。
+    - 若“Widerspruch eingegangen”事件发生，执行“Widerspruch prüfen”任务，检查异议。
+6. “Widerspruch prüfen”任务后，通过排他网关，根据检查结果判断走向：
+    - 若结果为“gerechtfertigt”，流程结束于“Fall abgeschlossen”。
+    - 若结果为“nicht gerechtfertigt”，执行“Auftrag an Inkasso”任务，委托收款。
+7. 若发生“Wiedervorlage 2 Wochen”定时事件，执行“Auftrag an Inkasso”任务，委托收款。
+8. 所有任务完成后，流程结束于相应的“Fall abgeschlossen”结束事件。

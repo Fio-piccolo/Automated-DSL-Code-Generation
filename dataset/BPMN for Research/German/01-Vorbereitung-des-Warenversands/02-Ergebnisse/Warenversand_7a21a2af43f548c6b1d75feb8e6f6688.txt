@@ -1,0 +1,12 @@
+这是一个货物运输流程的BPMN图，以下是其业务逻辑的自然语言描述：
+1. 流程开始于“Ware soll versendet werden”（货物应发送到哪里）事件。
+2. 接下来进入“Sekretariat”（秘书处）部门，进行“Versender klären”（明确发货人）的任务。
+3. 然后通过“Menge”（数量）的排他网关，根据货物数量进行分支：
+   - 如果是“groß”（大），则进入“Sonderversand”（特殊运输）子流程，包括“Angebote einholen”（获取报价）、“Angebot auswählen”（选择报价）和“Spediteur beauftragen”（委托货运代理）三个任务。
+   - 如果是“klein”（小），则进入“Paketschein ausfüllen”（填写包裹单）任务。
+4. 在“Paketschein ausfüllen”任务之后，通过“Versicherung notwendig?”（需要保险吗？）的排他网关，根据是否需要保险进行分支：
+   - 如果是“ja”（是），则进入“Versicherung abschließen”（签订保险）任务。
+   - 如果不是，则直接进入下一步。
+5. 接下来，无论是否需要保险，都会进入“Logistikleiter”（物流主管）部门的“Versicherung abschließen”（签订保险）任务。
+6. 然后进入“Lagerarbeiter”（仓库工人）部门，进行“Ware verpacken”（包装货物）和“zur Abholung bereitstellen”（准备好取货）两个任务。
+7. 最后，流程结束于“Ware zur Abholung bereit”（货物准备好取货）事件。

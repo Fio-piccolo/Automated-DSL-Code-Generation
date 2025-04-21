@@ -1,0 +1,12 @@
+业务需求如下：
+1. 流程开始于一个起始事件，触发后续流程。
+2. 接着执行“Fall prüfen”任务。
+3. 完成该任务后，进入“Regress Möglichkeit?”排他网关，根据条件判断流程走向。
+4. 若条件为“Nein”，则执行“Vorgang schliessen”任务，之后流程结束。
+5. 若条件为“Ja”，则执行“Zahlungsaufforderung schicken”任务，接着执行“Vorgang auf Wiedervorlage setzen”任务。
+6. 执行“Vorgang auf Wiedervorlage setzen”任务后，进入一个排他网关“Zahlungsverweigerung gerechtfertigt?”，再次根据条件判断流程走向。
+7. 若该网关条件为“Nein”，则执行“An Inkasso-Dienstleister abgeben”任务，之后流程结束。
+8. 若该网关条件为“Ja”，则再次执行“Vorgang schliessen”任务，之后流程结束。
+9. 在执行“Vorgang auf Wiedervorlage setzen”任务后，还可能触发中间捕获事件“Geld eingegangen”，若满足该事件条件，则执行“Eingang verbuchen”任务，之后回到“Vorgang schliessen”任务。
+10. 执行“Vorgang auf Wiedervorlage setzen”任务后，也可能触发中间捕获事件“VN widerspricht”，若满足该事件条件，则执行“Widerspruch überprüfen”任务，之后进入“Zahlungsverweigerung gerechtfertigt?”排他网关进行判断。
+11. 执行“Vorgang auf Wiedervorlage setzen”任务后，还可能触发中间捕获事件“Wiedervorlage -Frist abgelaufen”，若满足该事件条件，则执行相关任务后进入“An Inkasso-Dienstleister abgeben”任务。

@@ -1,0 +1,11 @@
+计算机发货流程开始于“Ware versandbereit”（货物可发货）的开始事件。首先，通过一个排他网关进行路径选择，有两个分支：“Sonderversand”（特殊运输）和“Paketversand”（包裹运输）。
+
+如果选择了“Paketversand”分支，接下来的任务是“Paketschein ausfüllen”（填写包裹单）。然后，流程进入一个包含网关，这里有两个并行的路径：一个是“Versicherung abschließen”（完成保险），另一个是继续后续步骤。
+
+在“Versicherung abschließen”路径中，完成保险后，会继续进行后续的任务。而在另一个路径中，会进行“Angebote einholen”（获取报价），然后通过一个并行网关分成三个并行的路径，分别是“Angebot 1”、“Angebot 2”和“Angebot 3”（报价1、报价2、报价3）。这些报价路径最终都会汇合到一个并行网关，然后进行“Angebot auswählen”（选择报价）和“Spediteur beauftragen”（委托运输商）。
+
+接下来，流程会进入一个并行网关，等待“Vorbereitung prüfen”（检查准备工作）和之前的路径都完成后，继续进行“Verpacken beauftragen”（委托包装）。包装完成后，货物准备就绪，进行“Ware bereitstellen”（提供货物）。
+
+最后，通过一个并行网关，汇合所有路径，进行“Vorbereitung prüfen”（检查准备工作），最终到达“Ware versenden”（发货）的结束事件。
+
+如果选择了“Sonderversand”分支，流程会直接进行“Angebote einholen”（获取报价），后续步骤与上述相同。

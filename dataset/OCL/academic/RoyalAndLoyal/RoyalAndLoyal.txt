@@ -1,0 +1,15 @@
+The requirements are as follows:
+
+The ServiceLevel context features a number of invariants or rules that operate on data sets, transforming them, and subsequently confirming the result. For instance, the initial character 'X' must be added to the given sequence, or the absence of partners in the program must be confirmed.
+
+The Transaction context checks whether certain elements are of a specified type.
+
+In the LoyaltyAccount context, several conditions are established, such as verifying that the amount of points is greater than zero if there are any transactions, and ensuring that all transactions derive from the same customer.
+
+The TransactionReport context verifies that the transactions in a report fall within the specified date range, and that these transactions are a subset of those on the card.
+
+CustomerCard must confirm that the owner is over 18 years old and that the card is valid from the date specified and before the expiration date.
+
+Lastly, LoyaltyProgram defines requirements such as the inclusion of the account number, the presence of a service level named 'basic', the collection of services by a partner, and the validation of participant ages. It also specifies the creation and enrollment of customers to the program.
+
+Please note that without the full context, some analysis might be challenging to fully understand. For better clarification, it would be best to refer to the original software requirements and design documents.

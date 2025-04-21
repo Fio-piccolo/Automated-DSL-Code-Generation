@@ -1,0 +1,9 @@
+该业务流程始于一个开始事件，之后进入“Klärung Versandart”（运输方式澄清）任务。接着通过一个名为“Sonderversand”（特殊运输）的排他网关，根据条件分支。若条件为“ja”，则进入“drei Angebote einholen”（获取三个报价）任务；若为“nein”，则进入“normaler Postversand”（普通邮政运输）任务。
+
+“drei Angebote einholen”任务完成后，进入“Angebot auswählen ”（选择报价）任务，随后是“Spediteur beauftragen”（委托货运代理）任务。
+
+“normaler Postversand”任务完成后，进入“Packetscheine ausfüllen”（填写包裹单）任务，之后通过一个名为“Versicherung?”（保险？）的排他网关，若条件为“ja”，进入“Versicherung abschliessen”（完成保险）任务，若为“nein”，则直接进入后续流程。
+
+完成保险相关任务或跳过保险步骤后，流程汇聚到一个网关，之后并行分支为“Ware zur Abholung bereit stellen”（准备货物以供提取）任务和“Ware verpacken”（包装货物）任务。
+
+“Ware zur Abholung bereit stellen”任务完成后连接到结束事件，“Ware verpacken”任务完成后经过一些流程也连接到结束事件，整个业务流程结束。

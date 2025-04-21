@@ -1,0 +1,16 @@
+### 整体业务流程概述
+该BPMN流程描述了一个涉及银行（Scoring (Bank)）和信用保护机构（Scoring (Credit protection agency)）的评分请求处理流程，主要用于处理评分请求并根据不同情况返回相应报告。
+
+### 银行侧流程
+1. 流程从“Start scoring request”开始事件启动，该事件触发后，进入“Send level 1 request”任务，银行向信用保护机构发送一级评分请求。
+2. 之后进入“eventBasedGateway”，这是一个排他性网关，根据收到的响应进行分支判断：
+   - 如果接收到“Level 1 report”消息事件，进入“Level 1 report”中间捕获事件，然后进入“Return result to clerk”任务，将一级报告结果返回给办事员，最后到达“Level 1 report returned”结束事件。
+   - 如果接收到“Delay”消息事件，进入“Inform clerk of delay”任务，通知办事员延迟情况，之后进入“Level 2 report”中间捕获事件。
+   - 若收到“Level 2 report”消息事件，进入“Display report”任务，显示二级报告，最后到达“Level 2 report returned”结束事件。
+
+### 信用保护机构侧流程
+1. 从“Start credit report”开始事件启动，进入“Process request”任务处理收到的请求。
+2. 进入“L1 or L2?”排他性网关，根据请求类型进行分支：
+   - 如果是一级请求，进入“Return level 1 report”任务，之后通过“IntermediateThrowEvent”发送“Level 1 report”消息给银行，最后到达结束事件。
+   - 如果是二级请求，进入“Process level 2 scoring”任务，处理二级评分，然后进入“Return level 2 report”任务，之后通过“IntermediateThrowEvent”发送“Level 2 report”消息给银行，最后到达结束事件。
+   - 如果遇到延迟情况，进入“Delay, send message”任务发送延迟消息，之后进入“IntermediateThrowEvent”发送“Delay, check later”消息给银行。

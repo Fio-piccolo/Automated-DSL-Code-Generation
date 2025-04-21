@@ -1,0 +1,7 @@
+The requirements are as follows:
+
+In the package of isoStdIso20022TechXsdPain00800101, there is a context DirectDebitTransactionInformation1, where it is specified that for Debtor Account (direct debit transaction information debtor Account), only IBAN (International Bank Account Number) is allowed. 
+
+As a result, the sizes of all other account identification types, such as BBAN (Basic Bank Account Number), proprietary account, UPIC (Universal Payment Identification Code), account type, currency, and account name, must be zero. This means these fields should not contain any values.
+
+This requirement is according to the row 14 on page 13 of SEPA (Single Euro Payments Area) B2B (Business to Business) Direct Debit C2B Implementation Guidelines.

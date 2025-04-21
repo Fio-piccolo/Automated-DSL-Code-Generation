@@ -1,0 +1,1 @@
+业务需求如下：首先是“Receive Case”的开始事件，接着执行“Request Payment”任务。之后通过排他网关进行分支，若收到钱则执行“Booking the payment.”任务，若客户有异议则进入“Checking Reason”排他网关，根据检查结果可能将案件转发给催收机构，也可能进行“Case Close”等操作。若时间到了执行“Set Reminder”任务后回到排他网关进行后续流程，还存在根据不同条件判断是否可能进行追索等情况，最终案件结束。

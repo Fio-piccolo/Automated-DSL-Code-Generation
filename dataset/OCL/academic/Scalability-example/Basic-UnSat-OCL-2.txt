@@ -1,0 +1,5 @@
+The requirements are as follows:
+
+In the context of 'A2', for every instance 'a' of 'A2', the attribute 'at' of instance 'a' must be greater than the attribute 'at' of associated instance 'a1'.
+
+In the context of 'A1', for every instance 'a' of 'A1', the attribute 'at' of instance 'a' must be equal to or greater than the attribute 'at' of associated instance 'a2'.

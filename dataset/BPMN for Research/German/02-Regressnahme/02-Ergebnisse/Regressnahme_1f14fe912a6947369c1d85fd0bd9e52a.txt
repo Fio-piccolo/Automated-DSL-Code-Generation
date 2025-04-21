@@ -1,0 +1,11 @@
+业务需求如下：
+1. 流程开始于“Regress-prüfung erforderlich”的开始事件。
+2. 首先执行“Regress-prüfung vornehmen”任务。
+3. 完成该任务后，进入“Regress-forderung?”的排他网关，根据条件判断走不同路径。
+    - 如果条件为“ja”，则执行“Zahlungsauf-forderung verschicken”任务，接着执行“auf Wiedervorlage setzen”任务，之后到达一个基于事件的排他网关。
+        - 若触发“Zahlungsein-gang erfolgt”的中间捕获事件，执行“Zahlung verbuchen”任务，最后以“Vorgang abgeschlossen”的结束事件完成流程。
+    - 如果条件为“nein”，则直接以“Vorgang abgeschlossen”的结束事件完成流程。
+    - 若在基于事件的排他网关处触发“Widerspruch eingegangen”的中间捕获事件，执行“Widerspruch prüfen”任务，然后进入“Widerspruch gerechtfertigt?”的排他网关。
+        - 若条件为“ja”，以“Vorgang abgeschlossen”的结束事件完成流程。
+        - 若条件为“nein”，执行“Inkasso-DL beauftragen”任务，之后再以“Vorgang abgeschlossen”的结束事件完成流程。
+    - 若在基于事件的排他网关处触发“Wiedervorlagefrist ist abgelaufen”的中间捕获事件，执行“Inkasso-DL beauftragen”任务，最后以“Vorgang abgeschlossen”的结束事件完成流程。

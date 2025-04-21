@@ -1,0 +1,12 @@
+准备发货流程如下：
+1. 从“Ware soll versendet werden”（货物需要发货）这个开始事件启动流程。
+2. 进入一个并行网关“sid-387C3160-CDAE-44E2-9951-D3008B7C10ED”，流程分为两条路径。
+   - 一条路径执行“Menge feststellen”（确定数量）任务，完成后进入下一步。
+   - 另一条路径执行“Versandart klären”（明确运输方式）任务，完成后进入“sid-EB7AE158-C7C5-4133-ADAD-BBFEF84F205C”排他网关。
+3. 在“sid-EB7AE158-C7C5-4133-ADAD-BBFEF84F205C”排他网关处，根据不同条件，选择执行“Angebote einholen”（获取报价）或“Post”（邮政运输）路径。
+   - 选择“Angebote einholen”路径时，完成任务后进入“Angebot auswählen”（选择报价）任务，然后是“Spediteur beauftragen”（委托快递商），再进入“sid-FB7AFD65-5CE3-4FF2-B94E-9953484E4270”排他网关。
+   - 选择“Post”路径时，进入“Angebot abgeben”（提交报价）任务，然后进入“sid-A56C998A-0C15-442B-94FE-474F25101D58”包含网关“Versicherung notwendig?”（是否需要保险）。
+4. 在“sid-A56C998A-0C15-442B-94FE-474F25101D58”包含网关处，根据条件选择执行“immer”（始终）或“Standardisierter Paketschein ausfüllen”（填写标准包裹单）任务，再进入“sid-9CBF164F-F956-4AD1-97D2-45524F44023D”包含网关。
+5. 在“sid-9CBF164F-F956-4AD1-97D2-45524F44023D”包含网关处，合并来自不同路径的流程，进入下一步。
+6. 同时，“sid-062F932B-6F8F-4E0E-A7F0-F6968D3577C5”物流主管执行“Versicherung abschließen”（完成保险）任务，“sid-D330A1DD-A43A-431A-8F3A-936372955FEB”仓库工人执行“Ware verpacken”（包装货物）任务，“sid-6DB8438B-36D6-4191-BF47-E9EFFFC76DFB”仓库工人执行“Ware zur Abholung bereitstellen”（准备货物待取）任务，这些任务完成后进入“sid-AED7C02D-EF1D-4714-81E6-4BB586B2585D”并行网关合并。
+7. 最终在“Ware ist zur Abholung bereit”（货物已准备好待取）这个结束事件结束流程。

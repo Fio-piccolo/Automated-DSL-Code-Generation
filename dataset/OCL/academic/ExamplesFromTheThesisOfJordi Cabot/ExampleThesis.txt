@@ -1,0 +1,19 @@
+The requirements are as follows:
+
+1. For any product, the product has to have a price that is above zero and maximum discount that is no more than 60%.
+
+2. For any sale, each shipment within the sale should have its planned shipping date to be no more than 30 days after the payment date.
+
+3. For any category, all customers in this category must have the total pending sale amount not exceeding the maximum pending amount set for the category. In addition, each category must have at least three customers.
+
+4. The number of restricted products should be no more than 20.
+
+In the second set of requirements, the conditions are negated as follows:
+
+1. There can exist products having price less or equal than zero or maximum discount more than 60%.
+
+2. There can exist instances of sales where at least one shipment has a planned shipping date more than 30 days after the payment date.
+
+3. There can exist categories where there is at least one customer has the total pending sale amount exceeding the maximum pending amount set for the category. There can also be categories with less than three customers.
+
+4. The number of restricted products can be more than 20.

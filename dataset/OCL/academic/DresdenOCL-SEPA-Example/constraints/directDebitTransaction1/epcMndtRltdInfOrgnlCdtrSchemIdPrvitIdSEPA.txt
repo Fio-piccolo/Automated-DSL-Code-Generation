@@ -1,0 +1,5 @@
+The requirements are as follows:
+
+For the DirectDebitTransaction1 object, there should be only one occurrence of 'Private Identification' allowed for the 'Mandate Related Information Amendment Information Original Creditor Schemes', which is referred as the 'mndtRltdInf AmdmntInfDtl orgnlCdtrSchmeId Id prvtId' path in the code.
+
+The presence of 'mndtRltdInf', 'amdmntInfDtls', and 'orgnlCdtrSchmeId.id.prvtId' should either be undefined or their occurrence should not exceed one. This rule is also in line with the SEPA B2B Direct Debit C2B Implementation Guidelines as mentioned on page 10, row 13.

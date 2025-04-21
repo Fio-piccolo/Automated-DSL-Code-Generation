@@ -1,0 +1,24 @@
+在一个银行相关的业务流程中，涉及到“Banking Frontend”、“Scoring (Credit Agency)”和“Scoring (Bank)”三个主要参与者。
+
+### 1. 信贷评分请求接收
+- “Banking Frontend”接收到信贷评分请求（Scoring Request received）后，向“Scoring (Credit Agency)”发送评分请求消息，启动“Scoring (Credit Agency)”流程。同时，“Banking Frontend”向自身发送消息，可能用于后续的跟踪或记录。
+
+### 2. Scoring (Credit Agency)流程
+- **开始**：“Scoring (Credit Agency)”的“Scoring Request received”开始事件被触发，流程启动。
+- **执行一级信贷评分**：执行“Perform Level 1 Credit Scoring”任务，对信贷请求进行初步评分。
+- **判断能否立即完成评分**：通过“Check scoring can be done immediately?”排他网关判断能否立即完成评分。如果能（Yes分支），则返回继续执行一级信贷评分任务；如果不能（No分支），则发送延迟通知（Send notification for delay）。
+- **发送一级评分结果**：若能立即完成评分，将一级评分结果发送出去（Send the Level 1 Scoring results）。若发送延迟通知，执行“Perform Level 2 Credit Scoring”任务，进行二级信贷评分。
+- **发送二级评分结果**：完成二级评分后，将二级评分结果发送出去（Send the Level 2 Scoring results）。
+- **结束**：最终，“Scoring results sent”结束事件标志着该流程完成。
+
+### 3. Scoring (Bank)流程
+- **开始**：“Banking Frontend”接收到信贷评分请求后，向“Scoring (Bank)”发送评分请求消息，“Scoring (Bank)”的“Scoring Request received”开始事件被触发，流程启动。
+- **发送评分请求**：向“Scoring (Credit Agency)”发送评分请求消息。
+- **接收一级评分结果**：通过“Receive Level 1 results”中间捕获事件等待来自“Scoring (Credit Agency)”的一级评分结果。
+- **等待代理响应**：通过“Wait for response from agency”事件驱动网关等待来自“Scoring (Credit Agency)”的响应。如果有响应（走其中一个分支），则接收响应并进行后续处理；如果没有收到响应（走另一个分支），则接收延迟通知（Receive Delay notification）。
+- **发送评分结果**：收到一级或二级评分结果后，发送评分结果（Send Scoring Results）。
+- **显示检查信**：若收到延迟通知，执行“Display message "Check Again Letter"”任务，显示检查信。
+- **接收二级评分结果**：通过“Receive Level 2 results”中间捕获事件等待来自“Scoring (Credit Agency)”的二级评分结果。
+- **结束**：最终，“Scoring result displayed”结束事件标志着该流程完成。
+
+在整个流程中，各参与者之间通过消息流进行交互，完成信贷评分的处理和结果反馈。

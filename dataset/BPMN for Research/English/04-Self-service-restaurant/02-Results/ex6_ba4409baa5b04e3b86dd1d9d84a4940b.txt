@@ -1,0 +1,23 @@
+1. **顾客流程**：
+   - 顾客感到饥饿（Hungry），触发流程开始。
+   - 顾客下单（Order Placed），订单信息传递给员工。
+   - 顾客等待叫号（Await Turn），期间可以进行其他活动。
+   - 当 buzzer 响起（Buzzer Buzzes），顾客前往服务窗口（Goes to service hatch）。
+   - 顾客在服务窗口领取食物（collects food）。
+   - 顾客支付费用（pay money）。
+   - 顾客取走 buzzer（collect buzzer），流程结束。
+2. **员工流程**：
+   - 员工接收顾客订单并录入 POS 系统（Order entered into POS）。
+   - 员工收取顾客费用（Money Collected）。
+   - 员工设置 buzzer（Sets up buzzer），并通知厨师（Chef Informed）。
+   - 员工等待厨师完成烹饪并通知（Notification received）。
+   - 员工触发 buzzer（Set off buzzer），通知顾客取餐。
+   - 员工等待 5 分钟（Wait 5 mins），如果顾客未取餐，员工呼叫顾客（Call customer）。
+   - 员工将食物交给顾客（Hands out food），流程结束。
+3. **厨师流程**：
+   - 厨师接收新订单信息（New Order Information）。
+   - 厨师准备餐食（Prepares meal）。
+   - 厨师将餐食放在服务窗口（Places in service Hatch）。
+   - 厨师通知员工餐食已准备好（Informs Employee），流程结束。
+
+这个流程图详细描述了餐厅点餐和取餐的整个过程，包括顾客、员工和厨师之间的信息传递和协作。

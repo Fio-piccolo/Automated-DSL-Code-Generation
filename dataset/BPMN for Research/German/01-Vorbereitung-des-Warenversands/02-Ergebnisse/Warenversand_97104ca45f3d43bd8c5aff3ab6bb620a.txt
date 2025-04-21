@@ -1,0 +1,16 @@
+业务需求如下：
+该业务流程名为“Warenversand”（货物运输），主要涉及三个角色：Sekretariat（秘书处）、Lagerarbeiter（仓库工人）、Logistikleiter（物流主管）。流程从“Ware zu versenden”（待运输货物）开始事件启动。
+
+首先，通过并行网关分为两条并行路径：
+- 一条路径进入Sekretariat负责的“Auslieferung prüfen”（检查交付）任务，之后到达“Menge?”（数量？）排他网关。在此网关根据货物数量大小进行分流：
+    - 若数量大（groß），则进入“Angebote bei Speditionen einholen und auswählen”（向货运公司获取并选择报价）任务，完成后与另一条数量小（klein）的路径在另一个排他网关汇聚。
+    - 若数量小（klein），则进入“Paketschein ausfüllen”（填写包裹单）任务，之后也到达该排他网关。
+- 另一条并行路径进入Lagerarbeiter负责的“Ware verpacken”（货物包装）任务，完成后进入平行网关等待汇聚。
+
+上述两条路径在排他网关汇聚后，继续到达“Versicherung notwendig?”（需要保险？）排他网关，在此根据是否需要保险进行分流：
+- 若不需要保险（Nein），则直接进入平行网关等待汇聚。
+- 若需要保险（Ja），则进入Logistikleiter负责的“Versicherung abschließen”（完成保险）任务，之后进入平行网关等待汇聚。
+
+在平行网关汇聚后，进入Lagerarbeiter负责的“Ware bereitstellen”（准备货物）任务，最后流程到达结束事件，整个货物运输流程结束。
+
+在流程中，还通过文本注释“Versand mit Paketdienst”（通过包裹服务运输）和“Versand mit Spedition”（通过货运公司运输）对相关任务进行了说明。

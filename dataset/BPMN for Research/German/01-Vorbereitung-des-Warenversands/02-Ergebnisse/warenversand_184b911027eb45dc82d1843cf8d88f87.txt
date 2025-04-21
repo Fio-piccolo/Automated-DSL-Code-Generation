@@ -1,0 +1,13 @@
+这是一个业务流程模型，包含一个名为“Mein Prozess”的流程，描述了一个业务操作的具体步骤和流程走向。
+1. **流程起点**：“Bestellung geht ein”（订单进入），这是流程的起始事件。
+2. **确定数量**：订单进入后，首先需要“Menge feststellen”（确定数量）。
+3. **获取报价**：接着进行“Angebot einholen”（获取报价）。
+4. **报价提交**：获取报价后，进行“Angebot abgeben”（提交报价）。
+5. **并行处理**：提交报价后，通过一个并行网关（parallelGateway）分为两个路径：
+    - 检查特殊运输要求：一条路径是“Sonderversand prüfen”（检查特殊运输要求）。
+    - 检查保险需求：另一条路径是“Versicherungs-bedarf prüfen”（检查保险需求）。
+6. **货物包装**：如果不需要特殊运输，货物进行“Ware verpacken”（包装）。
+7. **汇合处理**：之后，两个路径的处理结果在一个汇合网关（exclusiveGateway）汇合。
+8. **发货处理**：汇合后，进行“Versand veranlassen”（安排发货），这是流程的结束任务。
+
+在这个流程中，不同的任务分配给了不同的角色，如“Spediteur”（发货人）、“Sekretärin”（秘书）、“Logistikleiter”（物流经理）和“Lagerarbeiter”（仓库工人）。每个任务都有明确的输入和输出，通过顺序流和网关进行连接，以确保流程的顺利进行。

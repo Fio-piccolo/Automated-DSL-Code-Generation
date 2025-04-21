@@ -1,0 +1,18 @@
+该业务流程是关于货物运输的流程，从开始事件触发，经过多个任务和决策节点，最终完成货物运输。具体流程如下：
+1. 流程从“Mein Start”开始。
+2. 进入“Versandmenge bestimmen”任务，确定运输数量。
+3. 根据运输数量，进入“große Menge”或“kleine Menge”分支：
+    - “große Menge”分支：
+        - 执行“drei Angebote einholen”任务，获取三个报价。
+        - 执行“ein Angebot auswählen”任务，选择一个报价。
+        - 执行“Spediteur beauftragen”任务，委托运输商。
+    - “kleine Menge”分支：
+        - 执行“Pakeschein ausfüllen”任务，填写包裹单。
+4. 执行“Prüfen: Versicherung erforderlich?”任务，检查是否需要保险：
+    - 如果需要保险，执行“Versicherung abschließen”任务，完成保险。
+    - 如果不需要保险，执行“Paketschein ins Lager”任务，将包裹单存入仓库。
+5. 执行“Ware verpacken”任务，包装货物。
+6. 执行“Ware zur Abholung bereit stellen”任务，准备货物以供取货。
+7. 进入汇聚的排他网关，等待所有相关任务完成。
+8. 经过并行网关，继续后续流程。
+9. 流程结束。

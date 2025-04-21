@@ -1,0 +1,15 @@
+业务需求如下：
+1. 流程开始于“Meldung erhalten”（收到消息）事件。
+2. 收到消息后，执行“Fall prüfen”（审查案例）任务。
+3. 完成案例审查后，进入“Regress möglich?”（可追溯？）排他网关，根据条件判断后续流程。
+    - 若条件满足（返回值为“Ja”），则执行“Zahlungsaufforderung verschicken”（发送付款请求）任务。
+    - 若条件不满足（返回值不为“Ja”），则执行“kein Regress”（无追溯）中间抛出事件。
+4. 发送付款请求后，等待“Wiedervorlagefrist abgelaufen”（重新提交期限到期）中间捕获事件或“Geldeingang vom VN”（来自VN的资金到账）中间捕获事件或“Widerspruch”（异议）中间捕获事件。
+    - 若“Wiedervorlagefrist abgelaufen”事件触发，执行“Vorgang an Inkasso-Dienstleister abgeben”（将流程交给催款服务提供商）任务，之后流程结束于“Vorgang abgegeben”（流程已交付）事件。
+    - 若“Geldeingang vom VN”事件触发，执行“Eingang verbuchen”（登记收入）任务，之后进入“Vorgang schließen”（完成流程）任务，最后流程结束于“Vorgang abgeschlossen”（流程已完成）事件。
+    - 若“Widerspruch”事件触发，执行“Widerspruch prüfen”（审查异议）任务。
+5. 审查异议后，进入“Widerspruch gerechtfertigt?”（异议是否合理？）排他网关，根据条件判断后续流程。
+    - 若条件满足（返回值为“Nein”），执行“Vorgang an Inkasso-Dienstleister abgeben”任务，之后流程结束于“Vorgang abgegeben”事件。
+    - 若条件不满足（返回值不为“Nein”），执行“kein Regress”中间抛出事件。
+6. 执行“kein Regress”事件后，流程继续进行后续步骤，最终结束于“Vorgang abgeschlossen”或“Vorgang abgegeben”事件。
+7. 在流程中，可能会出现资金到账情况不确定的中间抛出事件“Geldeingang ungewiss”，触发该事件后流程继续进行，最终结束于“Vorgang abgeschlossen”或“Vorgang abgegeben”事件。

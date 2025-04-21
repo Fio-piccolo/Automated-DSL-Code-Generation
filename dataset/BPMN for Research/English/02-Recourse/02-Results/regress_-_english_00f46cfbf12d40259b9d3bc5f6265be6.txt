@@ -1,0 +1,8 @@
+业务流程从“Possible Recourse”消息事件触发开始。首先进入“Check Case”任务，对案例进行检查。检查完成后，流程来到“Recourse Possible?”的排他网关，根据判断结果进行分支：
+若判断结果为“否”，则流程进入“Close Close”任务，之后流程结束，状态为“Closed”。
+若判断结果为“是”，则进入“Request Payment”任务，请求支付。支付请求发出后，流程到达事件型网关，该网关有三个可能的事件分支：
+若收到“Payment Received”消息，表明款项已收到，进入“Make Booking”任务，之后再进入“Close Close”任务，最后流程结束，状态为“Closed”。
+若到达“Deadline”，即支付期限已到仍未收到款项，进入“Transfer Case to Collection Agency”任务，将案例转交给收账机构，之后流程结束，状态为“Transfered”。
+若收到“Insurant Disagrees”消息，即被保险人不同意支付，进入“Check Reasoning”任务，检查其不同意的理由。检查完成后，流程来到“Is Insurant Correct?”的排他网关，根据判断结果再次分支：
+若判断被保险人正确，流程进入“Close Close”任务，最后流程结束，状态为“Closed”。
+若判断被保险人不正确，流程进入“Transfer Case to Collection Agency”任务，将案例转交给收账机构，之后流程结束，状态为“Transfered”。

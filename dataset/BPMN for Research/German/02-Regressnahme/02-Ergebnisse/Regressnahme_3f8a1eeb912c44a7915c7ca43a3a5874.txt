@@ -1,0 +1,2 @@
+业务需求如下：
+该业务流程主要由一名员工（Sachbearbeiter）执行，起始于一个开始事件。开始后首先检查回归（Regress prüfen），检查完成后进入排他网关（Exclusive Gateway）进行条件判断。根据判断结果，若满足条件则发送支付请求（Zahlungsaufforderung schicken），之后进行入账登记（Eingang verbuchen）、重置再提交（Wiedervorlage setzen）等操作。在流程中存在一个基于事件的排他网关（Event Based Gateway），它会根据不同条件产生分支。其中一个分支在接收到特定消息后执行入账登记，另一个分支在经过定时器设定的时间后执行开启催款（Inkasso einschalten）操作。当入账登记和开启催款这两个任务都完成后，流程进入结束任务（Fall scließen），至此整个业务流程结束。

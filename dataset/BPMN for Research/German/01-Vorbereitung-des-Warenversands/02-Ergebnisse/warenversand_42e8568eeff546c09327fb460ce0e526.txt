@@ -1,0 +1,12 @@
+1. 流程开始于“Ware soll versendet werden”（货物应被发送）的起始事件。
+2. 接着，“Sekretariat klärt Versandart ”（秘书处澄清运输方式）任务执行，此任务完成后，流程进入“Welcher Versandweg?”（选择哪种运输路线？）的排他网关。
+   - 若选择“Kleine Mengen”（小批量），则进入“Paketschein ausfüllen”（填写包裹单）任务。
+   - 若选择“Große Mengen”（大批量），则进入“3 Angebote prüfen und günstigstes auswählen”（检查3个报价并选择最便宜的）任务。
+3. “Paketschein ausfüllen”任务完成后，进入“Versicherung nötig?”（是否需要保险？）的排他网关。
+   - 若回答“Ja”（是），则执行“Versicherung abschließen”（购买保险）任务。
+   - 若回答“Nein”（否），则直接进入后续流程。
+4. “3 Angebote prüfen und günstigstes auswählen”任务完成后，进入“Spediteur beauftragen”（委托运输商）任务。
+5. “Paketschein ausfüllen”任务完成后，若需要保险，完成“Versicherung abschließen”任务；之后“Spediteur beauftragen”任务和“Versicherung abschließen”任务完成后，两个分支都进入“Ware zum Versand bereitstellen”（准备好货物进行运输）任务。
+6. “Ware zum Versand bereitstellen”任务完成后，流程结束于结束事件。
+
+整个流程围绕货物运输展开，包括确定运输方式、选择运输路线、处理保险事宜以及准备货物交付等一系列步骤。

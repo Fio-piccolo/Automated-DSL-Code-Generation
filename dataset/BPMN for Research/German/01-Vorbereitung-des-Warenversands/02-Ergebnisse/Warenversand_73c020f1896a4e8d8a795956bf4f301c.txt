@@ -1,0 +1,11 @@
+该BPMN流程描述了一个订单处理的业务流程，具体如下：
+1. 流程开始于“Bestellung erfolgt”（订单生成）。
+2. 订单首先由Sekretariat（秘书处）进行“Bestellung prüfen”（订单检查）。
+3. 检查后的订单进入一个排他网关，根据条件分为两条路径：
+   - 一条路径是进行“Paketschein ausfüllen”（填写包裹单），然后进入“Versicherungspflicht prüfen”（检查保险义务）。
+   - 另一条路径是进行“Angebote einholen”（获取报价），然后进入“Angebot aussuchen”（选择报价）和“Angebot beauftragen”（委托报价）。
+4. 在“Versicherungspflicht prüfen”（检查保险义务）之后，根据结果分为两条路径：
+   - 如果需要保险，则进行“Versicherung abschließen”（完成保险），然后进入“Versicherungspflicht prüfen”（检查保险义务）的下一个步骤。
+   - 如果不需要保险，则直接进入“Versicherungspflicht prüfen”（检查保险义务）的下一个步骤。
+5. 上述两条路径在“Versicherungspflicht prüfen”（检查保险义务）的下一个步骤汇合，然后进入“Ware verpacken”（包装货物）。
+6. “Ware verpacken”（包装货物）和“Angebot beauftragen”（委托报价）的结果在一个并行网关汇合，然后流程结束。

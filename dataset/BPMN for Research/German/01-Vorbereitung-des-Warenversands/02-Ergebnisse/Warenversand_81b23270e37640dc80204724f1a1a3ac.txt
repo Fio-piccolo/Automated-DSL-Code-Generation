@@ -1,0 +1,14 @@
+该业务流程围绕货物运输展开，涉及仓库工人、秘书处、物流经理以及三家货运商，具体流程如下：
+1. 流程始于秘书处收到“Versandanzeige”（发货通知），随后进行“Versandavis bearbeiten”（处理发货通知）。
+2. 处理发货通知后，流程并行开展两项工作：
+    - 仓库工人进行“Ware verpacken”（包装货物）。
+    - 秘书处进行“Versandart bestimmen”（确定运输方式）。
+3. 确定运输方式后，出现分支情况：
+    - 若选择标准运输，秘书处需“Paketschein für Standard - versand ausfüllen”（填写标准运输包裹单）。之后再次出现分支，一条路径是由物流经理“Versicherung abschließen”（办理保险），另一条路径则直接进入“Versandavis bearbeiten”（处理发货通知）的后续流程。
+    - 若不选择标准运输，秘书处会并行向三家货运商发出请求，让其“Angebot erstellen”（制定报价）。货运商 1、货运商 2 和货运商 3 分别完成报价后，秘书处“günstigstes Angebot auswählen”（选择最优惠报价），并“Spediteur beauftragen”（委托货运商）。委托货运商后，又有三条分支路径分别指向三家货运商，让其“Ware abholen”（取货）。
+4. 仓库工人包装好货物后，面临两种选择：
+    - “Per Post versenden”（通过邮政发送）。
+    - “An Spedition übergeben”（交给货运商）。
+5. 货运商取货以及邮政发送货物的流程最终都会汇聚到一个排他网关，之后再与仓库工人包装货物后的流程汇合。
+6. 汇合后又有一个排他网关，再次决定货物是通过邮政发送还是交给货运商。
+7. 无论最终是邮政发送还是货运商运输，流程最终都会到达结束事件，整个货物运输业务流程结束。

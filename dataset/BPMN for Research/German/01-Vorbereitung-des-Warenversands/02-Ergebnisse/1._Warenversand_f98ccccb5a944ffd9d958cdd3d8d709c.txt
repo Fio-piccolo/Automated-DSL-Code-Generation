@@ -1,0 +1,9 @@
+该BPMN流程描述了公司（Unternehmen）处理货物发货的业务流程，涉及秘书处（Sekretariat）、物流主管（Logisitikleiter）和仓库工人（Lagerbearbeiter）三个角色。流程从货物待发货开始，到货物发送结束，具体步骤如下：
+1. **货物待发货**：流程始于“Ware zu Versand”（货物待发货）的开始事件，随后进入“Versandweg klären”（明确发货方式）任务，此任务由秘书处负责。
+2. **确定发货量及后续操作**：完成发货方式明确后，通过“Welche Versandmenge?”（何种发货量？）的排他网关进行判断。
+    - **小批量发货**：若为小批量发货，执行“Paketschein ausfüllen”（填写包裹单）任务，之后进入“Versicherung notwendig?”（是否需要保险？）的排他网关判断。
+    - **大批量发货**：若是大批量发货，则执行“3 Angebote einholen”（获取3个报价）任务，接着通过并行网关将任务分解为三个分支，分别获取“Angebot A”“Angebot B”“Angebot C”三个报价。完成这三个报价获取任务后，汇聚到一个并行网关，随后执行“Angebot auswählen”（选择报价）任务，再执行“Speditor beauftragen”（委托货运代理）任务。
+3. **保险相关操作**：在“Versicherung notwendig?”（是否需要保险？）的排他网关判断后：
+    - **需要保险**：若需要保险，由物流主管执行“Versicherung abschließen”（完成保险）任务，之后仓库工人执行“Ware verpacken”（包装货物）任务。
+    - **无需保险**：若无需保险，则直接执行“Ware verpacken”（包装货物）任务。
+4. **货物准备及发送**：包装货物后，仓库工人执行“Ware zur Abholung bereitstellen”（将货物准备好以便取货）任务，最后到达“Ware versendet”（货物已发送）的结束事件，标志着整个发货流程完成。

@@ -1,0 +1,5 @@
+The natural language description of the BPMN diagram is as follows:
+
+The process begins when "Goods need to be sent." Depending on the quantity, the process splits into two paths. For small quantities, the Sekretariat fills out a shipping document. If insurance is required, the Logistikleiter handles it. The goods are then packed by the Lagerarbeiter, and the process ends with the goods ready for pickup.
+
+For large quantities, the process diverges into three tasks where the Sekretariat obtains three offers. After all offers are received, the process converges and checks the quantity again. If the quantity remains large, it may loop, but if adjusted, it could proceed as a small quantity. Ultimately, the goods are packed by the Lagerarbeiter, completing the process.

@@ -1,0 +1,5 @@
+业务流程从“Ware versenden”（发货）开始。之后，需要“Angebot einholen”（获取报价），完成后进行“Paketschein ausfüllen”（填写包裹单）。接着流程进入一个排他网关（Exclusive Gateway），根据条件判断是否需要“Versicherung abschließen”（购买保险）。如果需要保险，流程走向相应任务；若不需要，则跳过。
+
+在获取报价任务后，还有一个“Angebot auswählen”（选择报价）任务，然后“Spedition beauftragen”（委托物流公司）。之后流程再次进入排他网关，根据不同条件分别走向不同路径。
+
+在另一条并行路径中，发货任务后进行“Ware zum Versand verpacken”（包装待发货商品），接着是“Verpackte Ware bereitstellen”（准备好包装好的商品）。这两条路径最终在并行网关（Parallel Gateway）汇聚，完成后到达“Ware bereitgestellt”（商品已准备好）的结束事件。整个流程涉及秘书处、物流主管和仓库工人等不同角色在各自工作区域内协同完成发货相关操作。

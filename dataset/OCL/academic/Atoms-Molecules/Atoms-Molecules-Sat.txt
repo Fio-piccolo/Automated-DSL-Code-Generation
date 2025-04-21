@@ -1,0 +1,5 @@
+The requirements are as follows:
+
+1. Each instance of the Atom class must have a weight that is greater than zero. This requirement ensures that atoms cannot have a negative or zero atomic weight.
+2. The weight of an Atom must be unique in all instances of Atom. This implies an atom cannot share the same atomic weight with another atom.
+3. For every instance of the Molecule class, none of the particles (which are assumed to be instances of the Atom) can be a noble gas. This implies all instances of Molecule must not consist of noble gases.

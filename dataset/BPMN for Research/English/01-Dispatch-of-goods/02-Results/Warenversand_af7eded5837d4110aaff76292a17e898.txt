@@ -1,0 +1,1 @@
+流程从开始事件启动，首先进行“Check Amount of order”任务。然后经过一个名为“ddss”的排他网关，根据条件分为“large”和“small”两条路径。对于“large”路径，会进行“Package Labelled”任务，接着进入并行网关，之后分别进行“Logistic A”“Logistic B”“Logistic C”任务，这些任务完成后再经过并行网关，接着进行“Select the Company”任务，然后经过并行网关，之后进行“Packaged goods by Warehouse”任务，再经过排他网关和并行网关，最后进行“Picked up by Logistic Coy”任务并结束流程。对于“small”路径，可能后续流程未详细显示。此外，还有“Parcel insurance”任务等也参与到流程中。

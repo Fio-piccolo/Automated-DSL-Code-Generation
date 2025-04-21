@@ -1,0 +1,9 @@
+The requirements are as follows:
+
+1. For every Product instance in the system, the stock must be greater than or equal to 5.
+
+2. A customer can be removed from the Gold Category in the Portal only if he is a Gold Customer and he has no sales activities. After the operation, the customer should not be a gold customer anymore.
+
+3. A new customer can be created in the system with a name and portal attribute. The creation operation doesn't have a pre-condition. After the operation, the new customer instance must be new, the name attribute of the new instance is equal to the name input given, and the portal attribute of the new instance is equal to the portal input given.
+
+4. A sale line can be added to a sale given a product and a quantity. Before the operation, the product stock must be greater than 0. After the operation, the new sale line instance must be new, the sale attribute of the new instance is equal to the sale instance where the operation happened, the product attribute of the new instance is equal to the product input given, the quantity attribute of the new instance is equal to the quantity input given, the product's stock must decrease by the quantity, and the total amount of the sale must increase by the quantity times the price of the product.

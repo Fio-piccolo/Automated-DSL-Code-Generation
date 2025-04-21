@@ -1,0 +1,5 @@
+The requirements are as follows:
+
+Every instance of class A2 should have a value of "at" that is greater than or equal to the value of "at" for the corresponding instance of class A1. This logic should apply sequentially to all classes up to class A100, where every instance of class A100 should have a value of "at" that is greater than or equal to the value of "at" for the corresponding instance of class A99. 
+
+And, finally, every instance of class A1 should have a value of "at" that is greater than or equal to the value of "at" for the corresponding instance of class A100, effectively closing the loop.

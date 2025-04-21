@@ -1,0 +1,5 @@
+The requirements are as follows:
+
+In the context of AmendmentInformationDetails1, there must exist a business rule which asserts that the original Creditor Scheme Identification (`orgnlCdtrSchmeId`) must only contain a Private Identification Other Identification (`prvtId othrId`), and all other fields in `orgnlCdtrSchmeId.id.orgId` should be empty. Specifically, the size of the following fields should be zero: Organization ID, Issuer, Driver's License Number, Customer Number, Social Security Number, Alien Registration Number, Passport Number, Tax Identification Number, Identity Card Number, Employer Identification Number, and Date and Place of Birth. The rule applies to the field parameters of the Private ID object within the original Creditor Scheme ID. 
+
+This rule is necessary for proper mapping of fields in accordance with the SEPA B2B Direct Debit C2B Implementation Guidelines and the EBA pacs3 schema.

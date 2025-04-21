@@ -1,0 +1,5 @@
+当顾客感到饥饿（Customer流程的hunger felt开始事件），进入餐厅（enter restaurant任务）并选择菜品（chose dish任务），等待轮到自己（his/her turn中间捕获事件），然后下单（place order任务）。下单后去付款（pay order任务），之后等待收到 buzzer（buzzer received中间捕获事件）。收到 buzzer 后，等待 buzzer 响起（buzzer setting off中间捕获事件），这里有个事件网关（eventBasedGateway），可能会出现 buzzer noticed（buzzer noticed中间捕获事件）或者 call heard（call heard中间捕获事件）的情况，最终都会去取餐（pick dish任务），取餐后享用美食（enjoy meal任务），最后饥饿得到满足（hunger satisfied结束事件）。
+
+对于Employee流程，当收到订单（order received开始事件），将订单录入POS系统（enter order in POS任务），然后收款（collect money任务），设置 buzzer（set buzzer任务）并交给顾客（hands over buzzer任务），接着向厨师下单（order dish任务）。当厨师准备好菜品（dish prepared中间捕获事件），设置 buzzer 响起（set off buzzer任务），这里又有个事件网关（eventBasedGateway），可能会直接通知顾客取餐（对应后面给餐流程），如果5分钟过去（5 min passed中间捕获事件 - timerEventDefinition），就呼叫顾客（call customer任务），最后把菜品给顾客（give out dish任务），订单处理完成（order processed结束事件）。
+
+Chef流程是，当收到菜品订单（dish ordered开始事件），准备餐食（prepare meal任务），将餐食放在取餐口（place in hatch任务），然后通知员工（inform employee任务），最后菜品准备好（dish prepared结束事件）。

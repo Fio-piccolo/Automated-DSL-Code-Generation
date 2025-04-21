@@ -1,0 +1,17 @@
+业务需求如下：
+1. 流程起始于“Waren zum Versand bereit”事件。
+2. 货物准备好后进入排他网关（ExclusiveGateway），根据订单数量进行分支：
+    - 若订单数量大于X，流程走“Bestellung > X”路径。
+    - 若订单数量小于X，流程走“Bestellung < X”路径。
+3. “Bestellung > X”路径下，进入包含网关（InclusiveGateway），再分为多个并行路径：
+    - 一个路径执行未命名任务。
+    - 一个路径执行未命名任务。
+    - 一个路径执行“Offerte Spediteur 1”任务，完成后有一个输出顺序流。
+    - 一个路径执行“Offerte Spediteur 2”任务，完成后有一个输出顺序流。
+    - 一个路径执行“Offerte Spediteur 3”任务，完成后有一个输出顺序流。
+4. “Bestellung < X”路径下，进入排他网关，判断是否需要保险：
+    - 若不需要保险，走“keine Versicherung nötig”路径。
+    - 若需要保险，进入“Logistikleiter schliesst Versicherung ab”任务，完成后有一个输出顺序流。
+5. 上述并行路径的输出流汇聚到包含网关，然后进入“Post”任务。
+6. “Post”任务完成后，流程到达“Ware beim Kunden”事件，表示货物已送达客户。
+7. 在流程中，有一个“Lagerarbeiter verpackt Ware”任务，表示仓库工人包装货物。

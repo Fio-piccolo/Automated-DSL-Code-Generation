@@ -1,0 +1,4 @@
+业务需求如下：
+首先有一个名为“Warenversand”的协作流程，其中包含一个名为“Warenversand”的流程。该流程中有多个参与者，如“Warenversand”（负责具体的货物运输事务）、“Sekretärin”（秘书相关任务）、“Lagerarbeiter”（仓库工人相关任务）、“Logistikleiter”（物流主管相关任务）。
+流程从一个起始事件“startEvent”开始，接着是一个名为“Versand klären”的任务，完成后通过序列流“sid-641EE9A4-3D8F-44C9-829D-818403AA9AA5”流向一个并行网关“parallelGateway”。并行网关后有一个排他网关“exclusiveGateway”，根据不同的条件分出两条路径，一条路径流向“Angebote einholen”任务，另一条路径先经过“Ware verpacken”任务再流向另一个并行网关。
+在后续的流程中，还有诸如“Spediteur auswählen”、“Spediteur beauftragen”等任务，以及多个排他网关和并行网关的交互，最终到达一个结束事件“endEvent”。整个流程通过各个任务和网关的顺序连接，实现货物运输相关的一系列操作。

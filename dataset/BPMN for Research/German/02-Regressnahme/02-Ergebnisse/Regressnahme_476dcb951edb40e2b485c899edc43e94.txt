@@ -1,0 +1,9 @@
+业务需求如下：
+1. 流程开始于“Regressfall?”任务，该任务判断是否存在回归情况。
+2. 根据“Regressfall?”任务的结果，通过排他网关进行决策。
+3. 如果“Regressfall?”任务结果为肯定，进入“Regress berechtigt?”任务，再次进行判断。
+4. “Regress berechtigt?”任务结果为肯定时，通过排他网关进行分支决策。
+5. 若分支决策为“Ja”，则触发“Zahlungsaufforderung an VN”中间捕获事件，发送支付请求给保险客户。
+6. 接着进行“Wiedervorlage setzen”中间捕获事件，设置重新提交。
+7. 最终到达“Vorgang abschliessen”结束事件，结束流程。
+8. 若“Regress berechtigt?”任务结果为否定，或者分支决策为“Nein”，则直接到达“Vorgang abschliessen”结束事件，结束流程。

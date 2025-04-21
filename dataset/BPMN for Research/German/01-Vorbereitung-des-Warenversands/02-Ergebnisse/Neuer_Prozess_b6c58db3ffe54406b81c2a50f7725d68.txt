@@ -1,0 +1,8 @@
+当货物需要被发送时（开始事件“Ware soll versendet werden”），流程启动。
+
+首先进入并行网关“Ist Sonderverand Sonderversand nötig?”，从这里分出三条路径：
+- 一条路径指向任务“Ware einpacken”（由“Lagerarbeiter”执行），执行完该任务后，进入任务“Prüfung, ob Vorbereitungen abgeschlossen”（同样由“Lagerarbeiter”执行），然后是任务“Ware zur Abholung bereitstellen”（“Lagerarbeiter”执行）。
+- 另一条路径指向任务“normalen Ware versandt anstoßen”（由“Sekretariat”执行），执行完该任务后，进入任务（未命名，由“Sekretariat”执行）。
+- 还有一条路径指向排他网关（未命名，由“Sekretariat”执行），从该网关分出一条路径指向任务“Sonderversand anstoßen”（“Sekretariat”执行），执行完该任务后，进入任务“Angebot bei 3 Speditteuren einholen”（“Sekretariat”执行）。
+
+另外，还有一个未详细展示完整流程的空流程（包含一个未命名的开始事件）。

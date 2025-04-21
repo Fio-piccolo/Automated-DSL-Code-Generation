@@ -1,0 +1,11 @@
+业务需求如下：
+1. 当“Regressmögl. wurde gemeldet”（退回可能性已报告）事件触发后，开始流程。
+2. 首先执行“Fall prüfen”（检查案例）任务。
+3. 执行完“Fall prüfen”任务后，通过排他网关进行判断，如果条件满足“Regress möglich”（退回可能），则触发“Zahlungsaufforderung an VN”（向供应商发出付款要求）中间抛出事件；如果条件不满足“Regress nicht möglich”（退回不可能），则直接进入后续流程。
+4. 触发“Zahlungsaufforderung an VN”事件后，通过排他事件网关进行分支判断。若收到“Zahlungseingang bestätigt”（付款确认），则执行“Zahlungs - eingang verbuchen”（记录付款到账）任务；若收到“Widerspruch erhalten”（收到异议），则执行“Widerspruch prüfen”（检查异议）任务；若“Frist abgelaufen”（期限已过），则进入后续流程。
+5. 执行“Widerspruch prüfen”任务后，通过排他网关进行判断。若“Widerspruch nicht grechtfertigt”（异议不合理），则进入“weitergabe an Inkasso”（移交催款）任务；若“Widerspruch gerechtfertigt”（异议合理），则进入后续流程。
+6. “weitergabe an Inkasso”任务完成后，若满足一定条件（具体条件未详细给出），则执行“Vorgang schließen”（结束流程）任务；若不满足条件，则进入后续流程。
+7. 执行“Zahlungs - eingang verbuchen”任务后，进入后续流程。
+8. 当所有相关任务和条件判断完成后，执行“Vorgang schließen”任务，最终流程结束。
+9. 在流程中，如果有其他满足特定条件的情况（如“Regress nicht möglich”“Widerspruch nicht grechtfertigt”“Widerspruch gerechtfertigt”等），流程会按照相应的分支进行流转，可能会触发不同的任务或进入不同的后续流程。
+10. 整个流程通过各种任务、网关和事件的协同工作，实现对业务流程的控制和处理，以确保在不同情况下能够准确地执行相应的操作，最终完成或推进业务流程。

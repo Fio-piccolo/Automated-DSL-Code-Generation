@@ -1,0 +1,5 @@
+当货物需要发货时（开始事件“Ware soll versendet werden”），首先由秘书处的工作人员执行“Menge ermitteln”任务（确定货物数量）。然后流程进入并行网关，并行执行两条路径：一条路径是秘书处的工作人员判断是否为特殊运输（通过排他网关“Sonderversand?”），如果是（条件“ja”），则执行“Angebote von 3 Spediteuren einholen”任务（获取3家运输商的报价），之后根据报价情况（通过排他网关）选择接受运输商1（“Angebot Spediteur 1 annehmen”）、运输商2（“Angebot Spediteur 2 annehmen”）或运输商3（“Angebot Spediteur 3 annehmen”）的报价；另一条路径是仓库工人执行“Ware verpacken”任务（包装货物）。
+
+在秘书处这边，如果不是特殊运输（“Sonderversand?”网关条件“nein”），则执行“Paketschein ausfüllen”任务（填写包裹单），然后判断是否需要保险（通过排他网关“Versicherung nötig?”），如果需要（条件“ja”），由物流经理执行“Versicherung abschliessen”任务（办理保险）；如果不需要（条件“nein”），则直接进入后续流程。
+
+无论是接受运输商报价的流程，还是办理保险或不需要保险的流程，最终都会通过相应的网关汇聚，然后仓库工人执行“Ware zur Abholung bereitstellen”任务（准备货物待取），最后货物发货（结束事件“Ware wird versendet”）。

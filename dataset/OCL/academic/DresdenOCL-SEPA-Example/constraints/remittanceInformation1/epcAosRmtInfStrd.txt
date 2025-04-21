@@ -1,0 +1,7 @@
+The requirements are as follows:
+
+In the RemittanceInformation1 context within the isoStdIso20022TechXsdPain00800101 package, the elements RfrdDocInf, RfrdDocRltdDt, RfrdDocAmt, Prtry which is within CdtrRefInf cdtrRefTp, Invcr, Invcee, and AddtlRmtInf within RmtInf Strd should not be included within the system or process being specified. 
+
+That is, their sizes should each be zero. This means each of these elements should be empty or not exist. Please note that this rule applies to non-AOS-banks. Should these elements be included, non-AOS instructed banks may reject the messages containing these elements. 
+
+More specific rules and guidelines can be found in Section 1.2 of the SEPA B2B Direct Debit C2B Implementation Guidelines.

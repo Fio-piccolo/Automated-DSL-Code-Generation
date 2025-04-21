@@ -1,0 +1,10 @@
+该业务流程主要涉及硬件经销商的货物处理及发货流程，具体如下：
+1. 流程始于“Ware versandbereit”（货物准备好发货）事件。
+2. 经过“parallelGateway”（并行网关），流程分为两个分支：
+    - 一个分支是进行“Ware verpacken”（包装货物）任务，由“Lagerarbeiter”（仓库工人）负责，完成后进入“Verpackte Ware bereitstellen”（提供包装好的货物）任务。
+    - 另一个分支是先进行“Versandart klären”（确定运输方式）任务，之后根据数量情况通过“exclusiveGateway”（排他网关）进行不同处理：
+        - 若数量少（Kleinmenge），则进行“Paketschein ausfüllen”（填写包裹单）任务。
+        - 若数量多（Großmenge），则进行“3 Speditions - angebote einholen”（获取3个运输报价）任务，之后选择合适的运输商进行“Ausgewählte Spedition beauftragen”（委托选定的运输商）任务。
+        - 若不需要保险（Keine Versicherung），则直接进入后续流程。
+3. 在处理过程中，若需要保险（Versicherung notwendig），则进行“Versicherung abschließen”（购买保险）任务。
+4. 各分支任务完成后，通过“parallelGateway”（并行汇聚网关）汇聚，然后进入“Ware abholbereit”（货物可取回）事件，标志着整个流程结束。

@@ -1,0 +1,14 @@
+业务需求如下：
+1. 流程开始于“VN mglw. regresspflichtig”的起始事件。
+2. 接着执行“Regressfall prüfen”任务，检查是否存在需要追溯的情况。
+3. 之后通过排他网关进行分支判断，根据判断结果决定后续流程走向。
+    - 如果判断为“nicht regresspflichtig”（无需追溯），则跳过一些步骤，直接进入“Geldeingang verbuchen”任务记录资金收入，然后经过“Vorgang schließen”任务关闭流程，最终结束于“sid-CE21FFC9-72B7-45B6-9ECC-4CD2924E6FBB”结束事件。
+    - 如果判断为“tats. regresspflichtig”（实际需要追溯），则执行“Zahlaufforderung versenden”任务发送付款请求。
+    - 发送付款请求后，执行“Wiedervorlage setzen”任务重置再提交。
+4. 重置再提交后，流程通过事件驱动网关进行分支：
+    - 若“Wiedervorlagefristabgelaufen”（再提交期限已过）事件触发，流程会经过一些任务和判断，最终可能走向“An Inkasso weiterleiten”任务转交给催款部门，然后结束于“sid-C7AF7428-CB33-4BFB-93C6-92E00D72687D”结束事件。
+    - 若收到“Widerspruch von VN eingegangen”（来自VN的异议），则执行“Widerspruch prüfen”任务检查异议。
+        - 检查后若判断为“nicht gerechtfertigt”（不合理），则经过一些步骤后进入“An Inkasso weiterleiten”任务转交给催款部门，然后结束于“sid-C7AF7428-CB33-4BFB-93C6-92E00D72687D”结束事件。
+        - 若判断为“gerechtfertigt”（合理），则经过一些任务后进入“Vorgang schließen”任务关闭流程，最终结束于“sid-CE21FFC9-72B7-45B6-9ECC-4CD2924E6FBB”结束事件。
+5. 在流程中，若“Geld eingegangen”（资金已收到）事件触发，则执行“Geldeingang verbuchen”任务记录资金收入。
+6. 各个任务和网关之间通过顺序流进行连接，以明确流程的执行顺序。

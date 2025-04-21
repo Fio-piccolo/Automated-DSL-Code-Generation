@@ -1,0 +1,12 @@
+该业务流程是关于货物运输准备的，主要包括以下步骤：
+1. 流程从“Start”开始。
+2. 由“Menge prüfen”任务检查货物数量。
+3. 根据数量检查结果，通过“Menge?”排他网关进行分支：
+    - 如果数量少，执行“Paketschein ausfüllen”任务填写包裹单。
+    - 如果数量多，执行“Angebot von 3 Spediteuren anfordern”任务向3家运输商询价。
+4. 填写包裹单和向运输商询价这两个任务并行执行，之后执行“Spediteur auswählen”任务选择运输商。
+5. 选择运输商后，执行“Versicherungsbedarf prüfen”任务检查保险需求，通过“Versicherung?”排他网关进行分支：
+    - 如果需要保险，执行“Versicherung abschließen”任务完成保险。
+    - 如果不需要保险，跳过保险相关步骤。
+6. 完成保险检查或跳过保险步骤后，执行“Ware sammeln und verpacken”任务收集和包装货物，之后执行“zur Abholung bereit stellen”任务准备好货物以便取货。
+7. 最后，流程以“Ware bereitgestellt”结束，表示货物已准备好。

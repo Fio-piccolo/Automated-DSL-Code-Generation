@@ -1,0 +1,9 @@
+流程从“Ware soll versendet werden”（货物应发送至何处）开始。流程通过并行网关分为两条并行路径，一条路径用于处理包装相关任务，另一条路径用于选择物流商。
+
+在选择物流商的路径中，首先经过一个排他网关，判断是“große Menge ?”（大批量？）还是“Kleine Menge?”（小批量？）。如果是大批量，经过任务“große Menge ?”后，进入并行网关，并行地从三个物流商（Spediteur 1、Spediteur 2、Spediteur 3）获取报价，即分别执行“Angebot von Spediteur 1 einholen”（获取物流商1的报价）、“Angebot von Spediteur 2 einholen”（获取物流商2的报价）、“Angebot von Spediteur 3 einholen”（获取物流商3的报价）这三个任务。获取完报价后，通过并行网关汇聚，然后执行“günstigstes Angebot auswählen”（选择最便宜的报价）任务，接着执行“Beauftragung Spediteur”（委托物流商）任务。
+
+如果是小批量，经过任务“Kleine Menge?”后，执行“Paketschein ausfüllen”（填写包裹单）任务，然后经过一个排他网关，判断是否需要“Logistikleiter schliesst Versicherung ab”（物流主管办理保险），如果需要则执行该任务，之后与不需要办理保险的情况通过排他网关汇聚。
+
+在包装相关路径中，执行“Ware verpacken”（包装货物）任务。
+
+最后，两条路径通过并行网关汇聚，执行“Ware ist zur Abholung bereit”（货物准备好可供取货）任务，流程结束于“Ware versendet”（货物发送）。

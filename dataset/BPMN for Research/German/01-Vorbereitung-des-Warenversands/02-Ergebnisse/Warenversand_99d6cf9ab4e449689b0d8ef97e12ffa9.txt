@@ -1,0 +1,8 @@
+业务需求如下：该业务流程主要涉及货物运输（Warenversand）相关的一系列操作，包含不同角色在不同环节的任务处理及流程流转，具体如下：
+1. 流程起始于收到订单（Bestellung da），由Sekräteriat（秘书处）角色负责此起始事件，订单到达后会有后续处理流程。
+2. 接着流程并行分支，一方面会到任务“Entscheidung Versandverantwortlichkeit”（确定运输责任），由Sekräteriat角色执行，完成后根据不同情况通过排他网关（exclusiveGateway）进行分流，可能走向不同的后续任务如“Angebot 1”“Angebot 2”“Angebot 3”等任务环节，这些任务分别由Sekräteriat角色负责，任务完成后会汇聚到另一个排他网关进行进一步处理。另一方面，起始事件后还会到任务“Verpacken der Ware”（货物包装），由Lagerarbeiter（仓库工人）角色执行，完成后也会有后续流程流转。
+3. 在上述某些任务完成后，会经过排他网关或并行网关的汇聚与分流处理，比如在涉及到报价、选择运输商、委托运输商等一系列操作后，经过相应网关处理继续流程。
+4. 其中有一个环节涉及判断是否需要保险（Versicherung），通过排他网关根据判断结果决定是走向任务“Abschluß einer Versicherung”（完成保险）还是继续其他流程分支，“Abschluß einer Versicherung”任务由Logistikleiter（物流主管）角色负责。
+5. 在流程的不同阶段还会涉及到如填写包裹单（Ausfüllen Paketschein）等任务，由Sekräteriat角色执行，完成后继续后续流程流转。
+6. 之后会有准备发货的中间抛出事件（intermediateThrowEvent）“Abschluß Vorbereitung”（完成准备），然后继续后续流程处理。
+7. 最后流程会到任务“Bereitstellung zur Abholung”（准备提货），由Lagerarbeiter角色执行，完成后流程到达终点事件“Ware Versandbereit”（货物准备发货），至此整个货物运输相关业务流程结束。整个流程中不同任务有各自的执行角色及明确的输入输出流向，通过各种网关进行条件判断和流程分支、汇聚处理，以完成整个货物运输相关业务的处理流程。

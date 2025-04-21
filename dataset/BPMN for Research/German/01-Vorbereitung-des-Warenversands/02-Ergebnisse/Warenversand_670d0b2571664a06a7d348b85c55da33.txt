@@ -1,0 +1,11 @@
+该BPMN流程定义描述了一个业务流程，主要涉及货物运输和配送相关的操作。具体业务逻辑如下：
+
+1. 流程从“Start”开始事件启动。
+2. 首先进入一个排他网关，根据不同条件分为两条路径：
+   - 若条件为“Klein”（小货物），则进入“Versandart klären”（明确运输方式）任务，之后进入另一个排他网关，根据网关结果又有不同走向。
+   - 若条件为“Groß”（大货物），则进入“Spediteur wählen und beauftragen”（选择并委托货运商）任务，之后进入一个并行网关，分为三条路径分别去获取不同货运商的报价。
+3. 同时，流程从并行网关分出一条路径去获取“Angebot von Spediteur 1 einholen”（获取货运商1的报价）等任务。
+4. 之后进入另一个排他网关“Nach Auswahl wählen”（选择后选择），根据不同选择进入不同任务。
+5. 还有一个排他网关“Versicherung abschließen?”（是否完成保险），若选择“Ja”（是）则进入“Versicherung abschließen.”（完成保险）任务，之后进入后续任务；若选择“Nein”（否）则直接进入后续任务。
+6. 在流程中，“Ware verpacken”（包装货物）和“Ware zum abholen Bereitstellen”（准备货物取货）任务会并行执行。
+7. 所有相关任务完成后，通过一个汇聚并行网关“sid-C66ABE9C-821F-4584-807B-3491F18CA2CA”，最终到达“End”结束事件，完成整个业务流程。

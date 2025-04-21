@@ -1,0 +1,11 @@
+该业务流程为货物发送流程，具体如下：
+1. 流程从“Ware soll versendet werden”（货物应被发送）的开始事件启动。
+2. 接着进入“Ist ein Sonderversand notwendig?”（是否需要特殊运输？）的排他网关判断：
+    - 若不需要（“Nein”），则执行“Paketschein erstellen”（创建包裹单）任务，之后流程进入“Versicherung notwendig?”（是否需要保险？）的排他网关判断。
+    - 若需要（“Ja”），则执行“Speditionsanfragen stellen und beauftragen”（提交和委托货运请求）任务，之后流程也进入“Versicherung notwendig?”（是否需要保险？）的排他网关判断。
+3. 在“Versicherung notwendig?”（是否需要保险？）的排他网关判断中：
+    - 若不需要（“Nein”），则直接通过一个汇聚排他网关，然后流程继续。
+    - 若需要（“Ja”），则由物流经理执行“Versicherung abschliessen”（签订保险）任务，之后通过汇聚排他网关，流程继续。
+4. 上述两条分支在经过各自的排他网关汇聚后，汇合到一个并行网关，并行网关分出两条并行分支：
+    - 一条分支直接进入“Bereitstellung der Ware”（提供货物）任务，该任务由仓库工人执行，完成后流程到达结束事件。
+    - 另一条分支进入“Ware verpacken”（包装货物）任务，该任务由仓库工人执行，完成后通过一个并行网关汇聚，然后进入“Bereitstellung der Ware”（提供货物）任务，最终到达结束事件。

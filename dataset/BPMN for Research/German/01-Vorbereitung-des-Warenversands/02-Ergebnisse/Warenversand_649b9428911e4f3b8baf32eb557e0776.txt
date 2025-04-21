@@ -1,0 +1,7 @@
+计算机经销商的业务流程如下：
+- 从名为“Ware soll...”的开始事件启动流程。
+- 进入排他网关，根据条件分为两条路径：若为“große Menge”（大量），则进入“3 Angebote einholen und bewerten”（获取并评估3个报价）任务；若为“kleine Menge”（小量），则进入“NW Versichert? prüfen”（检查是否需要保险）任务。
+- 在“3 Angebote einholen und bewerten”任务完成后，进入“Spedition beauftragen”（委托运输）任务，之后进入一系列排他网关和并行网关的判断与处理。
+- 在“NW Versichert? prüfen”任务完成后，根据结果进入“Versicherung erforderlich?”（是否需要保险）排他网关，若为“Ja”（是）进入“Versicherung abschließen”（完成保险）任务，若为“Nein”（否）进入“Paketschein ausfüllen”（填写包裹单）任务。
+- 其他任务如“Ware verpacken”（包装货物）、“Ware zur Abholung bereitstellen”（准备货物取货）等根据流程走向依次执行。
+- 当相关任务完成后，最终到达名为空的结束事件。在整个流程中，不同角色如秘书处、仓库工人、物流主管等在各自相关任务节点参与工作。

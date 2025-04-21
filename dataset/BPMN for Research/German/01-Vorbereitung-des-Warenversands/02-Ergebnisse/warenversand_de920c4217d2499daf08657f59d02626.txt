@@ -1,0 +1,8 @@
+业务需求如下：
+1. 流程开始于“Ware versenden”（发货）事件。
+2. 首先经过“Große Mengen?”（大量货物？）排他网关。如果答案为“Ja”（是），则执行“Angebote von drei unterschiedlichen Spediteuren einholen”（从三个不同的运输商获取报价）任务；如果答案为“nein”（否），则执行“Standardisierten Paketschein ausfüllen”（填写标准化包裹单）任务。
+3. 若执行获取报价任务，获取到三个不同运输商的报价后，执行“Ein Angebot auswählen”（选择一个报价）任务，然后根据选择的报价执行“Entsprechenden Spediteur beauftragen”（委托相应运输商）任务。
+4. 若执行填写包裹单任务，之后经过“Versicherung erforderlich?”（需要保险？）排他网关。若答案为“是”，则执行“Versicherung abschließen”（购买保险）任务；若答案为“否”，则不执行该任务。
+5. “Ware verpacken”（包装货物）任务在流程中独立执行。
+6. 由“委托相应运输商”任务和“购买保险”任务（若执行）产生的流程分支，最终会在一个汇聚网关合并，然后与“包装货物”任务的流程合并。
+7. 合并后的流程执行“Verpackte Ware zur Abholung bereitstellen”（准备好包装好的货物以供取货）任务，之后流程结束。

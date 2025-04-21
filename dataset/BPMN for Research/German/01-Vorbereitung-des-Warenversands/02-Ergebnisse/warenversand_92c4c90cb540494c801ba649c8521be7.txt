@@ -1,0 +1,1 @@
+业务需求如下：流程从开始事件启动，随后进入并行网关，并行产生三个分支任务，分别为“Angebot von Spedition1”、“Angebot von Spedition 2”、“Angebot von Spedition 3” 。这三个任务完成后，通过一个包容网关汇聚，之后执行“Spedition auswählen”任务，最后流程到达结束事件。

@@ -1,0 +1,7 @@
+该业务流程起始于一个开始事件，接着进入“Ware versenden”任务。之后通过“Große Mengen?”排他网关进行分支，如果选择“Ja”，则执行“3 Angebote holen”任务；如果选择“Nein”，则执行“Paketschein ausfüllen”任务。
+
+“3 Angebote holen”任务完成后，通过并行网关分成三条路径，分别执行“Angebot 1 holen”、“Angebot 2 holen”和“Angebot 3 holen”任务。这三个任务完成后，进入并行汇聚网关，然后执行“Ein Angebot auswählen”任务。
+
+“Paketschein ausfüllen”任务完成后，进入“Versicherung notwendig?”排他网关进行分支。若选择“Ja”，执行“Versicherung abschliessen”任务；若选择“Nein”，则直接执行“Ware verpacken”任务。
+
+“Versicherung abschliessen”任务完成后，与“Ware verpacken”任务的路径汇聚，之后执行“Zur Abholung breitstellen”任务，最终到达结束事件。

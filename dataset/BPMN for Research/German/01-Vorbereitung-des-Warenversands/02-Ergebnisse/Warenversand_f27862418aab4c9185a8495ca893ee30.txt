@@ -1,0 +1,11 @@
+业务需求如下：
+1. 流程开始于一个起始事件。
+2. 首先执行“Klären, wer den Versand übernimmt”任务。
+3. 接着通过一个排他网关进行决策。
+4. 执行“Angebote von 3 unterschiedlichen Spediteuren einholen”任务。
+5. 然后执行“Angebot auswählen”任务。
+6. 经过一个并行网关，分成多个路径：
+   - 一条路径执行“Paketschein ausfüllen”任务。
+   - 另一条路径执行“Spediteur auswählen”任务。
+   - 还有路径执行“Versicherung abschliiessen”任务和“Ware verpacken”任务。
+7. 最后通过汇聚网关和排他网关，流程结束。

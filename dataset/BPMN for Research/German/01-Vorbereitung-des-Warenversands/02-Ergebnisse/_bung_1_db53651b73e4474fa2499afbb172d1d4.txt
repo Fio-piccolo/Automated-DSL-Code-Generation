@@ -1,0 +1,17 @@
+流程描述：
+1. 开始事件：“Ware soll verschickt werden”（货物需要发送）。
+2. 并行网关（sid-4842B187），分支：
+   - 一条分支到任务“Ware verpacken”（包装货物），由“Logistikarbeiter”（物流工人）执行，然后到并行网关（sid-D0A174C0）。
+   - 另一条分支到排他网关（sid-CDD8F8F4）。
+3. 排他网关（sid-CDD8F8F4）分支：
+   - 分支1：到任务“Paketschein ausfüllen”（填写包裹单），由“Sekretariat”（秘书处）执行，然后到排他网关（sid-E9BA9D52）。
+   - 分支2：到任务“Angebote einholen”（获取报价），由“Sekretariat”执行，然后到并行网关（sid-EC9F2666）。
+4. 并行网关（sid-EC9F2666）分支：
+   - 分支1：到任务“Angebot 1 einholen”（获取报价1），由“Sekretariat”执行，然后到并行网关（sid-103E2CB9）。
+   - 分支2：到任务“Angebot 2 einholen”（获取报价2），由“Sekretariat”执行，然后到并行网关（sid-5A545CE0）。
+   - 分支3：到任务“Angebot 3 einholen”（获取报价3），由“Sekretariat”执行，然后到并行网关（sid-5A545CE0）。
+5. 并行网关（sid-5A545CE0）汇合后，到任务“Spediteur beauftragen”（委托运输商），由“Sekretariat”执行，然后到并行网关（sid-D0A174C0）。
+6. 排他网关（sid-E9BA9D52）分支：
+   - 分支1：到任务“Versicherung abschließen”（签订保险），由“Logistikleiter”（物流主管）执行，然后到并行网关（sid-D0A174C0）。
+   - 分支2：直接到并行网关（sid-D0A174C0）。
+7. 并行网关（sid-D0A174C0）汇合后，到任务“Ware zur Abholung bereitstellen”（准备货物待取），由“Logistikarbeiter”执行，然后到结束事件。

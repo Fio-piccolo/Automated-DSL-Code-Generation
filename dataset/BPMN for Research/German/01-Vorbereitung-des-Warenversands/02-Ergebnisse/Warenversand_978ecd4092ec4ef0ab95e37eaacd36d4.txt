@@ -1,0 +1,1 @@
+业务需求如下：当有货物需要发送时（由“Ware soll versendet werden”开始事件触发），先判断货物是大还是小（通过“Groß oder klein”排他网关），然后并行执行以下操作：一方面去处理“Angebot 1”相关任务，另一方面去处理“Angebot 3”相关任务，这两个任务完成后通过并行网关汇聚，接着执行“Angebot 2”相关任务，之后将上述几个任务的处理结果进行汇聚（通过另一个并行网关），再执行“Entscheidung”相关任务以完成整个货物发送前的准备流程。流程中涉及不同角色包括“Sekreteriat”“Spediteur”“Logistikleiter”等分别在各自负责的环节发挥作用。

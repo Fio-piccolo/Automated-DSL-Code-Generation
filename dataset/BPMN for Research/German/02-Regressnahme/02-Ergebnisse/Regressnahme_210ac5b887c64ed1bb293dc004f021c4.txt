@@ -1,0 +1,4 @@
+业务需求如下：
+1. 当“Regressanspruch gemeldet”事件触发后，开始执行流程。
+2. 首先对“Fall auf Regressberechtigung prüfen”任务进行处理。
+3. 接着通过“Berechtigt?”排他网关进行判断，如果不满足条件（“Nein”），则执行“Zahlungsaufforderung an VN und auf WV setzen”任务，之后根据不同情况（如“Zahlungseingang verzeichnet”、“Widerspruch erhalten”等）进行相应处理，包括记录支付、处理异议等操作，然后继续经过一系列判断和任务执行，如“Widerspruch prüfen”、“Gerechtfertigt?”判断等，最终可能完成流程并结束于“Vorgang ist geschlossen”事件；如果满足条件（“Ja”），则执行其他相关任务和判断，流程中还涉及到一些中间事件用于捕捉特定情况（如支付到账、收到异议等）并触发后续操作。

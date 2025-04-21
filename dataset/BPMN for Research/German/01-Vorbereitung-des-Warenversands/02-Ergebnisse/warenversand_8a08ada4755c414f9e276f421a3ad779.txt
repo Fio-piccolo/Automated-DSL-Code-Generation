@@ -1,0 +1,43 @@
+Here's a natural language description of the business process represented by the provided BPM XML:
+
+---
+
+The business process begins with an incoming request for a customer order. This request is processed through a series of sequential activities:
+
+1. **Order and sign a customer incoming request**  
+   - The customer provides their order details, and the system captures this information.
+
+2. **Verify Spend'empiere**  
+   - The system checks if the customer has an Empiere card or another accepted payment method. If accepted, the payment is processed; otherwise, the request is redirected to a different compartment.
+
+3. **Check signature**  
+   - The signed documents are reviewed to ensure authenticity and proper formatting.
+
+4. **Verify the signature**  
+   - The signature is confirmed to validate the authenticity of the signed documents.
+
+5. **Verify Spend'empiere again**  
+   - This step ensures that the payment method specified by the customer is valid for the transaction.
+
+6. **Verify the signature again**  
+   - The signature is re-verified to confirm the document's authenticity.
+
+7. **Send payment data to B2B XML transfer**  
+   - The payment details are securely transmitted to the B2B XML transfer service for processing.
+
+8. **Create an invoice**  
+   - An electronic invoice is generated and sent to the customer as a confirmation of the transaction.
+
+9. **Verify the Spend'empiere again**  
+   - This step may be repeated to ensure payment method validation is consistently applied.
+
+10. **Send the invoice to the customer**  
+    - The customer receives the invoice via email or another specified method.
+
+11. **Process the payment**  
+    - The payment is settled using the preferred method, and payment data is transmitted to the B2B XML transfer service.
+
+12. **Complete the order processing**  
+    - All necessary validations and payments are confirmed, and the order is marked as completed.
+
+The process flows through defined compartments, with each activity connected by sequential edges. Certain transitions are ignored under specific conditions, such as when an Empiere card is not accepted. The entire process is designed to ensure secure, efficient, and compliant document processing from receipt to completion.

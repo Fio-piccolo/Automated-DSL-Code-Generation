@@ -1,0 +1,11 @@
+业务需求如下：
+1. 首先开始事件“Möglicher Regress gegen Versicherungsnehmer liegt vor”触发流程，进入“Fall prüfen”任务。
+2. “Fall prüfen”任务完成后，流转到“Regress möglich?”排他网关。
+3. 若“Regress möglich?”排他网关判断为“Ja”，则执行“Zahlungsaufforderung versenden”任务；若为“Nein”，则流程结束。
+4. “Zahlungsaufforderung versenden”任务完成后，进入“Fall auf Wiedervorlage setzen”任务。
+5. “Fall auf Wiedervorlage setzen”任务完成后，流转到“Exclusive”类型的事件网关。
+6. 事件网关会根据不同条件分别触发“Geld eingegangen”“Widerspruch eingegangen”“Kein Geld innerhalb der Wiedervorlagefrist eingegangen”三个中间捕获事件中的一个。
+7. 若触发“Geld eingegangen”中间捕获事件，执行“Geldeingang verbuchen”任务，之后流转到相应的汇聚网关，再执行“Vorgang schließen”任务，最后结束流程。
+8. 若触发“Widerspruch eingegangen”中间捕获事件，执行“Widerspruch prüfen”任务，之后流转到“Widerspruch berechtigt?”排他网关。
+9. 若“Widerspruch berechtigt?”排他网关判断为“Ja”，执行相应后续流程；若为“Nein”，执行其他后续流程。
+10. 若触发“Kein Geld innerhalb der Wiedervorlagefrist eingegangen”中间捕获事件，执行“Vorgang schließen”任务，之后流转到相应的汇聚网关，再执行“Fall an Inkassodienstleister übergeben”任务，最后结束流程。

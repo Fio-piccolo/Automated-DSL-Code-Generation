@@ -1,0 +1,25 @@
+该BPMN流程描述了一个餐厅点餐和制作的业务流程，主要涉及顾客、员工和厨师三个角色。
+
+1. **顾客流程**：
+   - 顾客感到饥饿（Hunger Noticed），开始点餐流程。
+   - 顾客选择菜品（Choose a Dish）。
+   - 顾客下订单（Places order）。
+   - 顾客支付披萨费用（Pay for Pizza）。
+   - 顾客等待叫号（waiting for turn），期间可能会取一个 buzzer。
+   - 当 buzzer 被激活（buzzer activated），顾客可以取餐。
+
+2. **员工流程**：
+   - 员工收到订单（Order received）。
+   - 员工将订单输入 POS 系统（Places Order into POS）。
+   - 员工收钱（Collect Money）。
+   - 员工设置 buzzer（Set up buzzer）。
+   - 员工通知厨师订单（Informs Chef of Order）。
+   - 员工等待餐品准备好（Meal ready）。
+
+3. **厨师流程**：
+   - 厨师收到餐品订单（Meal Order Received）。
+   - 厨师准备餐品（Prepares meal）。
+   - 厨师将餐品放入服务 hatch（Places in Service Hatch）。
+   - 厨师通知员工餐品已在服务 hatch（Informs Employee Meal is in Service hatch）。
+
+整个流程从顾客感到饥饿开始，经过点餐、支付、等待，到员工处理订单、收钱、通知厨师，最后到厨师准备餐品并通知员工，形成一个完整的餐厅点餐和制作的业务流程。

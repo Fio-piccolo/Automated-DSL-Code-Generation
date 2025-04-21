@@ -1,0 +1,15 @@
+Der BPMN-Workflown "Vorbereitung Warenversand" beschreibt den Ablauf der Vorbereitung von Waren für ihren Versand. Der Prozess beginnt mit dem Start des Vorbereitungsvorgangs und gliedert sich in mehrere Schritte:
+
+1. **Ware verpacken**: Der Lagerarbeiter verpackt die Ware.
+
+2. **Sonderversand ?**: Das Sekretariat prüft, ob ein Sonderversand benötigt wird. Falls ja, werden Angebote eingeholt, die dann analysiert und ein Angebot ausgewählt wird. Anschließend wird der Spediteur beauftragen.
+
+3. **Versicherung notwendig**: Der Logistikleiter prüft, ob eine Versicherung notwendig ist. Falls ja, wird die Versicherung abgeschlossen.
+
+4. **Paketschein ausfüllen**: Das Sekretariat füllt den Paketschein aus.
+
+5. **Ware bereitstellen**: Der Lagerarbeiter bereitstellt die Ware.
+
+6. **Ware abgeholt**: Der Prozess endet mit der Abholung der Ware.
+
+Der Workflown enthält parallele Verzweigungen, die es ermöglichen, mehrere Aufgaben gleichzeitig zu bearbeiten, sowie Entscheidungsknoten, die den Ablauf anhand von Bedingungen steuern.

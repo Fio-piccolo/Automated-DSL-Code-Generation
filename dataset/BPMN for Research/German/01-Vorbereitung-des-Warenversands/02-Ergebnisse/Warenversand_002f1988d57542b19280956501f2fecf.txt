@@ -1,0 +1,16 @@
+该业务流程主要围绕两个部分展开：“Test 1”流程和“Übung 1”流程。
+1. **“Test 1”流程**：
+    - 流程从“Start 1”开始。
+    - 接着执行“Aufgabe 1”任务。
+    - 之后通过一个排他网关（Exclusive Gateway）进行分支判断，根据条件选择不同路径。如果选择“jo”路径，则执行后续相关任务；如果选择“no”路径，则执行“sid-704AF294-8819-414F-A9A8-F7800631C0D0”任务。
+    - 任务执行完成后，通过一个汇聚的排他网关（Exclusive Gateway）进行合并。
+    - 最后流程结束。
+2. **“Übung 1”流程**：
+    - 流程从开始事件启动。
+    - 执行“Ware zum Versand”任务，该任务之后又会通过一个排他网关进行分支判断，根据“große Mengen”（大量）条件，若选择“Ja”，则执行“Sekretariat: 3 Angebote einholen”任务；若选择“nein”，则执行“Spediteur beauftragen”任务。
+    - “Sekretariat: 3 Angebote einholen”任务完成后，执行“Angebot auswählen”任务，然后执行“Spediteur beauftragen”任务。
+    - “Spediteur beauftragen”任务之后，又会经过一个排他网关进行判断，若选择“ja”，则执行“Logistikleiter: Versicherung abschließen”任务；若选择“nein”，则直接进入后续流程。
+    - 执行“Ware verpacken”任务和“Bereitstellung der Ware zur Abholung”任务。
+    - 流程最后结束。
+
+整个业务流程通过BPMN图清晰地展示了各个任务之间的先后顺序、分支判断以及流程的流向，有助于相关人员理解和执行该业务流程。

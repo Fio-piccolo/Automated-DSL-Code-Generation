@@ -1,0 +1,19 @@
+流程从“Warenversand”开始事件启动。经过一个排他网关（默认路径指向“Normaler Versand”任务），该网关有两个输出路径，分别指向“Normaler Versand”任务和“Sonder Versand”任务。
+
+“Normaler Versand”任务完成后，通过序列流连接到一个排他网关。
+
+“Sonder Versand”任务完成后，连接到“Angebote Lieferanten prüfen”任务，该任务完成后也连接到上述排他网关。
+
+排他网关汇聚后，连接到一个包含网关，该网关有四个输出路径，分别指向“Verpacken”任务（两个不同的“Verpacken”任务）、“Standardversand”任务和“Versicherungsschein”任务。
+
+“Standardversand”任务完成后，连接到一个排他网关。
+
+其中一个“Verpacken”任务（sid-EE52DF5F）完成后，连接到另一个排他网关（sid-0B48A46E-FE7A-4337-983D-FA65A7A503E1），该网关输出连接到上述排他网关（与“Standardversand”任务连接的排他网关）。
+
+另一个“Verpacken”任务（sid-332443AB）无后续序列流（可能流程未完整展示或存在其他连接逻辑）。
+
+“Versicherungsschein”任务完成后，连接到一个排他网关（sid-04AE6CA6-9891-41CA-9055-D947BBE9FFA4）。
+
+上述两个排他网关（“Standardversand”任务连接的排他网关和“Verpacken”任务（sid-EE52DF5F）连接的排他网关）汇聚后，连接到排他网关（sid-04AE6CA6-9891-41CA-9055-D947BBE9FFA4）。
+
+排他网关（sid-04AE6CA6-9891-41CA-9055-D947BBE9FFA4）输出连接到一个包含网关（sid-9D997BE2-5293-41DC-ACA2-308C8A39E189），该网关输出连接到“Abholung und Versand organisieren”任务，该任务完成后，流程结束。

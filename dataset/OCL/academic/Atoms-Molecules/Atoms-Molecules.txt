@@ -1,0 +1,9 @@
+The requirements are as follows:
+
+1. All instances of Atom should have a weight greater than 0, which means no Atom should have a non-positive weight.
+
+2. All instances of Atom should have a unique weight. No two Atoms should share the same weight.
+
+3. There should be no instance of Molecule that contains a noble gas particle. All Molecules must be free from noble gas particles.
+
+4. At least one instance of Atom should be a noble gas. This means there must exist an Atom that is a noble gas.

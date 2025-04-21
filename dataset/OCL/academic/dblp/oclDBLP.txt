@@ -1,0 +1,32 @@
+The requirements are as follows:
+
+1. Every person should have a unique name.
+2. Every book should have a unique ISBN.
+3. Every book series should have a unique ID.
+4. Each issue of a book series is identified uniquely by its number.
+5. Every journal should have a unique ISSN.
+6. Every journal should have a unique title.
+7. Each volume of a journal is identified uniquely by its volume number.
+8. Each issue of a journal volume is identified uniquely by its number.
+9. Each section of a journal is identified uniquely by its title.
+10. Every conference series should have a unique name.
+11. Every conference edition should have a unique title.
+12. For book chapters, the initial page should be lesser or equal to the end page.
+13. For journal papers, the initial page should be lesser or equal to the end page.
+14. For journal issues, every paper should start on a different page.
+15. For edited books, every chapter should start on a different page.
+16. For book series issues, every chapter should start on a different page.
+17. All journal volumes within a journal should be consecutively numbered.
+18. If a book was presented at a conference, it should be published not earlier than the conference year.
+19. An edited book should not contain repetitions of the same section title.
+20. A book series issue should not have repetitions of the same section title.
+21. A journal section should not have repetitions of the same paper title.
+22. A book section should not have repetitions of the same chapter title.
+23. Every conference edition must end up being published in at least one of the following: an edited book, a book series issue, or a journal issue.
+24. Calculation of a person's total number of publications.
+25. Calculation of the total number of pages in a journal issue.
+26. The publication year of edited books, authored books, book chapters, and journal papers.
+27. The edition of edited books, authored books, book chapters, and journal papers.
+28. The publications associated with a specific author.
+29. The journal sections associated with a specific journal issue.
+30. The book sections associated with a specific edited book or book series issue.

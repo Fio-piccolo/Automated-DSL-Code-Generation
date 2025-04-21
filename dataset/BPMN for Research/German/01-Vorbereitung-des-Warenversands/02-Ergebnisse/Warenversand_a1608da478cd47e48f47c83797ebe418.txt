@@ -1,0 +1,1 @@
+业务需求如下：有一个协作（collaboration），包含一个参与者（participant），该参与者关联一个流程（process）。流程中有多个车道（lane），分别代表不同的角色，如“Lagerarbeiter”“Sekretariat”“Logistikleiter”等。每个车道下有多个任务（task），如“Ware verpacken”“Ware bereitstellen”等，还有并行网关（parallelGateway）和排他网关（exclusiveGateway）。这些元素之间通过序列流（sequenceFlow）连接，形成了一个业务流程的图形表示。整个流程从开始事件（startEvent）开始，经过各个任务和网关，最终完成业务流程。

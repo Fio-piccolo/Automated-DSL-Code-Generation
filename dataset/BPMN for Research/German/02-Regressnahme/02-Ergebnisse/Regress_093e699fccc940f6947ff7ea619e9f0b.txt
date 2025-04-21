@@ -1,0 +1,9 @@
+业务需求如下：
+1. 流程开始于“Regress möglich”的开始事件。
+2. 接着执行“Regress-möglichkeit prüfen”任务，检查是否有回归可能性。
+3. 之后通过“möglich?”排他网关进行判断，如果可行则进入“Zahlungsforderung eingegangen”中间抛出事件。
+4. “Zahlungsforderung eingegangen”事件后，通过事件驱动网关进行分支，可能会进入“Geldeingang eingegangen”中间捕获事件、“Wiedervorlagefrist abglaufen”中间捕获事件或“Widerspruch eingegangen”中间捕获事件。
+5. 当进入“Geldeingang eingegangen”事件后，执行“Geld verbuchen”任务。
+6. 若进入“Wiedervorlagefrist abglaufen”事件，则继续流程。
+7. 要是进入“Widerspruch eingegangen”事件，先执行“Widerspruch prüfen”任务，然后通过“gerechtfertigt?”排他网关进行判断，若不合理则进入“Vorgang schließen”任务，最终到达“Vorgang geschlossen”结束事件；若合理则继续流程。
+8. 流程中的各个判断分支会根据条件汇聚到相应的排他网关，然后继续后续流程，最终可能会到达“Inkassoauftrag versendet”结束事件。

@@ -1,0 +1,16 @@
+该业务流程主要围绕货物运输展开，起点是“Ware versenden”（发货），之后进入一系列任务和决策环节，最终完成货物的发送和相关流程。具体步骤如下：
+1. 流程开始于“Ware versenden”（发货）事件。
+2. 接着进入“grosse Menge?”（大量？）的排他网关进行判断。
+    - 若选择“Ja”（是），则执行“Angebote einholen”（获取报价）任务。
+    - 若选择“Nein”（否），则执行“Paketschein ausfüllen”（填写包裹单）任务。
+3. 执行“Angebote einholen”（获取报价）任务后，进行“Angebot auswählen”（选择报价）任务。
+4. 执行“Paketschein ausfüllen”（填写包裹单）任务后，进入“Versicherung?”（保险？）的排他网关进行判断。
+    - 若选择“Ja”（是），则执行“Versicherung abschließen”（完成保险）任务。
+    - 若选择“Nein”（否），则直接进行后续流程。
+5. 完成“Versicherung abschließen”（完成保险）任务或无需保险的判断后，执行“Vorbereitungen abgeschlossen”（准备完成）的中间抛出事件。
+6. 执行“Vorbereitungen abgeschlossen”（准备完成）的中间抛出事件后，进行“Versand beauftragen”（委托运输）任务。
+7. 执行“Versand beauftragen”（委托运输）任务后，进入一个排他网关进行判断。
+    - 若选择一种路径，则执行“Versand ausführen”（执行运输）任务，之后流程结束。
+    - 若选择另一种路径，则执行“Ware verpacken”（包装货物）任务。
+8. 执行“Ware verpacken”（包装货物）任务后，再次执行“Vorbereitungen abgeschlossen”（准备完成）的中间抛出事件。
+9. 再次执行“Vorbereitungen abgeschlossen”（准备完成）的中间抛出事件后，重复进行“Versand beauftragen”（委托运输）任务及后续的排他网关判断和相应任务执行，最终完成货物运输流程。

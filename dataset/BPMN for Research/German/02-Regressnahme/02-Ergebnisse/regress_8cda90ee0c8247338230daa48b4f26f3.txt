@@ -1,0 +1,12 @@
+业务需求如下：
+1. 流程开始于“Regress Info”事件，触发后进入“Fall prüfen”任务。
+2. 在“Fall prüfen”任务完成后，进入“Regress möglich?”排他网关，根据条件判断流程走向。
+    - 若条件满足（流程中未明确具体条件），流程进入“Zahlungsaufforderung verschickt”中间抛出事件，发送支付请求，之后进入“Exclusive”类型的事件网关。
+        - 从该事件网关出来后，有多个可能走向：
+            - 若满足特定条件（未明确），进入“Geld eingegangen”中间捕获事件，当满足条件（未明确）后，进入“Geldeingang verbuchen”任务，任务完成后流程到达“Vorgang geschlossen”结束事件。
+            - 若满足特定条件（未明确），进入“Widerspruch”中间捕获事件，之后进入“Widerspruch prüfen”任务，任务完成后进入“Widerspruch gerechtfertigt?”排他网关。
+                - 若判断结果为“是”，流程进入“Vorgang geschlossen”结束事件。
+                - 若判断结果为“否”，流程进入“Abgabe Inkassodienstleister”结束事件。
+            - 若经过一段时间（两星期），进入“Abgabe Inkassodienstleister”结束事件。
+    - 若在“Regress möglich?”排他网关中条件不满足，流程直接进入“Vorgang geschlossen”结束事件。
+3. 整个流程中涉及多个任务和事件，每个任务和事件都有相应的条件和后续流程，以确保业务流程的顺利进行和决策的准确性。

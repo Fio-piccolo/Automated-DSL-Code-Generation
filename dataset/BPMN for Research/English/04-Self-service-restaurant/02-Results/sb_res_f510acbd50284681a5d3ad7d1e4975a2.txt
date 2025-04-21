@@ -1,0 +1,9 @@
+自然语言需求描述如下：
+
+当Guest感到饥饿时，他们会进入餐厅并选择一道菜品。选择完成后，Guest需要支付订单。支付完成后，Employee会通知Chef有新的订单需要处理。同时，Employee会将订单信息记录到POS系统中。
+
+Chef收到订单后，开始准备餐点。餐点准备完成后，Chef会通知Employee。Employee在收到通知后，会触发一个 buzzer，提示Guest餐点已经准备好。Guest听到 buzzer 后，可以前往服务窗口取餐。
+
+如果Guest在支付完成后5分钟内没有听到 buzzer，Employee会主动联系Guest，确认是否需要继续等待或重新下单。当Guest取到餐点后，就可以开始用餐了。
+
+整个流程的关键在于各个角色之间的协作和信息传递，确保餐点能够及时准确地送达Guest手中。

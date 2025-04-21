@@ -1,0 +1,14 @@
+该业务流程描述了一家名为fs kleiner Händler Computerware的公司进行货物发送的过程，主要参与者包括fs Sekretariat（秘书处）、fs Lager（仓库）和fs Logistikleiter（物流经理），具体步骤如下：
+1. 流程从“fs Ware soll versendet werden”（货物需要被发送）的开始事件启动。
+2. 秘书处执行“fs Versandart festlegen”（确定运输方式）任务。
+3. 之后进入一个排他网关，根据条件分支：
+   - 若为“fs kleine Menge”（小批量），则执行“fs Prüfen, ob Versicherung erforderlich ist”（检查是否需要保险）任务，接着进入一个包含网关，根据条件分支：
+     - 若“fs Versicherung erforderlich”（需要保险），则由物流经理执行“fs Versicherung abschließen”（完成保险）任务，之后与另一分支汇聚到包含网关，再继续后续流程。
+     - 若“fs immer”（总是），则执行“fs Paketschein ausfüllen”（填写包裹单）任务，之后与另一分支汇聚到包含网关，再继续后续流程。
+   - 若为“fs sehr große Menge”（非常大批量），则执行“fs Anfrage an 3 Speditionen”（向三家货运公司询价）任务。
+4. 询价任务完成后，通过并行网关开启三个并行任务，分别为“fs Spedition1 Angebot”（货运公司1报价）、“fs Spedition2 Angebot”（货运公司2报价）和“fs Spedition3 Angebot”（货运公司3报价）。
+5. 这三个并行任务完成后，通过并行网关汇聚，然后执行“fs Angebot auswählen und Auftrag an Spedition”（选择报价并向货运公司下单）任务。
+6. 下单任务完成后，与填写包裹单任务的输出，通过排他网关汇聚，再继续后续流程。
+7. 同时，在确定运输方式后，另一个并行分支是执行“fs Ware verpacken”（包装货物）任务，由仓库负责。
+8. 包装货物任务完成后，与前面的汇聚结果，通过并行网关汇聚。
+9. 最终流程在“fs Ware versandfertig”（货物准备好发送）的结束事件结束。

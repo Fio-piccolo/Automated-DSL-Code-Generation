@@ -1,0 +1,8 @@
+该BPMN流程描述了货物运输准备和发送的业务流程，涉及物流主管、秘书处和仓库工人等角色。流程从准备货物开始，经过多个环节，最终货物准备好发货。具体业务逻辑如下：
+1. **起始环节**：流程从“Ware für Versand vorbereiten”（准备货物以便发货）这一开始事件启动。
+2. **并行任务**：随后进入并行网关，分成两条并行路径。
+    - **路径一：特殊运输相关**
+        - 经过“特殊运输是否必要？”的排他网关，如果判断为“是”（ja），则进入“Angebote einholen”（获取报价）任务，之后依次进行“Angebot auswählen”（选择报价）、“Spediteur beauftragen”（委托运输商）任务。
+        - 如果“特殊运输是否必要？”判断为“否”（nein），则执行“Paketschein ausfüllen”（填写包裹单）任务。之后进入“Versicherung nötig?”（是否需要保险？）的排他网关，如果判断为“是”（ja），则执行“Versicherung abschließen”（完成保险）任务。两条分支最终汇聚到一个排他网关。
+    - **路径二：货物包装相关**：并行执行“Ware verpacken”（包装货物）任务，之后是“Ware zur Abholung bereitstellen”（准备好货物以供取货）任务。
+3. **结束环节**：两条并行路径完成后，通过并行网关汇聚，最终到达“Ware versandfertig”（货物准备好发货）这一结束事件，流程结束。

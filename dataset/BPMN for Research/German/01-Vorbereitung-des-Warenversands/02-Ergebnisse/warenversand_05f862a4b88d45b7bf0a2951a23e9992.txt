@@ -1,0 +1,14 @@
+该业务流程主要涉及货物运输的一系列操作，具体如下：
+1. 流程开始：由开始事件触发流程。
+2. 确定运输负责人：通过名为“wer übernimmt Versand”的任务，确定负责运输的人员。
+3. 判断货物数量：根据“große Menge”的排他网关，判断货物数量是否为大量。
+    - 若是大量：执行“Sonderversand: 3 Angebote einholen”任务，获取3个运输报价。
+    - 若不是大量：执行“normaler Postversand: Paketschein ausfüllen”任务，填写普通邮政包裹单。
+4. 选择运输报价：通过“Angebote auswählen”的排他网关，从获取的报价中进行选择。
+    - 若选择某一报价：根据选择结果，分别执行“Spediteur2 beauftragen”“Spediteur1 beauftragen”或“Spediteur3 beauftragen”任务，委托相应的运输商。
+5. 货物包装与准备：执行“Ware verpacken”任务进行货物包装，以及“Ware bereitstellen”任务准备好货物。
+6. 判断是否需要保险：通过“Versicherung erforderlich?”的排他网关，判断运输是否需要保险。
+    - 若需要保险：执行“Versicherung abschließen”任务购买保险。
+    - 若不需要保险：直接进入后续流程。
+7. 流程汇聚：通过“Versicherung abschließen”任务或不需要保险的情况，流程进入“parallelGateway”进行汇聚。
+8. 流程结束：最终由结束事件结束整个业务流程。

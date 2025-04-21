@@ -1,0 +1,14 @@
+业务需求如下：
+1. 流程以“Ware zu versenden”（待发送货物）事件开始。
+2. 首先执行“Versandart klären”（明确运输方式）任务。
+3. 之后通过排他网关进行分支判断：
+    - 若选择“JA”（是）且有特殊运输需求，执行“Angebote von 3 Spediteuren einholen”（获取3家运输商报价）任务。
+    - 若选择“NEIN”（否），执行“Paketschein ausfüllen”（填写包裹单）任务。
+4. 执行“Ein Angebot auswählen”（选择一个报价）任务。
+5. 执行“Spediteur beauftragen”（委托运输商）任务。
+6. 再次通过排他网关进行分支判断：
+    - 若选择“JA”，执行“Versicherung abschließen”（购买保险）任务。
+    - 之后通过并行网关进行合并，再经过排他网关合并，最后执行“Ware verpacken”（包装货物）任务。
+    - 若选择“NEIN”，直接经过并行网关进行合并，再经过排他网关合并，然后执行“Ware verpacken”（包装货物）任务。
+7. 执行“Zur Abholung bereitstellen”（准备好取件）任务。
+8. 流程以“Warenversand vorbereiten”（准备货物运输）事件结束。

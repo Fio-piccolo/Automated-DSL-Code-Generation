@@ -1,0 +1,7 @@
+业务需求如下：这是一个名为“Regressnahme”的业务流程，主要涉及对退款的审核与处理。流程开始于“Regress prüfen”（检查退款）任务，完成后进入“Regressanspruch?”（是否有退款请求）的排他网关。若判断有退款请求（“Ja”），则执行“Zahlungsaufforderung an VN stellen”（向供应商发出付款要求）任务；若没有（“Nein”），则执行“Vorgang schließen”（结束流程）任务。
+
+发出付款要求后，进入一个基于事件的排他网关，该网关会根据不同条件产生分支。可能会出现“Geld erhalten”（收到款项）、“Wiederspruch des VN”（供应商提出异议）、“Frist abgelaufen”（期限到期）等情况。
+
+若收到款项，执行“Geldeingang verbuchen”（记录款项收入）任务，之后流程可能结束；若供应商提出异议，执行“Wiederspruch prüfen”（审核异议）任务，根据审核结果，若异议合理（“Ja”），可能执行不同后续操作，若不合理（“Nein”），则执行“Abgabe Weitergabe an Inkasso”（移交至收款部门）任务。
+
+整个流程中，不同任务完成后会根据条件导向不同的后续步骤，最终以多个“Vorgang geschlossen”（流程结束）的结束事件来表示流程的终结。

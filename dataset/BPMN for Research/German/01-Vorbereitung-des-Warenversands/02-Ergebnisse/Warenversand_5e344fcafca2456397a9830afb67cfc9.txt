@@ -1,0 +1,7 @@
+流程开始于“Versand notwendig”（发货必要）。然后流程并行执行三个任务：“Angebot 1 einholen”（获取报价1）、“Angebot 2 einholen”（获取报价2）、“Angebot 3 einholen”（获取报价3）。这三个任务完成后，流程汇聚到“Angebote vergleichen”（比较报价）任务。比较报价后，执行“Spedition beauftragen”（委托运输）任务。
+
+流程还并行执行“Versandart festlegen”（确定运输方式）和“Versicherung erforderlich”（需要保险）任务。“Versandart festlegen”任务后，根据条件判断（“Sonderversand?”特殊运输），如果是“Ja”（是），流程回到并行网关重新执行获取报价任务；如果是“Nein”（否），执行“Paketschein ausfüllen”（填写包裹单）任务，然后根据“Versichter versenden?”（发送给保险公司）的判断，如果是“Ja”（是），执行“Versicherung abschließen”（签订保险）任务，否则直接进入后续流程。
+
+“Versicherung erforderlich”任务后，根据条件判断，如果需要保险，执行“Versicherung abschließen”任务，否则直接进入后续流程。运输委托和保险相关流程完成后，流程汇聚，然后执行“Waren verpacken”（包装货物）任务。
+
+最后，流程并行执行“Waren verpacken”和“Ware bereitstellen”（准备货物）任务，完成后流程结束于“Ware versandfertig”（货物准备发货）。

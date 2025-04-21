@@ -1,0 +1,1 @@
+流程从"Bestellung erhalten"开始，接着进入一个排他网关。根据条件不同，流程可能进入"Ware verpacken"任务，或者进入"Versandart klären"任务。如果进入"Versandart klären"任务，完成后会进入一个名为"Sonderversand"的排他网关。如果满足某个条件（标记为"Ja?"），流程进入一个未命名的任务，否则进入一个包含网关。在包含网关处分出两条路径，一条路径通向"Paketschein ausfüllen"任务，另一条路径通向"Versicherung abschließen"任务。"Paketschein ausfüllen"任务完成后，流程进入一个包含网关，等待另一条路径的"Versicherung abschließen"任务完成。最后，两条路径在另一个排他网关汇合。

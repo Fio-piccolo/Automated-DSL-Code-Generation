@@ -1,0 +1,12 @@
+业务需求如下：
+1. 当事件“Fall wird gemeldet”触发时，进入流程。
+2. 首先执行“Fall wird geprüft”任务。
+3. 经过“ExclusiveGateway”进行条件判断，有两个分支：
+   - 如果满足某个条件走“Regres möglich”的分支，执行“Zahlungsaufforderung senden”任务，然后进行“Fall auf Wiedervorlage legen”任务，接着通过“EventBasedGateway”根据不同事件进行分流：
+     - 如果接收到“Eingang verzeichnen”事件（通过WebService），执行该任务后进行“Eingang buchen”任务。
+     - 如果接收到“Widerspruch empfangen”事件（通过WebService），执行“Widerspruch prüfen”任务，根据检查结果判断：
+       - 如果“Widerspruch ungerechtfertigt”，执行“Abgabe an Inkasso”任务，然后结束流程为“Vorgang geschlossen”。
+       - 如果“Widerspruch gerechtfertigt”，执行后续特定任务（图中未明确详细描述），之后可能结束流程为“Vorgang offen”。
+     - 如果“Wiedervorlagefrist abgelaufen”事件触发，执行“Abgabe an Inkasso”任务，然后结束流程为“Vorgang geschlossen”。
+   - 如果满足另一个条件走“kein Regress möglich”的分支，直接执行后续特定任务（图中未明确详细描述），之后可能结束流程为“Vorgang offen”。
+4. 在流程中，某些任务完成后会有相应的后续流程推进，如“Fall schliessen”任务完成后进入“Vorgang geschlossen”结束流程。

@@ -1,0 +1,21 @@
+该业务流程起始于“Ware soll versendet werden”（货物应发往何处）事件，之后通过一个并行网关，分为两路流程。一路流程先执行“Ware verpacken”（包装货物）任务，接着经过一系列处理，包括检查是否有大量货物需求，若有则获取多个报价，然后选择最优报价，再委托运输公司并填写包裹单，最后根据是否需要保险进行相应处理，若需要则完成保险手续，最终到达结束事件；另一路流程直接执行“Zur Abholung bereitstellen”（准备好取货）任务，之后同样经过一些与大量货物需求相关的决策和获取报价等步骤，最终也到达结束事件。具体流程如下：
+1. 开始于“Ware soll versendet werden”事件。
+2. 通过并行网关，一路执行：
+    - “Ware verpacken”任务。
+    - 到达“Große Menge?”（大量货物？）排他网关，若选择“ja”（是）：
+        - 经过并行网关，执行“Angebot 1 einholen”（获取报价1）、“Angebot 2 einholen”（获取报价2）、“Angebot 3 einholen”（获取报价3）任务。
+        - 并行网关汇聚后，执行“Günstigstes Angebot auswählen”（选择最优报价）任务。
+        - 执行“Spediteur beauftragen”（委托运输公司）任务。
+        - 执行“Paketschein ausfüllen”（填写包裹单）任务。
+        - 到达“Versicherung nötig?”（需要保险？）排他网关，若选择“ja”（是），执行“Abschluss Versicherung”（完成保险）任务。
+    - 任务与决策节点汇聚后，到达结束事件。
+3. 并行网关的另一路执行：
+    - “Zur Abholung bereitstellen”任务。
+    - 到达“Große Menge?”排他网关，若选择“ja”（是）：
+        - 经过并行网关，执行“Angebot 1 einholen”、“Angebot 2 einholen”、“Angebot 3 einholen”任务。
+        - 并行网关汇聚后，执行“Günstigstes Angebot auswählen”任务。
+        - 执行“Spediteur beauftragen”任务。
+        - 执行“Paketschein ausfüllen”任务。
+        - 到达“Versicherung nötig?”排他网关，若选择“ja”（是），执行“Abschluss Versicherung”任务。
+    - 任务与决策节点汇聚后，到达结束事件。
+4. 整个流程结束于结束事件。

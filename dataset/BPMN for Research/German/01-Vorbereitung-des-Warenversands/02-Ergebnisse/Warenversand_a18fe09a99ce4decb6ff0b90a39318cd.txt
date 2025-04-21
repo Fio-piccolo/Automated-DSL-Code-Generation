@@ -1,0 +1,2 @@
+业务需求如下：
+从起始事件开始，首先进行货物运输的澄清（Warenversand klären）任务，完成后有两个分支，根据特殊运输是否必要（Sonderversand notwendig?）的排他网关决定后续流程。如果不需要特殊运输，并行获取三个运输商的报价（分别为 Angebot bei Spediteur 1 einholen、Angebot bei Spediteur 2 einholen、Angebot bei Spediteur 3 einholen），然后进行包装（Ware verpacken）、准备提货（Ware zur Abholung bereitstellen）等一系列任务，最后结束事件。如果需要特殊运输，也会先获取三个运输商的报价，之后根据保险是否必要（Versicherung erforderlich?）的并行网关进行不同的后续流程，最终也到达结束事件。整个流程由不同部门（如 Sekretariat、Lagerarbeiter、Logistikleiter）的人员参与完成各个任务节点。

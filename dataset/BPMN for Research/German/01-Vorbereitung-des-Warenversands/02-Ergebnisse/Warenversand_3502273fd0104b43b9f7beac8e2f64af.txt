@@ -1,0 +1,7 @@
+该业务流程主要围绕货物运输展开，从货物待运输的通知开始，历经多个环节，包括确定运输负责人、获取运输报价、选择供应商、完成包装并交付货物等步骤，最终完成整个货物运输流程。
+1. **货物待运输通知**：当有货物需要运输时，流程启动，首先进入“Ware soll versendet werden”（货物待运输）的初始状态。
+2. **确定运输负责人**：从该初始状态开始，通过“parallelGateway”（并行网关）进行分支。一路进入“Klärung, wer den Versand übernimmt”（明确谁负责运输）任务，由相关人员确定负责运输的主体；另一路进入“Versicherung abschliessen”（购买保险）任务，判断是否需要购买保险。
+3. **获取运输报价**：若货物量较大（“große Menge”），则进入“Einholen von Angeboten bei drei Speditionen”（向三家货运公司获取报价）任务，向三家货运公司获取运输报价。
+4. **选择供应商**：获取报价后，进行“Auswahl eines Angebotes”（选择一个报价），从多家报价中选择合适的货运公司。之后根据选择结果，分别向不同的货运公司发送委托，即“Beauftragung Spediteur 1”（委托货运公司1）、“Beauftragung Spediteur 2”（委托货运公司2）、“Beauftragung Spediteur 3”（委托货运公司3）。
+5. **判断保险需求**：完成保险相关操作后，进入“Versicherung erforderlich?”（是否需要保险）的判断环节。若需要保险，则回到“Versicherung abschliessen”任务；若不需要，则流程继续。
+6. **完成包装并交付货物**：无论是否需要保险，之后都要完成“Ausfüllen des standardisierten Paketscheins für Postversand”（填写标准化邮政运输包裹单）任务。完成该任务后，再次进行判断，如果货物量小（“kleine Menge”），则直接进入“Ware verpacken”（包装货物）任务；若货物量大，则先进入相关采购任务（具体未明确说明），之后再进行“Ware verpacken”任务。包装好货物后，将货物交付给货运公司，完成“Ware zur Abholung bereitgestellt”（准备好货物以供取货）任务，最终结束整个流程。

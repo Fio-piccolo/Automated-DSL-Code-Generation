@@ -1,0 +1,6 @@
+业务需求如下：
+首先有一个名为“Computerhandel”的协作流程，包含“Sekretariat”“Lagerarbeiter”“Logistiker”三条业务线。
+从“startEvent”开始，先进行“Größe des Paketes ermitteln”任务，确定包裹尺寸后进入“ExclusiveGateway”判断是否需要特殊运输，若需要则进入相应流程，若不需要则进入下一步。
+接着进行“Angebote einholen”任务获取报价，然后选择一个报价进行“Ein Angebot auswählen”任务，之后委托快递进行“Spediteur beauftragen”任务，同时根据是否需要保险进入不同的“ExclusiveGateway”判断流程，若需要保险则进行“Versicherung abschließen”任务，若不需要则进入下一步。
+之后进行“Paketschein ausfüllen”任务填写包裹单，再根据是否需要保险进入不同的“ExclusiveGateway”判断流程，若需要保险则进行相应处理，若不需要则进入下一步。
+接着“Ware verpacken”任务进行包装，然后“Ware zur Abholung bereitstellen”任务准备好待取货物，最后到达“endEvent”结束流程。整个流程中各个任务和网关之间通过序列流进行连接和流转。

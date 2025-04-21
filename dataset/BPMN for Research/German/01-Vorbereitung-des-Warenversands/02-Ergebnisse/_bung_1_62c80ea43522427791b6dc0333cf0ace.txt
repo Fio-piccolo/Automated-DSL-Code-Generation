@@ -1,0 +1,7 @@
+当货物需要运输时，流程开始。物流主管所在的物流部门和秘书处、货物工人所在的部门协作处理。
+
+首先，货物需要运输的事件触发流程。然后并行网关分出两条路径：一条是秘书处的“Versand klären”（处理运输）任务；另一条是货物工人的“Ware verpacken”（包装货物）任务。
+
+在秘书处路径：“Versand klären”完成后，通过排他网关，若为“kleine Menge”（小批量），则进行“standarisierten Paketschein ausfüllen”（填写标准包裹单），接着“Bestimmung der Versicherung”（确定保险），再经排他网关，若“Versicherung notwendig”（需要保险），物流主管进行“Versicherung abschließen”（签订保险），完成后与若“keine Versicherung”（无需保险）的路径在排他网关汇合；若为“Sonderversand”（特殊运输），则通过并行网关同时进行“Angebot 1 einholen”（获取报价1）、“Angebot 2 einholen”（获取报价2）、“Angebot 3 einholen”（获取报价3），完成后在并行网关汇合，然后“Bestes Angebot beauftragen”（委托最佳报价），完成后与保险相关路径在排他网关汇合。
+
+货物工人包装货物完成后，与秘书处相关路径在并行网关汇合，然后货物工人进行“Ware zur Abholung bereitstellen”（准备货物待取），最后流程结束。

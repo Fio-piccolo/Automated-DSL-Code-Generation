@@ -1,0 +1,23 @@
+该业务流程围绕货物运输展开，起始于一个开始事件。首先进行运输方式澄清，接着依据货物数量判断是否为大批量运输。若是，向三家货运代理商获取报价；若否，则直接进行货物包装等后续操作。获取报价后，从三家代理商的报价中进行选择，选定后委托相应货运代理商，随后填充包裹单。之后判断是否需要保险，若需要则购买保险，之后进行货物包装、准备交付、完成邮寄等一系列操作，最终以结束事件告终。具体流程如下：
+1. **开始**：流程从一个开始事件启动。
+2. **运输方式澄清**：执行名为“Klärung Versandweg”的任务，以明确运输方式。
+3. **判断是否大批量运输**：通过“Versand großer Mengen?”的排他网关，根据货物数量情况进行分支。
+    - **若是大批量运输**：
+        - 执行“Angebotseinholung bei drei Spediteuren”任务，向三家货运代理商获取报价。
+        - 并行执行“Einholung Angebot Spediteur 1”“Einholung Angebot Spediteur 2”“Einholung Angebot Spediteur 3”三个任务，分别从三家代理商获取报价。
+        - 完成报价获取后，通过并行网关汇聚。
+        - 执行“Angebots-auswahl”任务，从三家代理商的报价中进行选择。
+        - 执行“Beauftragung Spediteur”任务，委托选定的货运代理商。
+    - **若不是大批量运输**：执行“Ware verpacken”任务，对货物进行包装。
+4. **填充包裹单**：执行“Ausfüllen Paketschein”任务，填充包裹单。
+5. **判断是否需要保险**：通过“Versicherung erforderlich?”的排他网关，判断是否需要保险。
+    - **若是**：执行“Versicherung abschließen”任务，购买保险。
+    - **若否**：直接进入后续流程。
+6. **后续流程**：
+    - 执行“Ware verpacken”任务，对货物进行包装（此步骤在非大批量运输时已执行，此处可能是重复确认或补充操作）。
+    - 执行“Zur Abholung bereitstellen”任务，准备好货物以便取件。
+    - 执行“Postversand durchführen”任务，完成邮寄。
+    - 通过“Postversand notwendig?”的排他网关，判断是否需要邮寄。
+        - **若是**：执行“Postversand durchführen”任务，完成邮寄。
+        - **若否**：直接进入后续流程。
+7. **结束**：流程以一个结束事件结束。

@@ -1,0 +1,7 @@
+业务逻辑如下：
+银行前端（Banking Frontend）发起评分请求，触发流程开始。请求经过一系列节点，首先到达“request scoring”任务（sid-CAD324D6-7940-4DB6-9327-2631065C1468），完成此任务后进入事件网关（sid-D3DCB60D-80FC-4AE3-99FE-52FCDF546C67）。事件网关根据条件进行分支，一部分流程进入“Scoring received”中间捕获事件（sid-2C19F57C-FDF3-4D87-9989-75BA2EC0A926），另一部分流程继续。
+在“Scoring received”事件后，到达“Present Scoring results to Frontend”任务（sid-528B978A-2A57-4040-BC22-A120BD8F47A2），此任务有两个输入流，分别来自不同的路径。完成该任务后，进入“Scoring request handled”结束事件（sid-7D55CB38-425F-47D4-91DD-2B1DD0CBB187），表示评分请求处理完毕。
+
+同时，信用保护机构（Scoring (Credit Protection Agency)）也发起评分请求，其流程开始于“Scoring needed”开始事件（sid-3494A368-0646-4BAD-B5A6-5D73C8AA3CD8），经过“execute scoring level 1”任务（sid-E6A6E06A-C7BB-445D-BD1E-E807775D27C8）、排他网关（sid-1FB3A4E6-3FED-4AD4-885B-FC80815DC6BD）等节点，根据不同条件进行分支，最终也到达“Scoring request handled”结束事件（sid-C5E2FD3E-8265-4AB8-AD04-0822F1DF7950）。
+
+整个流程中，存在多个中间捕获事件用于处理不同阶段的消息和事件，各个任务之间通过序列流连接，形成了一个复杂的业务流程。

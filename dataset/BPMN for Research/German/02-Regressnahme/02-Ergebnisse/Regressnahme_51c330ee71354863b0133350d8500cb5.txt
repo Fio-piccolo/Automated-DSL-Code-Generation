@@ -1,0 +1,22 @@
+业务需求如下：
+1. 当“Regressoption wird gemeldet”（退回选项被报告）事件触发后，流程开始。
+2. 首先执行“Fall prüfen”（审查案例）任务。
+3. 完成审查后，进入“Regressnahme”（退回）排他网关，根据条件可能会有不同的流向：
+    - 如果满足某种条件，流程会走向“Vorgang schließen”（完成流程）任务。
+    - 如果不满足该条件，会走向“Zahlungsaufforderung senden”（发送付款请求）任务。
+4. “Zahlungsaufforderung senden”任务执行后，有多个流向：
+    - 其中一个流向会进入“Vorgang weiterleiten”（继续流程）任务。
+    - 另外几个流向会进入一个未明确标识的排他网关（“sid-768C881B-8A89-4B78-B5C0-D52F6DB5019C”）。
+5. “Vorgang weiterleiten”任务执行后，会根据条件进入不同的后续任务或网关：
+    - 如果满足特定条件，流程会走向“Wiedervorlagefrist verstrichen”（重新提交期限过期）中间捕获事件。
+    - 如果不满足该条件，会走向“VN widerspricht”（客户反对）中间捕获事件。
+6. “Wiedervorlagefrist verstrichen”中间捕获事件触发后，执行“Vorgang weiterleiten”任务。
+7. “VN widerspricht”中间捕获事件触发后，执行“Widerspruch prüfen”（检查反对意见）任务。
+8. “Widerspruch prüfen”任务执行后，进入“Widerspruch gerechtfertigt?”（反对意见是否合理？）排他网关，根据条件有两个流向：
+    - 如果反对意见合理，流程会走向“Vorgang schließen”任务。
+    - 如果反对意见不合理，流程会走向“Vorgang weiterleiten”任务。
+9. 当“Vorgang schließen”任务执行完成后，流程到达“Vorgang beendet”（流程结束）结束事件，流程结束。
+10. 关于“VN zahlt”（客户付款）和“Zahlungseingang buchen”（记录付款到账）任务，在整个流程中，当客户付款并完成记录付款到账的操作后，会将相关信息反馈到流程中继续后续流程。
+11. 在“Regressnahme”排他网关中，如果选择“Keine Regressnahme”（无退回），流程会直接走向“Vorgang schließen”任务。
+12. 整个流程中涉及到不同的角色，如“Sachbearbeiter”（工作人员）和“Versichnerungsnehmer”（投保人），他们在各自的工作区域（泳道）内参与流程。
+13. 系统通过一系列任务、网关和事件的组合，实现对退回选项的处理、案例审查、付款请求、流程推进以及对客户反对意见的处理等业务逻辑，最终完成整个业务流程并结束。

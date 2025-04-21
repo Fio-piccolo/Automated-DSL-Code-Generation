@@ -1,0 +1,11 @@
+业务需求如下：
+1. 流程开始于“Mögliche Regressnahme”（可能的退款）事件。
+2. 首先执行“Regress prüfen”（检查退款）任务。
+3. 之后通过一个排他网关进行分支，如果条件满足（“Ja”，是），则执行“Zahlungsaufforderung senden”（发送付款请求）任务；如果不满足（“Nein”，否），则跳过该任务。
+4. 当收到“Zahlung eingegangen”（付款已收到）事件后，执行“Zahlung verbuchen”（记录付款）任务。
+5. 在流程中，若出现“Widerspruch”（异议），则执行“Widerspruch prüfen”（检查异议）任务。
+6. 若“Frisst verlaufen”（期限已过），则根据后续逻辑进行处理。
+7. 流程中存在多个排他网关用于条件判断和流程分支。
+8. 执行“Abgabe an Inkasso-Dienstleister”（提交给催款服务提供商）任务。
+9. 执行“Auf Wiedervorlage setzen”（重新提交）任务。
+10. 最后执行“Vorgang schließen”（完成流程）任务，流程结束于“Vorgang abgeschlossen”（流程已完成）事件；若流程未完成，则结束于“Vorgang offen”（流程开放）事件。

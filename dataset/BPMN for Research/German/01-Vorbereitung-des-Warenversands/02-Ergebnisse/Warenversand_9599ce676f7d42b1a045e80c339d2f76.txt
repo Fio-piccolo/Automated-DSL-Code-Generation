@@ -1,0 +1,14 @@
+业务需求如下：
+1. 流程从“Ware zum Versand”（待发货商品）开始事件启动。
+2. 然后进入“Angebote auswählen”（选择报价）任务。
+3. 接着来到“Bedingung 1: Menge klein? Bedingung 2: Menge gross?”（条件1：数量小？条件2：数量大？）排他网关，根据条件进行分流。
+    - 如果满足其中一个条件，流程继续。
+4. 之后到达并行网关，并行执行以下操作：
+    - 一条分支经过“Angebote einholen”（获取报价）任务，然后是“Spediteur auswählen”（选择运输商）任务。
+    - 另一条分支经过“verpacken”（包装）任务。
+    - 还有可能根据“Versicherung?”（保险？）排他网关的条件决定是否执行“Versicherung abschliessen”（完成保险）任务。
+5. 上述并行任务都完成后，在另一个并行网关汇合。
+6. 接着执行“Abholung”（提货）任务。
+7. 最后流程在结束事件结束。
+
+整个流程涉及不同的角色或部门，包括“Sekretariat”（秘书处）、“Logistikleiter”（物流主管）、“Post”（邮局）、“Spediteur”（运输商）、“Lagerarbeiter”（仓库工人）等，他们分别负责流程中不同的任务。

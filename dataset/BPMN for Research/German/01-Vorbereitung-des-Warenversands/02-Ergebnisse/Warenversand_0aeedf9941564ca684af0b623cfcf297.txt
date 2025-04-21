@@ -1,0 +1,10 @@
+该业务流程是关于特殊货物运输的流程，主要涉及发货过程中的多个环节，由不同人员协作完成。
+1. **流程开始**：以“Start Sonderversand”作为开始事件，标志着特殊货物运输流程的启动。
+2. **选择托运人**：“Spediteur aussuchen”任务由“Sekretariat”（秘书处）负责执行，即从众多托运人中挑选合适的托运人。
+3. **委托托运人**：“beauftragt Spediteur”任务同样由“Sekretariat”执行，代表公司与选定的托运人进行委托沟通，明确运输任务和要求。
+4. **填写标准包裹单**：“stand. Paketschein ausfüllen”任务由“Lagerarbeiter”（仓库工人）完成，根据货物信息和运输要求，填写标准的包裹单，确保包裹信息准确完整。
+5. **检查货物数量**：这里存在一个“ExclusiveGateway”（排他网关），用于判断货物数量。若货物数量多（“grosse Menge”），则进入“Spediteur aussuchen”任务，继续后续流程；若货物数量少（“kleine Menge”），则进入“stand. Paketschein ausfüllen”任务，仓库工人填写包裹单。
+6. **并行处理**：流程通过“ParallelGateway”（并行网关）进行任务的并行处理。从开始事件出发，并行执行“Ware verpacken”（由“Lagerarbeiter”负责，对货物进行包装）和“Versandart klären”（由“Sekretariat”负责，明确运输方式）两个任务。
+7. **选择保险**：完成包装和明确运输方式后，进入“inclusiveGateway”（包含网关）。在此处，根据不同条件进行分支选择。如果选择了某种保险方式，进入“Abschluss Versicherung”（由“Logistikleiter”负责，完成保险手续）任务；如果未选择该保险方式，则可能直接进入后续流程。
+8. **货物准备好取货**：经过一系列操作后，“Ware zur Abholung bereit”任务由“Lagerarbeiter”执行，意味着货物已准备好，可供托运人取货。
+9. **流程结束**：以“结束事件”作为整个流程的终点，标志着特殊货物运输流程的完成。

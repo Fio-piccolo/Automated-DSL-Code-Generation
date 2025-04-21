@@ -1,0 +1,7 @@
+The process involves three pools: credit scoring frontend (bank) (collapsed), credit scoring (bank) (expanded), and scoring service (credit protection agency, expanded).
+
+When a sales clerk requests a credit score via the bank's frontend, the credit scoring (bank) process starts by sending a scoring request to the scoring service. The scoring service immediately performs a level 1 quick scoring. If the score is available (determined by an exclusive gateway), it sends the result back to the bank process. The bank then presents the result to the frontend clerk. 
+
+If the level 1 score is not available, the scoring service reports a delay to the bank process and initiates level 2 scoring (which may take minutes). Upon receiving the delay notification, the bank process displays a message to the clerk to check later. Once the level 2 score is ready, the scoring service sends the result to the bank process, which then shows it at the frontend. 
+
+Message flows include the initial request from the bank to the agency, immediate score results, delay notifications, and final score results after level 2 processing. The bank process uses an event-based gateway to wait for either the immediate score or delay notification, while the agency uses an exclusive gateway to decide between immediate result or level 2 processing based on score availability.

@@ -1,0 +1,19 @@
+### 业务流程描述
+
+#### 银行前端（Banking Frontend）
+1. 银行前端收到评分请求（Scoring Request received），然后向“Scoring (Credit Agency)”发送评分请求消息。
+
+#### 评分（Credit Agency）流程（Scoring (Credit Agency)）
+1. 接收到评分请求（Scoring Request received）后，执行“Do first quick scoring (Level 1)”任务。
+2. 根据“Long Time..?”排他网关的判断结果：
+   - 如果结果为“否”，则发送“Immediate Result”消息。
+   - 如果结果为“是”，则执行“Inform the banking process of the delay”任务，并发送“Send delay reason signal”消息。
+3. 发送“Send Result (Level 2)”消息，将评分结果发送给银行评分流程。
+
+#### 评分（银行）流程（Scoring (Bank)）
+1. 收到来自银行前端的评分请求（Scoring Request received）后，执行“Send a Scoring Request”任务。
+2. 等待“Immediate result received”消息。
+   - 如果接收到即时结果，根据“Immediate Result Received..?”排他网关的判断结果：
+     - 如果结果为“是”，则发送“Send to Frontend”消息。
+     - 如果结果为“否”，则等待“Receive Result (Level 2)”消息。
+   - 收到“Receive Result (Level 2)”消息后，发送“Send to Frontend”消息。

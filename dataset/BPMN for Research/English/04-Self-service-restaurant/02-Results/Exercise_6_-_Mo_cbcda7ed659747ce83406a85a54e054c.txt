@@ -1,0 +1,22 @@
+该BPMN流程展示了餐厅中顾客、员工和厨师之间的协作过程。以下是详细的业务逻辑描述：
+
+1. **顾客流程**：
+   - 顾客感到饥饿（Feels Hungry），进入餐厅（Enters Restaurant）。
+   - 顾客选择餐品（Chooses Meal），等待叫号（Their Turn Arrives）。
+   - 顾客下单（Place Order），支付餐费（Pays for Food）。
+   - 顾客接受 buzzer（Accepts Buzzer），等待 buzzer 响起（Wait for Employee）。
+   - 顾客听到 buzzer 响起后，前往服务窗口（Goes to Service Window），返回餐桌（Return to Table），开始用餐（Eat）。
+
+2. **员工流程**：
+   - 员工接收订单（Receive Order），将订单输入 POS 系统（Enter Order in POS）。
+   - 员工收款（Collects Money），设置 buzzer（Set up Buzzer）。
+   - 员工将 buzzer 交给顾客（Give Buzzer to Customer），通知厨师（Informs Chef）。
+   - 员工等待订单（Waits for Order），触发 buzzer（Trigger Buzzer）。
+   - 员工在 5 分钟后（5 Minutes），呼叫顾客（Call for Customer）。
+   - 员工在顾客到达后（Customer Arrives），提供食物（Tender Food），结束顾客交易（End Customer Transaction）。
+
+3. **厨师流程**：
+   - 厨师接收订单（Receive Order），准备餐品（Prepares Meal）。
+   - 厨师将餐品放入服务窗口（Place meal in service hatch），通知员工（Informs Employee）。
+
+整个流程展示了顾客在餐厅用餐的完整过程，包括点餐、支付、等待和用餐等环节。员工在其中起到了协调和服务的作用，而厨师则负责准备餐品。

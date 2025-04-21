@@ -1,0 +1,10 @@
+业务需求如下：
+首先有一个名为“Warenversand”的协作流程，包含“Logistikleiter”“Sekretariat”“Lagerarbeiter”三个参与者。
+“Sekretariat”参与者从“Ware soll versendet werden”的开始事件出发，通过并行网关“sid-A7F333FD-083C-46A3-90F0-33C3E760A0AB”分为两条路径，一条路径到“Logistikleiter”参与者的“Versicherung abschliessen”任务，另一条路径到“Lagerarbeiter”参与者的“Ware verpacken”任务。
+“Lagerarbeiter”参与者完成“Ware verpacken”任务后，通过序列流到“Ware bereitstellen”任务，再通过序列流到并行网关“sid-46D3CA30-6D5D-4ED8-9E11-236445E618C8”。
+并行网关“sid-46D3CA30-6D5D-4ED8-9E11-236445E618C8”汇聚后通过序列流到“Ware versenden”任务，完成该任务后通过序列流到结束事件“”。
+在“Lagerarbeiter”参与者的“Ware verpacken”任务之前，“Lagerarbeiter”参与者从并行网关“sid-A7F333FD-083C-46A3-90F0-33C3E760A0AB”出发的另一条路径到“Logistikleiter”参与者的“Angebote einholen”任务，完成该任务后通过中间抛出事件“Angebote eingetroffen”到“Logistikleiter”参与者的“Angebot auswählen”任务，完成该任务后通过序列流到排他网关“sid-C878A659-C964-47DB-8594-917DE3ED2396”。
+排他网关“sid-C878A659-C964-47DB-8594-917DE3ED2396”汇聚后通过序列流到排他网关“sid-53B50FC6-B594-44AD-874D-2DE0A0DEF8D7”。
+排他网关“sid-53B50FC6-B594-44AD-874D-2DE0A0DEF8D7”根据条件判断是否需要保险，若需要保险则通过序列流到“Logistikleiter”参与者的“Versicherung abschliessen”任务，若不需要保险则通过序列流到排他网关“sid-FD1645D3-D210-472F-8012-CA1A70F0390D”。
+排他网关“sid-FD1645D3-D210-472F-8012-CA1A70F0390D”汇聚后通过序列流到并行网关“sid-46D3CA30-6D5D-4ED8-9E11-236445E618C8”。
+在判断是否需要保险的过程中，还有一个排他网关“sid-648574E7-087B-4437-9890-9DFFE844254E”，根据条件判断是否为特殊配送，若为特殊配送则通过不同的序列流到不同的任务，若不是特殊配送则也通过序列流到后续流程。整个流程围绕货物配送的各个环节展开，包括保险办理、包裹填写、获取报价、选择报价等。

@@ -1,0 +1,11 @@
+这是一个银行相关的业务流程，涉及银行前端（Banking Front end）、银行评分（Bank Scoring）和信用机构评分（Credit Agency Scoring）三个参与者。
+
+流程开始于银行前端的起始事件（startEvent），随后进入“Enter Customer detail”任务（task），在此任务中输入客户详细信息。接着，流程到达事件基于网关（eventBasedGateway），根据不同的条件进行分支。
+
+其中一个分支会触发中间捕获事件（intermediateCatchEvent）“Message Received”，然后进入“Level 1 Message Displayed”任务（task）显示一级消息。之后，流程继续到结束事件（endEvent）。
+
+另一个分支会先到达“Delay Message Displayed”任务（task）延迟消息显示，再经过一系列中间捕获事件和任务的交互，最终也到达结束事件。
+
+银行评分参与者也有类似的流程，从起始事件开始，经过“Check Credit”任务等，通过事件基于网关进行分支，与其他参与者的流程相互关联和交互。
+
+信用机构评分参与者同样从起始事件开始，经过“Level 1 Scoring”等任务，通过事件基于网关进行分支，与其他参与者的流程协同工作。整个流程涉及多个参与者之间的信息传递和任务执行，以完成银行相关的业务流程。

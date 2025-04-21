@@ -1,0 +1,13 @@
+该业务流程主要围绕货物运输展开，涵盖了从货物准备到交付的一系列环节。
+1. 流程起始于“Ware soll versendet werden”事件，触发“Prüfung Versandmenge”任务。
+2. 执行“Prüfung Versandmenge”任务后，进入“Sonderversand”独家网关进行分支判断。
+    - 若条件为“nein”，则流程走向“Prüfung Versicherungsbedarf”任务。
+    - 若条件为“ja”，则会并行执行“Einholung Angebote”任务和“Ausfüllen Paketschein”任务。
+3. “Prüfung Versicherungsbedarf”任务完成后，进入“Abschluss Versicherung”任务。
+4. “Abschluss Versicherung”任务结束后，通过“Exclusive Gateway”进行汇聚判断。
+    - 若两条路径都到达，则流程进入“Entscheidung und Beauftragung Spedition”任务。
+    - 若有一条路径未到达，则流程进入“Ware verpacken”任务。
+5. “Ware verpacken”任务完成后，进入“Ware bestellt bereitstellen”任务。
+6. 最后，流程以“Ware wurde versendet”事件结束。
+
+在这个过程中，“Logistik”、“Sekretariat”和“Lager”三个角色参与其中，各自负责不同阶段的工作。通过一系列任务和决策节点，确保货物能够顺利、准确地交付。

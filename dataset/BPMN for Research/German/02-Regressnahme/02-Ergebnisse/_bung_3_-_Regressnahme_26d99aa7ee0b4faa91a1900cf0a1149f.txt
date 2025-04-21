@@ -1,0 +1,16 @@
+业务需求如下：
+1. 流程开始于“Regress möglich”事件。
+2. 首先执行“Fallprüfung”任务。
+3. 执行完“Fallprüfung”任务后，通过“Regress möglich”排他网关进行判断。
+    - 如果条件为“ja”，则执行“Zahlungsanforderung schicken”任务。
+    - 执行完“Zahlungsanforderung schicken”任务后，进行“Vorgang auf WV setzen”任务。
+    - 执行“Vorgang auf WV setzen”任务后，通过事件驱动网关进行判断。
+        - 若发生“WV Frist verstrichen”事件，则执行“Geld verbuchen”任务。
+        - 若检测到“Zahlungseingang festgestellt”事件，则执行“Geld verbuchen”任务。
+        - 若收到“Widerspruch eingegangen”消息，则执行“Widerspruch prüfen”任务。
+    - 执行“Widerspruch prüfen”任务后，通过“Widerspruch gerechtfertigt”排他网关进行判断。
+        - 如果条件为“ja”，则执行“Vorgang schließen”任务。
+        - 若条件不满足，则执行“Vorgang an Inkassodienstleister übergeben”任务，并发送“Nachricht an Inkassodienstleister”消息。
+4. 执行“Geld verbuchen”任务后，通过“Vorgang geschlossen”结束事件结束流程。
+5. 执行“Vorgang schließen”任务后，通过“Vorgang geschlossen”结束事件结束流程。
+6. 执行“Vorgang an Inkassodienstleister übergeben”任务后，发送“Nachricht an Inkassodienstleister”消息，然后通过“Vorgang geschlossen”结束事件结束流程。

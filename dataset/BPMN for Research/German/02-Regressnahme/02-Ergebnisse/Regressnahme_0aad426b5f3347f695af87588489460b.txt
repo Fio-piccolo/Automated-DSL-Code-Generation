@@ -1,0 +1,15 @@
+业务需求如下：
+1. 当“VN wird in Regress genommen”事件触发后，流程开始。
+2. 流程进入“Zahlungsaufforderung kann versandt werden?”的排他网关判断环节。
+    - 如果判断结果为“JA”，则执行“Zahlungs-aufforderung versenden”任务。
+    - 如果判断结果为“NEIN”，则执行“Vorgang schließen”任务。
+3. “Zahlungs-aufforderung versenden”任务完成后，等待“Zahlung erhalten”中间捕获事件。
+    - 若收到“Zahlung erhalten”，则执行“Eingang verbuchen”任务。
+    - 若收到“Widerspruch erhalten”，则跳过“Eingang verbuchen”任务，进入“Widerspruch prüfen”任务。
+4. “Widerspruch prüfen”任务完成后，进入“Widerspruch gerechtfertigt”的排他网关判断环节。
+    - 如果判断结果为“NEIN”，则执行“An Inkasso weitergeben”任务。
+    - 如果判断结果为“JA”，则与“Eingang verbuchen”任务的流程合并，之后执行“Vorgang schließen”任务，最后流程结束。
+5. 在执行“Zahlungs-aufforderung versenden”任务前，会先执行“Fall prüfen”任务，然后根据“Fall prüfen”的结果决定是否执行“Auf Wiedervorlage setzen”任务。
+6. 当满足“Widervorlagefrist ohne Widerspruch oder Geldeingang abgelaufen”中间捕获事件条件时，流程会进入后续处理环节，最终流程结束。
+7. “VN”角色收到“Zahlungsaufforderung an VN”中间捕获事件后，执行“Auf Zahlungsaufforderung reagieren”任务。
+8. “Inkasso”角色等待相关消息，当收到对应消息时，流程继续进行后续未明确描述的操作。

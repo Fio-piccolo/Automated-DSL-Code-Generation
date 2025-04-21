@@ -1,0 +1,19 @@
+在信贷评分系统中，涉及三个主要参与者：信贷评分前端（银行）、信贷评分（银行）和评分服务。
+
+### 信贷评分前端（银行）流程
+1. 首先，信贷评分前端（银行）收到信贷评分请求（由 `scoring request received` 开始事件触发），然后发起请求信贷分数的任务 `request credit score`。
+2. 之后进入 `score received?` 排他网关，根据是否收到分数决定后续流程：
+   - 如果未收到分数，进入 `report delay` 任务，之后到达 `credit score received` 中间捕获事件。
+   - 如果收到分数，直接进入 `score received?` 排他网关的 `yes` 分支。
+3. 在 `credit score received` 中间捕获事件触发后，进入 `score available?` 排他网关，根据结果决定后续流程：
+   - 如果可用，进入 `send credit score` 任务，最后到达 `scoring request handled` 结束事件。
+   - 如果不可用，进入 `score available?` 排他网关的 `no` 分支，同样进入 `send credit score` 任务，最终到达 `scoring request handled` 结束事件。
+
+### 评分服务流程
+1. 评分服务收到评分请求（由 `scoring request received` 开始事件触发），进行 `compute credit score (level 1)` 任务。
+2. 完成后进入 `send result` 任务，之后进入 `score available?` 排他网关，根据是否有分数决定后续流程：
+   - 如果没有分数，进入 `compute credit score (level 2)` 任务，然后将信贷分数发送给 `credit scoring (bank)`（通过 `send credit score` 任务），之后进入 `score available?` 排他网关的 `yes` 分支。
+   - 如果有分数，直接进入 `score available?` 排他网关的 `yes` 分支。
+3. 在 `score available?` 排他网关的 `yes` 分支进入 `score available?` 排他网关，根据结果决定后续流程：
+   - 如果可用，进入结束事件 `scoring request handled`。
+   - 如果不可用，进入 `compute credit score (level 2)` 任务，然后将信贷分数发送给 `credit scoring (bank)`（通过 `send credit score` 任务），之后进入结束事件 `scoring request handled`。

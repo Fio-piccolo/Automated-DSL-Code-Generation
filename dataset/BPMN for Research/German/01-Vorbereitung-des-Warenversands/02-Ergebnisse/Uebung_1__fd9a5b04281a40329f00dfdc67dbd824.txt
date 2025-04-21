@@ -1,0 +1,16 @@
+当需要进行货物运输时，流程如下：
+1. 首先是“Ware soll versendet werden”（货物应被发送）的起始事件。
+2. 接着进入“Klärung der Versandmenge”（澄清运输数量）任务，此任务完成后，会根据数量情况进入不同分支。
+    - 若数量大，则通过“große Versandmenge”（大运输量）流向“Angebot einholen”（获取报价）任务。
+    - 若数量小，则通过“kleine Versandmenge”（小运输量）流向“Packetschein ausfüllen”（填写包裹单）任务。
+3. “Packetschein ausfüllen”任务完成后，接着是“Angebot einholen”任务。
+4. “Angebot einholen”任务完成后，进入并行网关“”，然后分成两个并行任务。
+    - 一个是“Ware verpacken”（包装货物）任务。
+    - 另一个是判断是否需要保险的排他网关“”。
+        - 若需要保险，则通过“Versicherung notwendig”（需要保险）流向“Versicherungs-abschluss”（保险结算）任务。
+        - 若不需要保险，则通过“Keine Versicherung notwendig”（不需要保险）流向“”。
+5. “Ware verpacken”任务完成后，货物进入“Ware bereitstellen”（准备货物）任务。
+6. “Versicherungs-abschluss”任务完成后，进入“”。
+7. “”完成后，货物到达“Ware zur Abholung bereit”（货物准备好取货）的结束事件。
+8. 在整个流程中，会从不同供应商获取报价，即“Angebote empfangen”（接收报价），然后对报价进行评估，即“Angebote auswerten”（评估报价），最后授予订单，即“Auftrag erteilen”（授予订单），之后还会有订单确认，即“Auftrags-bestätigung”（订单确认）。同时，在运输过程中会检查保险需求，即“Versicherungs-bedarf prüfen”（检查保险需求）。 
+9. 该业务流程涉及多个角色，包括秘书处、仓库工人和物流经理，他们在各自的工作区域内协同完成货物运输的相关操作。

@@ -1,0 +1,12 @@
+流程从“Versandauftrag erhalten”（收到发货订单）开始，进入“Logistikleiter”（物流经理）车道执行“Versicherung abschließen”（完成保险）任务。同时，并行进入“Sekretariat”（秘书处）车道和“Lagerarbeiter”（仓库工人）车道。
+
+在“Sekretariat”车道：
+1. 执行“Menge prüfen”（检查数量）任务，然后通过“Menge?”（数量？）排他网关判断。
+   - 若数量为“klein”（小），执行“Paketschein ausfüllen”（填写包裹单）任务，接着执行“Versichungsbedarf prüfen”（检查保险需求）任务，再通过“Versicherung nötig?”（需要保险？）排他网关判断。
+     - 若“NEIN”（否），流程继续；若“JA”（是），执行“Versicherung abschließen”（完成保险）任务，然后与其他路径在“4BF572E6”排他网关汇合。
+   - 若数量为“groß”（大），执行“Spediteure anfragen”（询问快递员）任务，接着执行“Angebot entgegennehmen”（接受报价）任务，再执行“Angebot auswählen”（选择报价）任务，最后执行“Spediteur beauftragen”（委托快递员）任务，然后与其他路径在“3EA77F81”排他网关汇合。
+2. 汇合后与“Lagerarbeiter”车道的任务在“B8361310”并行网关汇合。
+
+在“Lagerarbeiter”车道：
+1. 执行“Ware verpacken”（包装货物）任务，然后与其他路径在“B8361310”并行网关汇合。
+2. 汇合后执行“Ware bereitstellen”（提供货物）任务，最后流程结束于“Versandauftrag bearbeitet”（发货订单处理完成）。

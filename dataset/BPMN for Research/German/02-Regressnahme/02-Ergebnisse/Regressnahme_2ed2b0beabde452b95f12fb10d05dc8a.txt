@@ -1,0 +1,13 @@
+业务需求如下：
+1. 流程从“VN in Regress nehmen”开始。
+2. 接着进行“Fall prüfen”任务。
+3. 然后通过“Regress?”排他网关进行分支判断：
+    - 若条件满足（选择“Ja”路径），则执行“Zahlungsaufforderung schicken”任务。
+    - 若条件不满足（选择“Nein”路径），则流程结束。
+4. 在流程中，可能会捕获到“Wiederspruch”中间捕获事件。
+    - 捕获到后，先执行“Wiederspruch prüfen”任务。
+    - 然后通过“Zahlungsverweigerung gerechtfertigt?”排他网关再次进行分支判断：
+        - 若条件满足（选择“Ja”路径），则流程结束。
+        - 若条件不满足（选择“Nein”路径），则执行“Übergabe Inkassobüro”任务，之后流程结束。
+5. 流程还可能会捕获到“Wiedervorlage 2 Wochen verstrichen”中间捕获事件，捕获到后执行“Auf Wiedervorlage setzen”任务，然后回到流程的某个中间环节继续执行。
+6. 流程也可能会捕获到“Geld eingegangen”中间捕获事件，捕获到后执行“Geldeingang verbuchen”任务，最后流程结束。

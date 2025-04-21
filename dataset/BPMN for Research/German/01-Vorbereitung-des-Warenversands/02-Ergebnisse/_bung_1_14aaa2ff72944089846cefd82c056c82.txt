@@ -1,0 +1,1 @@
+公司的业务流程从“Auftrag”（订单）开始，由“Sekretariat”（秘书处）处理。首先进行“Mengen&#10;prüfen”（数量检查），然后根据检查结果（“große Menge”或“kleine Menge”）分别进行“Angebote einholen”（获取报价）或“Paketschein ausfüllen”（填写包裹单）。获取报价后，进行“Spediteur beauftragen”（委托运输商），填写包裹单后，根据是否需要保险（“mit Versicherung”或“ohne Versicherung”）进行“Versicherung abschließen”（签订保险）或直接继续。运输商委托和保险签订完成后，流程汇合，然后进行“Ware verpacken”（包装货物），最后流程结束。

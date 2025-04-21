@@ -1,0 +1,11 @@
+该BPMN流程描述了货物发送前的一系列准备工作，主要包括包裹单填写、发货确认、选择快递公司、保险办理、货物包装等环节，以下是具体业务逻辑：
+1. **流程开始**：以“Ware zur Versendung（货物待发送）”事件作为起始点，由此产生两条并行分支流程。
+2. **正常发货流程**：
+    - **发货确认**：第一个分支先进入“Kläriung des Versands（发货确认）”任务。
+    - **包裹单填写**：完成发货确认后，若属于小批量货物（“Normalversand（正常发货）”），则进入“Paketschein ausfüllen（填写包裹单）”任务。
+    - **保险办理**：填写包裹单后，若根据检验标准需要办理保险（“Versicherung erforderlich（需要保险）”），则进入“Versicherung abschliessen (Logistikleiter)（办理保险（物流主管））”任务；之后“填写包裹单”任务和“办理保险”任务均指向“Vorbereitungen abgeschlossen（准备工作完成）”任务。
+3. **特殊发货流程**：
+    - **选择快递公司**：发货确认后，若属于大批量货物（“Sonderversand（特殊发货）”），则进入“mindestens 3 Spediteure auswählen（选择至少3家快递公司）”任务，随后进入“Angebote einholen（获取报价）”任务。
+    - **报价查看与快递公司选择**：获取报价后，进行“Angebote sichten und Spediteur auswählen (Attribute unds Auswahlkriterien)（查看报价并选择快递公司（属性和选择标准））”任务，之后进入“Vorbereitungen abgeschlossen（准备工作完成）”任务。
+4. **货物包装流程**：另一条并行分支直接进入“Verpackung der Ware（货物包装）”任务。
+5. **流程汇聚与结束**：“准备工作完成”任务和“货物包装”任务完成后，通过并行网关汇聚，然后流程结束。

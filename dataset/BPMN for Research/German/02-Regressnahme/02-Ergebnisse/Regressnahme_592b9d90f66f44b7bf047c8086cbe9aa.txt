@@ -1,0 +1,12 @@
+业务需求如下：
+1. 流程开始于一个起始事件。
+2. 首先执行“Meldungseingag für Regressforderung”任务。
+3. 接着执行“Ueberprüfung Gültigkeit der Forderung”任务。
+4. 之后通过一个排他网关进行分支。
+   - 如果条件满足，流程会走向“Zahlungsaufforderung an VN verschicken”任务。
+   - 如果另一个条件满足，流程会走向“Versiicherungsnehmer akzeptiert Forderung”任务。
+5. 当执行“Zahlungsaufforderung an VN verschicken”任务后，会经过一个排他网关，然后执行“Zahlungsaufforderung verschickt”中间抛出事件，接着执行“Zahlungsaufforderung erhalten”中间捕获事件，再执行“Zahlung erhalten”任务，最后流程结束。
+6. 当执行“Versiicherungsnehmer akzeptiert Forderung”任务后，会经过一个排他网关。
+   - 如果条件满足，流程会走向“Versicherungsneher bezahlt geforderten Betrag”任务，之后流程结束。
+   - 如果另一个条件满足，流程会走向“Versicjherungs-nehmer widerspricht”任务，然后执行一个中间抛出事件。
+7. 如果在执行过程中需要，还会执行“Regressforderung auf Wiederholvorlage setzen”任务。

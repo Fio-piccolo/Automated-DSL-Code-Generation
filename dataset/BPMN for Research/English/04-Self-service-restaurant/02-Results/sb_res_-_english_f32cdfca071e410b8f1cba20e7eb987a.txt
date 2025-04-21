@@ -1,0 +1,31 @@
+The business process described in the BPMN diagram involves three main participants: Guest, Employee, and Chef. The process outlines the sequence of activities and interactions among these participants in a restaurant setting. Here is the natural language description of the process:
+
+1. **Guest's Process:**
+   - The process starts when the Guest feels hungry.
+   - The Guest enters the restaurant and chooses a dish.
+   - The Guest waits for their turn to place an order.
+   - Once it's their turn, the Guest places the order.
+   - The Guest pays for the meal.
+   - After payment, the Guest receives a buzzer.
+   - The Guest waits until the meal is ready and receives a notification (buzzer).
+   - Upon receiving the meal, the Guest eats and the process ends.
+
+2. **Employee's Process:**
+   - When a new customer places an order, the Employee receives the order.
+   - The Employee enters the order into the POS system.
+   - The Employee collects payment from the Guest.
+   - After payment is collected, the Employee sets up a buzzer for the Guest.
+   - The Employee hands over the buzzer to the Guest and explains its use.
+   - The Employee passes the order to the Chef.
+   - Once the meal is ready, the Chef places it in the service hatch, and the Employee receives this information.
+   - The Employee then sets off the buzzer to notify the Guest that the meal is ready.
+   - If the Guest does not arrive within 5 minutes, the Employee calls the Guest to remind them.
+   - When the Guest arrives at the counter, the Employee hands over the meal.
+
+3. **Chef's Process:**
+   - The Chef receives the order from the Employee.
+   - The Chef prepares the meal.
+   - Once the meal is prepared, the Chef places it in the service hatch.
+   - The meal is then ready to be handed over to the Guest.
+
+The process involves interactions between the Guest, Employee, and Chef, with the Employee acting as an intermediary between the Guest and the Chef. The use of a buzzer system ensures that the Guest is notified when their meal is ready, and the Employee handles the payment and order management. The process ensures that the Guest receives their meal efficiently and enjoys their dining experience.

@@ -1,0 +1,16 @@
+该业务流程围绕计算机发货展开，具体步骤如下：
+1. 发货流程开始，进入“Ware versenden”环节。
+2. 对发货方式进行检查，即执行“Versandart prüfen”任务。
+3. 经过排他网关进行分支判断。
+4. 若有特殊发货需求，则获取报价，执行“Angebote einholen”任务。
+5. 之后通过并行网关进行并发操作。
+   - 并行执行获取不同报价的任务，分别为“Angebot A”“Angebot B”“Angebot C”。
+   - 对获取的报价进行检查，执行“Angebote prüfen”任务。
+   - 根据检查结果委托发货商，执行“Spediteur beauftragen”任务。
+6. 填写包裹单，执行“Paketschein ausfüllen”任务。
+7. 再次经过排他网关进行判断。
+8. 并行网关再次进行并发操作。
+   - 并行执行不同任务，包括购买保险“Versicherung abschliessen”、包装货物“Ware verpacken”、准备货物“Ware bereitstellen”。
+9. 发货流程结束。
+
+整个流程涉及多个角色，包括秘书、发货商、邮政发货部门、仓库工人等，各角色在不同环节协同工作，以完成计算机发货的业务流程。

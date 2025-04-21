@@ -1,0 +1,14 @@
+业务需求如下：
+1. 流程从名为“Meldung Regressmöglichkeit”的开始事件启动。
+2. 启动后执行“Fall prüfen”任务。
+3. 完成“Fall prüfen”任务后，进入“Regress möglich?”的排他网关进行判断。
+    - 如果判断结果为“ja”，则执行“Vorgang auf Wiedervorlage setzen und Zahlungsaufforderung senden”任务，之后进入“Wiedervorlage-Frist abgelaufen”或“VN widerspricht”的中间捕获事件。
+        - 若进入“Wiedervorlage-Frist abgelaufen”，执行“Vorgang auf Wiedervorlage setzen und Zahlungsaufforderung senden”任务后，经过一系列判断和任务执行，最终完成流程。
+        - 若进入“VN widerspricht”，执行“Widerspruch prüfen”任务，再进入“Widerspruch gerechtfertigt?”的排他网关判断。
+            - 若判断结果为“ja”，执行“Inkasso-Dienstleister beauftragen”任务，之后完成流程。
+            - 若判断结果为“nein”，则执行其他相关任务（文档未明确说明）后完成流程。
+    - 如果判断结果为“nein”，执行“Vorgang schließen”任务，然后完成流程。
+4. 在流程中，当接收到“Zahlung eingegangen”的中间捕获事件时，执行“Zahlungseingang verbuchen”任务。
+5. 存在多个排他网关用于流程分支和汇聚的决策判断。
+6. 有多个任务需要依次或根据条件执行，包括任务的启动数量和完成数量要求。
+7. 最终流程在“Vorgang abgeschlossen”的结束事件完成。

@@ -1,0 +1,8 @@
+该业务流程开始于一个开始事件。首先进入一个排他网关，判断是否为特殊运输（Sonderversand）。
+- 如果是特殊运输，进入“Feststellung Versandgröße”任务，之后再次进入一个排他网关，判断后分别进入不同的任务：
+  - 若为“Ja”，进入“Paketschein ausfüllen”任务，再进入一个并行网关，并行执行不同路径。
+  - 若为“NEIN”，进入“Verpackung der Bestellung”任务，之后进入一个并行网关，并行执行不同路径。
+- 如果不是特殊运输，进入一个并行网关“Angebotsanfrage”，并行向三个不同供应商（Lieferant 1、Lieferant 2、Lieferant 3）发送询价请求。各供应商响应后进入一个并行网关汇聚，之后进入“Auswahl Angebot”任务选择供应商。选择后进入一个排他网关判断是否需要保险（Versicherung notwendig?）。
+  - 如果需要保险，进入“Logistikleiter schließt Versicherung ab”任务，再进入一个排他网关汇聚，之后进入后续任务。
+  - 如果不需要保险，直接进入后续任务。
+最后所有流程汇聚到一个结束事件。

@@ -1,0 +1,15 @@
+The requirements are as follows: 
+
+In the Direct Debit Transaction Information (DirectDebitTransactionInformation1), for the Ultimate Creditor Organisation Identification (ultmtCdtr.id.orgId), it can only contain one of the following sub-elements: 
+
+- BIC (Bank Identifier Code) 
+- IBEI (International Business Entity Identifier) 
+- BEI (Business Entity Identifier) 
+- EANGLN (Global Location Number) 
+- USCHU (US DUNS Number) 
+- DUNS (Data Universal Numbering System) 
+- BkPtyId (Bank Party Identifier)
+- TaxIdNb (Tax Identification Number) 
+- PrtryId (Proprietary Identification)
+
+This is according to the row 11 on page 12 of the SEPA B2B Direct Debit C2B Implementation Guidelines Version 1.3.

@@ -1,0 +1,15 @@
+该业务流程描述如下：
+
+1. 流程开始于“Versandauftrag einholen”（获取发货订单）。
+2. 并行网关将流程分为两条路径：
+    - 一条路径进入“wer übernimmt Versand”（谁负责发货）任务。
+    - 另一条路径进入“Ware verpacken”（包装货物）任务。
+3. “wer übernimmt Versand”任务后，进入“Menge abfragen”（询问数量）的排他网关：
+    - 若数量大（“große Menge”），进入“günstigstes Angebot auswählen einholen”（选择最便宜的报价）任务，然后进入“Spediteur beauftragen”（委托运输商）任务。
+    - 若数量小（“kleine Menge”），进入“Postversand”（邮政发货）任务，然后进入“Versicherung notwendig?”（需要保险吗？）任务。
+4. “Versicherung notwendig?”任务后，进入“Versicherung notwendig?”（需要保险吗？）的排他网关：
+    - 若不需要（“nein”），进入“Paketschein ausfüllen”（填写包裹单）任务，然后进入“Versicherung notwendig?”（需要保险吗？）的排他网关。
+    - 若需要（“ja”），进入“Versicherung abschließen”（签订保险）任务。
+5. “Versicherung abschließen”任务后，流程进入并行网关。
+6. “Ware verpacken”任务后，进入“Ware zur Abholung bereitstellen”（准备货物以便取货）任务，然后进入“Versand vorbereiter”（发货准备）的结束事件。
+7. 并行网关合并两条路径后，流程结束。

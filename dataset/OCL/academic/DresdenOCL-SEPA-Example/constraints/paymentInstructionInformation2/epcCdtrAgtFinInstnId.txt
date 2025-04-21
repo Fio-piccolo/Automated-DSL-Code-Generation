@@ -1,0 +1,13 @@
+The requirements are as follows:
+
+The system mandates that for the PaymentInstructionInformation2 context regarding the CreditorAgent (PmtInf cdtrAgt FinInstnId), only the Bank Identifier Codes (BIC) are permitted. This is in line with the SEPA B2B Direct Debit C2B Implementation Guidelines outlined in row 1, page 9.
+
+Particularly, the system checks that the size of the following attributes should be zero i.e., these attributes should not be provided:
+
+1. Clearance system member identification (cdtrAgt.finInstnId.clrSysMmbId)
+2. Name and address (cdtrAgt.finInstnId.nmAndAdr)
+3. Proprietary identification (cdtrAgt.finInstnId.prtryId)
+4. Combined identification (cdtrAgt.finInstnId.cmbndId)
+5. Branch identification (cdtrAgt.brnchId)
+
+So, according to the code, the system validates that no details other than the BIC are allowed for identifying the CreditorAgent.

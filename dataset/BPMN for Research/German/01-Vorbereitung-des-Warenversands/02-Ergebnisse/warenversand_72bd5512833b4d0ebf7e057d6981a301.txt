@@ -1,0 +1,7 @@
+该BPMN流程描述了一个货物运输的业务流程。流程从“Warenversand”（货物运输）开始，然后通过一个并行网关分成两个分支：一个分支是“Menge bestimmen”（确定数量），另一个分支是“Ware verpacken”（包装货物）。
+
+在“Menge bestimmen”分支中，根据数量的大小（kleine Menge或große Menge），流程会进入不同的路径。如果是kleine Menge，流程会经过一个并行网关，然后分为两个路径：一个是“Versicherung abschließen”（购买保险），另一个是“Standardisierten Paketschein ausfüllen”（填写标准包裹单）。如果是große Menge，流程会进入“Angebote einholen”（获取报价），然后根据报价选择不同的货运公司（Spediteur 1、Spediteur 2或Spediteur 3）。
+
+在“Ware verpacken”分支中，包装好的货物会进入“Ware zur Abholung bereitstellen”（准备货物以便取货）。
+
+最后，所有分支的流程会在不同的并行网关和排他网关处汇合，最终到达“Ende”（结束）。

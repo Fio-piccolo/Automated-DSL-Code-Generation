@@ -1,0 +1,8 @@
+该业务流程围绕发货需求展开，从确认发货需求开始，经过一系列任务和决策，最终完成货物的取件准备。具体流程如下：
+1. 当出现“Shipping needed”（发货需求）时，流程启动。
+2. 秘书处首先执行“Request offers”（请求报价）任务。
+3. 完成报价请求后，进行“Select shipping company”（选择运输公司）操作。
+4. 接着根据数量情况进行判断，如果数量多则执行相关操作（此处文档未明确具体操作内容）后回到“Request offers”；数量少则执行“Create package label”（创建包裹标签）任务。
+5. 创建包裹标签后，检查是否需要保险。若需要保险，则执行“Sign insurance”（签署保险）任务；若不需要，则直接进入下一步。
+6. 之后，秘书处执行“Pack goods”（包装货物）任务，物流人员执行“Prepare pick up”（准备取件）任务。
+7. 当“Pack goods”和“Prepare pick up”任务都完成，且满足其他相关条件后，流程到达“Pick up prepared”（取件准备完成）状态，流程结束。

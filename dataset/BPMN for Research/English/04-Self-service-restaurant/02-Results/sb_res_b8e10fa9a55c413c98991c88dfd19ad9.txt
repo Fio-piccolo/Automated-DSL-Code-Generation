@@ -1,0 +1,23 @@
+Guest、Employee和Chef之间的点餐流程如下：
+
+1. **Guest点餐流程：**
+   - Guest开始流程，选择想要的菜品。
+   - 下达订单。
+   - 支付餐费。
+   - 收到 buzzer 通知。
+   - 前往取餐。
+   - 用餐。
+
+2. **Employee处理流程：**
+   - 收到订单，输入POS系统。
+   - 收取餐费。
+   - 设置 buzzer。
+   - 通知Chef开始准备餐点。
+   - 在 buzzer 被触发后，准备餐点。
+   - 将餐点交给Guest。
+
+3. **Chef准备流程：**
+   - 收到订单后，准备餐点。
+   - 完成餐点后，通知Employee。
+
+流程中，Employee会定期检查 buzzer 的状态，确保在 buzzer 被触发后能够及时准备餐点。

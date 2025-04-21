@@ -1,0 +1,11 @@
+该业务流程主要涉及多个任务和决策节点，涵盖了从开始到结束的一系列操作，以完成某项业务。具体如下：
+1. **流程开始**：从起始事件开始。
+2. **数量判断**：通过排他网关判断数量大小，若为小量则执行“Paketschein ausfüllen”任务，若为大量则执行“3 Angebote auswählen”任务。
+3. **相关任务执行**：
+    - 若执行“Paketschein ausfüllen”任务，接着执行“Versicherungsbedarf prüfen”任务。
+    - 若执行“3 Angebote auswählen”任务，接着执行“Angebot auswählen”任务，再执行“Spediteur beauftragen”任务。
+4. **保险决策**：执行“Versicherungsbedarf prüfen”任务后，通过排他网关判断是否需要保险。若不需要，则直接执行后续任务；若需要，则执行“Versicherung abschließen”任务。
+5. **并行处理**：
+    - 从并行网关开始，一路执行“Ware verpacken”任务和“Ware bereitstellen”任务，最终到达结束事件。
+    - 另一路与其他任务汇聚到并行网关，再经过一些处理后到达结束事件。
+6. **流程结束**：到达结束事件，流程结束。

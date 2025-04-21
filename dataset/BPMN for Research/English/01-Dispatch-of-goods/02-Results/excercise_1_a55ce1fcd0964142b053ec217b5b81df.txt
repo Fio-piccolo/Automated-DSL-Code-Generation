@@ -1,0 +1,8 @@
+该业务流程主要围绕货物发货展开，旨在规范货物从准备发出到完成包装及相关操作的一系列流程。
+1. 发货开始：流程始于“ship goods”事件，这是货物发货流程的起点。
+2. 特殊处理判断：货物发货后，进入“special handling?”环节，在此判断是否需要特殊处理。
+3. 处理任务：
+    - 若无需特殊处理，跳过部分任务直接进行包装等后续操作。
+    - 若需要特殊处理，则按顺序执行“write package label”（写包装标签）、“Request offers”（请求报价）、“clarify shipping method”（澄清运输方式）、“select offer from logistic company”（从物流公司选择报价）等任务。
+4. 获取保险：在处理任务的同时或之后，执行“get insurance”（获取保险）任务。
+5. 包装货物：最后执行“package goods”（包装货物）任务，完成整个货物发货流程。

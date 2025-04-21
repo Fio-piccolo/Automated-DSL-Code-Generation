@@ -1,0 +1,10 @@
+该业务流程围绕电脑经销商业务展开，涵盖保险办理、货物运输等环节。具体如下：
+1. 流程起始于“Ware zu versenden”事件，触发后进入“Versandart klären”任务。
+2. 完成“Versandart klären”任务后，进入“grosse oder kleine Mengen?”排他网关。若选择“grosse Mengen”，则跳过“Prüfen ob Versicherung erforderlich”任务，直接进入“Angebot auswählen”任务；若选择“kleine Mengen”，则进入“Prüfen ob Versicherung erforderlich”任务。
+3. 完成“Prüfen ob Versicherung erforderlich”任务后，进入“Muss eine Versicherung abgeschlossen werden?”排他网关。若回答“ja”，则进入“Versicherung abschliessen”任务；若回答“nein”，则直接进入后续流程。
+4. 完成“Versicherung abschliessen”任务后，与“Versandart klären”任务的输出汇聚于“Offerten von 3 Spediteuren einholen”任务。
+5. 完成“Offerten von 3 Spediteuren einholen”任务后，进入“Angebot auswählen”任务。
+6. 完成“Angebot auswählen”任务后，进入“Spediteur beauftragen”任务。
+7. 完成“Spediteur beauftragen”任务后，与“Standarisierter Paketschein ausfüllen”任务的输出汇聚于“Waren verpacken”任务。
+8. 完成“Waren verpacken”任务后，进入“Ware zur Abholung bereitstellen”任务。
+9. 完成“Ware zur Abholung bereitstellen”任务后，流程结束于“Ware ist zur Abholung bereit”事件。

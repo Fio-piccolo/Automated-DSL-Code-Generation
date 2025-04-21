@@ -1,0 +1,5 @@
+该业务流程从“Start”开始，首先通过一个并行网关“Menge?”进行分流。若数量少，执行“Paketschein ausfüllen”任务；若数量大，则执行“Offerten einholen”任务。
+
+完成上述任务后，流程汇聚到一个并行网关，之后进行“Versicherung?”判断。若不需要保险，流程继续；若需要保险，则执行“Versicherung abschliessen”任务，然后流程再次汇聚。
+
+接着进行“Ware verpacken”任务，随后流程汇聚到一个并行网关，完成“Ware zur Abholung bereitstellen”任务后到达结束事件。在这个过程中，还涉及到“Offerte auswählen”和“Auftrag erteilen”等任务，整个流程在不同的任务和网关之间流转，以完成一系列相关业务操作。

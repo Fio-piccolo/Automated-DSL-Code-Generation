@@ -1,0 +1,2 @@
+业务逻辑如下：
+银行前端（Banking Frontend）发起一个评分请求，触发银行（Scoring (Bank)）流程的开始事件“Scoring needed”，然后银行执行“send a request to the Agency”任务，将请求发送给信用保护机构。信用保护机构（Scoring (Credit Protection Agency)）接收到请求后，在其流程中从开始事件开始，先进行“Level 1 First quick scoring”任务，然后通过排他网关进行决策，根据结果分别流向不同的路径。如果结果为“no”，则触发中间抛出事件“delay in results”并将消息传递给银行；如果结果为“yes”，则继续执行后续任务。银行在接收到信用保护机构的消息后，根据消息内容进行相应处理，通过排他网关决策后，分别流向结束事件“no”或“yes”，“no”结束流程，“yes”继续后续处理。整个流程中涉及多个中间事件和网关，用于控制流程的流转和消息的传递。

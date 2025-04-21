@@ -1,0 +1,4 @@
+银行前端（Banking Frontend）与银行评分（Scoring (Bank)）和信用保护机构评分（Scoring (Credit rotection Agency)）进行交互。
+首先，银行前端发起“Receive customer data”的开始事件，将数据传递给银行评分的“Request score”任务。银行评分的该任务完成后，通过事件网关（eventBasedGateway）进行分支，分别到达“Score available”中间捕获事件和“Check Back Later”中间抛出事件等不同节点。
+同时，信用保护机构评分也有其自身的流程，从“Perform Score Check”任务开始，经过多个网关和任务节点，如“Immediate Score available”“Immediate Score not available”等，最终到达结束事件。
+整个流程中，各个节点之间通过消息流（messageFlow）进行数据传递和流程推进，不同的分支和路径代表着不同的业务处理情况，如评分是否可用等，最终根据各种情况到达不同的结束节点。

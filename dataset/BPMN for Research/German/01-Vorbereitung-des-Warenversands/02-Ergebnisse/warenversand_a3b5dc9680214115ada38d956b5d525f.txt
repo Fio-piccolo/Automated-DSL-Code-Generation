@@ -1,0 +1,2 @@
+业务需求如下：
+从开始事件开始，首先进入并行网关，然后分别流向多个任务节点，包括 Sekreteriat erklärt wer den Versand übernimmt（秘书说明谁负责发货）、Paketschein ausfüllen（填写包裹单）、Angebotseinholung（获取报价）等。在特定节点处会有排他网关或包含网关进行决策，如遇到“Is Sonderversand nötig?”（是否需要特殊发货）的排他网关，会根据决策结果流向不同路径；遇到“Versicherung erforderlich?”（是否需要保险）的包含网关，也会根据决策结果流向不同路径。后续流程依次经过各种任务节点和网关的流转，最终到达结束事件。整个流程包含多个并行和顺序的任务执行以及决策判断过程。

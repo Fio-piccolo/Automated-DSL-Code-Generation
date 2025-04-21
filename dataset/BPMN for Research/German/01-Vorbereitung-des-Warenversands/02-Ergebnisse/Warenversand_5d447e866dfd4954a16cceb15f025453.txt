@@ -1,0 +1,14 @@
+1. 流程开始于“Neuer Versand”（新发货）事件。
+2. 事件触发后，流程进入并行网关，同时进行两个分支：
+    - 一个分支由“Sekretariat”（秘书处）执行“Versandart klären”（澄清发货类型）任务。
+    - 另一个分支由“Lagerarbeiter”（仓库工人）执行“Ware verpacken”（包装货物）任务。
+3. “Versandart klären”任务完成后，进入“Sonderversand?”（特殊发货？）排他网关：
+    - 如果是特殊发货（条件“ja”），执行“Angebote einholen”（获取报价）任务，然后是“Angebot auswählen”（选择报价）任务，接着是“Spediteur beauftragen”（委托运输商）任务。
+    - 如果不是特殊发货（条件“nein”），执行“Paketschein ausfüllen”（填写包裹单）任务。
+4. “Paketschein ausfüllen”任务完成后，进入“Versicherung?”（保险？）排他网关：
+    - 如果需要保险（条件“ja”），由“Leiter Logistik”（物流主管）执行“Versicherung abschließen”（办理保险）任务。
+    - 如果不需要保险（条件“nein”），直接进入后续流程。
+5. “Versicherung abschließen”任务完成后，或者“Versicherung?”网关判断不需要保险后，流程进入汇聚网关。
+6. 同时，“Ware verpacken”任务完成后，流程也进入汇聚网关。
+7. 汇聚网关汇合后，执行“Ware bereitstellen”（准备货物）任务。
+8. 最后，流程结束。

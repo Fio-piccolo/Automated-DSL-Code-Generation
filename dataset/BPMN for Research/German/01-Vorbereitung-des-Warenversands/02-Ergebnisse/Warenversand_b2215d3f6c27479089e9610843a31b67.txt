@@ -1,0 +1,2 @@
+业务需求如下：
+从“Start Warenversand”开始事件开始，流程进入“Klärung Versandart”任务，完成后进入并行网关。接着根据“Kleinstauftrag”排他网关的判断结果，若为“ja”则进入“Abschluss Versicherung”任务，完成后进入“D”排他网关；若为“nein”则进入“Einholung Angebote”任务，完成后进入“Angebot auswählen”任务，完成后再进入“Spediteur beauftragen”任务，完成后进入并行网关。在并行网关后，根据“Versicherung erforderlich”排他网关的判断结果，若为“ja”则进入“Abschluss Versicherung”任务，完成后进入“D”排他网关；若为“nein”则进入“Ware verpacken”任务，完成后进入“Ware zur Abholung bereit”任务，完成后进入并行网关，最后到达结束事件。整个流程涉及多个参与者，如“Warenversand”的不同部门“Sekretariat”“Logistikleiter”“Lagerarbeiter”等。

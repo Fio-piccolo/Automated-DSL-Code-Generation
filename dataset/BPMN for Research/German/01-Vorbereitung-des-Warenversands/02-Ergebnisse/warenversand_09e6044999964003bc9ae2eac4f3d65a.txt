@@ -1,0 +1,18 @@
+该业务流程主要围绕货物发货展开，具体步骤如下：
+1. 流程起始于“Ware soll versendet werden”事件，随后流程分为两路并行：
+    - 一路前往“Sekreteriat klärt, Versandweg festlegen”任务，完成后进入“welche Menge? Sonderversand notwendig?”排他网关。
+    - 另一路前往“Angebote einholen”任务，完成后进入“Angebot auswählen”任务，之后也进入“welche Menge? Sonderversand notwendig?”排他网关。
+2. 在“welche Menge? Sonderversand notwendig?”排他网关：
+    - 若货物数量少且无需特殊运输，流程进入“Versicherung notwenid?”排他网关。
+    - 若货物数量多且需要特殊运输，流程进入“Angebot auswählen”任务。
+3. 在“Versicherung notwenid?”排他网关：
+    - 若不需要保险，流程进入“Versícherung abschließen”任务，完成后进入“Spediteur beauftragen”任务，随后进入“Versanddokumente bereitstellen”任务，最后进入“Warenversand”结束事件。
+    - 若需要保险，流程进入“Spediteur beauftragen”任务，后续流程与不需要保险的情况相同。
+4. 在“Angebot auswählen”任务完成后：
+    - 进入“Spediteur beauftragen”任务，之后进入“Versanddokumente bereitstellen”任务，最后进入“Warenversand”结束事件。
+5. 在“Spediteur beauftragen”任务完成后：
+    - 进入“Versanddokumente bereitstellen”任务，最后进入“Warenversand”结束事件。
+6. 在“Versanddokumente bereitstellen”任务完成后：
+    - 进入“Warenversand”结束事件。
+7. 在“Warenversand”结束事件前，有一个“Ware verpacken”任务，该任务在“Ware zur Abholung bereitsgestellt”任务之前。
+8. “Ware zur Abholung bereitsgestellt”任务完成后，进入“Warenversand”结束事件。

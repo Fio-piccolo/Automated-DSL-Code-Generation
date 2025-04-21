@@ -1,0 +1,24 @@
+该业务流程主要围绕货物运输准备及后续流程展开，从货物准备好发货开始，经过一系列检查、任务执行和决策环节，最终完成货物准备好取货的状态，交付给客户或相关方。具体如下：
+1. 当货物准备好发货时，流程启动。
+2. 首先执行“Menge erfassen”（数量记录）任务。
+3. 接着进入“Ist Menge gross?”（数量是否大？）的排他网关进行判断。
+    - 如果数量大，流程按顺序执行以下任务：
+        - “Auswahl Spediteur”（选择承运人）。
+        - “Spediteur 1 Angebot erstellen”（承运人1创建报价）。
+        - “Auftrag an Spediteur 1”（向承运人1下订单）。
+        - “Spediteur 1 Angebot erstellen”（承运人1创建报价）。
+    - 如果数量不大，进入“0C971F40-6113-485B-A855-4EA84B2A709C”并行网关，随后执行：
+        - “Versicherung ausstellen”（出具保险）。
+        - 经过“Versicherung notwendig?”（是否需要保险？）排他网关判断：
+            - 如果需要保险，执行“Versicherung ausstellen”（出具保险）任务，然后进入后续流程。
+            - 如果不需要保险，直接进入后续流程。
+        - “Ware verpacken”（包装货物）。
+        - “Ware bereistellen”（准备货物）。
+4. 之后执行“Standard Paketschein ausfüllen”（填写标准包裹单）任务。
+5. 再经过“Spediteur informieren”（通知承运人）排他网关，根据不同情况执行：
+    - 若选择某个承运人，向其发送订单：
+        - “Auftrag an Spediteur 2”（向承运人2下订单）。
+        - “Auftrag an Spediteur 3”（向承运人3下订单）。
+    - 订单执行后，各承运人反馈订单执行情况。
+6. 所有与承运人相关的任务完成后，流程汇聚。
+7. 执行“Ware bereit zur Abholung”（货物准备好取货）任务，标志着整个业务流程结束。

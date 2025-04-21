@@ -1,0 +1,15 @@
+该BPMN流程主要描述了计算机经销商发货的业务流程，涉及秘书处、快递员、物流主管和仓库工人等多个角色，具体业务逻辑如下：
+1. **流程启动**：由“Ware versenden（发货）”这一开始事件触发流程。
+2. **运输方式决策**：流程进入“Versandart（运输方式）”排他网关，从“normaler Postversand（普通邮政运输）”和“Sonderversand（特殊运输）”两种运输方式中选择其一。
+3. **普通邮政运输流程**
+    - 若选择“normaler Postversand（普通邮政运输）”，则进入“Paketschein ausfüllen（填写包裹单）”任务，由秘书处负责。
+    - 完成包裹单填写后，流程进入“Versicherung notwendig（是否需要保险）”排他网关，判断是否需要保险。
+    - 若不需要保险（选择“Nein（否）”），直接进入汇聚排他网关“Ware bereit（货物准备好）”。
+    - 若需要保险（选择“Ja（是）”），则进入“Versicherung abschließen（完成保险）”任务，由物流主管负责，完成后进入汇聚排他网关“Ware bereit（货物准备好）”。
+4. **特殊运输流程**
+    - 若选择“Sonderversand（特殊运输）”，则进入“Angebot einholen（获取报价）”任务，由秘书处负责，该任务可能会多次执行（多实例，并行）。
+    - 完成获取报价后，快递员执行“Angebot erstellen（创建报价）”任务，该任务可能会多次执行（多实例，并行）。
+    - 之后进入“Angebot entgegennehmen（接收报价）”任务，由秘书处负责，该任务可能会多次执行（多实例，并行）。
+    - 接着进入“Auftrag erteilen（下达订单）”任务，由秘书处负责，完成后进入汇聚排他网关“Ware bereit（货物准备好）”。
+5. **货物准备**：在“Ware bereit（货物准备好）”排他网关汇聚后，仓库工人执行“Ware verpacken（包装货物）”任务。
+6. **货物交付**：包装完成后，流程进入并行网关进行汇聚，然后进入“Ware bereitstellen（提供货物）”任务，由仓库工人负责，最后流程到达结束事件，发货流程完成。

@@ -1,0 +1,5 @@
+业务需求如下：该业务流程围绕“Regressnahme”（退回）展开。首先是“Regressverdacht gemeldet”（退回嫌疑被报告）事件触发流程，进入“Prüfen des Falles”（审查案件）任务。之后通过“Möglichkeit auf VN in Regress nehmen?”（是否有可能退回给VN？）这一排他网关进行判断，如果答案为“Ja”（是），则触发“Zahlungsaufforderung”（付款要求）中间抛出事件；如果答案为“Nein”（否），则直接进入后续流程。
+
+对于“Zahlungsaufforderung”，会引发一个“Vorgang auf Wiedervorlage”（流程重新提交）任务。然后经过一系列判断和任务，如检查反对意见、判断是否合理等。如果出现“Widerspruch VN”（来自VN的反对意见），则进行相应处理；如果“Zeit abgelaufen”（时间到期），也会有对应操作。
+
+在整个流程中，涉及到“Zahlungseingang”（付款收到）的中间捕获事件，以及“Zahlungs -eingang verbuchen”（记录付款收入）等任务。最终，流程在“Vorgang abgeschlossen”（流程完成）事件处结束。 各个任务和事件之间通过顺序流和排他网关等进行逻辑连接和流转，以确保整个退回流程的顺利进行和准确处理。

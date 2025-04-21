@@ -1,0 +1,5 @@
+业务需求如下：当“Regressfall wird gemeldet”（退回情况被报告）这个事件触发后，流程开始。首先执行“Regressdaten prüfen”（检查退回数据）任务。之后进入一个排他网关（Exclusive Gateway），根据条件判断，如果“Forderung möglich”（要求可行），则执行“Zahlungsaufforderung schicken und auf Wieder - vorlage setzen”（发送付款要求并设置重新提交）任务；如果“Forderung nicht möglich”（要求不可行），则执行“Vorgang schließen”（结束流程）任务。
+
+执行“Zahlungsaufforderung schicken und auf Wieder - vorlage setzen”任务后，进入一个基于事件的排他网关（Event - Based Gateway）。若出现“Wiedervorlagefrist abgelaufen”（重新提交期限已过）的情况，执行“Vorgang an Inkasso abgeben”（将流程提交给托收）任务；若“Zahlung eingegangen”（收到付款），且满足一定条件，执行“Eingang verbuchen”（登记收入）任务；若“Widerspruch eingegangen”（收到异议），则进入另一个排他网关，根据“Widerspruch nicht gerechtfertigt”（异议不合理）或“Widerspruch gerechtfertigt”（异议合理）的判断，分别执行不同的“Vorgang an Inkasso abgeben”或“Vorgang schließen”任务。
+
+各个任务执行完毕后，根据具体的流向，可能会到达不同的结束事件（End Event），流程结束。

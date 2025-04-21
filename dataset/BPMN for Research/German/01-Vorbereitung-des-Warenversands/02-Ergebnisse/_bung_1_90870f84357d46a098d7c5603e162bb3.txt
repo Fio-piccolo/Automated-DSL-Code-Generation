@@ -1,0 +1,9 @@
+流程开始于“Ware benötigt”（货物需求）。接着进入并行网关，并行执行以下操作：
+1. 由Sekretariat（秘书处）执行“Menge prüfen”（检查数量）任务。然后通过“Große Menge?”（大量？）的排他网关：
+   - 若为“JA”（是），则执行“Angebot von 3 Spediteuren einholen”（从3家货运公司获取报价）、“1 Angebot auswählen”（选择1个报价）、“Spediteur beauftragen”（委托货运公司）任务。
+   - 若为“NEIN”（否），则执行“standardisierten Paketschein ausfüllen”（填写标准化包裹单）任务，接着执行“Versicherungs-bedarf klären”（明确保险需求）任务，然后通过“Versicherung erforderlich?”（需要保险？）的排他网关：
+     - 若为“JA”（是），由Logistikleiter（物流经理）执行“Versicherung abschließen”（办理保险）任务。
+     - 若为“NEIN”（否），直接进行后续步骤。
+2. 由Lagerarbeiter（仓库工人）执行“Ware verpacken”（包装货物）任务。
+
+并行操作完成后，流程通过并行网关汇聚，再由Lagerarbeiter（仓库工人）执行“Ware zur Abholung bereitstellen”（准备货物以便取货）任务，最后流程结束于“Ware zum Versand bereitgestellt”（货物已准备好发货）。

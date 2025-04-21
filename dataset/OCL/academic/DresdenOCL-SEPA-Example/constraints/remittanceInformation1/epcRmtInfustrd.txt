@@ -1,0 +1,3 @@
+The requirement is as follows: 
+
+Within the context of 'RemittanceInformation1' in the package 'isoStdIso20022TechXsdPain00800101', only one occurrence of 'unstructured' is allowed according to the SEPA B2B Direct Debit C2B Implementation Guidelines. The size of 'ustrd' should strictly be equal to 1.

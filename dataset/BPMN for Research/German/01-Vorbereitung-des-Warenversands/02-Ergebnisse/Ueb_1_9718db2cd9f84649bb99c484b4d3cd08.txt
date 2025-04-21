@@ -1,0 +1,11 @@
+该业务流程主要围绕电脑经销商的订单处理展开，具体如下：
+1. **订单接收**：流程始于“Versandauftrag erhalten”（接收发货订单）事件，订单由此进入流程。
+2. **数量检查**：订单进入后，首先由“Menge prüfen”（检查数量）任务对订单数量进行检查。
+3. **数量判断分支**：检查数量后，通过“Menge?”（数量？）排他网关进行判断。若数量“klein”（小），则流程走向“Paketschein ausfüllen”（填写包裹单）任务；若数量“groß”（大），则进入“3 Angebote anfragen”（询问3个报价）任务。
+4. **包裹单填写**：执行“Paketschein ausfüllen”任务，完成包裹单的填写。
+5. **保险需求检查**：填写完包裹单后，进行“Versicherungsbedarf prüfen”（检查保险需求）任务，判断是否需要保险。
+6. **保险需求判断分支**：通过“Versicherung nötig?”（需要保险？）排他网关判断。若不需要保险（“NEIN”），流程进入“Spediteur beauftragen”（委托托运人）任务；若需要保险（“JA”），则先执行“Versicherung abschließen”（签订保险）任务，之后再进入“Spediteur beauftragen”任务。
+7. **报价询问与选择**：若数量大，先执行“3 Angebote anfragen”任务询问3个报价，然后通过“Angebot auswählen”（选择报价）任务选择一个报价。
+8. **委托托运人**：完成报价选择后，执行“Spediteur beauftragen”任务委托托运人。
+9. **货物准备与包装**：在流程中，“Ware bereitstellen”（准备货物）任务负责准备货物，“Ware verpacken”（包装货物）任务负责对货物进行包装。
+10. **流程汇合与结束**：各个分支的任务完成后，流程在不同的汇合点进行汇合，最终到达“Versandauftrag bearbeitet”（发货订单处理完成）结束事件，表示整个订单处理流程完毕。

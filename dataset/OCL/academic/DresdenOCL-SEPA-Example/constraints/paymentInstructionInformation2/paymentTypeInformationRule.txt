@@ -1,0 +1,2 @@
+The requirement is as follows:
+Within the context of the PaymentInstructionInformation2 model, if the PaymentTypeInformation attribute is present and its size is greater than zero, then it necessitates that all instances of DirectDebitTransactionInformation must not contain the PaymentTypeInformation attribute. This is referenced on page 86 of the Payments_Standards-Initiation_updated.pdf document.

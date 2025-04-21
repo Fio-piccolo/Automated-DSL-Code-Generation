@@ -1,0 +1,15 @@
+业务流程开始后，首先由Sekretariat（秘书处）执行“Versandart klären”（澄清运输方式）任务。完成后，通过并行网关将流程分为两个并行执行的分支：
+
+第一个分支：Sekretariat处理运输方式相关决策。通过排他网关“Sonderversand nötig?”（需要特殊运输吗？）判断：
+- 若需要特殊运输（是），则依次执行“Angebote einholen”（获取报价）、“Angebot auswählen”（选择报价）、“Spedition beauftragen”（委托运输公司）任务（均由Sekretariat执行）；
+- 若不需要特殊运输（否），则由Sekretariat执行“Paketschein ausfüllen”（填写包裹单）任务；
+两个子分支完成后通过排他网关汇合。
+
+第二个分支：由Lagerarbeiter（仓库工人）执行“Ware verpacken”（包装货物）任务，完成后进入并行汇合网关等待。
+
+汇合后，通过排他网关“Versicherung notwendig?”（需要保险吗？）判断：
+- 若需要保险（是），由Logistikleiter（物流主管）执行“Versicherung abschliessen”（签订保险）任务；
+- 若不需要保险（否），直接进入后续流程；
+两个子分支完成后通过排他网关汇合。
+
+最终，所有分支在并行汇合网关汇合后，由Lagerarbeiter执行“Ware bereistellen”（准备货物）任务，流程结束。

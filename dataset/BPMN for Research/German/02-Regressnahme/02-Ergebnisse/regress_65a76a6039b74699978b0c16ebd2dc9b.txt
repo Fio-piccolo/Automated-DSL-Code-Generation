@@ -1,0 +1,11 @@
+业务需求如下：
+1. 流程从“Regress - meldung”开始。
+2. 经过“Regress - anspruch besteht?”这个排他网关，根据条件判断走不同路径。
+    - 若条件满足（“ja”），则执行“Zahlungs - aufforderung an VN senden”任务，之后进行“Vorgang auf Widervorlage setzen”任务，再通过一个事件网关。
+        - 若在此过程中“VN hat widersprochen”，则进入“Widerspruch - gerechtfertigt?”排他网关。
+            - 若“widerspruch - gerechtfertigt?”判断为“nein”，则执行“Vorgang abschließen”任务，之后结束流程。
+            - 若“widerspruch - gerechtfertigt?”判断为“ja”，则执行“Vorgang an Inkasso übergeben”任务，之后进入后续流程。
+        - 若“Frist ist abgelaufen”，则进入相应的排他网关进行后续处理。
+    - 若条件不满足（“nein”），则直接进入其他相关流程处理。
+3. 当出现“Zahlungs - eingang”时，执行“Geld verbuchen”任务。
+4. 整个流程最终到达“Regress - meldung bearbeitet”结束。

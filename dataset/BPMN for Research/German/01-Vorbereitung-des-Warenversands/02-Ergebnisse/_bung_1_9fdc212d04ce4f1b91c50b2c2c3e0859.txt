@@ -1,0 +1,7 @@
+该流程从“Ware soll versendet werden”（货物应被发送）的起始事件开始。
+
+流程分为两条并行路径：
+1. 一条路径是“Sekretariat”（秘书处）执行“Versandart prüfen”（检查运输方式）任务，然后通过“Versandart?”（运输方式？）的排他网关判断。如果是“normaler Postversand”（普通邮政运输），则执行“standardisierten Paketschein ausfüllen”（填写标准化包裹单）任务，接着执行“Prüfen, ob Versicherung erforderlich ist”（检查是否需要保险）任务，再通过“Versicherung erforderlich?”（需要保险？）的排他网关判断。如果是“Ja”（是），则执行“Versicherung abschließen”（签订保险）任务，否则（“Nein”（否））。
+2. 另一条路径是“Sekretariat”（秘书处）执行“Angebote von drei unterschiedlichen Spediteuren einholen”（从三个不同的货运代理处获取报价）任务，然后通过“Anfragen an Spediteure verschickt”（向货运代理发送请求）的中间抛出事件，接着通过“Angebote der Spediteure erhalten”（收到货运代理的报价）的中间捕获事件，然后执行“ein Angebot auswählen und Spediteur beauftragen”（选择一个报价并委托货运代理）任务。
+
+之后，两条路径汇合，执行“Ware verpacken”（包装货物）任务，然后通过“verpackte Ware zur Abholung bereitstellen”（准备好待取货的包装货物）任务，最后以“verpackte Ware zur Abholung bereitgestellt”（已准备好待取货的包装货物）的结束事件结束。

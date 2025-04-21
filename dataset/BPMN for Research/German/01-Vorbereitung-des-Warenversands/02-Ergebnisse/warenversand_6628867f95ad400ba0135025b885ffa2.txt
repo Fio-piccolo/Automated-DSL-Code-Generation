@@ -1,0 +1,7 @@
+当“Ware versenden”（发送货物）这个起始事件被触发后，流程开始。首先进入“Menge prüfen”（检查数量）任务，由“Sekretariat”（秘书处）执行。之后根据数量情况，通过并行网关“sid-B2FA11E6-34A8-4760-ADFE-F38E9CD5C445”分为两条路径：一条路径进入“Ware verpacken”（包装货物）任务，由“Lager”（仓库）执行；另一条路径进入“Menge prüfen”（检查数量）任务。
+
+如果是“große Menge”（大量），则进入“Angebot bei 3 Spediteure anfordern”（向3家货运代理询价）任务，由“Sekretariat”（秘书处）执行，之后依次进入“Angebot auswählen”（选择报价）、“Spediteur beauftragen”（委托货运代理）任务，再通过排他网关“sid-81A54C9B-91E5-4578-ACD5-BEA32C4FE74A”，根据条件决定是走“große Menge”（大量）分支进入“Standardisiertes Päckchen ausfüllen”（填充标准包裹）任务，还是走“kleine Menge”（小量）分支进入“kleine Menge”对应的任务路径。
+
+在“Standardisiertes Päckchen ausfüllen”（填充标准包裹）任务后，通过排他网关“sid-281C1FE0-F3EA-450D-BDA1-E99E2EC5FAE0”，如果“Versicherung erforderlich”（需要保险），则进入“Versicherung abschließen”（完成保险）任务，由“Logistikleiter”（物流主管）执行，之后进入“Ware zur Abholung bereit”（准备货物取走）任务，最后到达结束事件。如果不需要保险，则直接进入“Ware zur Abholung bereit”（准备货物取走）任务，之后到达结束事件。
+
+如果是“kleine Menge”（小量），则直接进入“Ware zur Abholung bereit”（准备货物取走）任务，之后到达结束事件。所有任务完成后，流程结束。

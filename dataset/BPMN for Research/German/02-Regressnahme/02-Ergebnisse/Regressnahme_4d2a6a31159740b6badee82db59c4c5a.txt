@@ -1,0 +1,13 @@
+业务需求如下：
+1. 流程从“Regressprüfung”开始事件启动。
+2. 首先执行“Regress prüfen”任务。
+3. 接着通过“Regress möglich?”排他网关进行判断，如果回归可行（条件为“ja”），则执行“Zahlungsaufforderung erstellen”任务；如果回归不可行（条件为“nein”），则进入“Vorgangs - abschluss”子流程。
+4. 执行“Zahlungsaufforderung erstellen”任务后，发送“Regress an VN gesendet”中间抛出事件。
+5. 当接收到“Zahlung eingegangen”中间捕获事件（满足特定条件）后，执行“Eingang verbuchen”任务。
+6. 执行“Eingang verbuchen”任务后，进入“Vorgangs - abschluss”子流程。
+7. 当满足“14 Tage Frist”中间捕获事件（通过定时器触发）时，执行“Inkassobüro einschalten”任务。
+8. 执行“Inkassobüro einschalten”任务后，流程结束于“Vorgang übergeben”。
+9. 当接收到“Widerspruch”中间捕获事件时，执行“Widerspruch prüfen”任务。
+10. 通过“Widerspruch gerechtfertigt?”排他网关进行判断，如果抗辩成立（条件为“ja”），则进入“Vorgangs - abschluss”子流程；如果抗辩不成立（条件为“nein”），则进入后续流程（文档未详细说明）。
+11. 当发送“Regress an VN gesendet”中间抛出事件后，执行“Wiedervorlage - status setzen”任务。
+12. 整个流程结束条件为到达相应的结束事件，如“Vorgang geschlossen”等。

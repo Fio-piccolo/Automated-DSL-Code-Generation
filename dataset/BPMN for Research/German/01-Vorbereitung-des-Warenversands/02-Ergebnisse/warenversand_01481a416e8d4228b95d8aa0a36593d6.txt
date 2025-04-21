@@ -1,0 +1,15 @@
+该业务流程从确定货物发送地点开始，首先判断是否为特殊运输。若不是特殊运输，则填写包裹单；接着判断是否需要保险，若需要则购买保险，之后进行货物包装、准备货物，最终发货。若为特殊运输，则直接进行相关确认，然后进行货物包装、准备货物，最终发货。具体流程如下：
+1. 开始事件“Ware soll versendet werden”触发流程。
+2. 通过排他网关“Sonderversand?”判断是否为特殊运输：
+    - 若不是特殊运输（“nein”流向），执行任务“Paketschein ausfüllen”（填写包裹单）。
+    - 填写包裹单后，通过排他网关“Ist eine Versicherung nötig?”判断是否需要保险：
+        - 若需要保险（“ja”流向），执行任务“Versicherung abschließen”（购买保险）。
+        - 购买保险后，执行任务“Ware verpacken”（货物包装）。
+        - 货物包装后，执行任务“Ware bereitstellen”（准备货物），最后到达结束事件“Ware versandt”（货物已发送）。
+        - 若不需要保险（“nein”流向），则直接执行任务“Ware verpacken”（货物包装）。
+    - 若为特殊运输（“ja”流向），执行任务“Angebote einholen”（获取报价）。
+    - 获取报价后，执行任务“günstigstes Angebot auswählen”（选择最佳报价）。
+    - 选择最佳报价后，执行任务“Spediteur beauftragen”（委托承运人）。
+    - 委托承运人后，并行执行任务“Festellen, ob Sonderversnd erforderlich”（确认是否需要特殊运输）和“Versicherung abklären”（澄清保险事宜）。
+    - 确认是否需要特殊运输后，若不需要则继续执行填写包裹单等后续流程；若需要则进行相关处理后到达结束事件。
+    - 澄清保险事宜后，判断是否需要保险，后续流程与上述不需要保险的情况一致，最后到达结束事件“Ware versandt”（货物已发送）。

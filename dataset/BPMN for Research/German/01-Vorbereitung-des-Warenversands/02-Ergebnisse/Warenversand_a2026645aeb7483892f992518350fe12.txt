@@ -1,0 +1,3 @@
+业务需求如下：
+有一个名为“Händler für Computer Hardware”的业务流程，涉及多个参与者，如“Händler für Computer Hardware”本身、“Sekretariat”、“Logistikleiter”和“Lagerarbeiter”。
+流程从“Ware muss versendet werden”的开始事件开始，然后进行“Zu versendende Menge prüfen”任务，接着根据不同条件进行分支。如果是“Groß”，则进入“Angebot von 3 Spediteuren einholen”任务，之后选择“Angebot auswählen”任务，再选择“1 Spediteur beauftragen”任务。如果是“Klein”，则先进行“Notwendigkeit Versicherung prüfen”任务，然后根据是否需要“Versicherung abschliessen”进行不同的后续流程，最终到达“Ware ist zur Abholung bereit”的结束事件。整个流程中包含多个并行网关和排他网关，用于控制流程的分支和合并。

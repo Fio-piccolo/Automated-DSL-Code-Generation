@@ -1,0 +1,10 @@
+业务需求如下：整个业务流程围绕货物运输（Warenversand）展开，涉及多个角色在不同环节执行相应任务以完成货物运输相关操作。流程起始于“Warenversand”（货物运输）开始事件，然后根据是否为特殊运输（Sonderversand?）以及是否需要保险（Versicherung erforderlich?）等条件进行不同路径的任务流转，最终完成所有操作到达结束事件。
+
+具体来说，流程开始后，先到达一个排他网关（exclusiveGateway）判断是否是特殊运输。如果是特殊运输，会执行相应后续任务（此处未明确特殊运输对应具体哪个任务分支后续展开情况）；如果不是特殊运输，会根据不同分支执行以下任务：
+- 执行无具体名称的任务（可能是不同类型的常规处理任务，具体依实际业务而定），完成后继续流转。
+- 执行“standartisierter Paketschein ausfüllen”（填写标准化包裹单）任务，完成后继续流转到判断是否需要保险的排他网关。
+- 执行“drei Angebote einholen”（获取三个报价）任务，完成后继续流转到后续并行网关等相关操作。
+
+之后，通过并行网关对不同任务分支进行汇聚整合，继续推进流程，比如涉及到根据获取的报价情况进一步执行如“Angebot 1 einholen”（获取报价1）、“Angebot 3 einholen”（获取报价3）、“Angebot 2 einholen”（获取报价2）等任务，然后再经过一系列流转汇聚等操作。
+
+在流程中还涉及到如“Versicherung abschliessen”（完成保险）、“Ware verpacken”（包装货物）、“Ware bereitstellen”（准备货物）等任务的执行，各任务之间通过顺序流（sequenceFlow）依次连接，按照设定的流程逻辑依次推进，直至最终到达结束事件，完成整个货物运输相关业务流程。不同任务分属于不同的角色负责执行，包括“Sekretariat”（秘书处）、“Logistikleiter”（物流主管）、“Lagerarbeiter”（仓库工人）、“Speditionsfirmen”（运输公司）等。

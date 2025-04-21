@@ -1,0 +1,22 @@
+该BPMN流程描述了一个名为“Warenversand”（货物配送）的业务流程，具体步骤如下：
+1. 开始事件：“Bestellung erhalten”（收到订单）。
+2. 并行网关：将流程分为两个并行路径。
+3. 第一个并行路径：
+   - 排他网关：“Warenumfang”（货物数量），根据货物数量分为“kleine Menge”（小数量）和“große Menge”（大数量）两个分支。
+   - 小数量分支：
+     - 任务：“Paketschein ausfüllen”（填写包裹单）。
+   - 大数量分支：
+     - 任务：“Angebote einholen Zuschlag erteilen”（获取报价并分配附加费）。
+   - 两个分支在排他网关处汇合。
+4. 第二个并行路径：
+   - 任务：“Ware verpacken”（包装货物）。
+   - 任务：“Waren bereitstellen”（准备货物）。
+   - 两个任务完成后，在并行网关处汇合。
+5. 并行网关：将两个并行路径的结果汇合。
+6. 排他网关：“Versicherung notwendig”（是否需要保险），根据是否需要保险分为两个分支。
+   - 需要保险分支：
+     - 任务：“Versicherung abschließen”（完成保险）。
+   - 不需要保险分支：直接通过。
+   - 两个分支在排他网关处汇合。
+7. 任务：“Ware versandfertig”（货物准备好发货）。
+8. 结束事件：“Waren sind versandbereit”（货物已准备好发货）。

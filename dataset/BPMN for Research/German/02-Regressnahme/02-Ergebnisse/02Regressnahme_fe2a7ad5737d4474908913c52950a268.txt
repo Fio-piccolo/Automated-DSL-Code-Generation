@@ -1,0 +1,9 @@
+业务需求如下：
+1. 流程开始于“Möglicher Regress erkannt”（可能的回归被识别）事件。
+2. 经过“Möglichkeit besteht?”（存在可能性？）排他网关，根据条件判断有两条外出顺序流，一条对应“Ja”（是），一条对应其他情况（这里未明确其他情况含义）。
+3. “Ja”方向会触发“Zahlungsaufforderung senden”（发送付款请求）中间抛出事件，然后执行“Vorgang auf \"Wiederforlage\" setzen”（将流程设置为“重新提交”）任务，之后回到“Möglichkeit besteht?”排他网关。
+4. 其他情况方向会经过“Möglichkeit besteht?”事件基于网关，该网关有三条外出顺序流，分别连接到“Geld eingegangen”（钱已收到）、“Frist abgelaufen”（期限已过）、“Widerspruch eingegangen”（收到异议）中间捕获事件。
+5. “Geld eingegangen”事件后连接到“Regress prüfen”（检查回归）任务，任务完成后经过“Gerechtfertigt?”（合理？）排他网关。
+6. “Frist abgelaufen”事件后直接连接到“Gerechtfertigt?”排他网关。
+7. “Widerspruch eingegangen”事件后执行“Widerspruch prüfen”（检查异议）任务，任务完成后经过“Gerechtfertigt?”排他网关。
+8. “Gerechtfertigt?”排他网关根据判断结果有两条外出顺序流，“Ja”（是）方向会经过一个汇合的排他网关后到达“Vorgang schließen”（完成流程）结束事件；“Nein”（否）方向会经过另一个汇合的排他网关后到达“An den Inkasso-Dienstleister abgeben”（提交给催款服务提供商）结束事件。

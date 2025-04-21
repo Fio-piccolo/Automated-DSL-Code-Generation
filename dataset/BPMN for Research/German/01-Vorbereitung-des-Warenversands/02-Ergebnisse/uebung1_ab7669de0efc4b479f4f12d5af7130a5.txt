@@ -1,0 +1,12 @@
+该业务流程主要涉及发货相关操作，具体如下：
+1. 流程开始于“Ware versandbereit”事件，触发后进入“Spediteur”车道的“Angebote erstellen”任务。
+2. 完成“Angebote erstellen”任务后，流转至“Sekretariat”车道的“Sonderversand prüfen”任务。
+3. “Sonderversand prüfen”任务完成后，通过“Versandart”排他网关进行判断。若选择“Sonderversand”，则进入“Angebot einholen”任务；若选择“Normalversand”，则进入“Standardisierten Paketschein ausfüllen”任务。
+4. 执行“Angebot einholen”任务后，回到“Angebote erstellen”任务；执行“Standardisierten Paketschein ausfüllen”任务后，进入“Versicherung prüfen”任务。
+5. “Versicherung prüfen”任务完成后，通过“Versicherung?”排他网关进行判断。若保险必要，则进入“Versicherung erbitten”任务；若保险不必要，则直接进入后续流程。
+6. 执行“Versicherung erbitten”任务后，进入“Versicherung abschließen”任务。
+7. 完成“Versicherung abschließen”任务后，流转至“Ware verpacken”任务。
+8. 执行“Ware verpacken”任务后，进入“Ware zur Abholung bereitstellen”任务。
+9. 完成“Ware zur Abholung bereitstellen”任务后，流程结束于“Ware abholbereit”事件。
+
+在整个流程中，“Lagerarbeiter”车道负责“Ware verpacken”任务，“Logistikleiter”车道负责“Versicherung abschließen”任务，其他任务分别由相应车道的角色完成。各任务之间通过BPMN规定的流向进行流转，确保发货流程的顺利进行。

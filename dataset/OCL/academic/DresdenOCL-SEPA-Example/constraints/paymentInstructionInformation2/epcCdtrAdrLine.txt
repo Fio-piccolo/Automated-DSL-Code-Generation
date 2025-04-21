@@ -1,0 +1,1 @@
+The requirement is as follows: In the context of PaymentInstructionInformation2, if there is at least one address line (AdrLine) specified for a creditor (Cdtr), it is restricted that the total number of AdrLine must not exceed two. This is in accordance with the SEPA B2B Direct Debit C2B Implementation Guidelines (refer page 8, row 8).

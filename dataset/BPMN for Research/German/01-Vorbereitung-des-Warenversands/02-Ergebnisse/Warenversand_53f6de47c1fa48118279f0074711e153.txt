@@ -1,0 +1,10 @@
+当有货物需要发货时，业务流程如下：
+1. 流程开始于“Ware soll versandt werden”（货物应被发送）事件。
+2. 首先由秘书处负责“Versand und Versicherung klären”（澄清运输和保险）任务。
+3. 之后进入“Große Menge?”（大量货物？）排他网关进行判断，如果货物量大，则进入“Angebote von 3 Spediteuren einholen”（获取3个运输商的报价）任务；如果货物量不大，则进入“Versicherung notwendig?”（需要保险？）包容网关。
+4. 若货物量大，获取报价后，进行“Angebot auswählen”（选择报价）任务，接着选择“Spediteur auswählen”（选择运输商），之后填写“Patketschein ausfüllen”（填写包裹单）。
+5. 若进入“Versicherung notwendig?”包容网关，若回答“ja”（是），则执行“Versicherung abschließen”（完成保险）任务；若回答“immer”（总是），则直接填写“Patketschein ausfüllen”（填写包裹单）。
+6. “Versicherung abschließen”（完成保险）任务和填写“Patketschein ausfüllen”（填写包裹单）任务完成后，流程汇聚到一个节点。
+7. 之后经过一些汇聚和排他网关，到达“Ware verpacken”（包装货物）任务，由仓库工人执行。
+8. 包装好货物后，进行“Ware zur Abholung bereitstellen”（准备好货物以供取货）任务。
+9. 最后以“Ware wurde bereitgestellt”（货物已准备好）事件结束整个流程。

@@ -1,0 +1,1 @@
+业务流程从“Receive Shipment Order”开始。接着通过并行网关分为两路，一路进行“Decide if it is a large/special shipment”判断，另一路进行“Package Product”操作。判断结果通过排他网关，若不是大型/特殊货物，则进行“Prepare Package Label”，然后通过排他网关判断是否需要保险，若不需要则与其他流程汇合；若是大型/特殊货物，通过并行网关分别进行“Request Offer 1”“Request Offer 2”“Request Offer 3”，之后通过包含网关汇合，进行“Choose best offer”，再与其他流程汇合。汇合后进行“Dispatch Product”，最终以“Product dispatched”结束。

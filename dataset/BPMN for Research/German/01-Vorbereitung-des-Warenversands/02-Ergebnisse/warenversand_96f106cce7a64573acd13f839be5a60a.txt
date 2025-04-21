@@ -1,0 +1,9 @@
+业务需求如下：流程从一个开始事件启动，接着执行任务“klären ob Ware versendet wird”（确认货物是否发货）。然后通过一个排他网关进行分流：
+- 若不发货则流程走向结束事件。
+- 若发货则进入任务“klärung wer den Versand übernimmt anhand der Menge”（根据数量确认谁负责发货），之后再经过一个排他网关：
+    - 若货物量小则执行任务“normaler Postversand”（普通邮寄发货），接着执行任务“Paketschein ausfüllen und klären ob Versicherung notwendig ist oder nicht”（填写包裹单并确认是否需要保险），然后经过一个排他网关，若需要保险则执行任务“Versicherung durch Logistikleiter”（由物流负责人办理保险）。
+    - 若货物量大则进入并行网关，并行执行以下三个任务：
+        - “Angebot Spedition Eins einholen”（获取第一家物流公司报价）
+        - “Angebot Spedition Zwei einholen”（获取第二家物流公司报价）
+        - “Angebot Spedition Drei einholen”（获取第三家物流公司报价）
+    这三个任务完成后通过一个并行网关汇聚，再执行任务“Auswahl eines Angebotes”（选择一个报价），之后执行任务“Beauftragung Sped.”（委托物流公司）。

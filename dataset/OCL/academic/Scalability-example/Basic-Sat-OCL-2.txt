@@ -1,0 +1,5 @@
+The requirements are as follows:
+
+In package "Package_1", for every instance of "A2", the attribute "at" of the "A2" instance must be greater than or equal to the attribute "at" of the associated "A1" instance.
+
+In the same package "Package_1", for every instance of "A1", the attribute "at" of the "A1" instance must be greater than or equal to the attribute "at" of the associated "A2" instance.

@@ -1,0 +1,2 @@
+业务需求如下：
+有一个协作流程，参与者为“Fima”，其对应的流程为“Fima”。流程中有多个车道，分别为“Sekretariat”“Logistikleiter”“Lagerarbeiter”。流程开始于一个起始事件，接着进入一个任务“Bestellung trift ein”，该任务完成后输出到另一个节点。然后进入一个排他网关，根据不同的条件分出四条路径，分别对应不同的任务，如“Sekretariat vergibt Aufrag an Spediteur 1”“Sekretariat vergibt Auftrag an Spediteur 2”“Sekretariat vergibt Auftrag an Spediteur 3”“Sekretariat holt Angebote ein”。这些任务完成后又会汇聚到一个排他网关，最后进入一个结束事件。整个流程中存在多个序列流来连接各个节点，以实现业务的流转。

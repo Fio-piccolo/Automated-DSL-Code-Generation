@@ -1,0 +1,1 @@
+业务需求如下：流程由“jjj”发起，在“Sekretariat”环节，流程从开始事件起步，首先执行“Zuständigkeit klären”任务，完成后进入“grosse Menge”的排他网关判断。若满足某条件（未明确），则执行“Paketschein ausfüllen”任务，完成后进入“Versicherung ”的排他网关；若不满足，执行“Offerten einholen”任务，完成后进入另一个未命名的排他网关。之后，从“Versicherung ”排他网关或未命名排他网关流出的流程，最终都通向“Versicherung abschliessen”任务，此任务由“Logistikleiter”负责完成。

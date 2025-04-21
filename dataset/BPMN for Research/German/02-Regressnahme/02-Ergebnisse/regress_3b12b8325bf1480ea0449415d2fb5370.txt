@@ -1,0 +1,14 @@
+业务需求如下：
+1. 以“Regressmeldung”开始流程。
+2. 执行“Prüfung der Inregressnahme”任务。
+3. 通过“Regress berechtigt?”排他网关进行分支判断：
+   - 若条件为“Ja”，则执行“Zahlungsaufforderung versenden”任务。
+   - 若条件为“nein”，则直接进入“Vorgang abgeschlossen”结束流程。
+4. 执行“Zahlungsaufforderung versenden”任务后，通过事件驱动的排他网关进行分支：
+   - 若触发“Zahlungseingang”中间捕获事件（收到付款），则执行“Zahlungseingang verbuchen”任务。
+   - 若触发“Widerspruch VN”中间捕获事件（收到异议），则执行“Prüfung des Widerspruchs”任务。
+5. 执行“Prüfung des Widerspruchs”任务后，通过“Widerspruch gerechtfertigt?”排他网关进行分支判断：
+   - 若条件为“ja”，则进入“Vorgang abgeschlossen”结束流程。
+   - 若条件为“nein”，则进入“an Inkasso Dienstleister weitergeleitet”结束流程。
+6. 执行“Zahlungseingang verbuchen”任务后，进入“Vorgang abgeschlossen”结束流程。
+7. 若触发“Ablauf Widervorlagefrist”中间捕获事件（异议期限到期），则进入“an Inkasso Dienstleister weitergeleitet”结束流程。

@@ -1,0 +1,3 @@
+The requirement is as follows:
+
+In the context of the DirectDebitTransaction1 in the isoStdIso20022TechXsdPain00800101 package, a condition must be validated. The condition is that both PreNotificationId and PreNotificationDate, denoted by preNtfctnId and preNtfctnDt respectively, should not exist or be set. This means, the size of the elements contained by both preNtfctnId and preNtfctnDt should be zero. This restriction is in place due to potential rejection by banks which are not in the AOS community should these elements are present, as per the warning annotation in the code and as referred to in section 1.2 of the SEPA B2B Direct Debit C2B Implementation Guidelines.

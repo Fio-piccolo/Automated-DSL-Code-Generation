@@ -1,0 +1,12 @@
+该业务流程主要涉及公司内部的一系列操作，从开始事件出发，经过多个任务和决策节点，最终结束流程。具体描述如下：
+1. 流程从开始事件启动。
+2. 首先执行“Menge prüfen”（检查数量）任务。
+3. 接着通过并行网关进行分支，同时执行“Angeot bei Spediteur 2 einholen”（从发货商2获取货物）、“Angeot bei Spediteur 1 einholen”（从发货商1获取货物）和“Angeot bei Spediteur 3 einholen”（从发货商3获取货物）这三个任务。
+4. 之后，流程汇聚到一个并行网关，再执行“ausgewählten Spediteur beauftragen”（委托选定的发货商）任务。
+5. 任务完成后，通过一个排他网关进行条件判断。
+6. 根据判断结果，可能执行“Packetschein ausfüllen”（填写包裹单）任务或者进行其他操作。
+7. 执行“Packetschein ausfüllen”任务后，又经过一个排他网关。
+8. 再次通过并行网关进行分支，分别执行“Versicherung abschliessen”（完成保险）、“Ware verpacken”（包装货物）和“Ware zur Abholung bereitstellen”（准备好货物以供取货）这三个任务。
+9. 最后，流程汇聚到结束事件，完成整个业务流程。
+
+在流程中，每个任务都有相应的负责人，分别属于不同的部门，如秘书处、物流主管和仓库工人等。同时，流程中还存在一些条件判断和并行操作，以确保业务的顺利进行。

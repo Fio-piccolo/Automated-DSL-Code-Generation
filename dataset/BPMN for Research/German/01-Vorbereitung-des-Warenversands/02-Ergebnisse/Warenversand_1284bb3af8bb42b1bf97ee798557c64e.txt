@@ -1,0 +1,8 @@
+该业务流程主要围绕业务处理展开，涵盖多个环节和决策点，具体如下：
+1. 流程始于一个开始事件。
+2. 经过一个排他网关，此网关会根据条件判断走向。若条件为“Normalversand?”，则进入名为“Versicherung?”的排他网关；若条件为“Sonderversand?”，则进入一个并行网关。
+3. 在“Versicherung?”排他网关处，又会根据条件判断。若选择“Ja”，则进入“Versicherung abschließen”任务；若选择“Nein”，则进入另一个并行网关。
+4. 有多个任务节点，包括“Angebot 1”“Paketschein ausfüllen”“Angebot 2”“Angebot 3”“Angebot auswählen”“Spediteur beauftragen”“Ware verpacken”“Ware bereitstellen”“Versicherung abschließen”等。
+5. 存在多个并行网关，用于并行处理不同的任务分支。
+6. 流程最终以一个结束事件告终。
+7. 整个流程中，不同任务由不同角色负责，如“Sekretariat”（秘书处）、“Lagerarbeiter”（仓库工人）、“Logistikleiter”（物流主管）等。在处理过程中，涉及对保险的决策、订单的选择、发货的安排以及货物的准备和包装等操作。

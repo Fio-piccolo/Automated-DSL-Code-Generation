@@ -1,0 +1,9 @@
+业务需求如下：该业务流程始于“Start”事件，随后进入“Bestellmenge prüfen”任务，对订单数量进行检查。检查后通过“Menge”排他网关，依据数量情况进行分流：若数量小，则进入“Ausfüllen standardisierter Paketschein”任务；若数量大，则进入“Angebote einholen”任务。
+
+执行“Ausfüllen standardisierter Paketschein”任务后，进入“Versicherung nötig?”排他网关，判断是否需要保险：若需要，则执行“Versicherung abschließen”任务；若不需要，则直接进入后续流程。
+
+执行“Angebote einholen”任务后，进行“Versicherung nötig?”排他网关判断，后续流程与“Ausfüllen standardisierter Paketschein”任务后的判断相同。
+
+两个分支在“Versicherung abschließen”任务后，或直接跳过该任务后，都会进入一个汇聚的排他网关，然后进入“Ware bereitgestellt”任务，接着进入“Ware versendet”结束事件。
+
+在主流程执行前，还有一个并行网关，会分流到“Bestellmenge prüfen”任务以及“Ware verpacken”任务。“Ware verpacken”任务完成后与主流程汇聚，最终都进入“Ware bereitgestellt”任务。

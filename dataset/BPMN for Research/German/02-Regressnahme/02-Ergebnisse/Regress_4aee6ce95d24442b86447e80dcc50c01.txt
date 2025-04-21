@@ -1,0 +1,13 @@
+业务需求如下：
+1. 流程开始于“Regressmeldung g”事件，触发后执行“Regress prüfen”任务。
+2. “Regress prüfen”任务完成后，进入“ExclusiveGateway”（排他网关）。
+3. 若排他网关判定“Regress möglich”（可退回），则执行“Zahlungsaufforderung an VN”（向供应商发出付款要求）任务；若判定“Nicht möglich”（不可退回），则直接进入“Vorgang schließen”（完成流程）任务。
+4. “Zahlungsaufforderung an VN”任务完成后，执行“WV setzen”任务。
+5. “WV setzen”任务完成后，进入“ExclusiveGateway”（排他网关）。
+6. 若排他网关判定流程可继续推进，则可能会触发“Zahlung bestätigt”（付款确认）中间捕获事件，或者触发“Wiedervorlage frist abgelaufen”（重新提交期限已过）中间捕获事件。
+7. “Zahlung bestätigt”中间捕获事件若被触发，进入“Vorgang schließen”任务；“Wiedervorlage frist abgelaufen”中间捕获事件若被触发，则执行“Nachfragen”（询问）任务。
+8. “Nachfragen”任务完成后，进入“ExclusiveGateway”（排他网关）。
+9. 若排他网关判定“Wiederspruch eingegangen”（收到异议），则执行“Zahungsverweigerung prüfen”（检查付款拒绝）任务；若未收到异议，则流程继续推进。
+10. “Zahungsverweigerung prüfen”任务完成后，进入“ExclusiveGateway”（排他网关）。
+11. 若排他网关判定检查结果为“Gerechtfertigt”（合理），则执行“Vorgang an Inkassodienstleister abgegeben”（已提交给收债机构）任务；若判定“Nicht gerechtfertigt”（不合理），则可能执行其他相关任务或进入其他流程分支。
+12. 各个任务执行完成后，通过相应的顺序流进入后续节点，最终可能结束于“EndEvent”（结束事件），或者根据不同的判定结果在流程中循环或分支执行。

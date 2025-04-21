@@ -1,0 +1,13 @@
+业务需求如下：该业务流程主要围绕货物运输准备（Vorbereitung des Warenversands）展开，涉及物流主管（Logistikleiter）、秘书（Sekretariat）、仓库工人（Lagerarbeiter）等不同角色。流程起始于需要准备货物运输的事件，之后依次进行确定运输量、根据运输量判断后续操作（运输量大于X则获取外部报价并将订单交给最优惠的供应商，运输量小于X则填写包裹单）等环节，接着对于是否需要保险进行判断并执行相应操作，然后进行货物包装、准备货物等步骤，最终完成货物运输准备。具体如下：
+1. 首先由“Warenversand soll vorbereitet werden”这一开始事件触发流程，该事件位于秘书所在的流程环节，触发后通过序列流将流程推进到“Versandmenge feststellen”任务，此任务由秘书负责，用于确定运输量。
+2. “Versandmenge feststellen”任务完成后，通过序列流将流程引向“parallelGateway（gatewayDirection为Diverging）”，在此并行网关处，流程分为两个分支。
+3. 其中一个分支流向“exclusiveGateway（gatewayDirection为Diverging且名为Menge?）”，在此处根据运输量进行判断，如果运输量大于X（通过名为“Menge > X”的序列流体现），则进入“Externe Angebote einholen”任务，该任务由物流主管负责，用于获取外部报价；获取报价完成后通过序列流进入“Auftrag an günstigsten Anbieter vergeben ”任务，同样由物流主管负责，将订单交给最优惠的供应商。
+4. 若在“exclusiveGateway（gatewayDirection为Diverging且名为Menge?）”处判断运输量小于X（通过名为“Menge < X”的序列流体现），则进入“Paketschein ausfüllen”任务，由秘书负责填写包裹单。
+5. “Externe Angebote einholen”任务完成后经序列流进入“Auftrag an günstigsten Anbieter vergeben ”任务，完成该任务后通过序列流进入“exclusiveGateway（gatewayDirection为Converging）”。“Paketschein ausfüllen”任务完成后通过序列流进入“exclusiveGateway（gatewayDirection为Diverging且名为Versicherung?）”。
+6. 在“exclusiveGateway（gatewayDirection为Diverging且名为Versicherung?）”处进行是否需要保险的判断，如果需要保险（通过名为“Ja”的序列流体现），则进入“Versicherung abschliessen”任务，由物流主管负责完成保险签订；如果不需要保险（通过名为“Nein”的序列流体现）则直接进入“exclusiveGateway（gatewayDirection为Converging）”。
+7. “Versicherung abschliessen”任务完成后通过序列流进入“exclusiveGateway（gatewayDirection为Converging）”，在此处与不需要保险的分支进行汇聚，然后通过序列流进入下一个环节。
+8. 经过前面步骤汇聚后，流程通过序列流进入“parallelGateway（gatewayDirection为Converging）”，在此并行网关处等待其他分支流程完成汇聚。
+9. 同时，在“parallelGateway（gatewayDirection为Diverging）”的另一个分支通过序列流进入“Ware verpacken”任务，该任务由仓库工人负责，完成货物包装；包装完成后通过序列流进入“parallelGateway（gatewayDirection为Converging）”。
+10. 在“parallelGateway（gatewayDirection为Converging）”处，当来自“Auftrag an günstigsten Anbieter vergeben ”、“Versicherung abschliessen”（若有保险需求）以及“Ware verpacken”的流程都汇聚完成后，通过序列流进入“Ware bereit stellen ”任务，由仓库工人负责准备好货物。
+11. “Ware bereit stellen ”任务完成后通过序列流进入“Warenversand vorbereitet”这一结束事件，标志着货物运输准备流程全部完成。
+此外，还有一个文本注释关联到“Externe Angebote einholen”任务，提到有三个不同的运输商。各任务和网关等元素在流程中通过不同的序列流相互连接以实现整个业务流程的流转。

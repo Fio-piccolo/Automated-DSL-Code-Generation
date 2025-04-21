@@ -1,0 +1,10 @@
+1. 开始事件“Versandauftrag”触发流程。
+2. 并行网关“08843204-F366-47C4-B733-11021EC29E9D”将流程分为两条并行路径：
+   - 路径一：“2D66EC04-A801-4480-ADAC-3A095545E00B”任务“Versandart klären”。
+      - 处理后进入排他网关“C6E652DD-91AB-4307-94FE-BB26C4FDA8AE”判断“Menge groß?”：
+         - 若“ja:Spedition”（数量大），进入“6200D095-19A7-4E31-ADE5-588F8F0812D2”任务“Angebote einholen”，然后是“02646CA5-C0F7-48B6-9F62-E737FC53E8AF”任务“Angebot auswählen”，接着“FC57180F-5220-4834-BABC-4EF60C5C0077”任务“Spediteur beauftragen”，最后到排他网关“8E1A1D72-4166-4370-BFC8-E7B80345760F”。
+         - 若“nein: Postversand”（数量不大），进入“B2409113-C377-41D9-AB5E-AE60957DFEE7”任务“Paketschein ausfüllen”，然后到排他网关“4691A61B-7D52-4E29-A9F6-B79F2434CC2B”判断“Versicherung nötig?”：
+            - 若“ja”（需要保险），进入“7BE49EF7-7A83-4D70-8285-AD9DE8E762F6”任务“Versicherung abschließen”，再到排他网关“166DC7F1-2B49-4EB4-8DDA-801549A9486D”，最后到排他网关“8E1A1D72-4166-4370-BFC8-E7B80345760F”。
+            - 若“nein”（不需要保险），直接到排他网关“8E1A1D72-4166-4370-BFC8-E7B80345760F”。
+   - 路径二：“C9E8C6D5-3281-4E2D-A168-46EF7E86BFC6”任务“Ware verpacken”，然后到并行网关“025AA811-5300-4D57-AD45-9FBA5E1DF836”。
+3. 并行网关“025AA811-5300-4D57-AD45-9FBA5E1DF836”汇合两条路径后，进入“8003FDB7-F43B-46A6-A678-DE99F60937A5”任务“Ware bereitstellen”，最后到结束事件“7B841D6D-4C3B-40C1-9C40-16054A8902CB”。

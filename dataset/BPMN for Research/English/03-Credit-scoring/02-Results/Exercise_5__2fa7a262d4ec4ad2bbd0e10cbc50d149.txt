@@ -1,0 +1,9 @@
+这是一个银行相关的业务流程，涉及银行前端（Banking Front End）、银行评分（Scoring (Bank)）和信用保护机构评分（Scoring (Credit Protection Agency)）三个参与者。
+
+银行前端发起流程，首先触发银行评分的开始事件（startEvent），然后进行“请求评分”任务（task），完成后进入中间捕获事件（intermediateCatchEvent）。
+
+在银行评分中，根据不同的条件会进入不同的路径。如果进入特定的中间捕获事件，会触发排他网关（exclusiveGateway）的决策，决定后续流向“结果”任务（task）或“评分延迟消息”任务（task）。“结果”任务完成后到达结束事件（endEvent）。
+
+同时，信用保护机构评分也有其自身的流程，从开始事件开始，进行“快速评分（Level 1）”任务等，最后到达结束事件。
+
+整个流程中，各个参与者之间通过消息流（messageFlow）进行交互，如银行前端与银行评分之间的消息流等。

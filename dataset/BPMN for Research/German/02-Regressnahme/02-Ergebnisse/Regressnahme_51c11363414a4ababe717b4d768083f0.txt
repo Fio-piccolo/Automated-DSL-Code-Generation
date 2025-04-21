@@ -1,0 +1,13 @@
+业务需求如下：
+1. 流程从“Meldung - Regress Fall”开始事件启动。
+2. 启动后进入“Prüfung Regressfall”任务，完成该任务后到达“Regress?”排他网关。
+3. 在“Regress?”排他网关进行条件判断：
+   - 若条件为“ja”，则进入“Zahlungs-aufforderung schicken”任务，之后通过事件驱动网关，可能走向“Zahlungseingang”中间捕获事件（当有支付进入时），或者走向“Widerspruch VN”中间捕获事件（当有客户异议时）。
+   - 若条件为其他（未明确写出的条件，暂用其他表示），则进入后续未明确的流程分支（文档中未详细描述该分支具体走向）。
+4. 当到达“Zahlungseingang”中间捕获事件，即有支付进入时，进入“Zahlungs-eingang verbuchen”任务。
+5. 当到达“Wiedervorlagefrist abgelaufen”中间捕获事件，即催款期限到期时，进入后续流程（文档中未详细描述该后续流程具体走向）。
+6. 当到达“Widerspruch VN”中间捕获事件，即有客户异议时，进入“Widerspruch prüfen”任务，完成该任务后到达“Gerechtfertigt?”排他网关。
+7. 在“Gerechtfertigt?”排他网关进行条件判断：
+   - 若条件为“nein”，则进入“Abgabe Inkasso-Dienstleister”任务，之后到达流程结束事件“Vorgang schließen”。
+   - 若条件为“ja”，则进入后续未明确的流程分支（文档中未详细描述该分支具体走向）。
+8. 各个任务完成后，流程逐步汇聚到“Vorgang schließen”结束事件，完成整个流程。

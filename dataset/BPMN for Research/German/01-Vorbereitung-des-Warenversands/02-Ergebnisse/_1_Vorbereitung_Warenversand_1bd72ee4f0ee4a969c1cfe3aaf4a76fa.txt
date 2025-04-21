@@ -1,0 +1,14 @@
+该BPMN流程主要描述了Acme Computer Parts公司处理货物发送的业务流程，涉及仓库工人、秘书处和物流主管三个角色，以下是详细的业务流程描述：
+1. **流程启动**：当有货物需要发送时，流程从“Ware soll versendet werden”（货物需要发送）这个开始事件启动。
+2. **并行任务开启**：启动后进入并行网关，同时触发两个并行分支：
+    - **确定运输方式**：秘书处的工作人员执行“Versandweg ermitteln”（确定运输方式）任务。完成该任务后，流程进入“Versandweg?”（运输方式选择）这个排他网关，根据不同的运输方式，有“Postversand”（邮政运输）和“Sonderversand”（特殊运输）两个分支：
+        - **邮政运输**：如果选择“Postversand”，流程进入相关并行网关，然后执行“Paketschein ausfüllen”（填写包裹单）任务。
+        - **特殊运输**：如果选择“Sonderversand”，秘书处工作人员执行“3 Angebote einholen”（获取3个报价）任务。完成该任务后，通过中间抛出事件“3 Angebote liegen vor”（3个报价已获取），接着执行“Angebot auswählen”（选择报价）任务，之后执行“Spediteur beauftragen”（委托货运代理）任务。
+    - **货物准备与包装**：仓库工人执行“Ware bereitstellen”（准备货物）任务，完成后执行“Ware verpacken”（包装货物）任务。
+3. **任务汇聚与后续操作**：“委托货运代理”任务和“包装货物”任务完成后，流程通过并行网关汇聚，然后仓库工人执行“Ware bereitstellen”（准备货物）任务，之后流程到达结束事件。
+
+在运输过程中，还有保险相关的子流程：
+1. **保险必要性判断**：在并行网关的另一个分支中，执行“Versicherungspflicht überprüfen”（检查保险义务）任务。完成后进入“Versicherung erforderlich?”（是否需要保险）这个排他网关，根据判断结果有两个分支：
+    - **需要保险**：如果需要保险，物流主管执行“Versicherung abschließen”（签订保险）任务。
+    - **不需要保险**：如果不需要保险，则直接进入后续流程。
+2. **保险流程汇聚**：无论是否需要保险，流程最终通过排他网关汇聚，然后进入与其他任务汇聚的并行网关，最终到达流程结束事件。

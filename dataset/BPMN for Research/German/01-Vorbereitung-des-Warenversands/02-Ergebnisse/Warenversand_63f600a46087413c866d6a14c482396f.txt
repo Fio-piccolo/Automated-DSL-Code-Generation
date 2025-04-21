@@ -1,0 +1,9 @@
+当货物准备好发货时（Ware ist versandbereit），流程开始。首先进入“Große oder kleine Menge?”（大或小数量？）排他网关，若为小数量（Postversand），则执行“Standardisierten Paketschein ausfüllen”（填写标准化包裹单）任务，然后进入“Versicherung notwendig?”（是否需要保险）排他网关；若为大数量（Sondervesand），则执行“Angebote von 3 Spediteueren einholen”（获取3家货运公司的报价）任务。
+
+在“Standardisierten Paketschein ausfüllen”任务后进入“Versicherung notwendig?”排他网关，若需要保险，执行“Versichreung abschließen”（办理保险）任务；若不需要保险，则直接进入后续流程。
+
+对于“Angebote von 3 Spediteueren einholen”任务完成后，执行“Angebot an günstigsten Spediteur geben”（向最优惠的货运商报价）任务，然后进入“Vorbereitungen für Versand sind geklärt”（发货准备就绪）中间抛出事件。
+
+“Vorbereitungen für Versand sind geklärt”事件触发后，并行执行两个分支：一个分支通知仓库工人（Lagerarbeiter informieren），另一个分支执行“Spediteur auswählen”（选择货运商）和“Versichreung abschließen”（办理保险）任务。
+
+仓库工人接到通知后，执行“Ware verpacken”（包装货物）任务，包装完成后与“Vorbereitungen für Versand sind geklärt”事件的另一个分支汇合，共同执行“Ware zur Abhloung bereitstellen”（准备货物取货）任务，最后货物被取走（Ware wird abgeholt），流程结束。

@@ -1,0 +1,11 @@
+业务需求如下：
+1. 流程开始于“Warenversand”任务。
+2. 之后通过“Angebot anfordern”并行网关分流出四条路径，分别连接到“Sped1”“Sped2”“Sped3”和“Verpacken der Ware”任务。
+3. “Sped1”“Sped2”“Sped3”任务完成后分别连接到“Menge”排他网关，根据数量判断走不同路径。若数量大，走“groß”路径连接到“Angebot anfordern”并行网关；若数量小，走“klein”路径连接到“Ist eine Versicherung nötig?”排他网关。
+4. “Verpacken der Ware”任务完成后连接到“Menge”排他网关，同样根据数量判断走不同路径。
+5. “Ist eine Versicherung nötig?”排他网关根据判断结果分流出两条路径。若需要保险，走“ja”路径连接到“Versicherung abschließen”任务；若不需要保险，走“nein”路径连接到另一个排他网关。
+6. “Versicherung abschließen”任务完成后连接到一个并行网关。
+7. “Angebot anfordern”并行网关的四条流出路径中，除了上述连接到任务的路径外，还有一条路径连接到“Abholen der Ware”任务。
+8. “Abholen der Ware”任务完成后连接到一个并行网关。
+9. “Postversand”任务有一个流入路径，完成后连接到一个排他网关。
+10. 上述并行网关和排他网关会进行收敛，最终流程结束。

@@ -1,0 +1,18 @@
+业务需求如下：
+1. 以“Regressmeldung”（退回消息）作为流程起点。
+2. 执行“Regress prüfen”（检查退回）任务。
+3. 进入“Regressnahme?”（是否接受退回？）排他网关进行判断。
+    - 如果选择“Ja”（是），则发送“Zahlungsaufforderung schicken”（发送付款请求）任务。
+    - 如果选择“Nein”（否），则进行后续不同路径。
+4. 执行“Zahlungsaufforderung schicken”任务后，进行“Wiedervorlage setzen”（重新提交）任务。
+5. “Wiedervorlage setzen”任务后，通过事件驱动网关进行分流。
+    - 可能触发“Geld erhalten”（收到款项）中间捕获事件。
+    - 可能触发“Widerspruch eingegangen”（收到异议）中间捕获事件。
+    - 可能触发“Wiedervorlagefrist abgelaufen”（重新提交期限到期）中间捕获事件。
+6. 若触发“Geld erhalten”事件，执行“Eingang verbuchen”（登记收入）任务。
+7. 若触发“Widerspruch eingegangen”事件，执行“Widerspruch prüfen”（检查异议）任务，并进入“gerechtfertigt?”（是否合理？）排他网关判断。
+    - 如果选择“Ja”，则进入后续流程。
+    - 如果选择“Nein”，则执行“Inkassobüro beauftragen”（委托收款机构）任务。
+8. 若触发“Wiedervorlagefrist abgelaufen”事件，执行“Inkassobüro beauftragen”任务。
+9. 上述任务完成后，进入相应的汇聚网关。
+10. 最终流程结束，状态为“Vorgang geschlossen”（流程已关闭）。

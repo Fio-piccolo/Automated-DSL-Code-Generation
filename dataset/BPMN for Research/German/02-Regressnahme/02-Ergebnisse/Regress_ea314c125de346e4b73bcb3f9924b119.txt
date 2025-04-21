@@ -1,0 +1,11 @@
+业务需求如下：
+1. 流程开始于“Regressmeldung”事件，触发对“Regress prüfen”任务的执行。
+2. 执行“Regress prüfen”任务后，流程进入“Zahlungsaufforderung?”的排他网关。
+3. 如果排他网关的条件判断结果为“否”，则流程直接结束。
+4. 如果排他网关的条件判断结果为“是”，则流程进入并行网关。
+5. 并行网关之后，流程分两支执行。一支执行“Wiedervorlage”任务，另一支执行“Zahlungsaufforderung an VN”任务。
+6. 执行“Wiedervorlage”任务后，流程结束。
+7. 执行“Zahlungsaufforderung an VN”任务后，向“Versicherungsnehmer”参与者发送“Zahlungsaufforderung”消息，触发“Versicherungsnehmer”参与者中的流程。
+8. “Versicherungsnehmer”参与者中的流程开始于一个中间捕获事件，之后进入一个未明确描述的任务（可能是用于处理支付要求的相关任务）。
+9. 该任务之后，流程进入一个排他网关，此网关之后又进入一个任务“Widerspruch gerechtfertigt”。
+10. 执行“Widerspruch gerechtfertigt”任务后，流程结束。

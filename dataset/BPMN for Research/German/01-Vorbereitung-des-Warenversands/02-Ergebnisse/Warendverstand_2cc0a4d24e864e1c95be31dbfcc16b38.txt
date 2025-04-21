@@ -1,0 +1,7 @@
+业务流程从“Ware versandbereit”（货物可发货）这个起始事件开始。之后对货物数量进行检查，若数量大则执行“Paketschein ausfüllen”（填写包裹单），若数量不大则去获取3个报价。获取报价后委托货运代理，同时填写包裹单的任务也在进行。这两个任务完成后，流程进入一个汇聚的排他网关。
+
+接着通过一个并行网关分成两路，一路是检查保险必要性，若需要则购买保险，之后进行货物包装；另一路是检查保险必要性，若不需要则直接进行货物包装。货物包装完成后，流程进入另一个汇聚的排他网关。
+
+然后检查是否需要保险，若需要则购买保险，之后流程继续；若不需要则直接继续流程。最后流程到达“Ware abholbereit”（货物可取货）这个结束事件。
+
+在整个流程中，“Versicherung abschliessen”（购买保险）、“Menge prüfen”（检查数量）、“3 Angebote einholen”（获取3个报价）、“Spediteur beauftragen”（委托货运代理）、“Paketschein ausfüllen”（填写包裹单）、“Versicherungsnotw prüfen”（检查保险必要性）、“Ware verpacken”（货物包装）等任务在相应条件下依次执行。

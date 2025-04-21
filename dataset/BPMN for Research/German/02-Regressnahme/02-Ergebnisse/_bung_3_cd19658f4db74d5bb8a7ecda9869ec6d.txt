@@ -1,0 +1,18 @@
+业务需求如下：
+1. 首先启动“Regress ermittelt”事件。
+2. 接着执行“Möglichkeit prüfen”任务。
+3. 之后进入“Regress?”排他网关进行判断：
+   - 若条件满足（回答“JA”），则执行“Zahlungsaufforderung an VN senden”任务。
+   - 若条件不满足（回答“NEIN”），则进入后续不同路径。
+4. 执行“Zahlungsaufforderung an VN senden”任务后，通过事件驱动网关，根据不同条件走不同分支：
+   - 当满足某条件时，触发“Zahlungseingang erfaßt”中间捕获事件。
+   - 当满足另一条件时，触发“Widerspruch erfolgt”中间捕获事件。
+   - 当满足第三个条件时，触发“Wiedervorlagefrist abgelaufen”中间捕获事件。
+5. 触发“Zahlungseingang erfaßt”事件后，执行“Zahlungseingang verbuchen”任务。
+6. 触发“Widerspruch erfolgt”事件后，执行“Widerspruch prüfen”任务，之后进入“Widerspruch gerechtfertigt?”排他网关判断：
+   - 若判断结果为“JA”，则执行“An Inkasso-Dienstleistert weiterleiten”任务。
+   - 若判断结果为“NEIN”，则进入其他相关流程。
+7. 触发“Wiedervorlagefrist abgelaufen”事件后，进入相关流程。
+8. 上述各任务和网关的执行结果，最终汇聚到不同的排他网关进行整合：
+   - 相关结果整合后，执行“Vorgang abschließen”任务。
+   - 最后以“Vorgang abgeschlossen”结束事件完成整个流程。

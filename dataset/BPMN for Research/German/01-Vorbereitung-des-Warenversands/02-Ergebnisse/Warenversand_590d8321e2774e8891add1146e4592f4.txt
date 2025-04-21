@@ -1,0 +1,17 @@
+该业务流程为发货订单流程，具体如下：
+1. 流程从“Mein Start”开始。
+2. 进入“Son derversand notwendig”的排他网关判断是否需要特殊发货：
+   - 若不需要（条件为“Groß”），则执行“Paketschein ausfüllen”任务（填写包裹单）。完成后进入“Versicherung notwendig”排他网关判断是否需要保险。
+     - 若不需要保险，流程结束。
+     - 若需要保险，执行“Versicherung abschließen”任务（完成保险），然后流程结束。
+   - 若需要特殊发货，执行“Spediteur anfragen”任务（询问运输商）。
+3. 执行“Spediteur anfragen”任务后，进入并行网关，并行执行以下三个任务：
+   - “Anfrage Spediteur 1”（询问运输商1）。
+   - “Anfrage Spediteur 2”（询问运输商2）。
+   - “Anfrage Spediteur 3”（询问运输商3）。
+4. 上述三个并行任务完成后，在并行网关处汇聚，然后执行“Spediteur beauftragen”任务（委托运输商）。
+5. 执行“Spediteur beauftragen”任务后，回到“Versicherung notwendig”排他网关进行保险判断（与步骤2中此网关的判断逻辑一致）。
+6. 若在“Versicherung notwendig”排他网关判断不需要保险，流程结束；若需要保险，执行“Versicherung abschließen”任务后流程结束。
+7. 若在“Versicherung notwendig”排他网关判断不需要保险且之前判断不需要特殊发货，流程直接结束；若需要保险，执行“Versicherung abschließen”任务后流程结束。
+8. 当判断需要保险且之前判断需要特殊发货，执行“Versicherung abschließen”任务后流程结束。
+9. 当“Versicherung notwendig”排他网关判断不需要保险且之前判断需要特殊发货时，执行“Ware bereitstellen”任务（提供货物），然后流程结束。

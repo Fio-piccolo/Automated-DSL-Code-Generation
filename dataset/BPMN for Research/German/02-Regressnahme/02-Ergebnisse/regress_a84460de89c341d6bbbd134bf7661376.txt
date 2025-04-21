@@ -1,0 +1,7 @@
+业务需求如下：首先抛出“Regressmeldung”（退回消息）事件，接着执行“Fall prüfen”（审查案例）任务。之后进入“Regresspflichtig”（有退回义务）的排他网关进行分支判断，如果条件为“ja”（是），则执行“Zahlung anfordern”（要求付款）任务；如果条件为“nein”（否），则执行“Vorgang abschließen”（完成流程）任务。
+
+执行“Zahlung anfordern”任务后，进入一个排他的事件网关。若后续有“Frist abgelaufen”（期限已过）的中间捕获事件触发，会有两种走向：一种是执行“Geld eingegangen”（款项已收到）任务，之后执行“Vorgang schließen”（完成流程）任务；另一种是执行“An Inkasso weitergeben”（移交催款）任务。
+
+若执行“Vorgang abschließen”任务后，也会根据不同条件有不同走向。当出现“Widerspruch gerechtfertigt”（抗辩成立）的排他网关分支判断，若条件为“nein”，执行“An Inkasso weitergeben”任务；若条件为“ja”，执行“Vorgang schließen”任务。
+
+此外，当执行“Versicherungsnehmer wiederspricht”（投保人提出异议）的接收任务后，会再次执行“Fall prüfen”任务，然后又进入“Widerspruch gerechtfertigt”的排他网关进行后续流程判断。每个任务执行完成后，根据流程走向，最终可能会到达不同的结束事件，如“abgeschlossen”（已完成）或“übergeben”（已移交）。

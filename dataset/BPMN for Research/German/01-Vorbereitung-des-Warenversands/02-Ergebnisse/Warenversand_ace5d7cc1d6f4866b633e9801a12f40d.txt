@@ -1,0 +1,5 @@
+业务需求如下：
+首先有一个协作（collaboration），包含两个参与者（participant），分别是“Sekretariat”和“Prozess Lager”。“Sekretariat”有一个名为“Sekretariat”的流程，“Prozess Lager”有一个名为“Prozess Lager”的流程。
+在“Sekretariat”的流程中，有一个起始事件（startEvent）“Ware zum Versand”，触发后通过并行网关（parallelGateway）分为两条路径。一条路径经过任务（task）“Auswahl Versandoption”，再通过排他网关（exclusiveGateway）“Größe Paket?”分为“großes Paket”和“kleines Paket”两条分支，分别对应两个任务“großes Paket”和“Paketschein - Standard”。另一条路径直接经过任务“Angebot auswählen”。
+在“Prozess Lager”的流程中，有一个任务“Verpackung Ware im Lager”，完成后通过序列流（sequenceFlow）与“Sekretariat”的流程相连。
+在后续的流程中，各个任务之间通过排他网关和序列流进行连接和流转，最终到达结束事件（endEvent）“Versand an KD”。整个流程描述了从货物准备发送到包装、选择运输选项、保险等一系列操作，最终将货物发送给 KD 的业务流程。

@@ -1,0 +1,16 @@
+业务需求如下：
+1. 流程开始于“Regressfall liegt möglicherweise vor”的开始事件。
+2. 首先执行“Fall prüfen”任务，检查案例。
+3. 之后通过“Regress möglich?”的排他网关进行判断。
+    - 如果是（“ja”），则执行“Zahlungsaufforderung schicken”任务，发送付款请求。
+    - 如果否（“nein”），则流程进入“Widervorlag einrichten”任务，设置还款。
+4. 对于“Zahlungsaufforderung schicken”任务之后的流程：
+    - 经过一个未命名的事件网关（Exclusive类型）进行分支。
+        - 其中一个分支，如果“Wiedervorlagefrist abgelaufen”（还款期限到期）的中间捕获事件触发，执行“Vorgang schließen”任务，结束流程。
+        - 另一个分支，如果“Geld eingegangen”（钱已收到）的中间捕获事件触发，执行“Zahlung verbuchen”任务，记录付款。
+    - 对于“Widervorlag einrichten”任务之后的流程：
+        - 如果“VN widerspricht”（客户有异议）的中间捕获事件触发，执行“Widerspruch prüfen”任务，检查异议。
+        - 对于“Widerspruch prüfen”任务之后：
+            - 如果异议合理（“ja”），则流程继续。
+            - 如果异议不合理（“nein”），则流程进入一些后续处理（未明确在图中表示，但可推测与结束流程或其他操作相关）。
+5. 最后，通过一系列任务和网关，流程最终到达“Vorgang an Inkassodienstleister abgegeben”的结束事件，表示流程已提交给收账服务提供商。

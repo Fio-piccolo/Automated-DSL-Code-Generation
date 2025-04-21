@@ -1,0 +1,17 @@
+The requirement is as follows:
+
+We need to define operations for a type named "UReal". This type should have two attributes named 'x' and 'u', both of type Real.
+
+The operations for this type are as follows:
+
+- A method named 'add' that receives another UReal object as parameter and returns a new UReal object. The values of 'x' and 'u' of the result should be the sum of the respective values of the current object and the parameter.
+
+- A method 'minus' that performs subtraction. The 'x' value of the result should be the difference between the current object's 'x' value and the parameter's 'x' value, and the 'u' value of the result should be the square root of the difference of squares of the corresponding values of 'u'.
+
+- We require a multiplication method 'mult' and a division method 'divideBy'. The division method should verify that the divisor is not zero.
+
+- Several unary methods: 'abs' that returns the absolute value, 'neg' that returns the negation, 'power' that raises the Type to a real power, 'inverse' that returns the multiplicative inverse (but verifies that the object is not zero), 'sqrt' that calculates the square root (the object should not be negative), 'floor' and 'round' methods which calculate the integer floor and rounding values respectively.
+
+- Several comparison methods: 'equals', 'distinct', 'compareTo', 'lessThan', 'lessEq', 'max', 'min'. These methods allow for comparing two 'UReal' objects in various ways.
+
+Implement these operations using the suitable OCL expressions that capture the desired computation.

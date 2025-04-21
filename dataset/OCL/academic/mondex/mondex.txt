@@ -1,0 +1,11 @@
+The requirements are as follows:
+
+1. For an object of the AbWorld type, there must be exactly one predecessor world (PredWorld) and one successor world (SuccWorld) existing.
+
+2. There should be at most one Initial World instance in the system at any point, i.e. the number of instances of the AbInitWorld class should be less than 2.
+
+3. An object of the AbEndWorld type should have exactly one predecessor world (PredWorld) and no successor world should exist.
+
+4. A Coin must belong to a Purse. This is defined in each World object, there would be at least one purse existing that includes the coin either in its balance or its lost coins.
+
+5. Regarding the balance and lost coins in a Purse, there should not be any coin sharing between two different purses in two distinct worlds. It means that if two purses are different, their corresponding worlds should also be different.

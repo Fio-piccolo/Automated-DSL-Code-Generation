@@ -1,0 +1,11 @@
+The requirements are as follows:
+1. For all instances of A2, the attribute 'at' should always be greater than the 'at' attribute of its associated A1 instance.
+2. For all instances of A3, the attribute 'at' should always be greater than the 'at' attribute of its associated A2 instance.
+3. For all instances of A4, the attribute 'at' should always be greater than the 'at' attribute of its associated A3 instance.
+4. For all instances of A5, the attribute 'at' should always be greater than the 'at' attribute of its associated A4 instance.
+5. For all instances of A6, the attribute 'at' should always be greater than the 'at' attribute of its associated A5 instance.
+6. For all instances of A7, the attribute 'at' should always be greater than the 'at' attribute of its associated A6 instance.
+7. For all instances of A8, the attribute 'at' should always be greater than the 'at' attribute of its associated A7 instance.
+8. For all instances of A9, the attribute 'at' should always be greater than the 'at' attribute of its associated A8 instance.
+9. For all instances of A10, the attribute 'at' should always be greater than the 'at' attribute of its associated A9 instance.
+10. For all instances of A1, the attribute 'at' should always be equal or greater than the 'at' attribute of its associated A10 instance.

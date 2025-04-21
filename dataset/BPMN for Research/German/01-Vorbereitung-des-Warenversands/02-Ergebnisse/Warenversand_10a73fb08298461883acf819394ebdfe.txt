@@ -1,0 +1,8 @@
+该业务流程围绕货物运输展开，涵盖了从创建报价到货物交付的一系列操作。具体如下：
+1. 流程由“Start”事件启动，进入“Menge klären”任务。
+2. 完成数量确认后，流程进入“Grosse Menge?”排他网关。若数量大，则进入“Sonderversand”中间抛出事件；若数量不大，则进入“Postversand”中间抛出事件。
+3. “Sonderversand”和“Postversand”之后，分别执行“Angebote anfordern”和“Angebot auswählen”任务。
+4. 选定报价后，执行“Beauftragen”任务，随后根据是否需要保险进入不同分支。
+5. 若需要保险，执行“Versicherung abschliessen”任务，之后流程汇聚，再执行“Ware verpacken”和“zur Abholung bereitstellen”任务，最终以“Ende”事件结束流程。
+6. 若不需要保险，则执行“stand. Paketschein ausfüllen”任务，然后进入“versichern?”排他网关。根据保险结果，若需要保险则执行“Versicherung abschliessen”任务，之后流程汇聚，再执行“Ware verpacken”和“zur Abholung bereitstellen”任务，最终以“Ende”事件结束流程；若不需要保险，则直接执行“Ware verpacken”和“zur Abholung bereitstellen”任务，最终以“Ende”事件结束流程。
+7. 在整个流程中，还涉及“Angebote erstellen”任务，该任务在流程开始时执行，为后续流程提供报价基础。

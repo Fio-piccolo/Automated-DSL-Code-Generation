@@ -1,0 +1,15 @@
+业务需求如下：
+1. 流程以“Regress gegen VN gemeldet”（向越南退回已申报）这个开始事件启动。
+2. 启动后进入“Regressnahme prüfen”（检查退回）任务。
+3. “Regressnahme prüfen”任务完成后，流转到“Regress berechtigt?”（退回是否被授权？）这个排他网关。
+4. 若排他网关判断退回被授权（走“ja”路径），则进入“VN Zahlungsaufforderung schicken”（向越南发送付款要求）任务；若判断未被授权（走“nein”路径），则进入“Widerspruch prüfen”（检查异议）任务。
+5. “VN Zahlungsaufforderung schicken”任务完成后，流转到一个排他类型的事件网关。
+6. 该事件网关会根据不同条件分支：
+   - 若收到“Zahlung eingegangen”（付款已收到）消息，进入“Eingang verbuchen”（登记收入）任务；
+   - 若收到“Widerspruch eingegangen”（异议已收到）消息，进入“Widerspruch prüfen”（检查异议）任务；
+   - 若经过10天（通过定时器事件），进入后续流程。
+7. “Eingang verbuchen”任务完成后，流程到达“Zahlung eingegangen”结束事件，表示付款已成功处理。
+8. “Widerspruch prüfen”任务完成后，流转到“Widerspruch gerechtfertigt?”（异议是否合理？）这个排他网关。
+9. 若该排他网关判断异议合理（走“ja”路径），则进入“An Inkasso weiterleiten”（转交给催款部门）任务；若判断不合理（走“nein”路径），则流程继续进行其他步骤（这里未明确说明其他步骤具体内容）。
+10. “An Inkasso weiterleiten”任务完成后，到达“Vorgang an Inkasso weitergeleitet”结束事件，表示流程已转交给催款部门。
+11. 另外，在流程中，有多个任务完成后会流转到相应的后续节点，最终整个流程结束于“Vorgang geschlossen”（流程已关闭）结束事件。

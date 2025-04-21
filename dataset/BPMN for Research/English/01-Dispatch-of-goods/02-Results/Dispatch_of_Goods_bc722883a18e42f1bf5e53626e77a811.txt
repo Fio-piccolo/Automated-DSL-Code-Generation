@@ -1,0 +1,13 @@
+该业务流程是一个发货流程，主要涉及发货需求的触发以及一系列与物流相关的操作，最终完成货物的准备和交付。
+1. 当出现“shipping needed”（发货需求）时，流程启动。
+2. 首先经过“size?”（尺寸？）这个排他网关，根据货物尺寸的不同，流程会有不同的分支：
+    - 如果货物尺寸大，流程会进入“invite logistics comapnies”（邀请物流公司）任务。
+    - 如果货物尺寸小，流程会进入“write package label”（写包裹标签）任务。
+3. “invite logistics comapnies”任务完成后，进入“evaluate the offers”（评估报价）任务。
+4. “write package label”任务完成后，进入“evaluate if insurance is needed”（评估是否需要保险）任务。
+5. “evaluate if insurance is needed”任务完成后，会经过“needed?”（需要？）这个排他网关：
+    - 如果回答是“yes”，则进入“deal with the insurance”（处理保险）任务。
+    - 如果回答是“no”，则直接进入后续流程。
+6. “evaluate the offers”任务完成后，进入“select the offer”（选择报价）任务。
+7. “deal with the insurance”任务完成后，与“select the offer”任务的流程汇聚，然后经过一个并行网关，并行地进行“pack the goods”（包装货物）任务和“prepare the package to be picked up”（准备包裹以便取件）任务。
+8. “pack the goods”任务完成后，与“prepare the package to be picked up”任务的流程汇聚，最后流程结束于“”（此处可能原文档有误，应为某个结束事件）。

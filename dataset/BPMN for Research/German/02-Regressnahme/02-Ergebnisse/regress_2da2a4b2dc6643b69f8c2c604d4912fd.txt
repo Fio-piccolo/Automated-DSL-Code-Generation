@@ -1,0 +1,3 @@
+业务需求如下：流程起始于“Möglicher Regress”事件，接着执行“Fall auf Regress prüfen”任务，之后进入“Regress möglich?”排他网关进行判断。若判断结果为“是”，则流程会通过并行网关分成两路，一路执行“Vorgang auf Wiedervorlage setzten”任务，另一路执行“Zahlungs - aufforderung an VN erstellen”任务；若判断结果为“否”，则直接执行“Vorgang schliessen”任务并结束流程。
+
+对于执行“Zahlungs - aufforderung an VN erstellen”任务后，会通过并行网关与“Vorgang auf Wiedervorlage setzten”任务的执行结果汇聚，然后执行“Geldeingang verbuchen”任务，接着进入“Zahlungsverweigerung gerechtfertigt?”排他网关进行判断。若判断结果为“是”，则执行“Zahlungsaufforderung an Inkasso - DL schicken”任务；若判断结果为“否”，则流程会等待“Widervorlagefrist abgelaufen”事件（通过定时器触发），之后执行相关操作，可能还会根据“Zahlungseingang”事件的条件判断执行后续任务，最终执行“Vorgang schliessen”任务结束流程。整个流程中还包含一些中间事件用于处理消息、异常等情况。

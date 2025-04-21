@@ -1,0 +1,12 @@
+业务需求如下：
+1. 首先“Regress Fall wird gemeldet”（退回情况被报告）这一事件触发流程。
+2. 接着对是否存在实际的退回可能性进行检查（Prüfung ob tatsächlich die Möglichkeit zur Regress - nähme besteht）。
+3. 检查后通过排他网关（Exclusive Gateway）进行分支：
+   - 如果结果为“nein”（否），则流程直接进入“Vorgang schließen”（流程关闭）。
+   - 如果结果为“ja”（是），则创建支付请求并发送给保险客户（Zahlungsauf - forderung erstellen und VN schicken）。
+4. 保险客户收到支付请求后，可能有不同后续情况：
+   - 若发生“Wiederspruch”（异议），流程会进行相应处理后继续分支。
+   - 正常情况下，保险客户进行“Abgabe an Inkassodienst”（向收款服务交付）操作。
+   - 在某些条件下，可能会出现“Wiedervorlagefrist”（重新提交期限），经过一段时间后会有后续流程。
+5. 流程中存在一些中间捕获事件，如“Geld eingegangen”（钱已收到）、“Wiedervorlagefrist”（重新提交期限）等，用于处理特定情况并引导流程走向。
+6. 最后根据不同情况，流程可能会多次进入“Vorgang schließen”（流程关闭）或“Abgabe”（交付）等结束状态。整个流程围绕保险相关的退回情况处理、支付请求以及后续操作展开，通过各种任务、网关和事件来协调和控制业务流程的执行。

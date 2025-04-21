@@ -1,0 +1,1 @@
+The requirement is as follows: within the context of RemittanceInformation1 in package 'isoStdIso20022TechXsdPain00800101', only one instance of 'unstructured' is allowed. This stipulation is in accordance with the SEPA B2B Direct Debit C2B Implementation Guidelines (specifically, row 6 on page 14).

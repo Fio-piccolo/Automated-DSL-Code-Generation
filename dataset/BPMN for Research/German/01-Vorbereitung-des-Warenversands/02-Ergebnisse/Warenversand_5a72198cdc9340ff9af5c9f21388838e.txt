@@ -1,0 +1,5 @@
+业务流程从“Ware versandfertig”（货物准备好发货）的开始事件启动。然后进入“Sekretariat”（秘书处）车道的“Sonderversand?”（特殊运输？）排他网关，根据判断进入不同分支。
+如果是“Ja”（是），进入“Angebot 1 einholen”（获取报价1）、“Angebot 2 einholen”（获取报价2）、“Angebot 3 einholen”（获取报价3）三个并行任务，完成后在并行网关汇聚，接着进行“Angebot auswählen”（选择报价）和“Spediteur beauftragen”（委托运输商）任务，最后结束。
+如果是“Nein”（否），进入“Paketschein ausfüllen”（填写包裹单）任务，同时还有其他分支：
+一是进入“Lager”（仓库）车道的“Ware verpacken”（包装货物）任务；
+二是进入“Logistik”（物流）车道，先经过“Versicherung?”（保险？）排他网关，若“Ja”（是）则进行“Versicherung abschliessen”（签订保险）任务，若“Nein”（否）则直接到汇聚网关，然后与其他分支在并行网关汇聚，最终到达“Ware zur Abholung bereit”（货物准备好取货）的结束事件。

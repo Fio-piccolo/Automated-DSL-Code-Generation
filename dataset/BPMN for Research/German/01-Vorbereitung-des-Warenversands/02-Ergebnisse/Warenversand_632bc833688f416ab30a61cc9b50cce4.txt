@@ -1,0 +1,10 @@
+当收到“Versandauftrag”（发货订单）后，首先由“Mein Pool”中的“Sekretariat”部门执行“Bestellmenge prüfen”（检查订购数量）任务，然后进入一个排他网关“große Menge”（大量）。根据检查结果，如果数量不大，继续执行“Angebote einholen”（获取报价）任务，之后进入另一个排他网关，根据条件走向不同路径；如果数量大，则直接进入相应路径。
+- 如果选择获取报价，完成任务后进入另一个排他网关“große Menge”，根据条件走向不同路径。
+- 从“Bestellmenge prüfen”任务出来的另一条路径进入“Spediteur beauftragen”（委托运输商）任务，之后进入一个排他网关，根据条件走向不同路径。
+- 在获取报价任务完成后，如果条件满足，进入“Spediteur auswählen”（选择运输商）任务，之后进入“Spediteur beauftragen”任务。
+- 无论从哪个路径进入“Spediteur beauftragen”任务，之后都会进入一个排他网关，根据条件走向不同路径。
+- 若在某个节点判断出需要保险，则执行“Versicherung abschließem”（完成保险）任务，之后进入另一个排他网关。
+- 同时，在流程中有并行网关，会同时执行“Ware verpacken”（包装货物）和“Paketschein ausfüllen”（填写包裹单）任务。
+- 包装货物任务完成后进入一个并行网关，之后进入“Ware zur Abholung bereitstellen”（准备货物供取货）任务。
+- 填写包裹单任务完成后进入一个排他网关，根据条件走向不同路径，若不需要保险则进入“Paketschein ausfüllen”任务后续路径，若需要保险则进入“Versicherung abschließem”任务后续路径。
+- 最终，“Ware zur Abholung bereit”（货物准备好取货）任务完成后，标志着整个发货流程结束。

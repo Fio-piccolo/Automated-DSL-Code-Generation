@@ -1,0 +1,14 @@
+业务需求如下：
+1. 流程开始于“VN kann möglicherweise in Regress enommen werden”事件。
+2. 接着执行“Fall prüfen”任务。
+3. 之后通过“Besteht Möglichkeit zur Regressnahme?”排他网关进行分支判断：
+    - 若判断结果为“ja”，则执行“Zahlungsaufforderung schicken”任务。
+    - 若判断结果为“nein”，则流程结束于“Keine Regressnahme möglich”事件。
+4. 执行“Zahlungsaufforderung schicken”任务后，触发“Vorgang auf Wiedervorlage”中间抛出事件。
+5. 该事件之后通过一个排他事件网关进行分支：
+    - 若有“Geld eingegangen”中间捕获事件发生，执行“Eingang verbuchen”任务，然后执行“Vorgang schließen”任务，最后流程结束于“Regressnahme erfolgreich”事件。
+    - 若有“Wiederspruch eingegangen”中间捕获事件发生，执行“Wiederspruch prüfen”任务。
+        - 若“Wiederspruch prüfen”任务后判断“Zahlungsverweigerung gerechtfertigt?”为“nein”，则执行“An Inkasso-Dienstleister abgeben”任务，之后流程结束于“Regressnahme an Inkoasso-Dienstleister abgegeben”事件。
+        - 若“Wiederspruch prüfen”任务后判断“Zahlungsverweigerung gerechtfertigt?”为“ja”，则执行“Vorgang schließen”任务，最后流程结束于“Regressnahme nicht gerechtfertigt”事件。
+    - 若“Wiedervorlage-Frist abgelaufen”中间捕获事件发生，则执行后续相关任务（文档未详细说明后续流程）。
+6. 最后通过一个汇聚排他网关进行汇聚，之后的流程文档未详细说明。

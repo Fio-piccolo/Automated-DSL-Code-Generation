@@ -1,0 +1,16 @@
+### 业务流程描述
+
+#### 银行前端（banking frontend）
+1. 从外部接收到“request for score”消息后，向“Scoring(bank)”发起“request scoring”请求，并等待反馈。
+2. 若收到“scoring complete?”事件网关的结果，若成功则显示结果给用户（“Display result to user”），若延迟则显示延迟消息给用户（“Display delay message to user”）。
+3. 当收到“successfully recieved”或“delay reported”事件时，分别按流程继续执行后续操作，最终以“end”结束流程。
+
+#### Scoring(bank)流程
+1. 收到来自银行前端的“request scoring”请求后，执行“request scoring”任务，然后进入“scoring complete?”事件网关。
+2. 若网关判断为成功，向银行前端发送成功结果并结束；若判断为延迟，触发“delay reported”事件给银行前端。
+3. 同时，有不同的分支处理逻辑，如根据结果是否成功决定不同走向，若成功则发送结果到银行前端的“Display result to user”任务，若延迟则触发“delay reported”事件通知银行前端。
+
+#### Credit agency scoring流程
+1. 收到“request for score”请求后，执行“perform quick score”任务，进入“result successful”排他网关。
+2. 若结果成功，向银行发送成功分数并结束；若不成功，执行“inform bank of delay”任务，然后进行“perform level 2 scoring”，接着等待“2 minute wait”计时器事件。
+3. 等待结束后，发送分数到银行并结束流程。

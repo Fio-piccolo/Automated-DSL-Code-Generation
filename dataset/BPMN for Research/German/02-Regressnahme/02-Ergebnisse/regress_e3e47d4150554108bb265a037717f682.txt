@@ -1,0 +1,10 @@
+业务需求如下：
+1. 流程起始于“Möglicher Regress VN”事件。
+2. 接着执行“Prüfung ob Regress oder nicht”任务，判断是否存在可追溯情况。
+3. 若存在可追溯，通过“Regress”路径进入“Verschicken Zahlungsaufforderung und setzen auf Wiedervorlage”任务，然后进行付款通知并设置为催款状态。
+4. 若不存在可追溯，通过“Kein Regress”路径进入“Schließung des Vorgangs”任务，完成流程关闭。
+5. 对于付款通知环节，会经过“Geldeingang”网关，根据不同条件进行分支。若选择“Ja”，进入“Verbuchung und Schließung des Vorgangs”任务，之后完成相关操作并关闭流程；若选择“Nein”，则进入一系列判断和任务环节。
+6. 若选择“Nein”，进入“Widerspruch VN”任务处理异议，接着进行“Prüfung des Widerspruchs”任务检查异议，根据检查结果可能进入“Abgabe an Inkasso”任务，也可能进入其他相关任务。
+7. 若经过检查异议后满足一定条件，会触发“Wiedervorlage-Frist abgelaufen”中间捕获事件，然后进入“Abgabe an Inkasso”任务。
+8. 在“Abgabe an Inkasso”任务之后，会根据结果进入不同的结束事件，完成整个流程。
+9. 对于不同任务，如“Schließung des Vorgangs”“Verbuchung und Schließung des Vorgangs”等，根据流程走向执行相应操作并到达不同的结束节点。

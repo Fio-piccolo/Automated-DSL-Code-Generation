@@ -1,0 +1,1 @@
+业务需求如下：首先是起始事件“Warenversand gewünscht”，随后流程分为两条并行路径。一条路径是先进行“Versandart bestimmen”任务，接着根据条件选择不同的分支，若为“kleine Versandmenge”则进入“Paketschein ausfüllen”任务，若为“Versicherung erforderlich”则进入“Versicherung abschließen”任务；另一条路径是先进行“Ware verpacken”任务，然后经过并行网关“Converging”汇聚，再进行“Bereitstellung zur Abholung”任务，最后到达结束事件。整个流程中各个任务和网关之间通过序列流进行连接和控制流转。

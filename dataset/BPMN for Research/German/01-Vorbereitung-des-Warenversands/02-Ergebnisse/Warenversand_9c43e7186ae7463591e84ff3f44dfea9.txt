@@ -1,0 +1,3 @@
+业务需求如下：该业务流程主要涉及电脑经销商（Computerhändler）相关的一系列操作，具体如下：
+首先从“Ware zu versenden”（待发货商品）这个起始事件开始，之后流程通过并行网关分为两个分支，一个分支后续会判断是否为大量商品（“große Menge?”），如果是（走“ja”分支）则去获取3个报价（“3 Angebote einholen ”），接着从获取的报价中选择一个报价（“ein Angebot auswählen ”），再委托一家快递公司（“einen Spediteur beauftragen”）；另一个分支则是填写包裹单（“Paketschein ausfüllen”）。
+填写包裹单后会判断是否需要保险（“Versicherung erforderlich?”），如果需要（走“ja ”分支）则去完成保险签订（“Versicherung abschliessen”），之后两个分支会进行汇聚，汇聚后又经过一些操作最终完成商品准备（“Ware bereitgestellt”）的状态。其中涉及不同角色如物流主管（Logistikleiter）、秘书（Sekretärin）、仓库工人（Lagerarbeiter）在各自负责的任务环节执行相关任务，比如准备商品（“Ware bereitstellen”）、包装商品（“Ware verpacken ”）等。

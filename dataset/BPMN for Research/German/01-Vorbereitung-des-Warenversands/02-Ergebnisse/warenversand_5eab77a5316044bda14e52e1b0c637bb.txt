@@ -1,0 +1,7 @@
+流程从“Ware soll versendet werden”（货物应发送到哪里）的开始事件启动。首先，流程通过并行网关分为两个分支：一个分支是“Ware verpacken”（包装货物）任务，另一个分支是“Mengengröße feststellen”（确定数量大小）任务。在“Mengengröße feststellen”任务后，流程通过排他网关“welche Menge?”（数量多少）根据数量大小（“große Menge” - 大数量或“kleine Menge” - 小数量）进行分流。
+
+对于大数量（“große Menge”），执行“Sonderversand vorbereiten”（准备特殊运输）任务，然后通过并行网关分为三个分支，分别执行“Angebot Spediteur 1”（货运代理1报价）、“Angebot Spediteur 2”（货运代理2报价）和“Angebot Spediteur 3”（货运代理3报价）任务。这些任务完成后，通过并行网关合并，接着执行“Spediteur auswählen”（选择货运代理）和“Spediteur beauftragen”（委托货运代理）任务。
+
+对于小数量（“kleine Menge”），执行“Paketschein ausfüllen”（填写包裹单）任务，然后执行“feststellen, ob Versicherung erforderlich ist”（确定是否需要保险）任务。之后通过排他网关“Versicherung erforderlich?”（需要保险吗）根据是否需要保险（“Ja” - 是或“Nein” - 否）进行分流。如果需要保险（“Ja”），执行“Versicherung abschließen”（签订保险）任务；如果不需要保险（“Nein”），则直接通过排他网关合并。
+
+上述两条路径（大数量和小数量处理路径）在各自的处理后，分别通过排他网关和并行网关合并。合并后，执行“Ware zur Abholung bereitstellen”（准备货物以便取货）任务，最后流程以“Ware bereitgestellt”（货物已提供）的结束事件结束。

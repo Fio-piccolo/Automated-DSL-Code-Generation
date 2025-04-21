@@ -1,0 +1,5 @@
+当需要进行货物运输时（“Warenversand erforderlich”），流程开始。首先，流程并行执行两个任务：“Ware verpacken”（包装货物，由“Lagerarbeiter”执行）和“Versandart und ggf. Versicherung abklären”（明确运输方式及可能的保险，由“Sekretariat”执行）。
+
+在“Versandart und ggf. Versicherung abklären”之后，通过“Sonderversand erforderlich?”（是否需要特殊运输）的排他网关判断。如果需要（“Ja”），则进行“Offerten einholen”（获取报价）、“günstigstes Angebot auswählen”（选择最便宜的报价）、“Gewünschter Spediteur beauftragen”（委托所需的运输商）这些任务（均由“Sekretariat”执行），然后到达一个排他网关。如果不需要特殊运输（“Nein”），则进行“Paketschein ausfüllen”（填写包裹单，由“Sekretariat”执行），接着通过“Versicherung erforderlich?”（是否需要保险）的排他网关判断。若需要保险（“Ja”），则进行“Versicherung abschliessen”（签订保险，由“Logistikleiter”执行）；若不需要保险（“Nein”），则直接到相应网关。
+
+之后，不同分支的流程会汇聚到网关，再与“Ware verpacken”后的流程汇聚，然后进行“Bereitstellen zur Abholung”（准备好待取货，由“Lagerarbeiter”执行），最后结束流程（“Ware Versenden”）。

@@ -1,0 +1,2 @@
+业务需求如下：
+该业务流程主要围绕货物发送展开。首先由“Spediteur 3”发起“Angbot anfordern”（申请报价）任务。接着流程进入主流程，从“Ware soll versendet werden”（货物应被发送）这个开始事件触发，经过“Versandart klären”（明确运输方式）任务，然后到“Große Menge?”（大量？）这个排他网关进行判断。如果数量大，流程走向不同分支；如果数量不大，则继续后续流程。之后经过“Paketschein ausfüllen”（填写包裹单）任务、“Versicherung erforderlich?”（需要保险？）排他网关等环节。在流程中，不同角色如“Sekretariat”（秘书处）、“Post”（邮政）、“Spediteur 1”“Spediteur 2”“Lager”（仓库）、“Logistikleiter”（物流主管）等参与其中，各自负责不同的任务和操作，最终目标是实现货物的准备和交付，即达到“Ware bereitgestellt”（货物已准备好）的结束事件。

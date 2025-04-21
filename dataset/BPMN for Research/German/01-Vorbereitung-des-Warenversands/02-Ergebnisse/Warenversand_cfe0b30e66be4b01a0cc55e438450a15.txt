@@ -1,0 +1,10 @@
+业务需求如下：
+该流程以“Anfrage”（请求）作为起始事件，随后进入“Entscheidung treffen”（做出决策）任务。根据决策结果，可能会出现两种情况：若数量少，则进入“Paketschein ausfüllen”（填写包裹单）任务；若数量多，则进入“Angebot anfordern”（请求报价）任务。
+
+执行“Angebot anfordern”任务后，会并行地进行多个操作。一方面，会向不同的供应商请求多个报价，即“Angebot 1”“Angebot 2”“Angebot 3”；另一方面，会进行一些条件判断和流程分支。
+
+在收到多个报价后，进入“Auswahl eines Angebotes”（选择一个报价）任务，然后根据选择的报价进行后续操作，比如“Spediteur beauftragen”（委托运输商）。之后，会进行一些检查和判断，如“V-Pflicht prüfen”（检查V义务），根据检查结果可能会有不同的流程走向。
+
+在整个流程中，还涉及到与“Lager”（仓库）相关的操作，如“Lagerarbeiter verpackt Lieferung”（仓库工人包装货物），以及与“Versicherung”（保险）相关的操作，如“Versicherung abschliessen”（签订保险）。
+
+最后，经过一系列的操作和流转，流程到达结束事件，完成整个业务流程。

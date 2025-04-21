@@ -1,0 +1,6 @@
+业务逻辑描述：
+银行（Bank）与信用保护机构（Credit Protection Agency）以及银行前端（Banking Frontend）之间存在一系列的消息流程和任务交互。
+银行开始时，通过起始事件（startEvent）触发请求评分任务（Request Score），该任务完成后将结果传递给事件基于网关（eventBasedGateway）。
+事件基于网关根据不同条件进行分流，一部分流向信用保护机构的相关流程，另一部分继续在银行内部的流程中流转。
+信用保护机构也有自己的起始事件开始相关流程，包括快速评分、发送延迟通知等任务，并且与银行的流程相互关联和交互。
+整个流程中包含多个中间捕获事件（intermediateCatchEvent）用于接收不同阶段的消息，以及排他网关（exclusiveGateway）用于决定流程的走向。最终流程以结束事件（endEvent）结束。

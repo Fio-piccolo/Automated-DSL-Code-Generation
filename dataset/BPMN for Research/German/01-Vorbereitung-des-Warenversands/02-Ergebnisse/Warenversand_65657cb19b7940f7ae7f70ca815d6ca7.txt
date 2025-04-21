@@ -1,0 +1,18 @@
+该BPMN流程描述了一个名为“Warenversand”（货物运输）的业务流程。具体业务逻辑如下：
+
+1. 流程从“Bestellung”（订单）开始事件启动。
+2. 订单进入“Bestellung einordnen”（订单分类）任务，处理后进入一个排他网关。
+3. 在排他网关处，根据订单数量（分为“große Menge”（大量）和“kleine Menge”（少量））决定流程走向：
+   - 如果是大量订单，进入“Angebote einholen”（获取报价）任务，处理后回到并行网关。
+   - 如果是少量订单，进入“Paketschein ausfüllen”（填写包裹单）任务，处理后进入排他网关。
+4. 并行网关将流程分为三条路径：
+   - 一条路径到达“Angebot abgeben”（提交报价）任务（由“Spediteur 1”执行）。
+   - 一条路径到达“Angebot abgeben”（提交报价）任务（由“Spediteur 2”执行）。
+   - 一条路径到达“Angebot abgeben”（提交报价）任务（由“Spediteur 3”执行）。
+5. 这些报价任务完成后进入一个并行网关进行汇聚。
+6. 汇聚后进入“Angebot auswählen & beauftragen”（选择并委托报价）任务，处理后进入另一个并行网关。
+7. 并行网关将流程分为两条路径：
+   - 一条路径到达“Waren verpacken”（包装货物）任务。
+   - 一条路径到达“Versicherungsschein ausfüllen”（填写保险单）任务（根据是否需要保险决定进入此任务或直接进入另一个排他网关）。
+8. “Waren verpacken”任务完成后进入一个并行网关与“Versicherungsschein ausfüllen”任务完成后的路径进行汇聚。
+9. 汇聚后进入“Waren bereit zur Abholung”（货物准备好取货）结束事件，完成整个货物运输流程。

@@ -1,0 +1,17 @@
+该业务流程主要围绕货物发送展开，具体步骤如下：
+1. 起始于“Ware ist zu versenden”（货物待发送）事件。
+2. 接着进行“Versandart klären”（明确运输方式）任务。
+3. 之后通过排他网关，根据不同条件分支：
+    - 若数量少，执行“Standardisierten Paketschein ausfüllen”（填写标准化包裹单）任务。
+    - 若数量多，则进行“Angebote von 3 Speditionen einholen”（获取3家物流公司报价）任务。
+4. 对于“Standardisierten Paketschein ausfüllen”任务完成后，进入“Versicherung notwendig?”（是否需要保险）排他网关：
+    - 若需要，执行“Versicherung abschließen”（购买保险）任务。
+    - 之后两个分支汇聚到一个网关，再进行“Angebot auswählen”（选择报价）任务。
+5. 对于“Angebote von 3 Speditionen einholen”任务完成后，经过“Angebot eingetroffen?”（报价是否收到）并行网关，并行处理3个报价评估任务：
+    - “Angebot 1 bewerten”（评估报价1）。
+    - “Angebot 2 bewerten”（评估报价2）。
+    - “Angebot 3 bewerten”（评估报价3）。
+6. 3个评估任务完成后汇聚，进行“Angebot auswählen”（选择报价）任务。
+7. 选择报价后，触发“Angebot ausgewählt”（报价已选择）中间抛出事件，并执行“Auftrag an Spedition erteilen”（向物流公司下达订单）任务。
+8. 同时，在起始事件后，并行进行“verpackte Ware bereitstellen”（准备包装好的货物）任务和“Ware verpacken”（包装货物）任务。
+9. 上述任务完成后，经过并行网关汇聚，最终到达“Ware versandtbereit”（货物准备好发送）结束事件。

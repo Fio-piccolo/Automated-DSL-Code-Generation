@@ -1,0 +1,5 @@
+The requirements are as follows:
+
+Within the package isoStdIso20022TechXsdPain00800101 for the specified model, in the context of PaymentInstructionInformation2, a certain condition is required for an invariant called EPC_AOS_ChrgsAcct. This invariant condition is that the size of the charges account (i.e., the number of elements in the chrgsAcct collection) must be equal to zero.
+
+Please note that there is a warning that the element ChrgsAcct within PmtInf is only available for AOS; instructed banks that are not part of the AOS community may reject messages containing these elements. Reference is made to section 1.2 of the SEPA B2B Direct Debit C2B Implementation Guidelines.

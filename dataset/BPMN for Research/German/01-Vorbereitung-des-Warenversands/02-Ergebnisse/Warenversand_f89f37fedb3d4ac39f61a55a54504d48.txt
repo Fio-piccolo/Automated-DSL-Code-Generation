@@ -1,0 +1,12 @@
+业务需求如下：
+1. 流程开始于一个起始事件。
+2. 首先执行一个无特定名称的任务。
+3. 接着有三个名为“Angebot 1”“Angebot 2”“Angebot 3”的任务并行执行。
+4. 完成这三个任务后，通过一个并行网关进行汇聚，然后执行“1 Angebot auswählen”任务。
+5. 之后根据选择的结果，执行“Spediteur wird beauftragt”任务。
+6. 若选择的是标准运输，则执行“normaler Postversand”任务和“standardisierter Paketschein ausfüllen”任务，接着执行“Versicherung ist abgeschlossen”任务，最后流程结束。
+7. 若选择的是特殊运输，则执行“Auswahl von drei unterschiedlichen Spediteuren einholen”任务，之后执行“Ware wird vom Lagerarbeiter zur Abholung bereitsgestellt”任务，该任务会产生两个并行分支，分别执行“normaler Postversand”任务和“standardisierter Paketschein ausfüllen”任务，然后执行“Versicherung ist abgeschlossen”任务，最后流程结束。
+8. 在执行“standardisierter Paketschein ausfüllen”任务后，需要先明确保险需求，若需要保险，则执行“Versicherungsbedarf klären”任务，根据结果决定是执行“ja”分支（执行“Versicherung ist abgeschlossen”任务）还是“nein”分支（执行其他相关任务）。
+9. 在执行“Ware wird vom Lagerarbeiter zur Abholung bereitsgestellt”任务前，会先执行“Lagerarbeiter verpackt Ware”任务。
+10. 在流程开始后，会先执行“Bestellmenge prüfen”任务，然后根据结果决定是进行标准运输还是普通运输。
+11. 整个流程通过一系列的任务、网关和顺序流来实现不同情况下的业务处理，最终到达结束事件完成流程。

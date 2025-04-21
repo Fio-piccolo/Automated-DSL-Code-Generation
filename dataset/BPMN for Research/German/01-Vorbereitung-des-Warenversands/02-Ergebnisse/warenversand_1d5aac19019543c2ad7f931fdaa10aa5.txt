@@ -1,0 +1,8 @@
+该业务流程围绕货物运输展开，始于订单接收，经多环节协作，完成货物包装与交付准备。
+1. 流程起始于“Eingang Bestellung”（接收订单）事件。
+2. 由“Logistikleiter”（物流主管）负责“Versicherung abschließen”（购买保险）任务。
+3. “Sekretariat”（秘书处）执行“Mengenbestimmung”（确定数量）任务，之后进入“Menge groß/klein”（数量大小）的排他网关判断。
+    - 若数量少，流程经“3 Angebote bei Spediteure einholen”（向三家快递公司获取报价）任务，再由“günstigstes Angebot auswählen”（选择最优惠报价）任务，接着“Spediteur beauftragen”（委托快递公司）。
+    - 若数量多，直接进行“3 Angebote bei Spediteure einholen”任务。
+4. 之后流程汇聚，“Paketschein”（包裹单）任务完成后，货物进行包装交付准备。
+5. 最终，货物准备好交付，整个流程结束。

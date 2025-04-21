@@ -1,0 +1,12 @@
+业务需求如下：
+1. 流程以“Regressnahme”事件开始。
+2. 接着执行“Fall prüfen”任务。
+3. 之后通过“Möglichkeit f. Regress ?”排他网关进行分支判断。
+    - 如果条件为“ja”，则执行“Zahlungsaufforderung verschicken”任务，然后通过“Zahlung eingegangen”中间捕获事件（需满足特定条件），再执行“Zahlungseingang verbuchen”任务，最后到达“Regressprozess geschlossen”结束事件。
+    - 如果条件为“nein”，则执行“Vorgang schließen”任务，然后到达“Regressprozess geschlossen”结束事件。
+4. 在执行“Zahlungsaufforderung verschicken”任务后，通过事件驱动网关进行分支。
+    - 若接收到“Widerspruch eingelangt”消息，执行“Widerspruch prüfen”任务，再通过“Widerspruch gerechtfertigt?”排他网关进行判断。
+        - 若为“ja”，执行“Übergabe an Inkasso”任务。
+        - 若为“nein”，也执行“Übergabe an Inkasso”任务。
+    - 若经过“Zahlung eingegangen”中间捕获事件（满足条件），执行“Zahlungseingang verbuchen”任务。
+    - 若经过“Ablauf Vorlagefrist”中间捕获事件（定时器触发），执行“Zahlungseingang verbuchen”任务。

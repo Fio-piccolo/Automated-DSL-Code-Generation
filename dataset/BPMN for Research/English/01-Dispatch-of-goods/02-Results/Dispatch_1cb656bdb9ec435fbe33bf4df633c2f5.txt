@@ -1,0 +1,11 @@
+该业务流程主要涉及货物发货的一系列操作，由不同角色协同完成，具体如下：
+1. **发货开始**：流程始于“Ship Goods”事件，这是发货流程的起点。
+2. **金额判断与任务分配**：通过“Exclusive Gateway”进行判断，如果货物金额大，则进入“Send RFO”任务；如果金额小，则进入“Write Shipping Label”任务。这两个任务分别由不同的人员或角色执行，“Send RFO”任务可能由秘书相关人员负责，“Write Shipping Label”任务可能由物流部门相关人员负责。
+3. **任务执行与流转**：
+    - 执行“Send RFO”任务后，接着进行“Select Offer”任务。
+    - 执行“Write Shipping Label”任务后，进行“Parcel Insurance necessary?”任务，判断是否需要包裹保险。
+    - 在“Parcel Insurance necessary?”任务后，又会通过一个“Exclusive Gateway”进行判断，如果需要保险，则进入“Take Parcel Insurance”任务；如果不需要保险，则直接进入后续流程。“Take Parcel Insurance”任务由物流部门相关人员执行。
+    - 同时，流程从开始事件还会并行进入“Clarify who will do the shipping”任务和“Package Goods”任务。“Clarify who will do the shipping”任务由秘书相关人员执行，执行后回到之前的判断节点；“Package Goods”任务由仓库管理员相关人员执行，执行后进入后续的并行汇聚节点。
+4. **任务汇聚与后续操作**：
+    - 经过一系列任务后，流程在不同路径上的任务会汇聚到一起，最终到达“Pickup Packaged Goods”任务，由物流公司相关人员执行。
+    - 执行完“Pickup Packaged Goods”任务后，发货流程结束。

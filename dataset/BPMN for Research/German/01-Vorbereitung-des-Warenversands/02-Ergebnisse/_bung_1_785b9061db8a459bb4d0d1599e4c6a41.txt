@@ -1,0 +1,7 @@
+流程由“Versand-Auftrag”开始事件触发。“Sekretariat”执行“Versandweg klären”任务，然后流程进入“436FFC42”排他网关。从该网关，流程到“E0707DB8”排他网关。根据“E0707DB8”网关的条件，流程可能进入不同路径：
+- 若为“Große Mengen”（大数量），进入“D4F35AC2”并行网关，然后并行执行“Angebot 1 einholen”、“Angebot 2 einholen”和“Angebot 3 einholen”任务，完成后在“58AF3A63”并行网关汇聚，接着执行“günstigstes Angebot auswählen”和“Auftrag an Spediteur”任务，最后结束于“8866FDC5”结束事件。
+- 若为“kleine Mengen”（小数量），执行“Paketschein ausfüllen”任务，然后执行“Ist eine Versicherung nötig?”任务，进入“DAE448F4”排他网关：
+  - 若“ja”（是），“Logistikleiter”执行“Versicherung abschließen”任务。
+  - 若“nein”（否），直接继续。
+- 若为其他情况（未明确标识的路径），“Lagerarbeiter”执行“Ware verpacken”和“Ware bereitstellen”任务。
+之后，“Sekretariat”和“Lagerarbeiter”的路径在“62BF6BF9”并行网关汇聚，然后执行“Ware versenden”任务，最后结束于“AB974375”结束事件。

@@ -1,0 +1,3 @@
+业务需求如下：
+首先有一个名为“Warenausgang”的流程，包含多个参与者，如“Logistikleiter”“Sekretariat”“Lagerarbeiter”等。
+从开始事件“Ware soll versendet werden”开始，流程依次经过“Versandart feststellen”“Welche Versandart?”（根据不同选择分为两条路径）等任务节点，在某些节点会进行如“Angebote einholen”“Paketschein ausfüllen”等操作，还会根据“Versicherung nötig?”的判断决定后续流程走向，最终到达结束事件“Ware versandbereit”。整个流程中各个任务节点之间通过顺序流连接，如从一个任务节点到另一个任务节点的流程走向等都有明确的定义和标识。

@@ -1,0 +1,9 @@
+业务需求如下：该业务流程始于“Regressmeldung”（退回消息）事件，随后进入“Regress prüfen”（检查退回）任务。接着通过“Regress?”（是否退回）排他网关进行分支判断。若判断结果为“是”，则执行“Zahlungsaufforderung an VN verschicken”（向供应商发送付款请求）任务；若为“否”，则该分支流程结束。
+
+执行“Zahlungsaufforderung an VN verschicken”任务后，进入一个排他性的事件驱动网关。此网关有多个分支，分别对应“Eingang Zahlung”（收到付款）、“Eingang Widerspruch”（收到异议）、“Wiedervorlagefrist abgelaufen”（重新提交期限已过）等事件。
+
+当接收到“Eingang Zahlung”事件后，执行“Zahlungseingang verbuchen”（记录付款到账）任务；接收到“Eingang Widerspruch”事件后，执行“Widerspruch prüfen”（检查异议）任务；当“Wiedervorlagefrist abgelaufen”事件触发时，该分支流程结束。
+
+“Widerspruch prüfen”任务完成后，进入“Widerspruch gerechtfertigt?”（异议是否合理？）排他网关进行判断。若结果为“是”，则执行后续相关流程；若为“否”，则该分支流程结束。
+
+在整个流程中，多个条件分支最终汇聚到“Vorgang schließen”（结束流程）任务，完成后流程结束。若流程在处理过程中完成了“向供应商发送付款请求”任务，且接收到“收到付款”事件并完成“记录付款到账”任务后，同样会进入“Vorgang an Inkasso abgegeben”（流程已提交给收款机构）事件，标志着流程在该路径下的结束。

@@ -1,0 +1,12 @@
+该BPMN流程主要描述了发货部门处理订单的业务逻辑，具体如下：
+1. **订单接收**：流程始于“Bestellung eingegangen（订单已收到）”这一开始事件，之后进入“Versandart klären（明确发货方式）”任务。 
+2. **特殊安排判断**：完成发货方式确认后，通过“ Sonderverand nötig?（是否需要特殊安排？）”这个排他网关进行决策。
+    - **需要特殊安排**：若判定需要特殊安排，则执行“Angebote einholen（获取报价）”任务；在所有报价收到（“alle Angebote eingetroffen（所有报价已收到）”中间抛出事件）后，进行“Spediteur beauftragen（委托货运代理）”任务。 
+    - **无需特殊安排**：若判定不需要特殊安排，则直接执行“Paketschein ausfüllen（填写包裹单）”任务。 
+3. **保险需求判断**：执行完“Paketschein ausfüllen（填写包裹单）”任务后，流程来到“Versicherung erforderlich?（是否需要保险？）”这一排他网关。
+    - **需要保险**：如果需要保险，“Logistikleiter（物流主管）”执行“Versicherung abschließen（完成保险）”任务。 
+    - **无需保险**：如果不需要保险，则直接进入后续流程 。 
+4. **并行任务**：不管是否需要保险，在“Versandart klären（明确发货方式）”任务完成后，流程通过并行网关分为两条并行路径：
+    - **包装货物**：“Lagerarbeiter（仓库工人）”执行“Ware verpacken（包装货物）”任务。 
+    - **准备货物**：“Lagerarbeiter（仓库工人）”执行“Ware bereitstellen（准备货物）”任务。 
+5. **流程结束**：上述两个并行任务完成后，通过并行网关汇聚，流程到达“Ware versandbereit（货物准备好发货）”这一结束事件，整个发货流程结束。

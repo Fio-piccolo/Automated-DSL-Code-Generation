@@ -1,0 +1,14 @@
+该业务流程主要涉及货物发货，具体如下：
+1. 流程始于“Ware soll versendet werden”（货物应发往何处）事件。
+2. 进入“Exclusive Gateway”（排他网关），根据货物数量进行分支：
+    - 若货物数量少，走“Kleine Mengen”（小批量）路径，进入“Normaler Postversand”（普通邮政发货）任务。
+    - 若货物数量多，走“Große Mengen”（大批量）路径，进入“Angebote einholen”（获取报价）任务。
+3. “Normaler Postversand”任务完成后，进入“Paketschein ausfüllen”（填写包裹单）任务。
+4. “Angebote einholen”任务完成后，进入“günstigstes Angebot auswählen”（选择最优惠报价）任务。
+5. “Paketschein ausfüllen”任务完成后，进入“Exclusive Gateway”（排他网关），判断是否需要保险：
+    - 若不需要，走“nein”（否）路径，进入“Ware verpacken”（包装货物）任务。
+    - 若需要，走“ja”（是）路径，进入“Versicherung abschliessen”（购买保险）任务。
+6. “Versicherung abschliessen”任务完成后，与“nein”路径合并，进入“Ware verpacken”任务。
+7. “günstigstes Angebot auswählen”任务完成后，进入“Spediteuer beauftragen”（委托快递公司）任务。
+8. “Ware verpacken”任务完成后，进入“Ware verschicken”（发货）任务。
+9. “Spediteuer beauftragen”任务完成后，与“Ware verschicken”任务的路径合并，最终流程结束于“”事件。

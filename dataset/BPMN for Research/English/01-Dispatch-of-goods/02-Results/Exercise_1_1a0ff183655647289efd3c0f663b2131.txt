@@ -1,0 +1,11 @@
+该业务流程是关于货物运输发货的流程，具体如下：
+1. 当有货物需要运输时，流程启动。
+2. 进入“Quantity to be shipped”的排他网关进行判断，如果数量少则进入“Normal Post”任务。
+3. 执行“Normal Post”任务后，进入“Package Label”任务。
+4. “Package Label”任务完成后，进入“Determine Insurance”任务。
+5. “Determine Insurance”任务后，通过排他网关判断是否购买保险，如果购买则进入“Insurance Taken”任务，如果不购买则进入“Insurance Not Taken”任务。
+6. 上述两个任务完成后，进入“Prepare for pickup”任务。
+7. 若数量不是少的情况，则进入并行网关，并行执行“Request Bid Shipping Company 1”、“Request Bid Shipping Company 2”和“Request Bid Shipping Company 3”三个任务。
+8. 这三个任务完成后，进入并行网关的汇聚点，然后执行“Choose Company”任务。
+9. “Choose Company”任务完成后，进入“Package Label”任务，后续流程与数量少的情况相同，直至“Prepare for pickup”任务。
+10. 完成“Prepare for pickup”任务后，流程结束，将货物交付给运输公司。

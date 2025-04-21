@@ -1,0 +1,3 @@
+业务需求如下：
+有一个名为“Waren-Übung 1”的协作流程，包含多个参与者，如“Waren-Übung 1”（对应流程“Waren-Übung 1”）、“Sekertariat”（有多个流程节点关联）、“Logistikleiter”（有一个流程节点关联）、“Lagerarbeiter”（有多个流程节点关联）。
+从开始事件“sid-0D823A4A-63D9-42F6-BEEE-B94D3439927F”出发，经过“versand klären”任务（sid-F7D48B38-9EA1-41AC-A146-04B86660B14A），到达排他网关“große Menge?”（sid-AE6B89ED-DBDF-40D7-BF51-7C8E04FF6336），根据条件分为两条路径，一条是“ja”路径，经过“Spedition Angebote einholen”任务（sid-059605F9-5482-4411-8D79-57C2711C2093），再到排他网关，另一条是“nein”路径，经过后续一系列排他网关和任务的处理，最终到达结束事件“sid-8B5BB620-D3D3-42DD-A1A9-EDA5BF6A26C5”。整个流程中各个任务和网关之间通过序列流连接，如“sid-870BFA67-9819-4BBE-9D31-ACF64012C86A”等序列流连接不同的节点。

@@ -1,0 +1,9 @@
+业务流程从“Start”开始，接着进入名为“Sekretariat Entscheidung:”的任务。然后流程经过一个排他网关，根据“kl. Menge”（小批量）或“gr. Menge”（大批量）的条件进行分支。
+
+如果是“kl. Menge”，则进入“Ausfüllen des Paketscheins”（填写包裹单）任务，之后进入“Sekretariat: Entscheidung Versicherung”（秘书处：保险决定）任务。
+
+如果是“gr. Menge”，流程会进入一个并行网关，并行执行三个任务：“Anfrage Sped 1”（询问运输公司1）、“Anfrage Sped 2”（询问运输公司2）和“Anfrage Sped 3”（询问运输公司3）。这些任务完成后，流程汇合到另一个并行网关，然后进入“Sekretariat bestimmt Sped”（秘书处确定运输公司）任务。
+
+接下来，流程进入“Logistikleiter: Versicherung erforderlich”（物流经理：需要保险）任务，之后再次经过一个并行网关，并行执行“Lager: Ware verpacken”（仓库：包装货物）和“Lager: Ware zur Abholung bereitstellen”（仓库：准备货物以便取货）任务。
+
+最后，所有分支汇合到一个并行网关，然后流程结束。

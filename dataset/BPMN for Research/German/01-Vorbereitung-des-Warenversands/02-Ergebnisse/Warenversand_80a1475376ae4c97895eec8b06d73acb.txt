@@ -1,0 +1,7 @@
+该业务流程围绕货物发货展开，涉及秘书处、物流主管和仓库工人三个角色，具体业务逻辑如下：
+1. 流程从“Start”开始，由秘书处负责“Abklärung Versand”（发货确认）。
+2. 发货确认完成后，进入“Grosser Menge”（大批量判断）的排他网关。若货物为大批量，秘书处进行“Einholen von Angeboten verschiedener Spediteure”（向不同货运代理获取报价），之后“Beauftragen Spediteur”（委托货运代理）；若为小批量，秘书处“Paketschein ausfüllen”（填写包裹单）。
+3. 填写包裹单后，流程通过并行网关分为两条分支：一条由仓库工人“Ware verpacken”（包装货物）；另一条进入“Versicherung notwendig?”（是否需要保险）的排他网关。
+4. 若需要保险，由物流主管“Versicherung abschliessen”（办理保险）；若不需要保险，直接与办理保险完成后的流程汇合。
+5. 包装货物完成后，与保险相关流程汇合进入并行网关汇聚点。
+6. 委托货运代理和上述汇合后的流程再次汇合，最终由仓库工人“Ware bereitstellen”（准备货物）。

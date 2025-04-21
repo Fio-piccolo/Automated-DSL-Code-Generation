@@ -1,0 +1,9 @@
+业务需求如下：
+1. 流程开始于“VN kann in Regress genommen werden”的起始事件。
+2. 首先执行“Regressnahme prüfen”任务，检查是否可以进行退回操作。
+3. 接着通过“Regress möglich?”的排他网关进行判断，如果可以退回（“Ja”），则执行“Zahlungsaufforderung senden”的发送任务，向相关方发送支付请求；如果不可以退回（“Nein”），则流程进入后续的其他处理路径。
+4. 在流程中，可能会出现“Wiedervorlage eingetreten”的中间捕获事件（可能是有重新提交的情况发生），以及“Geld eingegangen”的中间捕获事件（表示收到款项）。
+5. 当收到反对意见（“Widerspruch eingangen”）时，执行“Widerspruch prüfen”任务检查反对意见是否合理。
+6. 对于反对意见的合理性判断，通过“Widerspruch gerechtfertigt?”的排他网关进行决策，如果合理（“ja”），则流程进入相应路径；如果不合理（“nein”），则进入其他路径。
+7. 在流程执行过程中，会有一些任务，如“Vorgang schließen”（关闭流程）、“Vorgang an Inkasso-DL angeben”（将流程提交给催款部门）、“Wiedervorlage setzen”（重新提交）等。
+8. 流程最终可能会到达两个结束事件，一个是正常结束的事件，另一个是可能在其他条件下结束的事件。整个流程通过一系列的任务、网关和事件来处理与支付退回、款项接收、反对意见处理等相关的业务逻辑。

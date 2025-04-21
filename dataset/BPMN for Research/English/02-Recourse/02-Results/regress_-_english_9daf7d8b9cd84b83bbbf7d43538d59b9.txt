@@ -1,0 +1,5 @@
+业务流程开始于“Information”的开始事件，接着进入“Possible Resourcing?”的排他网关。如果判断为“是”，流程进入“Request Payment”任务；如果判断为“否”，流程进入“End Event”结束。
+
+“Request Payment”任务完成后，进入“Insurant Response”的中间捕获事件，之后进入“Exclusive Gateway”。若有多个输入流进入该网关，根据不同条件进行分流，分别进入后续不同的任务或事件。
+
+例如，若“Insurant Response”后进入某个特定中间捕获事件，会经过一系列流程节点，如“Check Reason”任务等，然后再次进入排他网关进行判断，若判断为“不同意”，会进入“forward case to collection”任务；若判断为“同意”，会进入“make booking”任务等。整个流程中还有多个中间捕获事件和排他网关，根据不同的条件和事件进行流程的分支和流转，最终可能到达不同的结束事件。

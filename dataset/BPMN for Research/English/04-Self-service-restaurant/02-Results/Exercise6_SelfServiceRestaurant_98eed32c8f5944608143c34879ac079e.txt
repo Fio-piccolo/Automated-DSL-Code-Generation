@@ -1,0 +1,19 @@
+该BPMN流程图描述了一个餐厅点餐及用餐的业务流程，主要涉及顾客、员工和厨师三个角色，具体如下：
+1. **顾客流程**：
+   - 顾客感到饥饿（Feel Hunger），进入餐厅（Enter Restaurant）。
+   - 选择菜品（Choose Dish），然后下单（Place Order）。
+   - 支付订单（Pay Order），并获取 buzzer（Receive Buzzer）。
+   - 等待 buzzer 响起（Buzzer rings），听到 buzzer 响后前往服务窗口（Go to Service Hatch）。
+   - 取餐（Pick up Meal），然后用餐（Eat Meal），最后饥饿得到满足（Hunger satisfied）。
+2. **员工流程**：
+   - 员工收到订单（Received Order），将订单录入 POS 系统（Enter Order in POS）。
+   - 收取顾客的钱（Collect Money），将 buzzer 交给顾客（Pass on Buzzer to Guest），并告知顾客 buzzer 的含义（Inform Guest of Buzzer Meaning）。
+   - 将订单交给厨师（Pass on Order to Boss），等待厨师准备好餐食（Meal ready）。
+   - 激活顾客的 buzzer（Activate Customers Buzzer），等待顾客到达（Wait 5 Min.）。
+   - 顾客到达后，将餐食交给顾客（Hand over Meal），订单完成（Order fulfilled）。
+3. **厨师流程**：
+   - 厨师收到订单（Order received），准备餐食（Prepare Meal）。
+   - 将餐食放在服务窗口（Place Meal in Service Hatch），并通知员工（Inform Service Employee）。
+   - 餐食准备完成（Dish prepared）。
+
+该流程图详细描述了顾客在餐厅点餐、用餐的整个过程，以及员工和厨师在其中的协作。

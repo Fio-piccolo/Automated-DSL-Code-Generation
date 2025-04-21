@@ -1,0 +1,16 @@
+业务需求如下：
+1. 当投保人信息被提交后，流程开始。
+2. 首先对业务流程进行检查。
+3. 检查通过后，进入“Regressanspruch ist möglich”的排他网关。根据条件判断，有两个分支：
+    - 若条件满足（“Ja”），则发送支付请求。
+    - 若条件不满足（“Nein”），则直接进入后续流程。
+4. 发送支付请求后，进入“Wiedervorlagefrist abgelaufen”的中间捕获事件（基于时间触发），或者“Zahlung eingegangen”的中间捕获事件（基于消息触发），或者“Widerspruch eingegangen”的中间捕获事件（基于消息触发）。
+5. 当“Wiedervorlagefrist abgelaufen”事件触发后，执行“Vorgang abschließen”任务。
+6. 当“Zahlung eingegangen”事件触发后，执行“Zahlung verbuchen”任务。
+7. 当“Widerspruch eingegangen”事件触发后，执行“Widerspruch prüfen”任务。
+8. “Widerspruch prüfen”任务完成后，进入“Widerspruch gerechtfertigt”的排他网关。根据条件判断，有两个分支：
+    - 若条件满足（“Ja”），则执行“Vorgang an Inkasso abgeben”任务。
+    - 若条件不满足（“Nein”），则执行其他操作（文档未明确）。
+9. “Vorgang an Inkasso abgeben”任务完成后，执行“Vorgang abschließen”任务。
+10. “Wiedervorlage einrichten”任务完成后，也会进入后续流程。
+11. 上述各个任务完成后，流程汇聚到一起，最终执行“Vorgang abschließen”任务，然后流程结束。

@@ -1,0 +1,9 @@
+业务流程从“Start”（开始事件）启动，首先执行“Bestellung”（处理订单）任务。完成订单处理后，通过并行网关将流程分为两条并行路径：一条进入“Sekretariat wer übernimmt?”（确定由哪个秘书处负责）任务，另一条进入“LagerLane 2”泳道的“Ware verpacken”（包装货物）任务。  
+
+在“Sekretariat wer übernimmt?”任务完成后，通过“Versandgröße”（运输大小）排他网关判断运输规模：若为“groß”（大型运输），则执行“Sekretariat Angebote einholen und Spediteur beauftragen”（秘书处收集报价并委托运输商）任务；若为“klein”（小型运输），则可能直接进入后续流程（需结合流程连接）。  
+
+同时，流程中另一路径执行“Sekretariat Paketschein ausfüllen”（秘书处填写包裹单）任务，完成后通过“Versicherung”（保险）排他网关判断是否需要保险：若选择“ja”（需要），则由“Logistikleiter”（物流主管）处理；若选择“nein”（不需要），则直接进入后续收敛步骤。  
+
+“Ware verpacken”（包装货物）完成后，结果传递至并行收敛网关；而“Sekretariat收集报价并委托运输商”、“Logistikleiter”处理完成后的结果，以及“Versicherung”选择“nein”的分支，均通过排他收敛网关汇聚后，再传递至并行收敛网关。  
+
+所有并行路径汇聚后，执行“Bereitstellung zur Abholung”（准备好待取件）任务，最终流程结束。

@@ -1,0 +1,5 @@
+该业务流程从“Shipping Required”开始，首先根据包裹大小判断走不同分支。如果是大包裹，进入“Special post”任务；如果是小包裹，进入“normal post”任务。
+
+“Special post”和“normal post”任务完成后，都会进入“package label”任务。“package label”任务完成后，进入“Insurance”环节，在此环节判断是否需要保险，如果需要则进入“logistics dept. takes insuarance”任务，之后进入“packaging ”任务，最后流程结束；如果不需要保险，则直接进入“packaging ”任务，最后流程结束。
+
+在流程中，还存在多个评审环节，包括“review 1”“review 2”“review 3”，这些评审环节与其他任务并行推进，最后汇总到一起，再进入下一个环节。另外，还有一个“selecting company”任务，在整个流程中起到衔接作用。

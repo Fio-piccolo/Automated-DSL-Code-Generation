@@ -1,0 +1,3 @@
+The requirements are as follows:
+
+In the context of PaymentInstructionInformation2 in the isoStdIso20022TechXsdPain00800101 package, there are constraints that need to be validated. The creditor (cdtr) should not contain any address type (adrTp), street name (strtNm), building number (bldgNb), postal code (pstCd), town name (twnNm), country subdivision (ctrySubDvsn), identification (ID) and country of residence (ctryOfRes) which are only applicable for AOS (Account Owner Statement) community. Any instructed banks that are not part of the AOS community may reject messages containing these elements. These constraints are made in reference to section 1.2 of the SEPA B2B Direct Debit C2B Implementation Guidelines.

@@ -1,0 +1,19 @@
+The business process described in the BPMN diagram can be outlined in natural language as follows:
+
+1. **Initiation**: The process begins with the need to send goods ("Ware soll versendet werden").
+
+2. **Decision on Special Delivery**: The first decision point checks if special delivery is required ("Ist Sonderversand nötig?").
+
+   - **Yes**: The process proceeds to request quotations ("Angebote einholen"), select the cheapest offer ("günstigstes Angebot auswählen"), and engage a freight forwarder ("Spediteur beauftragen").
+   
+   - **No**: The process skips to filling out the standardized consignment note ("standardisierten Paketschein ausfüllen").
+
+3. **Insurance Check**: After engaging the freight forwarder, another decision point checks if insurance is needed ("Ist eine Versicherung nötig?").
+
+   - **Yes**: The process includes concluding the insurance ("Versicherung abschließen").
+
+4. **Final Preparations**: Regardless of the insurance decision, the goods are packed ("Ware verpacken") and prepared for pickup ("Ware zur Abholung bereitstellen").
+
+5. **Completion**: The process concludes with the goods being delivered ("Ware bereitgestellt").
+
+This structured flow ensures that all necessary steps, including decisions on special delivery and insurance, are addressed to successfully deliver the goods.

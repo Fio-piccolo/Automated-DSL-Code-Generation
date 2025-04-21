@@ -1,0 +1,24 @@
+### 顾客（guest）流程
+1. 当顾客感到饥饿（feel hungry）时，进入选择菜品（choose dish）任务。
+2. 选择完菜品后，进入“his turn”中间捕获事件，可能会根据条件判断是否轮到顾客下单。
+3. 如果轮到顾客，进行下单（place orders）操作。
+4. 下单后进入支付订单（pay order）任务。
+5. 支付完成后，等待晚餐准备好（dinner is ready）的中间捕获事件触发。
+6. 晚餐准备好后，顾客去取餐并用餐（pick up meal and eat）。
+7. 用餐完毕后，若感到满意（satisfied），流程结束。
+
+### 员工（employee）流程
+1. 当收到新订单消息（通过D6D812AC-57F0-442C-B64B-54739C5D06F8的消息事件定义触发），进入录入订单到销售点系统（enter order into POS）任务。
+2. 录入订单后，进入收款（collect money）任务。
+3. 收款后，设置蜂鸣器（set up buzzer）。
+4. 设置蜂鸣器后，通知厨师有新订单（message chef of new orders）。
+5. 厨师准备好餐食后，员工出发蜂鸣器（sett off buzzer）。
+6. 出发蜂鸣器后，根据条件判断（通过78BA34D8-3CC6-4880-A632-5D022AACB290的条件事件定义）进行相应操作，若不满足条件，等待5分钟（5 min）中间捕获事件触发（通过timerEventDefinition）。
+7. 5分钟后，进入排他网关进行条件判断，根据不同条件进行召回（recall）或其他操作。
+8. 完成订单相关操作后，流程结束。
+
+### 厨师（chef）流程
+1. 当收到新订单消息（通过FA5F408C-16A2-4336-9BE4-65BE4EBBBD97的消息事件定义触发），开始准备餐食（prepare meals）。
+2. 准备好餐食后，放入服务窗口（place into servis hatch）。
+3. 放入服务窗口后，发送餐食已准备好的消息（通过EB65C98A-4EE1-47CA-AF32-3B3C961175ED的消息事件定义）。
+4. 消息发送后，流程结束（completed）。

@@ -1,0 +1,7 @@
+The requirement is as follows:
+
+This requirement is about a software package named "isoStdIso20022TechXsdPain00800101". Within this package, the object DirectDebitTransactionInformation1 has an operation or instruction set for the creditor agent (InstrForCdtrAgt).
+
+There is an important note that 'InstrForCdtrAgt' in the DirectDebitTransactionInformation1 is only for 'AOS' community, and non-'AOS' community banks who are instructed may reject messages containing these elements. Further specifications are referred to section 1.2 of the SEPA B2B Direct Debit C2B Implementation Guidelines.
+
+The key operation to note here is 'EPC_AOS_InstrForCdtrAgt': The 'instrForCdtrAgt' should have a size of 0. This essentially means that no instructions should be currently set for the creditor agent.

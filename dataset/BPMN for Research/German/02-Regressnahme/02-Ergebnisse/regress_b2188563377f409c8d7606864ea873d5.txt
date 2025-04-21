@@ -1,0 +1,2 @@
+业务需求如下：
+这是一个关于保险业务流程的BPMN图。流程始于一个开始事件，之后进入“Regress Prüfen”（追溯检查）任务。该任务完成后，进入“Regresspflichtig?”（是否有追溯义务？）的排他网关。若判断有追溯义务（选择“Ja”），则进入“Zahlungsaufforderung versenden”（发送付款请求）任务，之后依次经过“Zahlungseingang Buchen”（记录付款到账）任务、“Vorgang Wiedervorlage”（再次提交流程）任务，最后到达结束事件“Vorgang geschlossen”（流程结束）。若判断没有追溯义务（选择“Nein”），则直接进入“Vorgang schießen”（执行流程）任务，然后也到达结束事件“Vorgang geschlossen”（流程结束）。在流程中，存在一个“Wiederspruch”（异议）的中间捕获事件，当出现异议时，会进入“Wiederspruch Widerspruch prüfen”（检查异议）任务，之后回到开始事件重新开始流程。此外，还有一些并行网关和其他中间捕获事件用于处理可能的并发情况或特定条件的触发，整个流程涉及保险公司和投保人两个参与者，通过消息流进行交互。

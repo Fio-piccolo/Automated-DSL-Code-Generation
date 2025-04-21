@@ -1,0 +1,9 @@
+该业务流程从开始事件出发，首先由Sekretariat部门的人员执行“wer übernimmt Versand”任务，接着通过一个排他网关进行分支决策。如果选择Spediteur 1，则由其执行“Angebot einholen”任务；如果选择Spediteur 2，则由其执行“Angebot einholen”任务；如果选择Spediteur 3，则由其执行“Angebot einholen”任务。
+
+在执行“Angebot einholen”任务后，所有分支的流程都会汇聚到一个包容网关。包容网关之后，会根据情况决定是否需要执行“Paketschein ausfüllen”任务。如果需要，则由Sekretariat部门的人员执行该任务，然后通过一个并行网关进行分支。
+
+并行网关的一个分支是由Sekretariat部门的人员执行“braucht es eine Versicherung?”任务，另一个分支是由Sekretariat部门的人员执行“Ware verpacken”任务。执行完这两个任务后，流程会继续进行。
+
+如果需要保险，则由Logistikleiter部门的人员执行“Versicherung abschliessen”任务，然后由Sekretariat部门的人员执行“Ware zur Abholung bereitstellen”任务，最后流程结束。
+
+如果不需要保险，则直接由Sekretariat部门的人员执行“Ware zur Abholung bereitstellen”任务，最后流程结束。

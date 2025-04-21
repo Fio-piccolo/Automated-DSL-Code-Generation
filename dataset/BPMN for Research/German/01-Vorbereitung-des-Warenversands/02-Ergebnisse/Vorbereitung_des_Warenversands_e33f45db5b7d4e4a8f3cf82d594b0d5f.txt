@@ -1,0 +1,17 @@
+该业务流程为货物运输流程，具体如下：
+1. 流程开始于“Ware vesenden”（发货）事件。
+2. 进入“Klärung Versandweg”（澄清运输路线）任务，由秘书处负责。
+3. 接着是“grosse Menge?”（大量货物？）排他网关，根据条件判断走向。
+    - 若选择“ja”（是），进入“Auswahl Spedition”（选择货运公司）任务。
+    - 若选择“nein”（否），进入“Postversand vorbereiten”（准备邮政运输）任务。
+4. 选择货运公司后，通过并行网关分为三路：
+    - 一路进入“Spedition 1”（货运公司1）任务。
+    - 一路进入“Spedition 2”（货运公司2）任务。
+    - 一路进入“Spedition 3”（货运公司3）任务。
+5. 这三个任务完成后，进入“günstigstes Angebot auswählen”（选择最优惠报价）任务。
+6. 然后进行“Spediteuer beauftragen”（委托货运公司）任务。
+7. 若选择邮政运输，进入“Paketschein ausfüllen”（填写包裹单）任务。
+8. 之后是“Ist eine Versicherung nötig? notwendig”（是否需要保险？必要）排他网关，根据条件判断：
+    - 若选择“ja”（是），进入“Versicherung abschließen”（购买保险）任务。
+    - 若选择“nein”（否），进入下一步。
+9. 最后，进行相关后续操作，流程结束。

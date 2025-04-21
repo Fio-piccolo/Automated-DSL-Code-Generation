@@ -1,0 +1,2 @@
+业务逻辑如下：
+银行前端（Banking Frontend）发起请求（Request fo&#10; a scoring），消息流传递至评分银行（Scoring Bank），评分银行的“forward to SCHUFA”任务开始处理，处理完成后将消息传递至中间捕获事件（intermediateCatchEvent），中间捕获事件有多个输出流向不同的任务或结束事件，如传递至“Perform Scoring Level 1”任务（Scoring Credit protection agency），该任务处理完成后根据条件判断进入不同的流程分支（通过 exclusiveGateway 的判断），后续各个任务和事件按照相应的顺序和条件进行流转，如“send Scoring Level 1 result”任务等，最终各个流程的结束事件（如“1st Scoring&#10;finished”“2nd Scoring&#10;finished”等）完成相应的业务流程。

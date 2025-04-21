@@ -1,0 +1,21 @@
+该业务流程主要涉及货物发送相关操作，起始于“Ware zu versenden”事件，结束于“Paket zur Abholung bereitstellen”任务。
+
+1. **起始**：以“Ware zu versenden”作为开始事件，表示有货物需要发送。
+2. **信息确认**：
+    - 进入“Details (insb. Warenmenge, Wert) klären”任务，在此任务中，工作人员需要明确货物的详细信息，包括数量和价值等。
+    - 完成信息确认后，流程进入“Menge?”这个排他网关，依据货物数量情况进行分支。
+3. **数量分支处理**：
+    - 如果数量大（“Gross”），则进入“Angebote einholen”任务，即获取报价。
+    - 若数量小（“Klein”），则进入“Paketschein ausfüllen”任务，填写包裹单。
+4. **保险判断分支**：
+    - 完成包裹单填写后，进入“Versicherung erforderlich?”排他网关，判断是否需要保险。
+    - 若需要保险（“Ja”），则执行“Versicherung abschliessen”任务，完成保险手续。
+    - 若不需要保险（“Nein”），则跳过保险相关流程。
+5. **后续操作**：
+    - 完成保险相关操作后，执行“Spediteur auswählen”任务，选择托运人。
+    - 接着进行“Spediteur beauftragen”任务，委托托运人运输货物。
+    - 所有相关任务完成后，流程通过两个并行网关和一个排他网关进行汇聚整合。
+    - 随后进行“Paket verpacken”任务，包装货物。
+    - 完成包装后，执行“Paket zur Abholung bereitstellen”任务，准备好包裹以供取件，最后流程结束。
+
+整个业务流程围绕货物发送展开，通过一系列任务和决策节点，确保货物信息准确、运输安排合理，最终完成货物的准备交付工作。

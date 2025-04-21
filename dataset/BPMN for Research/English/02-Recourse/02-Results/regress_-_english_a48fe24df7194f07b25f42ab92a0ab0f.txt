@@ -1,0 +1,3 @@
+业务逻辑如下：
+首先，有一个“Receive subrogation information”的开始事件，触发后进入“Assess case”任务，完成该任务后进入“Recourse possible?”的排他网关。根据该网关的判断结果，若“Recourse possible?”为“是”，则进入“Send Request For Payment”任务；若为“否”，则直接进入“Case closed”的结束事件。
+“Send Request For Payment”任务完成后进入“7 Day Deadline for disagreement reached”的中间捕获事件，若达到 7 天期限且有分歧，会进入“Insurant Disagrees”的中间捕获事件，触发后进入“Check reasoning”任务，完成该任务后进入“Is reasoning correct?”的排他网关。若“Is reasoning correct?”为“是”，则进入“Case closed”的结束事件；若为“否”，则进入“Forward to collection agency”任务，完成后进入“Case forwarded”的结束事件。

@@ -1,0 +1,11 @@
+The requirements are as follows:
+
+1. For 'Product' class in the 'eShop' package, the stock of any instance of the product should always be equal to or greater than 5.
+
+2. As for the 'GoldCustomer' class, the requirement is that the sum of the amounts of all paid sales by any instance of GoldCustomer should exceed 10.
+
+3. Concerning the 'Portal' class, there's a constraint on the 'removeGoldCategory' operation, where a customer instance can only be removed from the GoldCustomer category if it is indeed of GoldCustomer type and if it has no sales.
+
+4. For the 'Customer' class, the creation of a new customer is constrained. Specifically, the new customer result needs to be identified as new, and the name and 'portal' attributes of this newly created customer should be equal to the input parameters ‘name’ and ‘p’. In this case, no specific precondition is defined, so any instance can create a new customer.
+
+5. Finally, for the 'Sale' class, a pre-condition for the 'addSaleLine' operation is that there has to be a positive stock of the given product. After conducting this operation, the 'SaleLine' result will be identified as a new instance with its attributes being set appropriately. It's connected to the initial 'Sale' and 'Product' instances. Meanwhile, the stock of the product is decreased by the sale quantity, and the amount attribute of the instance of the 'Sale' class is increased by the multiplication of the quantity and price of the product.

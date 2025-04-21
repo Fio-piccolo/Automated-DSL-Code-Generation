@@ -1,0 +1,7 @@
+The requirements are as follows:
+
+Within the context of DirectDebitTransactionInformation1 within the package isoStdIso20022TechXsdPain00800101, there is an invariant EPC_AOS_DbtrAgtAcct. 
+
+This implies that the size of the debtor agent account (dbtrAgtAcct) must always be 0. 
+
+This implementation is specific to AOS community only and if banks not in the AOS community receive messages containing these elements, they may reject them. This information is referenced from section 1.2 of the SEPA B2B Direct Debit C2B Implementation Guidelines.

@@ -1,0 +1,3 @@
+业务需求如下：
+首先有一个协作（Collaboration），其中包含一个参与者（Participant）“Vorbereitung de Warenversands”，它关联一个流程（Process）“Vorbereitung de Warenversands”。流程中有多个车道（Lane），分别代表不同的角色或部门，如“Spditeur B”“Spditerur A”“Spediteur C”“Logistikleiter”“Sekretariat”等。
+流程中包含多个任务（Task），如“Angebot erstellen”“Versicherung erstellen”“Ware verpacken”等，每个任务有其特定的名称、完成数量和起始数量。任务之间通过顺序流（SequenceFlow）连接，形成一定的流程顺序。例如，从开始事件（StartEvent）开始，经过一些任务和网关（Gateway），最终到达结束事件（EndEvent）。其中有并行网关（ParallelGateway），用于并行执行多个路径，还有排他网关（ExclusiveGateway），用于根据条件选择不同的路径。例如，在“Versicherung erforderlich?”的排他网关处，根据条件决定是否进入“Versicherung erstellen”任务等。整个流程描述了货物配送准备阶段的业务逻辑，各个任务和角色之间的交互关系以及流程的走向。

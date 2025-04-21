@@ -1,0 +1,6 @@
+该业务流程主要围绕电脑经销商发货展开，涵盖从货物待发至发货准备完成的一系列操作，包括保险办理、发货细节确认、物流环节协调以及包装和交付等步骤。具体如下：
+1. 流程始于“Ware soll versendet werden”（货物待发）事件，触发后进入“Umfang der Sendung klären”（明确发货范围）任务。
+2. 完成发货范围明确后，进入“Große Menge?”（大量货物？）排他网关。若判断为大量货物，则走“Normalversand”（普通运输）路径，先执行“Paketschein ausfüllen”（填写包裹单）任务，再进行“Versicherungspflicht klären”（明确保险义务）任务，之后通过“Versicherung notwendig?”（需要保险？）排他网关。若需要保险，返回“Versicherung abschließen”（办理保险）任务；若不需要，则进入后续流程。若判断为非大量货物，即走“Sonderversand”（特殊运输）路径，执行“Angebote einholen”（获取报价）任务，接着进行“günstigstes Angebot auswählen”（选择最优惠报价）任务，再“Spediteur beaufragen”（委托运输商），之后流程与普通运输路径合并。
+3. 两个运输路径合并后，进入“Paketschein ausfüllen”（填写包裹单）任务（此任务在不同路径中可能有先后顺序差异），随后进行“Versicherungspflicht klären”（明确保险义务）任务，再通过“Versicherung notwendig?”（需要保险？）排他网关。若需要保险，返回“Versicherung abschließen”（办理保险）任务；若不需要，则继续。
+4. 经过相关任务和判断后，流程到达“Versicherung abschließen”（办理保险）任务，完成后进入后续流程。
+5. 后续流程包括多个任务，如物流相关的任务分配到不同角色所在泳道执行，最终完成货物包装和交付准备，到达“Ware wurde zur Versendung bereitgestellt”（货物已准备好发货）结束事件。

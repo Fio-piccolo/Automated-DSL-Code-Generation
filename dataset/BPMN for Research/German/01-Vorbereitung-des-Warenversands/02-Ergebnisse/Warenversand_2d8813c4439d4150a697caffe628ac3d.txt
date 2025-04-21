@@ -1,0 +1,14 @@
+该业务流程主要围绕货物运输展开，具体如下：
+1. 订单下达：“Auftrag Warenversand”（货物运输订单）作为流程起点。
+2. 确定数量：由“Sekretariat”（秘书处）负责“Klärung Mengengröße”（确认数量）。
+3. 判断是否需要特殊运输：通过“ExclusiveGateway”（排他网关）“Sonderversand notwendig?”（是否需要特殊运输）进行判断。
+    - 若需要，“Sekretariat”准备“Anfrage”（申请）并发送给“Spedition 1”（物流公司1）、“Spedition 2”（物流公司2）、“Spedition 3”（物流公司3）。
+    - 若不需要，“Sekretariat”准备“Paketschein”（包裹单）。
+4. 货物准备：“Lagerarbeiter”（仓库工人）负责“Ware verpacken”（包装货物），之后货物准备好待取。
+5. 运输安排：
+    - 收到申请后，各物流公司返回“Angebot”（报价）。
+    - “Sekretariat”对各物流公司的报价进行“Vergleichen”（比较）。
+6. 判断是否需要保险：通过“ExclusiveGateway”“Versicherung notwendig?”（是否需要保险）进行判断。
+    - 若需要，“Logistikleiter”（物流经理）办理“Versicherung abschliessen”（完成保险），之后进行货物运输。
+    - 若不需要，直接进行货物运输。
+7. 货物运输：“Logistikleiter”委托“Spediteur”（承运人）进行货物运输，最终货物运输完成流程结束。

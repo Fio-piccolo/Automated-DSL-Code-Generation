@@ -1,0 +1,16 @@
+业务需求如下：
+1. 流程开始于“Got the info”事件。
+2. 接着执行“Check the case for the possibility”任务。
+3. 然后通过排他网关进行分支：
+    - 如果条件为真（Y），则执行“send request for payment”任务。
+    - 如果条件为假（N），则执行“Close the case”任务。
+4. “send request for payment”任务完成后，经过一个基于事件的排他网关再次分支：
+    - 若触发“money received”事件，执行“Make booking & Close the case”任务。
+    - 若触发“insurant disaggrees”事件，执行“Check the reasoning if acceptable”任务。
+5. “Check the reasoning if acceptable”任务完成后，又通过一个排他网关进行判断：
+    - 若结果为真（Y），执行“Close the case”任务。
+    - 若结果为假（N），执行“Forward to collection agency”任务。
+6. 所有涉及“Close the case”任务执行完毕后，到达“case closed”结束事件。
+7. “Forward to collection agency”任务执行完毕后，到达“case sent to coll agency”结束事件。
+8. 若在执行过程中触发“deadline reached”事件（基于定时器），则执行后续相关任务（文档中未明确具体后续任务细节）。
+9. 整个流程中，通过不同的条件判断和任务执行，实现对业务场景的处理，根据不同事件和条件走向不同的任务和结束节点。

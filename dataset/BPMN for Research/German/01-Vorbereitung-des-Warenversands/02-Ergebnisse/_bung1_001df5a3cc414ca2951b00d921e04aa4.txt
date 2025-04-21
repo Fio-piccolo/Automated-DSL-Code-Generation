@@ -1,0 +1,10 @@
+该BPMN流程主要描述了一个涉及多个角色的货物运输业务流程，具体如下：
+1. **流程启动**：流程从开始事件触发，进入“Versandart klären”（确定运输方式）任务，此任务由“Sekretariat”（秘书处）负责。
+2. **获取报价**：完成运输方式确定后，执行“Angebote einholen”（获取报价）任务，同样由“Sekretariat”负责，获取相关运输报价。
+3. **选择报价**：接着进行“Angebot auswählen”（选择报价）任务，“Sekretariat”从获取的报价中挑选合适的方案。
+4. **委托货运代理**：选择好报价后，执行“Spedition beauftragen”（委托货运代理）任务，“Sekretariat”委托货运代理进行运输工作。
+5. **并行分支**：之后流程通过并行网关进入两个并行分支：
+    - 一个分支进入“Versicherung notwendig?”（是否需要保险）的排他网关判断。若需要保险，则执行“Versicherung abschliessen”（签订保险）任务，由“Logistikleiter”（物流主管）负责；若不需要保险，则直接跳过此任务。
+    - 另一个分支进入“Sonderversand nötig?”（是否需要特殊运输）的排他网关判断。若需要特殊运输，执行“Angebote einholen”（获取报价）任务；若不需要，则执行“Paketschein ausfüllen”（填写包裹单）任务，由“Sekretariat”负责。
+6. **货物准备与包装**：两个分支完成后，通过并行网关汇聚，执行“Ware bereistellen”（提供货物）任务，由“Lagerarbeiter”（仓库工人）负责准备货物，然后执行“Ware verpacken”（包装货物）任务，同样由“Lagerarbeiter”负责包装。
+7. **流程结束**：最后流程到达结束事件，整个业务流程完成。

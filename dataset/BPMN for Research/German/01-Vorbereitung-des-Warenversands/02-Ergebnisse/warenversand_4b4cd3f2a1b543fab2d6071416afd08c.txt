@@ -1,0 +1,11 @@
+该业务流程主要围绕货物发货展开。首先明确货物发货地点，接着检查订单数量，之后根据数量进行不同分支处理。若数量大，获取报价、选择报价、委托货运代理、包装货物、明确保险需求、若需要则购买保险，之后流程汇合，准备好货物以便取货，最终完成发货流程。具体如下：
+1. 从“Ware soll versendet werden”开始，进入“Bestellmenge prüfen”。
+2. 完成订单数量检查后，通过“parallelGateway”分为两个分支：
+    - 一个分支通过“exclusiveGateway”判断数量情况：
+        - 若数量大，进入“Angebote einholen”，之后进行“Angebot auswählen”，再到“Spediteuer beauftragen”，最后进入“Ware verpacken”。
+        - 若数量小，进入“Paketschein ausfüllen”，之后进行“Versicherungsbedarf klären”。
+    - 另一个分支直接进入“Paketschein ausfüllen”，之后进行“Versicherungsbedarf klären”。
+3. 在“Versicherungsbedarf klären”后，通过“exclusiveGateway”根据是否需要保险进行分支：
+    - 若需要保险，进入“Versicherung abschließen”，之后流程汇合。
+    - 若不需要保险，直接进入流程汇合。
+4. 流程汇合后，通过“parallelGateway”再次汇合不同路径的任务，然后进入“zur Abholung bereitstellen”，最后到达“结束事件”完成整个流程。

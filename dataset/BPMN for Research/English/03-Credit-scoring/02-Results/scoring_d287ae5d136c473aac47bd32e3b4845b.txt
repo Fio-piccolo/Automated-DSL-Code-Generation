@@ -1,0 +1,26 @@
+### 整体业务流程概述
+该BPMN流程定义涉及银行前端（Banking Frontend）、银行系统评分模块（Scoring (Banking System)）和信用机构评分模块（Scoring (Credit Agency)）三个主要参与者，描述了从接收评分请求到生成显示结果并结束的业务流程。
+
+### 银行前端（Banking Frontend）
+1. 发起评分请求，将请求发送至银行系统评分模块（Scoring (Banking System)）。
+
+### 银行系统评分模块（Scoring (Banking System)）
+1. **流程开始**：“Process scoring request”开始事件被触发，标志着评分请求流程启动。
+2. 接收到请求后，进入“Scoring requested”任务，处理该评分请求。
+3. 进入“eventBasedGateway”排他性事件网关，根据不同条件决定流程走向：
+    - 若满足某一条件，流程走向“sid-0C0D97E2-6AE4-480E-8937-F5C7568F58BA”中间捕获事件。
+    - 若满足另一条件，流程走向“sid-261F9B1E-5984-41C4-B4D3-FC93D6406534”中间捕获事件。
+4. 同时，“Generate display result”任务会在收到来自不同中间捕获事件的输入后执行，最终流程汇聚到“sid-8AD25E1A-D1CC-4FDB-BD9F-D96CF949F17A”结束事件。
+
+### 信用机构评分模块（Scoring (Credit Agency)）
+1. **流程开始**：“Receive scoring request”开始事件被触发，接收来自银行前端的评分请求。
+2. 进入“Perform level 1 scoring”任务，执行一级评分。
+3. 进入“exclusiveGateway”排他性网关，根据条件决定流程走向：
+    - 若满足某一条件，流程走向“Level 1 report result generated”任务。
+    - 若满足另一条件，流程走向“Level 1 result not available ”任务。
+4. “Level 1 result not available ”任务若被触发，会启动“Start Level 2 Scoring ”任务，进行二级评分，最终结果汇聚到“Level 2 report generated”任务，之后进入“sid-4B57ABE3-265B-4AE7-AA14-FCB52FEBC06A”结束事件。
+
+### 消息流转
+- 银行前端与银行系统评分模块、信用机构评分模块之间通过消息流进行交互，传递评分请求及相关信息。
+- 银行系统评分模块内部各任务及事件之间通过顺序流连接，按照特定逻辑顺序执行。
+- 信用机构评分模块内部各任务及事件之间同样通过顺序流连接，遵循相应业务逻辑执行。

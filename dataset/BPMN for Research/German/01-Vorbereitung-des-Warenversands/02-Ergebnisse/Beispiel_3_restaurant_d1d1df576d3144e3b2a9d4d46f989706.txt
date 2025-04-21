@@ -1,0 +1,5 @@
+当客人感到饥饿（hunger noticed），开始流程。客人先查看餐品范围（reviewing meal range），接着选择菜品（choosing dish），然后下单（place order），下单后付款（pay for order），付款后拿取蜂鸣器并等待餐食（take buzzer, waiting for meal）。当蜂鸣器响起（buzzer activated），客人去取餐（pick up meal），取餐后用餐（eat meal），用餐后流程结束（hunger satisfied）。
+
+员工在收到订单（order recieved）后，将订单录入POS系统（enter order in POS），然后向客人收款（collect money from guest），收款后设置蜂鸣器并交给客人（set up a buzzer and hand to guest），接着通知厨师订单（inform chef about order）。当餐食在服务窗口（meal in hatch），员工有两种情况，若客人出现（guest appeared），则将餐食交给客人（hand over meal），流程结束（order done）；若未出现，等待5分钟（all 5 min）后召回（recall）。
+
+厨师在收到烹饪订单（cooking order recieved）后，准备餐食（preparing meal），当餐食完成（meal done），将餐食放在服务窗口（placing meal in service hatch），流程结束（cooking order completed）。

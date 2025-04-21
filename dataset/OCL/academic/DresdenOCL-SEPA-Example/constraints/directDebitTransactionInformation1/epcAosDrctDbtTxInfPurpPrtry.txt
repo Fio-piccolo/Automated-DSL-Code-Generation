@@ -1,0 +1,9 @@
+The requirement is as follows:
+
+There's a package named isoStdIso20022TechXsdPain00800101 in the system related to some Direct Debit Transaction Information. 
+
+It's noted that the 'Prtry' element in 'DrctDbtTxInf Purpose' is used exclusively for Direct Debit Transaction Information of AOS (Automated Operations Services). Non-AOS banks or entities are warned that they may reject messages containing these elements. 
+
+Therefore, an invariant is established for the DirectDebitTransactionInformation1 business context where for any such direct debit transaction, the number of 'Prtry' elements contained in the purpose of the transaction (purp.prtry) must be zero. 
+
+This means that no 'Prtry' elements should be included in the purpose of these direct debit transactions as they can cause issues with non-AOS entities.

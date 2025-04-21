@@ -1,0 +1,7 @@
+在银行与保护机构的协作业务流程中：
+- 银行前端（Banking Frontend）发起流程，发送消息给“Scoring (Bank)”中的“Sales Clerk”。
+- “Sales Clerk”首先从开始事件（sid-0BD6ECEA-5046-4BAD-B7A0-30D7335F2482）触发，创建评分请求（Create Scoring Request，任务sid-CD22299F-A1B2-4317-ACB9-D4E4D6853CE3）。
+- 之后触发中间抛出事件（sid-DFDC8FA2-D4FF-4403-8EB9-E1A009EB2641），等待消息。收到消息后进入中间捕获事件（sid-4CECFCD1-C781-4BA1-914E-21D823E0838E）。
+- 接着进入排他网关（sid-1720FCF2-29EE-47F1-A4F6-403ED08B32C0）判断“Level 2 Required?”，如果为“Yes”，执行“Perform Level 2 Scoring”任务（sid-A4FE90BE-CCBF-409E-8995-91BEC7BC809A），完成后到达相应结束事件；如果为“No”，直接到达另一个结束事件。
+- 保护机构端，从开始事件（sid-8D30BADC-BF98-47F8-B6D5-7BBB546C4B2D）触发，执行“Perform Level 1 Scoring”任务（sid-CFB0AED9-3D4C-44BC-9567-F7E7F12ABE9A）。
+- 然后触发中间抛出事件（sid-496815D3-803E-42CD-81D7-38BA0D580AD1），进入排他网关（sid-BE7F2E5B-4921-48E0-9AB5-AA47BDF2F8AE）判断“Level 2 Required?”，如果为“Yes”，向银行端发送消息触发相关流程；如果为“No”，也向银行端发送消息触发相关流程。

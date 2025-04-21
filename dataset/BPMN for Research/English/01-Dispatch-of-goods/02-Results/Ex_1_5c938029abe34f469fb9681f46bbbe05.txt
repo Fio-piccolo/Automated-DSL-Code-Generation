@@ -1,0 +1,5 @@
+当接收到订单后，流程开始。首先通过“Shipment size?”这个排他网关，根据货物数量大小进行分支：
+- 若数量少，流程走向“Print label”任务，打印标签后，进入“Shipment value?”排他网关。
+    - 若货物价值低，直接进入后续流程。
+    - 若货物价值高，则执行“Take insurance”任务，进行投保，之后进入“Select best offer”任务，从多个投标中选择最佳报价，再经过“Logistics company selected”中间抛出事件，最终到达流程结束节点“Ready for pickup”，表示准备好取货。
+- 若数量大，执行“Package goods”任务进行货物包装，同时并行执行“Take insurance”任务进行投保，之后流程汇聚，执行“Invite for bids”任务邀请投标，投标后对不同的投标进行评估（评估投标A、评估投标B、评估投标C），评估完成后同样经过“Select best offer”任务选择最佳报价，再经过“Logistics company selected”中间抛出事件，最后到达流程结束节点“Ready for pickup”。

@@ -1,0 +1,6 @@
+业务逻辑如下：
+首先由“Banking Frontend”发起“Receive credit score”的开始事件，触发“Send scoring request”任务，将评分请求发送出去。此任务完成后，通过事件基于网关“Exclusive”进行分支，分别流向“Score level 1”和“Inform of delay”两个路径。
+“Score level 1”路径中，由“Scoring (Credit Protection Agency)”进行“Score level 1”任务，然后通过排他网关“Successful?”进行判断，若成功则流向“Send level 1 score”任务，将级别 1 分数发送出去；若不成功则流向“Inform of delay”任务。
+“Inform of delay”任务完成后，触发“Score level 2”任务，完成后将级别 2 分数发送出去。
+同时，“Send scoring request”任务的输出连接到事件基于网关“Exclusive”的汇聚端，与其他分支的输出一起汇聚到“ExclusiveGateway (Converging)”，然后流向“Send score to frontend”任务，将分数发送到“Banking Frontend”。
+“Banking Frontend”收到分数后，触发“Request finished”的结束事件，整个流程结束。

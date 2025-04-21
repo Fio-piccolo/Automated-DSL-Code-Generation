@@ -1,0 +1,12 @@
+该业务流程围绕货物运输展开，由秘书、物流部门负责人和仓库管理员协作完成。首先是货物准备发货，接着根据货物数量走不同分支，准备包裹标签后由不同运输公司发货，发货后确认货物已运输，期间物流部门负责人获取包裹保险，仓库管理员负责包装货物。具体流程如下：
+1. 流程开始，进入“Goods Ready for Shipment”任务。
+2. 完成“Goods Ready for Shipment”任务后，通过“Exclusive Gateway”。若货物数量大，进入“Prepare Package Label”任务；若货物数量正常，进入另一个“Exclusive Gateway”。
+3. 从第一个“Exclusive Gateway”出来后，进行“Prepare Package Label”任务。
+4. 完成“Prepare Package Label”任务后，根据不同条件选择运输公司：
+    - 若满足条件1，选择“Shipping Company 1”运输。
+    - 若满足条件2，选择“Shipping Company 2”运输。
+    - 若满足条件3，选择“Shipping Company 3”运输。
+5. 选择运输公司发货后，进入“Goods Shipped”任务。
+6. 在发货前，物流部门负责人进行“Get Parcel Insurance”操作。
+7. 发货同时，仓库管理员进行“Package Goods”操作。
+8. 完成“Goods Shipped”任务，流程结束。

@@ -1,0 +1,4 @@
+The requirements are as follows:
+
+In the context of the DirectDebitTransactionInformation1, which refers to the information regarding a direct debit transaction,
+certain elements pertaining to the debtor’s postal address (PstlAdr), such as address type (AdrTp), street name (StrtNm), building number (BldgNb), postal code (PstCd), town name (TwnNm), country subdivision (CtrySubDvsn), and country of residence (CtryOfRes)should not be present. This is due to the fact that these elements are only applicable to the AOS community. Banks not part of the AOS community may reject messages containing these elements. As such, the sizes of these elements should all be 0, indicating their absence.

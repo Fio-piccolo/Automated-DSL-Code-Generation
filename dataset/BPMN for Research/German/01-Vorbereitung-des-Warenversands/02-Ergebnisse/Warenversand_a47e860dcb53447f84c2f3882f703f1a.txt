@@ -1,0 +1,8 @@
+业务需求如下：
+- 从“Ware versenden”开始事件开始，首先由“Sekretariat”执行“Angebot einholen”任务，同时有两个输入流“ja”和“nein”，分别对应不同的流程分支。
+- 当接收到“ja”时，进入“Grosse Menge?”排他网关，若为“ja”则继续流程，若为“nein”则返回“Angebot einholen”任务。
+- 在“Grosse Menge?”排他网关为“ja”的分支中，执行“Angebot auswählen”任务，然后进入“Drei Angebote?”排他网关，同样有“ja”和“nein”两个分支。
+- 当“Drei Angebote?”排他网关为“ja”时，执行“Parketschein ausfüllen”任务，接着进入“Versicherung erforderlich?”排他网关，又有“ja”和“nein”两个分支。
+- 在“Versicherung erforderlich?”排他网关为“ja”的分支中，执行“Versicherung abschließen”任务，然后与其他相关流程汇合；在为“nein”的分支中，也与其他相关流程汇合。
+- 各个参与者之间通过消息流进行交互，如“Sekretariat”与“Spediteure”之间的消息流等。
+- 最终到达“Ware versendet”结束事件，完成整个业务流程。

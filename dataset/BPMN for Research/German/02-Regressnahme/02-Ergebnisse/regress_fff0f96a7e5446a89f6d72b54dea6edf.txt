@@ -1,0 +1,13 @@
+业务需求如下：
+1. 流程从“Meldung VN für Regress”开始。
+2. 接着执行“Prüfung des Falls”任务。
+3. 进入“Regress möglich?”排他网关进行判断。
+    - 如果回归可行，执行“Versendung Zahlungs-aufforderung an VN”任务，然后通过“Zahlung eingetroffen”中间捕获事件或“Wiederspruch des VN”中间捕获事件进行后续流程。
+        - 若收到付款，进行“Geldeingang prüfen”任务，再通过“Geld eingetroffen?”排他网关判断。
+            - 若钱已到账，执行“Abgabe an Inkasso”任务。
+            - 若钱未到账，也执行“Abgabe an Inkasso”任务。
+        - 若收到客户异议，执行“Prüfung Wiederspruch”任务，再通过“Wiederspruch gerechtfertigt?”排他网关判断。
+            - 若异议合理，执行“Abgabe an Inkasso”任务。
+            - 若异议不合理，流程继续进行。
+    - 如果回归不可行，直接进行后续流程。
+4. 通过“Zahlung eingetroffen”中间捕获事件、“Wiederspruch des VN”中间捕获事件、“Abgabe an Inkasso”任务、“Geldeingang prüfen”任务、“Wiederspruchsfrist”中间捕获事件等节点的处理后，汇聚到“Vorgang abgeschlossen”结束事件，标志着流程结束。

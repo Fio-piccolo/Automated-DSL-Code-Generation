@@ -1,0 +1,19 @@
+### 顾客流程
+1. 顾客感到饥饿（feels hungry）后，进入选择菜单菜品（chooses dish from menue）的任务。
+2. 选择完菜品后，进入下单（place order）任务。
+3. 下单后进入等待叫号（waiting for turn）事件，可能会根据条件等待。
+4. 若等待一定时间（waiting for buzzer 10 min）后无回应，可选择检查餐食（check on meal）或继续等待。
+5. 若收到叫号（receive buzzer），则前往取餐（collect food），并支付订单费用（pay for order）。
+6. 取到食物后开始吃食物（eat food），直到饥饿感消失（hunger stilled）。
+
+### 员工流程
+1. 员工收到顾客订单（receive order from customer）后，将订单录入POS系统（puts order into POS system）。
+2. 录入后收取顾客费用（collects money from guest）。
+3. 收取费用后设置订单叫号（set-up buzzer for order），并通知厨师新订单（inform Chef of new order）。
+4. 厨师准备好食物后，员工可选择让顾客取餐（customer collects food）或等待5分钟（wait 5 min.）。
+5. 若等待5分钟后食物未准备好，可选择再次叫号（buzz again）。
+6. 顾客取到食物后，流程结束。
+
+### 厨师流程
+1. 厨师收到新订单通知（wait for next order）后开始烹饪食物（cook food）。
+2. 烹饪完成后将食物放置在服务窗口（place food in service hatch）。

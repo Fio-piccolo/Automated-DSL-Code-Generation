@@ -1,0 +1,9 @@
+业务需求如下：
+1. 流程开始于“Bestellung geht ein”（订单进入）事件。
+2. 订单进入后，首先需要“Klärung Versandart”（澄清运输方式）。
+3. 之后通过“Versandart?”（运输方式？）排他网关进行判断，如果选择“Sonderversand”（特殊运输），则进入相应流程；若有其他情况（图中未明确其他分支），则继续后续流程。
+4. 接着进行“Angebote einholen”（获取报价）。
+5. 然后经过一个并行网关，之后进入“Versicherung erforderlich”（需要保险）排他网关。如果选择“Ja”（是），则进行“Versicherung abschließen”（完成保险），之后再进行“Angebot auswählen”（选择报价）；如果选择“Nein”（否），则直接进行“Angebot auswählen”（选择报价）。
+6. 选择报价后，若需要保险则完成保险，之后进行“Ware zur Abholung bereitstellen”（准备货物以便提取）。
+7. 完成准备货物后，进入“Ware bereitgestellt”（货物已准备好）结束事件，流程结束。
+8. 在整个流程中，有一个“Angebote erstellen”（创建报价）任务，它在流程开始后独立进行，不影响其他任务的顺序执行。

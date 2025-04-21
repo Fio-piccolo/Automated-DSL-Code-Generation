@@ -1,0 +1,7 @@
+该业务流程描述了一个货物发货的流程。起始事件“Ware soll versendet werden”表示有货物需要发送。
+
+首先，流程通过并行网关分流到两个分支：
+- 一个分支由“Lagerarbeiter”（仓库工人）执行“Ware verpacken”（包装货物）任务，之后流程到达“Spediteur beauftragen”（委托货运商）任务。
+- 另一个分支由“Sekreteriat”（秘书处）执行“Sekreteriat prüft, wer Versand übernimmt”（秘书处检查由谁进行发货）任务，然后通过“grosse Menge”（大量）排他网关，若为大量货物，则由“Sekretariat holt Angebot von 3 Speditionen ein”（秘书处从3家货运公司获取报价），接着是“Angebote auswählen”（选择报价），再进行“Spediteur beauftragen”（委托货运商）任务；若不是大量货物，则执行“normaler Postversand”（普通邮政运输）任务。
+
+之后，无论从哪个分支过来，都会通过并行网关汇合，进入“Ware wird versendet”（货物被发送）结束事件。在流程中，“Logistikleiter”（物流经理）会检查是否需要保险，若需要，则执行“Logistikleiter schließt Versicherung ab”（物流经理完成保险手续），之后通过排他网关汇合到后续流程。同时，“Sekreteriat”会执行“Sekretariat füllt Paketschein aus”（秘书处填写包裹单）任务，然后通过“Versicherung erforderlich?”（是否需要保险）排他网关，将结果反馈到流程主线上。

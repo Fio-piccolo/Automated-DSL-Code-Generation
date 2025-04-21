@@ -1,0 +1,34 @@
+这个BPMN流程描述了一个餐厅用餐的业务逻辑，包含客人、员工和厨师三个参与者的协作。具体流程如下：
+1. 客人流程：
+   - 客人感到饥饿（Hunger noticed）。
+   - 进入餐厅（Enter restaurant）。
+   - 选择菜品（Choose dish）。
+   - 等待叫号（Wait for turn）。
+   - 下单（place order）。
+   - 支付费用（pay money）。
+   - 取餐器（take buzzer）。
+   - 注意到取餐器响（beep noticed）。
+   - 取餐（get meal）。
+   - 用餐（eat meal）。
+   - 用餐结束（meal eaten）。
+2. 员工流程：
+   - 收到订单（order received）。
+   - 输入订单（Enter order）。
+   - 收款（collect money）。
+   - 设置取餐器（set up buzzer）。
+   - 交给客人取餐器（hand over buzzer）。
+   - 通知厨师（inform chef）。
+   - 等待餐品准备好（meal ready）。
+   - 触发取餐器（set off buzzer）。
+   - 等待客人取餐（customer gets meal）。
+   - 交给客人餐品（hand over meal）。
+   - 订单处理完成（order processed）。
+   - 如果5分钟内客人未取餐，呼叫客人（call customer）。
+3. 厨师流程：
+   - 收到通知（无名称的开始事件）。
+   - 准备餐品（prepare meal）。
+   - 将餐品放在取餐口（place meal in hatch）。
+   - 通知员工（inform employer）。
+   - 餐品准备完成（meal prepared）。
+
+这个流程展示了客人在餐厅用餐的全过程，以及员工和厨师在其中的协作。

@@ -1,0 +1,15 @@
+该业务流程从“Ware zu versenden（货物待发货）”开始，目标是完成“Warenversand vorbereitet（货物运输准备就绪）”。具体流程如下：
+1. 流程启动后，通过并行网关将任务分为两条并行路径。
+    - 路径一：
+        - 进行“Versandart klären（明确运输方式）”。
+        - 完成后，通过排他网关进行判断：
+            - 若选择“ja（是）”，则依次进行“Angebote einholen（获取报价）”和“Spediteur beauftragen（委托货运代理）”。
+            - 若选择“nein（否）”，则进行“Paketschein ausfüllen（填写包裹单）”。
+        - 填写包裹单后，再次通过排他网关判断：
+            - 若选择“ja（是）”，则进行“Versicherung abschliessen（办理保险）”。
+            - 若选择“nein（否）”，则直接进入后续汇合步骤。
+        - 办理保险或选择“否”后，流程汇合，继续向下执行。
+    - 路径二：进行“Ware verpacken（包装货物）”。
+2. 两条路径的任务完成后，通过并行网关汇合。
+3. 汇合后进行“Ware zur Abholung bereitstellung（准备货物待取件）”。
+4. 最后流程结束，货物运输准备就绪。

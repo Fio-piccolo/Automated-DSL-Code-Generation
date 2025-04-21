@@ -1,0 +1,16 @@
+业务需求如下：
+1. 流程开始于“Bestellung eingegangen”（订单已收到）事件。
+2. 之后，流程进入“Angebote einholen”（获取报价）任务，由“Sekretariat”（秘书处）执行。
+3. 根据是否需要特殊运输，流程会进行分支：
+   - 如果是，进入“Angebot auswählen”（选择报价）任务，之后流程继续。
+   - 如果否，流程会进入两个并行路径：
+     - 一条路径是直接进入“Ware verpacken”（包装货物）任务，由“Lagerarbeiter”（仓库工人）执行。
+     - 另一条路径是进入“Paktetschein ausfüllen”（填写包裹单）任务，之后判断是否需要保险：
+       - 如果需要，进入“Versicherung abschliessen”（办理保险）任务，由“Logistikleiter”（物流主管）执行。
+       - 如果不需要，流程直接继续。
+4. 完成“Ware verpacken”任务后，货物被准备好取货。
+5. 当所有相关任务完成后，货物被发送，流程结束于“Ware versendet”（货物已发送）事件。
+6. 同时，“Spediteur”（托运人）有自己的流程：
+   - 首先创建报价，然后发送报价。
+   - 接着准备货物并发送货物，最终流程也结束于“Ware versendet”事件。
+7. 整个流程中，不同任务由不同的角色在各自的工作区域内执行，通过消息流进行交互和协调。

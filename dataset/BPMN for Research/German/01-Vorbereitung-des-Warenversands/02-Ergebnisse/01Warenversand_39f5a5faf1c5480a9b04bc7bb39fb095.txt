@@ -1,0 +1,13 @@
+该BPMN流程主要描述了包裹发送的业务流程，从开始准备发送包裹，到选择快递公司并最终完成包裹发送。具体流程如下：
+1. **开始事件**：流程始于“Paket soll versandt werden”（包裹将被发送）这一事件。
+2. **并行分支**：经过并行网关，流程分为两个并行路径。
+    - **路径一**：判断是否为特殊发货（“Sonderversand?”）。
+        - **如果否**：填写标准化包裹单（“Standardisierten Paketschein ausfüllen”）。接着判断是否需要保险（“Versicherung erforderlich?”）。
+            - **如果需要**：进行保险操作（“Versicherung”）。之后与其他路径合并。
+            - **如果不需要**：直接与其他路径合并。
+        - **如果是**：直接进入获取快递公司报价步骤。
+    - **路径二**：进行包裹包装（“Paket verpacken”）。之后与其他路径合并。
+3. **获取报价**：通过并行网关，同时向三个快递公司（“Spediteur 1 Angebot einholen”、“Spediteur 2 Angebot einholen”、“Spediteur 3 Angebot einholen”）获取报价。
+4. **选择快递公司**：所有报价获取完成后，通过并行网关汇聚，之后选择快递公司（“Spediteur auwählen”）。
+5. **包裹发送**：经过排他网关汇聚各种条件分支后，进行包裹发送（“Paket versenden”）。
+6. **结束事件**：流程以“Paket versandt”（包裹已发送）这一事件结束。

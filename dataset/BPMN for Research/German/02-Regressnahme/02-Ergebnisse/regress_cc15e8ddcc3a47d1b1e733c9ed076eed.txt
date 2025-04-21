@@ -1,0 +1,18 @@
+业务需求如下：
+1. 流程从“Regressnahme”开始。
+2. 首先经过“Regressfähigkeit?”这个排他网关进行分支判断。
+    - 如果条件满足（走“Ja”路径），则发送“Zahlungsauforderung an VN verschicken”任务。
+    - 该任务完成后，到达“Widerspruch VN?”排他网关。
+        - 若回答“Ja”，则进行“Prüfung des Widerspruch”任务。
+        - 完成此任务后，通过“Gerechtfertigt?”排他网关进行判断。
+            - 若判断为“Nein”，则执行“Übergeben der Forderung an Inkasso-DL”任务，之后流程结束，显示“Weitergeleitet an Inkasso-DL”。
+    - 如果“Regressfähigkeit?”判断结果为不满足（走“Nein”路径），则流程直接结束，显示“Vorgang geschlossen! Keine Regressansprüche”。
+3. 对于发送“Zahlungsauforderung an VN verschicken”任务后，还有另外的分支情况。
+    - 会经过一个事件驱动网关“”进行分支。
+        - 其中一个路径是等待“Geldeingang VN”（收到钱）这个中间捕获事件。
+        - 收到钱后，执行“Zahlung des VN verbuchen”任务。
+        - 完成此任务后，流程结束，显示“Vorgang geschlossen! Zahlung eingetroffen”。
+        - 另一个路径是等待“x Tage Widervorlage”（x天的再次提交）这个中间捕获事件。
+        - 此事件触发后，经过“Zahlung eingetroffen?”排他网关进行判断。
+            - 若判断为“Nein”，则执行“Regressansprüche bei VN prüfen”任务，之后回到“Regressfähigkeit?”网关重新开始判断。
+            - 若判断为“Ja”，则执行“Zahlung des VN verbuchen”任务，后续流程同上述收到钱后的流程，即完成此任务后，流程结束，显示“Vorgang geschlossen! Zahlung eingetroffen”。

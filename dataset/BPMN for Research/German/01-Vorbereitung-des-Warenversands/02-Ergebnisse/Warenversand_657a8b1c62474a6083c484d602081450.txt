@@ -1,0 +1,5 @@
+当需要发送货物（Ware versenden）时，首先进行发货数量（Versandmenge klären）的确认。接着，通过排他网关根据货物数量情况进行分支：若为小数量，进入“Standard Paketschein”任务；若为特殊大数量发货，则进入并行网关。在并行网关处，分为三条路径分别处理。其中一条路径指向“Angebot 1”任务，另一条指向“Angebot 2”任务，还有一条指向“Angebot 3”任务。
+
+对于小数量情况，通过排他网关进一步分支：若需要保险（Versicherung abschliessen），进入“Versicherung abschliessen”任务，然后通过另一个排他网关判断是否有保险，若无保险则进入“ohne Versicherung”路径，最终到达“Abholbereit”结束事件；若不需要保险，则进入“Verpacken”任务，之后通过排他网关判断是否可以发货，若可以则进入“Ware Abholbereit”任务，最终到达“Abholbereit”结束事件。
+
+对于特殊大数量发货情况，并行网关分出的三条路径分别对应不同的报价任务，完成报价选择（Angebote auswählen）后，进入“Spediteur beauftragen”任务，最终到达结束事件。

@@ -1,0 +1,12 @@
+业务需求如下：
+1. 以“Incident”事件开始流程。
+2. 执行“Regress prüfen”任务。
+3. 进入“Moeglichkeit besteht?”排他网关，根据条件选择后续路径。
+    - 若满足特定条件，发送“Zahlungsaufforderung an VN”中间抛出事件。
+    - 若出现“Widerspruch”，进入“Zahlungsverweigerung”中间捕获事件。
+4. “Zahlungsverweigerung”事件后进入“Gerechtfertigt?”排他网关，再次根据条件选择后续路径。
+    - 若满足条件，流程以“Vorgang geschlossen”结束事件结束。
+    - 若不满足条件，执行“Weitergabe an Inkasso”任务，之后流程以“Vorgang geschlossen”结束事件结束。
+5. 若在“Moeglichkeit besteht?”排他网关选择另一路径，直接进入“Vorgang geschlossen”结束事件结束流程。
+6. 对于“Zahlungsaufforderung an VN”事件，若收到相关反馈进入“Widerspruch”排他网关，后续流程同步骤4。
+7. 对于“Widerspruch”排他网关，若有其他相关反馈进入“Geldeingang vom VN”排他网关，之后进入“Vorgang geschlossen”结束事件结束流程。

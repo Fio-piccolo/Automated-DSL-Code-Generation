@@ -1,0 +1,12 @@
+该业务流程围绕货物运输展开，涵盖了从货物待运输开始，经过确定运输方式、判断是否为特殊运输、获取报价并委托快递公司、填写标准化包裹单、决定是否购买保险、进行包装、准备货物到最终完成运输的一系列环节，涉及秘书、物流经理、仓库工人等不同角色的协同工作。具体如下：
+1. **开始**：流程以“Ware zu versenden”（货物待运输）事件启动。
+2. **确定运输方式**：由“Klären Versandart”（确定运输方式）任务处理，完成后进入后续流程。
+3. **判断是否为特殊运输**：通过“ExclusiveGateway”（排他网关）“Sonderversand notwendig?”（是否需要特殊运输？）进行判断，若为“是”，则执行“3 Angebote einholen und Spediteur beauftragen”（获取3个报价并委托快递公司）任务；若为“否”，则执行“Standardisierter Paketschein ausfüllen”（填写标准化包裹单）任务。
+4. **获取报价并委托快递公司（特殊运输情况）**：“3 Angebote einholen und Spediteur beauftragen”任务完成后，进入下一个环节。
+5. **填写标准化包裹单（非特殊运输情况）**：“Standardisierter Paketschein ausfüllen”任务完成后，进入下一个环节。
+6. **判断是否需要保险**：经过“ExclusiveGateway”“Versicherung notwendig?”（是否需要保险？）判断，若为“是”，则执行“Versicherung abschließen”（购买保险）任务；若为“否”，则直接进入下一步。
+7. **购买保险**：执行“Versicherung abschließen”任务，完成后进入下一步。
+8. **包装货物**：由“schomma verpacken”（包装货物）任务负责，完成后进入下一步。
+9. **准备货物**：“Ware bereitstellen”（准备货物）任务完成后，整个流程结束于“EndEvent”。
+
+在整个流程中，不同任务分布在“Sekretariat”（秘书）、“Logistikleiter”（物流经理）、“Lagerarbeiter”（仓库工人）等不同角色的工作区域内，各环节通过顺序流和网关进行有序衔接，确保货物运输流程的顺利进行。

@@ -1,0 +1,10 @@
+业务需求如下：
+1. 流程开始于“Warensendung erforderlich”（货物发送必要）的开始事件。
+2. 首先进入“Menge klären”（明确数量）任务，完成该任务后，进入“Menge?”（数量？）的排他网关。
+3. 根据“Menge?”网关的判断，如果数量大，则进入“Angebot einholen”（获取报价）任务；如果数量小，则进入“Paketschein ausfüllen”（填写包裹单）任务。
+4. “Angebot einholen”任务完成后，进入“Angebot auswählen”（选择报价）任务，之后进入“Spediteur beauftragen”（委托承运人）任务。
+5. “Paketschein ausfüllen”任务完成后，进入“Versicherung notwendig?”（需要保险？）的排他网关。
+6. 如果不需要保险，则流程继续；如果需要保险，则进入“Versicherung abschliessen”（完成保险）任务，之后流程继续。
+7. 经过一系列任务后，进入“Paket bereitstellen”（准备包裹）任务，然后是“Ware verpacken”（包装货物）任务。
+8. 最后进入结束事件。
+9. 该流程涉及“Sekretariat”（秘书处）、“Logistikleiter”（物流主管）、“Lager”（仓库）等角色。

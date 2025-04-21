@@ -1,0 +1,18 @@
+业务需求如下：
+1. 流程开始于“Regressmöglichkeit vorgelegt.”（退回可能性已提交）的开始事件。
+2. 首先执行“Wegen Regress Möglichkeit prüfen”（因退回可能性进行检查）任务。
+3. 接着通过“Regress möglichkeit gegeben?”（有退回可能性吗？）的排他网关进行判断。
+    - 如果选择“Nein”（否），则执行“Vorgang abschlissen”（完成流程）任务。
+    - 如果选择“Ja”（是），则执行“Zahlungsaufforderung an VN senden”（向VN发送付款请求）任务。
+4. 执行“Vorgang erfolglosgeschlossen”（流程未成功完成）或“Vorgang an Inkasso DL weitergeleitet”（流程转发至收款DL）的结束事件。
+5. 若执行“Zahlungsaufforderung an VN senden”任务后，执行“Wiedervorlage anlegen”（创建重新提交）任务。
+6. 之后可能会发生“Zahlungeingegangen”（收到付款）或“Widerspruch eingegangen”（收到异议）的中间捕获事件。
+    - 若发生“Zahlungeingegangen”，则执行“Geldeingang verbuchen”（记录收款）任务。
+    - 若发生“Widerspruch eingegangen”，则执行“Widerspruch prüfen”（检查异议）任务。
+7. 对于“Widerspruch prüfen”任务的结果，通过“gerechtfertigt?”（合理吗？）的排他网关进行判断。
+    - 如果选择“Nein”，则执行“An Inkasso DL weiterleiten”（转发至收款DL）任务。
+    - 如果选择“Ja”，则执行“Vorgang schließen”（完成流程）任务。
+8. 执行“Vorgang erfolgreich abgeschlossen”（流程成功完成）的结束事件。
+9. 若执行“An Inkasso DL weiterleiten”任务后，可能执行“Vorgang schließen”任务，之后再执行“Vorgang erfolgreich abgeschlossen”的结束事件。
+10. 若“Wiedervorlage - Frist abgelaufen”（重新提交 - 期限已过）的中间捕获事件发生，则执行“Vorgang schließen”任务，之后执行“Vorgang erfolgreich abgeschlossen”的结束事件。
+11. 整个流程在“Sachbearbeiter”（业务人员）的工作范围内进行。

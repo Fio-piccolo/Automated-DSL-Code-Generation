@@ -1,0 +1,18 @@
+业务需求如下：
+1. 流程开始于“VN kann evt. in Regress genommen werden”的开始事件。
+2. 首先，由“Regressnahme überprüfen”任务对退款进行检查。
+3. 检查后进入“Möglichkeit besteht?”的排他网关，根据条件判断流程走向：
+   - 若条件为“nein”，则执行“Vorgang schließen”任务。
+   - 若条件为“ja”，则执行“Zahlungsaufforderung an VN”任务。
+4. “Zahlungsaufforderung an VN”任务有多个输出序列流：
+   - 当出现“Geld eingegangen”的中间捕获事件时，执行“Verbuchen”任务。
+   - 当出现“Widerspruch eingegangen”的中间捕获事件时，先执行“Widerspruch prüfen”任务，然后进入“gerechtfertigt?”的排他网关，根据条件判断流程走向：
+     - 若条件为“ja”，则执行“Vorgang schließen”任务。
+     - 若条件为“nein”，则进入“AC20EF17 - 156B - 4D41 - 98B4 - 2FBA8270CA67”的事件基于网关（汇聚）。
+   - 当出现“Wiedervorlagefrist abgelaufen”的中间捕获事件时，进入“AC20EF17 - 156B - 4D41 - 98B4 - 2FBA8270CA67”的事件基于网关（汇聚）。
+5. “AC20EF17 - 156B - 4D41 - 98B4 - 2FBA8270CA67”的事件基于网关（汇聚）后，执行“Abgabe an Inkassodienstleister”任务。
+6. 流程最后以“Vorgang geschlossen”的结束事件告终，该结束事件会在多个任务执行完成后触发，这些任务包括：
+   - “Vorgang schließen”任务（可能执行多次）。
+   - “Abgabe an Inkassodienstleister”任务。
+   - “Verbuchen”任务后执行的“Vorgang schließen”任务。
+   - “Widerspruch prüfen”任务后根据条件执行“Vorgang schließen”任务后，由该“Vorgang schließen”任务的输出汇聚到结束事件。

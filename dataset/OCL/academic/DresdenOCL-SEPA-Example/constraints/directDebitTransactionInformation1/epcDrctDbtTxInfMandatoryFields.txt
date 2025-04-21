@@ -1,0 +1,3 @@
+The requirement is as follows: 
+
+Within the Direct Debit Transaction Information (DirectDebitTransactionInformation1), four fields are mandatory. These fields include the Direct Debit Transaction (drctDbtTx), Mandate Related Information (drctDbtTx mndtRltdInf), Mandate Identification (drctDbtTx mndtRltdInf mndtId), and Date of Signature (drctDbtTx mndtRltdInf dtOfSgntr). Each of these fields must possess at least one entry, meaning their size in the context should be more than zero. This requirement aligns with rows 1-4 on page 10 of the SEPA B2B Direct Debit C2B Implementation Guidelines.

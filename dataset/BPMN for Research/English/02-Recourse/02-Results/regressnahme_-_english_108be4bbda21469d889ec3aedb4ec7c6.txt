@@ -1,0 +1,9 @@
+业务流程从“Informed about claim”的开始事件开始，接着进入“Check the case”任务，然后到达“Recourse possible”的排他网关。根据此网关的判断结果，流程会分两条路径：
+- 如果判断为“Insurant right?”为“yes”，流程进入到一个并行网关，分别流向“Send request for payment”任务和“Make a reminder”任务。
+- 如果判断为“no”，流程会流向“Forward case to collection agency”任务。
+
+在“Send request for payment”任务和“Make a reminder”任务之后，流程会汇合到一个排他网关，然后根据判断结果再次分两条路径：
+- 如果判断为某种情况（未明确说明），流程会进入“Check reasoning of insurant”任务，之后再根据判断结果流向“Forward case to collection agency”任务或其他未明确的后续流程。
+- 如果判断为另一种情况（未明确说明），流程会进入“Close the case”任务，结束流程。
+
+在整个流程中，还存在一些中间捕获事件，如“Money received”“Disagreement received”“Deadline”等，这些事件可能会触发相应的后续操作或流程分支，但文档中未明确说明其具体作用和后续流程。

@@ -1,0 +1,18 @@
+业务需求如下：
+1. 流程从开始事件启动。
+2. 经过中间捕获事件，该事件等待特定消息触发。
+3. 到达排他网关“Prüfung ob Regress möglich”，根据条件判断流程走向：
+    - 若条件为“nein”，则流程直接进入结束事件“Vorgang schließen”。
+    - 若条件为“ja”，则进入并行网关“Diverging”。
+4. 并行网关“Diverging”会产生两个分支：
+    - 一个分支进入任务“Auf wiedervorlage setzen”。
+    - 另一个分支进入排他网关“Geld eingetroffen”。
+5. 任务“Auf wiedervorlage setzen”完成后，经过排他网关“Zeit”，进入并行网关“Converging”。
+6. 排他网关“Geld eingetroffen”根据条件判断流程走向：
+    - 若条件为“Ja”，则流程进入结束事件“Vorgang schließen”。
+    - 若条件为“nein ”，则进入排他网关“Prüfung ob Widerspruch gerechtfertigt?”。
+7. 排他网关“Prüfung ob Widerspruch gerechtfertigt?”根据条件判断流程走向：
+    - 若条件为“Ja”，则流程进入结束事件“Vorgang schließen”。
+    - 若条件为“nein ”，则进入排他网关“Unspecified”。
+8. 排他网关“Unspecified”之后，流程进入结束事件“Inkasso Dienstleiter beauftragt”。
+9. 并行网关“Converging”等待两个分支都到达后，再进入后续流程。

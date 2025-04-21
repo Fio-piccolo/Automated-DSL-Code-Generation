@@ -1,0 +1,25 @@
+该BPMN图描述了一个餐厅的业务流程，主要涉及顾客、员工和厨师三个角色，具体如下：
+1. **顾客流程**：
+   - 顾客感到饥饿（hungry），开始点餐流程。
+   - 顾客选择菜品（choose a dish）。
+   - 顾客下单（place order）。
+   - 顾客支付（pay）。
+   - 顾客等待订单准备就绪（waiting for the order to be ready）。
+   - 顾客取餐（pick up the food）。
+   - 顾客用餐（eat）。
+   - 顾客的饥饿感得到满足（hunger satisfied），流程结束。
+2. **员工流程**：
+   - 员工收到订单（order），开始处理订单流程。
+   - 员工录入订单（enter order）。
+   - 员工收款（collect money）。
+   - 员工设置 buzzer 并将其交给顾客（set up of buzzer and passing to the client）。
+   - 员工等待订单准备就绪的通知（employee notified that the order is ready）。
+   - 员工发送消息给 buzzer（send a message to the buzzer）。
+   - 员工等待5分钟（waiting for 5 min）。
+   - 员工根据订单是否被取走进行分支处理：
+     - 如果订单被取走（order collected），流程结束（end of the process）。
+     - 如果订单未被取走，员工继续呼叫顾客取餐（call for the client to collect the order until it is picked up），直到订单被取走，流程结束（end of the process）。
+3. **厨师流程**：
+   - 厨师收到订单通知（informed about the order），开始准备订单流程。
+   - 厨师准备订单并将其放在服务窗口（prepare the order and place it in the service hatch）。
+   - 流程结束（end of the process）。

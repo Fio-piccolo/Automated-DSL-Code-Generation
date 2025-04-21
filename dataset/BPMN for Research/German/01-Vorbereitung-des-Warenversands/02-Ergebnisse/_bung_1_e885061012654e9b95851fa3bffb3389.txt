@@ -1,0 +1,10 @@
+1. 流程开始于“Versand klären”（发货澄清）。
+2. 然后进入“Menge prüfen?”（检查数量？）任务。
+3. 接着到“Sonderversand?”（特殊运输？）的排他网关：
+    - 若为“Nein”（否），则执行“Paketschein ausfüllen”（填写包裹单）任务，之后到“Ist eine Versicherung nötig?”（是否需要保险？）的排他网关：
+        - 若为“Ja”（是），执行“Versicherung abschließen!”（签订保险！）任务，然后与其他路径汇合；
+        - 若为“Nein”（否），直接与其他路径汇合。
+    - 若为“Ja”（是），进入“Angebot 1 einholen”（获取报价1）、“Angebot 2 einholen”（获取报价2）、“Angebot 3 einholen”（获取报价3）并行任务，完成后进行“Angebot auswählen”（选择报价）任务，再与其他路径汇合。
+4. 汇合后，执行“Ware verpacken”（包装货物）任务。
+5. 然后执行“Verpackte Ware bereitstellen”（提供包装好的货物）任务。
+6. 最后流程结束于“Versand”（发货）。

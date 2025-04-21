@@ -1,0 +1,3 @@
+The requirements are as follows:
+
+In the context of the class 'PaymentInstructionInformation2' within the 'isoStdIso20022TechXsdPain00800101' package, a rule is specified that the 'Payment Information Identification' or 'pmtInfId' attribute should not be empty. Basically, it is important to include at least one 'pmtInfId' when giving instructions for a payment. This rule has been recommended by the SEPA B2B Direct Debit C2B Implementation Guidelines Version 1.3 document.

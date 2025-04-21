@@ -1,0 +1,27 @@
+### 业务流程描述
+
+#### 1. 整体流程概述
+该BPMN图涉及三个参与者：“Banking Frontend”、“Scoring (Bank)”和“Scoring (Credit protection agency)”，通过消息流进行交互。主要业务流程围绕贷款评分展开，分为银行内部评分流程（“Scoring (Bank)”）和信用保护机构的评分流程（“Scoring (Credit protection agency)”）。
+
+#### 2. 银行前端（Banking Frontend）流程
+- 开始事件“New scoring case”触发流程。
+- 进入任务“Raise scoring request”，向“Scoring (Bank)”发起评分请求。
+- 之后进入事件网关“eventBasedGateway”，根据不同情况进行分流：
+    - 若接收到“Level1 Scoring received”事件（通过消息事件定义触发），进入任务“Report Scoring Result to Banks Frontend”，将评分结果报告给银行前端，然后通过排他网关“exclusiveGateway”进行条件判断。
+    - 若接收到“Scoring1 Delay Message received”事件（通过消息事件定义触发），则进入任务“Send Delay Message”，并等待“Scoring1 Delay Message”消息。
+- 等待“Level2 Scoring received”事件（通过消息事件定义触发），然后再通过排他网关进行条件判断。
+- 最后在任务完成后，以“Done”结束事件结束流程。
+
+#### 3. 银行评分（Scoring (Bank)）流程
+- 从银行前端接收到评分请求后，进入任务“Raise scoring request”。
+- 之后进入事件网关“eventBasedGateway”，根据不同情况进行分流：
+    - 若满足条件，进入任务“Report Scoring Result to Banks Frontend”，将评分结果报告给银行前端。
+    - 若不满足条件，进入任务“Wait for answer”等待反馈。
+- 接收到相应事件后，通过排他网关进行条件判断，最终完成流程。
+
+#### 4. 信用保护机构评分（Scoring (Credit protection agency)）流程
+- 接收到评分请求（通过消息事件定义触发）后，进入任务“Run Level1 scoring”进行一级评分。
+- 根据一级评分结果，通过排他网关“result?”判断：
+    - 若为“是”，进入任务“Run Level2 scoring”进行二级评分。
+    - 若为“否”，进入任务“Send "Delay" message”发送延迟消息。
+- 二级评分完成后，通过排他网关“Converging”进行合并，最后将评分结果发送给银行前端。

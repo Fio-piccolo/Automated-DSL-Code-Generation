@@ -1,0 +1,16 @@
+业务需求如下：
+1. 流程以“Regressgrund bekannt”（退回原因已知）的开始事件启动。
+2. 接着进入“Regressgrund prüfen”（检查退回原因）任务。
+3. 完成该任务后，通过“Regressgrund berechtigt?”（退回原因是否合理？）排他网关进行分支判断：
+    - 若退回原因不合理（选择“Nein”），则跳过后续部分流程。
+    - 若退回原因合理（选择“Ja”），则继续执行“Zahlungs-aufforderung versenden”（发送付款请求）任务。
+4. 发送付款请求后，执行“Wiedervorlage-zeitpunkt setzen”（设置重新提交时间点）任务。
+5. 之后通过一个事件驱动的排他网关进行分支：
+    - 若收到“Zahlung erhalten”（收到付款）消息，则执行“Zahlungs-eingang verbuchen”（记录付款到账）任务。
+    - 若达到“Wiedervorlagezeitpunkt erreicht”（重新提交时间点到达），则继续后续流程。
+    - 若收到“Widerspruch erhalten”（收到异议）消息，则执行“Widerspruch prüfen”（检查异议）任务。
+6. 检查异议后，通过“Widerspruch Gerechtfertigt?”（异议是否合理？）排他网关进行判断：
+    - 若异议不合理（选择“Nein”），则执行“Fall an Inkasso weiter geben”（将案件转交给催款部门）任务。
+    - 若异议合理（选择“Ja”），则继续执行“Vorgang schließen”（完成流程）任务。
+7. 完成“Zahlungs-eingang verbuchen”任务或满足相关条件后，继续执行“Vorgang schließen”任务。
+8. 完成“Vorgang schließen”任务后，通过两个汇聚的排他网关进行汇聚，最终流程以“Vorgang abgeschlossen”（流程完成）结束事件结束。

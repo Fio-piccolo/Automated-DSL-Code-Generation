@@ -1,0 +1,19 @@
+这个BPMN流程描述了一个名为"Warenversand"（货物运输）的业务流程，具体如下：
+
+1. **开始**：流程从一个开始事件开始。
+2. **确定运输方式**：接下来，由Sekretariat（秘书处）的工作人员负责确定运输方式（Versandart klären）。
+3. **判断是否需要特殊运输**：然后，通过一个排他网关（Sonderversand notwendig?）判断是否需要特殊运输。
+   - 如果需要特殊运输（ja），则由Sekretariat的工作人员负责获取报价（Angebote einholen）。
+   - 如果不需要特殊运输（nein），则流程继续往下进行。
+4. **并行处理**：接下来是一个并行网关，分成三条并行路径：
+   - 第一条路径：由Lagerarbeiter（仓库工人）负责包装货物（Ware verpacken）。
+   - 第二条路径：由Sekretariat的工作人员负责填写包裹单（Paketschein ausfüllen）。
+   - 第三条路径：由Sekretariat的工作人员负责选择报价（Angebot auswählen），然后委托运输商（Spediteur beauftragen）。
+5. **判断是否需要保险**：在并行路径中，有一个排他网关（Versicherung notwendig?）判断是否需要保险。
+   - 如果需要保险（ja），则由Logistikleiter（物流主管）负责办理保险（Versicherung abschließen）。
+   - 如果不需要保险（nein），则流程继续往下进行。
+6. **汇合并行路径**：所有并行路径在一个并行网关处汇合。
+7. **汇合排他路径**：所有排他路径在一个排他网关处汇合。
+8. **汇合所有路径**：所有路径在一个排他网关处汇合。
+9. **准备货物以供取货**：由Lagerarbeiter负责准备货物以供取货（Ware zur Abholung bereitstellen）。
+10. **结束**：流程结束。

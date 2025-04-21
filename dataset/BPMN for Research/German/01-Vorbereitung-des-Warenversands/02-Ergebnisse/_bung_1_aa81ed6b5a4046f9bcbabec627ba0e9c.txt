@@ -1,0 +1,9 @@
+这是一个货物运输（Warenversand）的业务流程。流程从“开始事件”（sid-D379DA6E-F477-484F-B440-ECE88336EAB4）开始，接着进入“并行网关”（sid-5EBD8FC4-1B9C-4F8E-8E69-06E37EC04EC2），该网关分出两条路径：一条路径是“Lagerarbeiter”（仓库工人）执行“Verpackung”（包装，sid-3ED45D6E-1000-42A0-9AD9-5382E3924938）任务；另一条路径是“Sekretariat”（秘书处）执行“Menge bestimmen”（确定数量，sid-30537F2C-D190-4224-B7D5-E78A5ECF308A）任务。
+
+“Menge bestimmen”任务完成后进入“Exclusive Gateway”（排他网关，sid-32A50063-F479-4FA8-8627-2CDBBB89D796），根据“Warenwert”（货物价值）判断：
+ - 如果判断为“nein”（否），则执行“Paketschein”（包裹单，sid-DC964934-BCFD-48D3-9A89-33A3F88CB660）任务，然后执行“Versicherung prüfen”（检查保险，sid-16E73F4F-39A2-404D-8CB4-A916F7A0A309）任务，再进入“Exclusive Gateway”（sid-8CA374E0-C950-4C28-B0D8-C5139756BB7C）判断：
+    - 如果判断为“ja”（是），则“Logistikleiter”（物流经理）执行“Versicherung”（保险，sid-AEB3C7AD-87AB-480E-AB39-9708476A240C）任务，之后进入“Exclusive Gateway”（sid-FC910385-D588-47D9-80A6-576041C09E6F）。
+    - 如果判断为“nein”（否），直接进入“Exclusive Gateway”（sid-FC910385-D588-47D9-80A6-576041C09E6F）。
+ - 如果判断为“ja”（是），则进入“Parallel Gateway”（并行网关，sid-D99FB3BF-E4D2-4C0B-AFBD-2757E5BB12E9），该网关分出三条路径，分别执行“Angebot 2”（报价2，sid-AFF0E3A5-A349-4D42-9312-A05C630FAC47）、“Angebot 1”（报价1，sid-73E9304F-D10A-4BBA-AC66-3A1B109B4A93）、“Angebot 2”（报价2，sid-9C1F483D-CDD5-425C-8422-D9E9BE80F8A4）任务，这三个任务完成后进入“Parallel Gateway”（sid-F7CAECF5-FE1A-4607-BCCC-60E13F229C32）汇聚，然后执行“Mahlzeit in Auftrag geben”（订餐，sid-BC84B813-AF55-4135-9ACD-8F273BB0F1DC）任务，之后进入“Exclusive Gateway”（sid-04C48BAB-4FDF-4A89-8A93-2727EB56F74B）。
+
+“Exclusive Gateway”（sid-FC910385-D588-47D9-80A6-576041C09E6F）和“Exclusive Gateway”（sid-04C48BAB-4FDF-4A89-8A93-2727EB56F74B）汇聚到“Parallel Gateway”（sid-7FA27492-8187-4346-B989-B02109292467），该网关汇聚了“Verpackung”任务的输出和上述两个“Exclusive Gateway”的输出，然后执行“Warenversand”（货物运输，sid-4CDB0D92-681C-4FE1-975B-06FC85ACE5FF）任务，最后流程在“End Event”（sid-D23C46F1-487F-4161-B907-220A05E25AAB）结束。

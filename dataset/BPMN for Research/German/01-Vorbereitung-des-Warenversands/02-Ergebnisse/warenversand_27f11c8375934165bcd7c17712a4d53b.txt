@@ -1,0 +1,16 @@
+该业务流程主要围绕计算机硬件经销商的相关业务展开，涉及货物包装、物流安排、保险购买以及发货等一系列操作。具体如下：
+1. 流程开始于“Start”事件。
+2. 随后进入“Ware verpacken”任务，由仓库工人负责对货物进行包装。
+3. 包装完成后，货物进入“parallelGateway”（并行网关），此时可能有多个路径分支。
+4. 其中一个分支是“Verpackte Ware zur Abholung bereistellen”任务，由仓库工人准备好包装好的货物以供取货，之后流程到达“endEvent”结束。
+5. 另一个分支涉及物流相关操作。从并行网关出来后，先进行“Menge erfassen”任务，由相关人员记录货物数量。
+6. 根据数量情况，通过“Menge > x?”（数量大于x？）的排他网关进行判断。
+   - 如果数量大于x，执行“Speditionsangebote einholen”任务，获取运输报价。
+   - 如果数量不大于x，执行“Postpaketschein ausfüllen”任务，填写邮政包裹单。
+7. 对于获取运输报价的情况，经过“Günstigstes Angebot?”（最优惠报价？）的排他网关进行决策。
+   - 如果有最优惠报价，可能会执行不同的任务，如“Sped. 1 beauftragen”“Sped. 2 beauftragen”“Sped. 3 beauftragen”，分别向不同的运输公司下单。
+   - 下单后，这些任务的输出会经过一系列的处理和判断，最终可能会执行“Post beauftragen”任务，安排发货。
+8. 在物流过程中，还会涉及到保险相关的判断。在填写邮政包裹单之后，通过“Versicherung erforderlich?”（需要保险？）的排他网关进行决策。
+   - 如果需要保险，执行“Versicherung abschließen”任务，购买保险。
+   - 如果不需要保险，则直接进入后续流程。
+9. 最后，所有相关任务完成后，流程到达“endEvent”结束。

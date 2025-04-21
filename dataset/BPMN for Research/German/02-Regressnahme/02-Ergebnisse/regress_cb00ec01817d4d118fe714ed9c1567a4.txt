@@ -1,0 +1,19 @@
+业务需求如下：
+1. 流程以“Möglicherweise Regress”开始事件启动。
+2. 启动后进入“Fall prüfen”任务，对情况进行检查。
+3. 检查后进入“Regress möglich?”排他网关，判断是否可能回归。
+    - 如果判断结果为“Ja”，则进入“Zahlungsaufforderung an VN senden”任务，向VN发送付款请求。
+    - 如果判断结果为“Nein”，则流程直接进入结束事件。
+4. 发送付款请求后，进入“Wiedervorlage”中间抛出事件。
+5. 该事件触发“Exclusive”类型的事件网关，网关有三个分支：
+    - 一个分支等待“Geld erhalten”中间捕获事件，即收到钱。
+    - 一个分支等待“Wiedervorlagefrist abgelaufen”中间捕获事件，即还款期限到期。
+    - 一个分支等待“Widerspruch erhalten”中间捕获事件，即收到异议。
+6. 收到钱后，进入“Eingang verbuchen”任务，进行收入登记。
+7. 还款期限到期后，进入“Übergabe an Inkasso”任务，移交催款。
+8. 收到异议后，进入“Widerspruch prüfen”任务，检查异议。
+9. 检查异议后，进入“Widerspruch gerechtfertigt?”排他网关，判断异议是否合理。
+    - 如果判断结果为“Ja”，则进入一个结束事件。
+    - 如果判断结果为“Nein”，则与还款期限到期后的流程合并，进入“Übergabe an Inkasso”任务，移交催款。
+10. “Übergabe an Inkasso”任务完成后，进入一个结束事件。
+11. “Eingang verbuchen”任务完成后，进入另一个结束事件。

@@ -1,0 +1,9 @@
+该业务流程是关于商品发货准备的流程，主要包括以下步骤：
+1. 流程从“Start Warenversand”开始，通过并行网关“Diverging”分为两个路径。
+2. 一个路径是由“Lagerarbeiter”（仓库工人）执行“Ware verpacken”（包装商品）任务，然后商品被送到“Ware zur Abholung bereit”（准备好取货）任务，之后通过汇聚网关“Converging”。
+3. 另一个路径是由“Sekretariat”（秘书处）执行“3 Angebote einholen”（获取3个报价）任务，然后根据商品数量通过“grosse Menge”（大量）排他网关分为两个分支。
+    - 如果商品数量大，执行“Paketschein ausfüllen”（填写包裹单）任务，再根据是否需要保险通过“Versicherung?”（保险？）排他网关分为两个分支。
+        - 如果需要保险，执行“Versicherung abschliessen”（完成保险）任务，之后回到汇聚网关。
+        - 如果不需要保险，直接回到汇聚网关。
+    - 如果商品数量不大，执行“1 Angebot auswählen xy”（选择一个xy报价）任务，然后执行“Spediteur beauftragen”（委托承运人）任务，之后回到汇聚网关。
+4. 汇聚网关之后的流程继续，商品最终到达“EndEvent”结束流程。

@@ -1,0 +1,24 @@
+业务需求如下：
+1. 流程以名为“Meldung \"Regress möglich\"”的开始事件启动。
+2. 启动后执行“Regress prüfen”任务。
+3. 执行完“Regress prüfen”任务后，进入“Regressnahme berechtigt?”的排他网关进行判断。
+    - 如果判断结果为“nein”，则执行“Vorgang schließen”任务，之后流程结束。
+    - 如果判断结果为“ja”，则进入并行网关。
+4. 并行网关有两个输出流向：
+    - 一个流向执行“Zahlungsaufforderung erstellen/verschicken”任务。
+    - 另一个流向执行“Vorgang auf Wiedervorlage setzen”任务。
+5. 执行“Zahlungsaufforderung erstellen/verschicken”任务后，流程继续。执行“Vorgang auf Wiedervorlage setzen”任务后，进入事件驱动网关。
+6. 事件驱动网关有多个输出流向：
+    - 其中一个流向是，如果收到“Wiederspruch durch VN eingegangen”的中间捕获事件，则执行“Wiederspruch des VN prüfen”任务。
+    - 另一个流向是，如果“WiedervorlageFrist ist abgelaufen”的中间捕获事件发生，则流程继续。
+    - 还有一个流向是，如果发生“Zahlungseingang erfolgt”的中间捕获事件，则执行“Zahlungseingang verbuchen”任务。
+7. 执行“Wiederspruch des VN prüfen”任务后，进入“Wiederspruch gerechtfertig?”的排他网关进行判断。
+    - 如果判断结果为“nein”，则执行“Vorgang schließen”任务，之后流程结束。
+    - 如果判断结果为“ja”，则执行“Vorgang schließen”任务，之后流程结束。
+8. 执行“Zahlungseingang verbuchen”任务后，执行“Vorgang schließen”任务，之后流程结束。
+9. 执行“Vorgang auf Wiedervorlage setzen”任务后，还会执行其他相关任务（文档中未详细描述具体逻辑），最终进入结束事件“Vorgang beendet”，流程结束。
+10. 执行“Zahlungsaufforderung erstellen/verschicken”任务后，还会执行其他相关任务（文档中未详细描述具体逻辑），最终进入结束事件“Vorgang beendet”，流程结束。
+11. 整个流程中存在一些中间捕获事件，如“Wiederspruch durch VN eingegangen”“WiedervorlageFrist ist abgelaufen”“Zahlungseingang erfolgt”等，用于触发相应的任务。
+12. 流程中还有一些排他网关和并行网关，用于控制流程的走向和分支。
+13. 流程中涉及多个任务，包括“Regress prüfen”“Vorgang schließen”“Zahlungsaufforderung erstellen/verschicken”“Wiederspruch des VN prüfen”“Zahlungseingang verbuchen”“InkassoDienstleister kontaktieren und Fall abgeben”等，每个任务完成后会根据条件进入下一个环节。
+14. 文档中还提到一个待办事项“ToDo: Woher kommen die Daten?”，但未明确其在流程中的具体作用和关联。

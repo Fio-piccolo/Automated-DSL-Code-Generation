@@ -1,0 +1,11 @@
+这是一个保险业务流程的定义。流程从“Chance of Regress”（可能的倒退）开始事件（sid-53BE31D4-84CA-4DD0-ADC8-3377B42018F1）触发，然后经过“Check case”（检查案件）任务（sid-FAB544DC-37AF-476E-A013-91D69F2DA70F），接着到达“ist Regress berechtigt?”（是否有合法的倒退？）排他网关（sid-33BB7BEF-A80F-4379-B884-785BD0FEEE59）。如果是合法的倒退，流程进入“Send payment request”（发送支付请求）任务（sid-7A1B22ED-F4D1-47A2-9A6A-3E3071665752）；如果不是合法的倒退，流程进入“15C795AB-3757-42BE-9F4C-516962817B0A”中间节点。
+
+在“15C795AB-3757-42BE-9F4C-516962817B0A”中间节点，流程会根据后续的条件进行判断。如果收到“PH disagrees”（PH 不同意）中间捕获事件（sid-3BF5C4AC-37D7-4E7B-9114-020E0AB2D962），流程进入“Check claim”（检查索赔）任务（sid-2CF80B22-B3B8-4D4A-9D50-F53238ABDBAD）；如果收到“Reminder”（提醒）中间捕获事件（sid-55E40259-31FF-4BA1-B3CD-C8639F20E409），流程进入“7228F16A-C110-4B0D-97A2-8F60B7EA7DC5”中间节点。
+
+在“Check claim”任务后，流程到达“Refusal justified?”（拒绝是否合理？）排他网关（sid-C0DF8617-DBF3-45FF-8F4D-822CD61FB5A7）。如果拒绝合理，流程进入“Forward case to collection agency”（将案件转交给收款机构）任务（sid-B6A307A0-F7DA-457B-8F2F-069E1935E493）；如果拒绝不合理，流程进入“Close the case”（关闭案件）任务（sid-551DD689-896B-412D-8D24-0E6B59419882）。
+
+“Close the case”任务有两个输入流，分别来自“3A398374-46E6-4B11-8881-29A7CE5B55E0”和“91D5A458-292B-4042-9EE8-D28E624E59A9”，完成后到达“Case closed”结束事件（sid-6607D29E-518F-47BC-BAA1-056F1E750FCA）。
+
+“Send payment request”任务的输出流进入“4C014D03-A63B-4E71-9C47-B5B7EE46500A”事件基于网关，该网关有多个输出流，分别进入不同的后续任务或中间节点。
+
+整个流程描述了保险业务中从案件开始到最终处理结果（关闭案件或转交给收款机构）的一系列操作和判断。

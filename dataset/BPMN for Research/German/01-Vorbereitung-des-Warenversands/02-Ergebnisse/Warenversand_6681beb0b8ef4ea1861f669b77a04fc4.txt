@@ -1,0 +1,21 @@
+当有货物需要发送时，流程开始于名为“Ware soll versendet werden”的开始事件。首先进行“Details Warenversand klären”任务，明确货物发送的详细信息。
+
+接着进入排他网关，根据条件分流：
+- 如果是特殊发货需求（标记为“Sonder-versand notwendig”），则执行“Angebote anfordern”任务以请求报价；
+- 如果是普通发货，则执行“Paketschein ausfüllen”任务填写包裹单。
+
+在请求报价后，进入包含网关，分流执行：
+- “Logistikleiter schließt Versicherung ab”任务，为货物办理保险（如果需要）；
+- 继续“Paketschein ausfüllen”任务。
+
+完成上述任务后，进入并行网关，同时进行“Ware verpacken”和“Spediteure erstellen und schicken Angebote”任务，分别进行货物包装和生成并发送报价。
+
+在收到报价后，执行“Angebot auswählen”任务选择报价，然后“Spediteur beauftragen”任务指定发货商。
+
+之后进入排他网关，根据条件（是否需要保险）分流：
+- 如果不需要保险，执行相应任务；
+- 如果需要保险，执行“Logistikleiter schließt Versicherung ab”任务办理保险。
+
+然后通过并行网关汇合，进行“Ware bereitstellen”任务准备货物。
+
+接着通过排他网关根据不同条件分流，执行相应任务，最终通过包含网关汇合后，进入“Paketschein ausfüllen”任务再次填写包裹单，最后通过并行网关汇合后进入结束事件，流程结束。

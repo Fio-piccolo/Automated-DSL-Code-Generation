@@ -1,0 +1,20 @@
+该业务流程主要围绕货物处理展开，从接收订单开始，经历多个环节，最终完成货物的交付或处理。具体如下：
+1. **订单接收**：流程始于“Bestellung erhalten”（接收订单）事件。
+2. **确定运输负责人**：订单接收后，进入“Klären wer den Versand übernimmt”（确定谁负责运输）任务，以明确负责运输的人员。
+3. **判断是否需要特殊运输**：根据运输情况，通过“Sonderversand nötig?”（是否需要特殊运输）排他网关进行判断。
+    - 若不需要特殊运输，流程进入“Paketschein ausfüllen”（填写包裹单）任务。
+    - 若需要特殊运输，则进入“Angebot anfordern”（请求报价）任务。
+4. **请求报价**：执行“Angebot anfordern”任务后，流程并行进入多个分支。
+    - 并行执行“Angebot erstellen”（创建报价）任务，不同的“Spediteur”（发货人）角色执行该任务。
+    - 同时执行“Lieferung vorbereiten”（准备交付）任务，不同的“Spediteur”角色执行该任务。
+5. **评估报价**：完成报价创建和交付准备后，进入“Angebote evaluieren”（评估报价）任务，对收到的报价进行评估。
+6. **选择报价**：评估报价后，通过“Angebot auswählen”（选择报价）排他网关进行选择。
+    - 根据选择结果，可能进入不同的后续任务，如继续进行交付准备等。
+7. **判断货物状态**：根据业务逻辑，通过“Versicherung benötigt?”（是否需要保险）排他网关判断是否需要保险。
+    - 若需要保险，执行“Versicherung abschließen”（办理保险）任务。
+    - 若不需要保险，则进入下一步。
+8. **判断货物处理方式**：通过“Ware wird abgeholt oder versendet?”（货物是被取走还是发送）排他网关判断货物的处理方式。
+    - 若货物被取走，执行“Ware abholen”（取货）任务。
+    - 若货物被发送，执行“Ware versenden”（发货）任务。
+9. **包装和准备货物**：在取货或发货前，可能需要执行“Ware verpacken”（包装货物）任务和“Ware zur Abholung bereitstellen”（准备好货物以供取货）任务。
+10. **流程结束**：货物取走或发货后，流程进入结束事件，标志着整个业务流程的完成。

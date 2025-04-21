@@ -1,0 +1,11 @@
+该业务流程是关于货物运输的，具体如下：
+1. 货物运输流程开始于“Ware versenden”（发货）事件。
+2. 发货后，进入“Klärung der Versandart”（澄清运输方式）任务，完成该任务后，流程进入一个排他网关（Exclusive Gateway）。
+3. 根据在排他网关中做出的决策，流程可能会有不同的走向：
+    - 如果满足特定条件，流程会进入“Paketschein”（包裹单）任务，完成该任务后，可能会进入后续的某个任务（图中未明确标识）。
+    - 如果不满足上述条件，流程会进入“Angebote einholen”（获取报价）任务，完成该任务后，进入“Spediteur beauftragen”（委托承运人）任务，之后可能会进入后续的某个任务（图中未明确标识）。
+4. 在“Spediteur beauftragen”任务完成后，流程进入一个并行网关（Parallel Gateway）。
+5. 从并行网关出来后，流程会同时进行两个任务：
+    - “Verpackung der Ware”（包装货物）任务，由仓库工人（Lagerarbeiter）负责。
+    - “Versicherung abschließen”（购买保险）任务，由邮政运输（Postversand）部门负责。
+6. 完成上述两个任务后，流程最终到达结束事件（End Event），表示货物运输流程结束。

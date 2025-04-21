@@ -1,0 +1,15 @@
+业务需求如下：
+1. 流程开始于“Regress ggf. möglich”事件，之后进入“Fall prüfen”任务。
+2. “Fall prüfen”任务完成后，进入“Regress möglich”的排他网关。
+3. 若排他网关走“Regress OK”路径，则进入“Fall schliessen”任务，之后结束流程。
+4. 若排他网关走其他路径，则发送“Zahlungs - aufforderung an VN”消息，进入“Zahlungsaufforderung geht ein”中间捕获事件。
+5. “Zahlungsaufforderung geht ein”事件之后进入“Überlegen”任务。
+6. “Überlegen”任务完成后，进入“Regress möglich”的排他网关。
+7. 若排他网关走“Überweisen weil OK”路径，则进入“Überweisen weil OK”任务，之后进入结束事件。
+8. 若排他网关走“Widersprechen erwünscht”路径，则进入“Widersprechen erwünscht”任务，之后发送消息，进入中间抛出事件。
+9. 中间抛出事件之后，进入“Auftrag”中间捕获事件。
+10. “Auftrag”事件之后，可能会有多种后续流程，具体取决于不同条件和任务的执行结果。
+11. 整个流程中涉及到不同角色（如VN、Inkasso DL、Sachbearbeiter）的任务和交互，以及消息的发送和接收。
+12. 流程中还包含一些判断节点（排他网关和事件基于网关），用于根据不同条件决定流程的走向。
+13. 存在一些任务，如“Vorgang schliessen”“Widerspruch prüfen”“Fall schliessen”“Auftrag an Inkasso”“Wiedevorlage setzen”等，分别执行不同的操作。
+14. 流程中还有一些中间捕获事件，如“Geld vom VN korrekt eingegangen”“Widerspruch VN geht ein”“Frist abgelaufen”等，用于处理特定的情况或条件。

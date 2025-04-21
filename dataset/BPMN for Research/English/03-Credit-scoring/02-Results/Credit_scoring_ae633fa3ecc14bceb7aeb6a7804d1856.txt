@@ -1,0 +1,6 @@
+业务流程描述：
+银行（Scoring (bank)）和信用保护机构（Scoring (credit protection agency)）参与该业务流程。
+开始时，银行端的“Button pressed”开始事件触发，经过“Check 1st scoring”任务，将结果传递到事件基于网关（eventBasedGateway）。
+事件基于网关根据条件进行分支，一部分流程到“First scoring arrives”中间捕获事件，另一部分到“2nd scoring arrives”中间捕获事件。
+在信用保护机构端，“Request received”开始事件触发后，经过“Perform scoring level 1”任务、“Report delay”任务等一系列操作，最终到达两个“Process end”结束事件。
+银行端的“Send scoring to front end”任务将结果发送到前端，同时还有一些延迟相关的消息处理流程，如“Delay message received”中间捕获事件和“Send message "scoring delayed""任务等。整个流程中各个节点之间通过消息流（messageFlow）进行交互。

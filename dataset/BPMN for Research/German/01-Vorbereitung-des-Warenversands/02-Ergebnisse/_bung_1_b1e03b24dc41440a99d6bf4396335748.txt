@@ -1,0 +1,9 @@
+流程开始于“Computer GmbH”的“Sekretariat”部门，首先进行“Versand klären”任务。之后通过一个排他网关，根据“kleine Menge”或“große Menge”的条件进行分支。
+
+如果是“kleine Menge”，则进行“Paketschein ausfüllen”任务，接着是“Versicherung prüfen”任务。“Versicherung prüfen”后通过另一个排他网关，根据“keine Versicherung”或“Versicherung ja”的条件分支。若为“keine Versicherung”，则直接进入汇聚网关；若为“Versicherung ja”，则由“Logistikleiter”部门进行“Versicherung abschließen”任务，之后也进入汇聚网关。
+
+如果是“große Menge”，则进行“3 Angebote einholen”任务，接着是“Angebot auswählen”任务，然后是“Spediteur beauftragen”任务，之后进入汇聚网关。
+
+汇聚网关之后，由“Lagerarbeiter”部门进行“Ware verpacken”任务，接着是“Ware bereitstellen”任务，最后流程结束。
+
+流程中还涉及“Computer GmbH”与“Spediteur”之间的消息传递，包括“3 Angebote einholen”、“Angebot auswählen”、“Spediteur beauftragen”等任务与“Spediteur”的交互。

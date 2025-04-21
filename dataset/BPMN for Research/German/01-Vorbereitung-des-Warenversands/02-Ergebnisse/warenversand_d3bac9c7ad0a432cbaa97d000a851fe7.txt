@@ -1,0 +1,12 @@
+业务需求如下：
+1. 流程从“Auftrag Ware versandt”（订单货物已发货）事件开始。
+2. 进入“Klärung welche Expedition übernimm den Transport”（澄清哪个快递公司负责运输）任务，在此任务中确定负责运输的快递公司。
+3. 接着进入“große Menge? > 5”（数量大于5？）排他网关，根据货物数量进行分支判断。
+    - 如果数量大于5，执行“Sonderversand Angebote einholen”（获取特殊运输报价）任务。
+    - 如果数量不大于5，流程继续向下。
+4. 并行执行“Sopediteuer 1”（快递公司1）、“Ware vom Lager abholen”（从仓库提货）、“Postschein ausfüllen”（填写邮寄单）任务。
+5. 之后进入“Ist Versicherung erforderlich?”（是否需要保险？）排他网关进行判断。
+    - 如果需要保险，执行“Versicherung abschliessen”（购买保险）任务，然后继续流程。
+    - 如果不需要保险，流程直接继续。
+6. 并行执行“Ware via Post veschicken”（通过邮政发货）、“Ware im Lager verpaken”（在仓库包装货物）、“Ware zum Versand bereit stellen”（准备发货）任务。
+7. 这些任务完成后，流程汇聚到结束事件，标志着整个业务流程结束。

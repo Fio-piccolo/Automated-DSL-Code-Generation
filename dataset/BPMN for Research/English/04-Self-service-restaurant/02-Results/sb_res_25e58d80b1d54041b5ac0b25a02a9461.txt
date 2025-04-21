@@ -1,0 +1,31 @@
+### 客人流程（Guest）
+1. 客人进入系统，从“Get some lunch”开始事件启动流程。
+2. 接着进入“Choose a dish”任务，客人在此选择想要的菜品。
+3. 选择菜品后，流程进入“Guest turn”中间捕获事件，等待客人再次操作。
+4. 然后进入“Place order”任务，客人在此下单。
+5. 下单后进入“Pay order”任务，客人进行支付。
+6. 支付后进入“buzzer received”中间捕获事件，等待收到取餐 buzzer。
+7. 收到 buzzer 后，进入“collect meal”任务，客人去取餐。
+8. 取餐后进入“have lunch”任务，客人享用午餐。
+9. 最后在“lunch complete”结束事件完成整个流程。
+
+### 员工流程（Employee）
+1. “Next guest in queue”开始事件触发流程，代表有新客人进入排队。
+2. 进入“Input guest's order”任务，员工记录客人的订单。
+3. 记录订单后进入“set off guest's buzzer”任务，为客人设置并触发取餐 buzzer。
+4. 同时进入“receive payment”任务，接收客人支付。
+5. “set and give buzzer to guest”任务，为客人设置并给予 buzzer。
+6. “inform chef”任务，通知厨师准备餐点。
+7. 进入事件驱动网关“3rd time?”，根据条件判断是否为第三次服务。
+8. 如果不是第三次服务，进入“lunch is ready”中间捕获事件，等待餐点准备好。
+9. 餐点准备好后，进入“hand over meal”任务，将餐点交给客人。
+10. 客人收到餐后，“Serving complete”结束事件标志服务完成。
+11. 如果是第三次服务，进入“call customer”任务，联系客人。
+12. 联系后，“serving complete”结束事件标志服务完成。
+
+### 厨师流程（Chef）
+1. “order received”开始事件触发，代表收到客人订单。
+2. 进入“Prepare Meal”任务，厨师准备餐点。
+3. 准备好后进入“place meal in the service hatch”任务，将餐点放置在服务窗口。
+4. 然后进入“inform employee”任务，通知员工餐点已准备好。
+5. 最后在“prepare meal complete”结束事件完成餐点准备流程。

@@ -1,0 +1,3 @@
+The requirements are as follows:
+
+For every Direct Debit Transaction Information within a Payment Instruction Information, if the 'Amendment Indicator' is set to 'TRUE' and the 'Original Debtor Agent' is identified with a proprietary ID 'SMNDA', then the 'Sequence Type' under Payment Type Information must be set to 'FRST'.

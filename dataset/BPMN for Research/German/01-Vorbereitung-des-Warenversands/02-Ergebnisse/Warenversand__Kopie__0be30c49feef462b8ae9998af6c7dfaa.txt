@@ -1,0 +1,2 @@
+业务需求如下：
+首先由 Logistikleiter 负责“Versicherung abschließen”任务，完成后转向下一步；接着 Sekretariat 发起“Ware zu versenden”的开始事件，之后进入“Versandweg klären”任务；然后通过“Versandart?”的排他网关进行决策，分为“Sonderversand”和“Postversand”两条路径；“Sonderversand”路径下经过一系列并行网关和任务，最终到达“Angebot wählen”任务；“Postversand”路径也经过类似的并行网关和任务流程；在各个任务节点之间通过序列流连接，形成一个复杂的业务流程，最终以“Versandauftrag fertiggestellt”的结束事件结束整个流程。整个流程涉及多个参与者（Computerhändler 的不同部门）在不同任务节点上的协作，以完成货物的发送相关工作。

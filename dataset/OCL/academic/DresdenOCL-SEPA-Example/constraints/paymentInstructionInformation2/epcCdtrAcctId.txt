@@ -1,0 +1,3 @@
+The requirement is as follows: 
+
+For the Creditor Account Id (referred to as "PmtInf CdtrAcct Id" in code) in the "PaymentInstructionInformation2" context, only the use of IBAN (International Bank Account Number) is permitted. This means that other types of account identification methods such as Basic Bank Account Number (BBAN), proprietary account characteristics (prtryAcct), or Universal Payment Identification Code (UPIC) should not be used, as indicated by their respective sizes set to 0 in the code. This requirement is in line with the rules stipulated in row 18 on page 8 of the SEPA (Single Euro Payments Area) Business to Business (B2B) Direct Debit Customer to Business (C2B) Implementation Guidelines.

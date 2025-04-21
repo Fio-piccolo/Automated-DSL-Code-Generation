@@ -1,0 +1,24 @@
+### 银行前端（Banking Frontend）流程
+1. 银行前端接收到评分请求（Scoring Request received）。
+2. 向信用机构（Scoring (Credit Agency)）发送评分请求消息。
+3. 等待信用机构返回评分结果消息。
+4. 将收到的信用机构评分结果消息转发给银行内部的评分模块（Scoring (Bank)）。
+5. 等待银行内部评分模块返回最终评分结果。
+
+### 信用机构（Scoring (Credit Agency)）流程
+1. 接收到来自银行前端的评分请求（Scoring Request received）。
+2. 执行首次快速评分（Do first quick scoring）。
+3. 通过排他网关（Level 2 check required?）判断是否需要进行二级评分：
+   - 如果不需要（No），则发出一级评分结果消息（Level 1 Results）并结束一级评分流程（Level 1 scoring completed）。
+   - 如果需要（Yes），则启动二级评分（Start Level 2 Scoring）。
+4. 二级评分完成后，发出二级评分结果消息（Level 2 Results）并结束二级评分流程（Level 2 scoring completed）。
+5. 如果在二级评分过程中出现延迟情况，发送延迟通知消息（Inform Delay）。
+
+### 银行内部评分模块（Scoring (Bank)）流程
+1. 接收到来自银行前端的评分请求（Scoring Request received）。
+2. 发送评分请求消息给信用机构。
+3. 等待接收信用机构的评分结果消息（Receive Scoring Results）。
+4. 对收到的评分结果进行处理，通过排他网关（Result is ready?）判断结果是否准备好：
+   - 如果结果准备好（Yes），则发送结果消息（Send Results）并结束一级评分流程（Level 1 scoring completed）。
+   - 如果结果未准备好（No），则发送延迟通知消息（Inform Delay）并等待。
+5. 接收到信用机构的最终评分结果后，结束二级评分流程（Level 2 scoring completed）。

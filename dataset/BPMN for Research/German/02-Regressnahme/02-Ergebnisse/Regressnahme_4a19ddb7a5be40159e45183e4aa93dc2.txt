@@ -1,0 +1,10 @@
+业务需求如下：
+1. 流程开始于一个开始事件。
+2. 首先执行“Regressforderung prüfen”任务。
+3. 之后通过一个排他网关，根据条件分为两个流向：
+   - 如果条件满足，执行“Zahlungsaufforderung senden”任务，然后执行“Vorgang auf Wiedervorlage setzen”任务，接着通过一个事件基于网关，根据不同情况分别执行：
+     - 若出现“Frist abgelaufen”，则执行后续相关流程。
+     - 若出现“Widerspruch”，则执行“Widerspruch prüfen”任务，再根据结果通过另一个排他网关进行不同走向。
+     - 若出现“Zahlungseingang”，则执行“Zahlungseingang verbuchen”任务。
+   - 如果条件不满足，直接进入后续流程。
+4. 经过一系列任务和网关后，最终到达结束事件，流程结束。

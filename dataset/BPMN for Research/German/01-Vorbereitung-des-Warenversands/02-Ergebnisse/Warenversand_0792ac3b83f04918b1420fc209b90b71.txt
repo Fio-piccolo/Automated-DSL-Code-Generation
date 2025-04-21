@@ -1,0 +1,12 @@
+该业务流程主要涉及货物发送相关操作，从起始事件开始，经过一系列任务和决策节点，最终完成货物的包装、保险、选择配送商以及发货等流程。具体如下：
+1. 流程开始于一个起始事件。
+2. 起始事件之后，进入“Sekretarirat klärt den Versand”任务，即秘书处理发货事宜。
+3. 完成该任务后，通过一个排他网关进行决策。如果发货量较大，则进入“Menge Versand groß”路径；如果发货量较小，则进入“Menge Versand klein”路径。
+4. 在“Menge Versand groß”路径中，经过一个排他网关后，会有三个并行的任务分支，分别是选择“Spediteur 1”“Spediteur 2”“Spediteur 3”。
+5. 选择完配送商后，进入一个排他网关。根据不同条件，可能会进入“Paketschein ausfüllen Sekretariat”任务（填写包裹单）或“Versicherung lotistikleiter”任务（物流经理进行保险）。
+6. 完成上述任务后，通过一个排他网关进行决策，可能会进入不同的后续流程。
+7. 在“Menge Versand klein”路径中，经过一个排他网关后，也会进入相应的任务分支，如“Paketschein ausfüllen Sekretariat”或“Versicherung lotistikleiter”。
+8. 完成这些任务后，进入一个混合网关进行整合。
+9. 整合后，通过一个并行网关进入“Lagerarbeiter verpackt ware”任务，即仓库工人包装货物。
+10. 包装完成后，进入“Versand”任务，即发货。
+11. 最后，流程结束于一个并行网关的汇聚点。

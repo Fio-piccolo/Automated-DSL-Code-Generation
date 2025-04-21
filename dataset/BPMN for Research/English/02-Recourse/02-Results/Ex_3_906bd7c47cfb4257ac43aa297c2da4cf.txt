@@ -1,0 +1,24 @@
+这是一个保险代位求偿的业务流程，描述如下：
+
+1. 流程从"Insurant subrogated"(被保险人代位求偿)事件开始，表示被保险人提出代位求偿请求。
+
+2. 系统首先执行"Check case"(案件检查)任务，对案件进行初步审核。
+
+3. 审核后进入"subrogation possible?"(是否可代位求偿)的排他网关判断：
+   - 如果不可代位求偿("No"路径)，直接执行"Close case"(结案)任务，然后流程结束于"Case closed"(案件关闭)事件。
+   - 如果可以代位求偿("Yes"路径)，进入并行网关，同时执行两个分支：
+
+4. 并行分支1：
+   - 执行"Make remainder"(制作催款通知)任务
+   
+5. 并行分支2：
+   - 触发"Request for payment"(付款请求)中间事件
+
+6. 两个并行分支完成后，进入事件网关，等待以下三种可能的事件之一：
+   - "Money received"(收到款项)：执行"Make a booking"(记账)任务，然后执行"Close case"任务，流程结束于"Case closed"事件。
+   - "Disagreement received"(收到异议)：执行"Check reasoning"(检查异议理由)任务，然后进入"Insurant right?"(被保险人是否正确)的排他网关判断：
+     * 如果被保险人正确("Yes"路径)，执行"Close case"任务，流程结束于"Case closed"事件。
+     * 如果被保险人不正确("No"路径)，流程直接结束于"Sent to collection agency"(发送给催收机构)事件。
+   - "Disagreement deadline reached"(异议期限到期)：流程直接结束于"Sent to collection agency"事件。
+
+整个流程涵盖了保险代位求偿案件从受理到结案的全过程，包括案件审核、催款通知、付款请求、异议处理等关键环节，并考虑了多种可能的处理路径。

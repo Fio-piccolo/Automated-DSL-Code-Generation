@@ -1,0 +1,10 @@
+### 银行职员业务流程
+1. **银行系统部分**：
+   - 流程从名为“”的开始事件启动。当该事件触发后，进入“Place request to agency”任务，该任务将请求发送给信用保护机构。
+   - 发送请求后，进入“delay info received”中间捕获事件，等待来自信用保护机构的延迟信息。若接收到延迟信息，进入“Process delay message presentation”任务处理延迟消息展示，之后将消息发送回信用保护机构。
+   - 同时，在“Place request to agency”任务发送请求后，等待“score received”中间捕获事件，若接收到信用保护机构返回的评分结果，进入“Process result for presentation”任务处理评分结果展示，最后到达“credit score completed”结束事件。
+2. **信用保护机构部分**：
+   - 当接收到来自银行的“credit score request received”开始事件触发的信用评分请求后，进入“Do Quick scoring”任务进行快速评分。
+   - 完成快速评分后，进入“Is Scoring Done?”排他网关判断评分是否完成。若未完成，进入“Do Level 2 scoring”任务进行二级评分；若完成，进入“send score result”中间抛出事件发送评分结果给银行。
+   - 若在快速评分未完成时接收到延迟信息，进入“Inform delay”中间抛出事件，将延迟信息发送回银行。最终，通过“send score result”中间抛出事件或“Inform delay”中间抛出事件发送信息后，流程结束。
+3. 银行与信用保护机构之间通过消息流进行交互，银行向信用保护机构发送请求，信用保护机构处理后向银行返回评分结果或延迟信息。银行系统根据接收到的结果或信息进行相应处理。

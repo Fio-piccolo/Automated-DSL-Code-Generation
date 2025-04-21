@@ -1,0 +1,3 @@
+流程开始于“Versandauftrag erhalten”（收到发货订单），然后进入“Lagerarbeiter”（仓库工人）角色的“Ware verpacken”（包装货物）任务。同时，“Sekretariat”（秘书处）角色执行一系列任务：首先“Angebote einholen”（获取报价），接着“Angebot auswählen”（选择报价），然后“Beauftragung des Spediteurs”（委托货运代理），之后“Ausfüllen Paketschein”（填写包裹单）。之后有一个“Versicherung erforderlich?”（需要保险吗？）的排他网关，如果需要保险，进入“Logistikleiter”（物流经理）角色的“Abschließen einer Versicherung”（完成保险）任务；如果不需要保险，直接通过。无论是否经过保险任务，流程都会通过“Versandauftrag bearbeitet”（处理发货订单）结束事件结束。
+
+此外，在“Menge prüfen”（检查数量）任务后有一个“Menge?”（数量？）的排他网关，如果数量小，进入“Standardpaketschein ausfüllen”（填写标准包裹单）任务，然后“Versicherungsbedarf prüfen”（检查保险需求），如果有保险需求，进入“Versicherung abschließen”（完成保险）任务。

@@ -1,0 +1,7 @@
+The requirement is as follows:
+
+For every instance of PaymentInstructionInformation2, the name of the UltimateCreditor must be unique if it exists. Only one organization ID is allowed and must be unique for the UltimateCreditor and Creditor. The condition applies to various identifiers such as BIC, IBEI, BEI, EANGLN, USCHU, DUNS, bank party ID, tax ID number, proprietary ID and others.
+
+Similarly, only one private ID is allowed and must not be the same for the UltimateCreditor and Creditor. This applies to identifiers such as driver's license number, customer number, social security number, alien registration number, passport number, tax ID number, identity card number, employer ID number and other ID. There is also a special condition that for 'other ID', either its ID or ID type should be different. 
+
+In essence, the UltimateCreditor in the PaymentInstructionInformation2 should be different from the Creditor, considering all the identifiers specific to them.

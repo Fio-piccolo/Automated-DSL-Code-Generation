@@ -1,0 +1,9 @@
+业务需求如下：该业务流程围绕PC - Händler展开，由“Ware zu versenden”（有货物待发送）这一事件启动流程。流程主要涉及三个角色，分别为Sekretariat（秘书处）、Logistikleiter（物流主管）和Lager（仓库）。
+1. **并行处理**：并行网关将流程分为两条并行路径，一条路径由秘书处处理，另一条路径由仓库处理。
+2. **秘书处处理路径**：
+    - 秘书处首先执行“Versandart klären”（明确运输方式）任务。
+    - 之后通过“Menge ?”（数量？）这一独占网关判断，若数量大，执行“Speditionsangebote einholen”（获取货运报价）任务，接着执行“Angebot auswählen”（选择报价）任务，然后“Spediteur beauftragen”（委托货运商）；若数量小，执行“Versicherungsnotwendigkeit prüfen”（检查保险必要性）任务，通过“Versicherung notwendig?”（保险是否必要？）这一独占网关判断，若保险必要，由物流主管执行“Versicherung abschliessen”（签订保险）任务，若保险不必要，两条分支在此处通过独占网关汇聚。
+    - 之后执行“Standardisierter Paketschein ausfüllen”（填写标准化包裹单）任务。
+    - “Spediteur beauftragen”任务和“Standardisierter Paketschein ausfüllen”任务的结果汇聚，继续后续流程。
+3. **仓库处理路径**：仓库接到并行网关分出的任务后，执行“Ware verpacken”（包装货物）任务。
+4. **最终汇聚**：秘书处和仓库处理路径的结果在“Ware bereitstellen”（准备好货物）任务前汇聚，执行该任务后流程结束。

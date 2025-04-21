@@ -1,0 +1,7 @@
+在一个信贷评分业务流程中，涉及“Banking frontend”、“Scoring (Bank)”和“Scoring (Credit protection agency)”三个参与者。
+1. “Banking frontend”首先发起“FE credit check request”，将请求发送给“Scoring (Bank)”的“Request scoring”任务。
+2. “Scoring (Bank)”的“Request scoring”任务处理请求后，进入“exclusiveGateway”，根据不同条件决定后续流向：
+   - 若符合某些条件，进入“Send result”任务发送结果；
+   - 若需要通知延迟，触发“Notify delay”中间抛出事件，向“Scoring (Credit protection agency)”发送通知。
+3. “Scoring (Credit protection agency)”接收到延迟通知后，执行“Perform level 1 scoring”任务，若2分钟内未完成，触发“Notify delay”中间抛出事件通知“Banking frontend”，并继续进行“Perform level 2 scoring”任务，最终完成“Level 1 scoring complete”和“Level 2 scoring complete”。
+4. “Scoring (Bank)”在接收到“Scoring (Credit protection agency)”的结果后，完成后续流程。

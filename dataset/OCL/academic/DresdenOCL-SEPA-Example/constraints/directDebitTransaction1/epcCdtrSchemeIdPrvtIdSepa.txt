@@ -1,0 +1,5 @@
+The requirements are as follows:
+
+In the context of DirectDebitTransaction1 package from isoStdIso20022TechXsdPain00800101 model, the 'Identification Type' (denoted as IdTp) under 'Other Identification' (othrId), for Credit Scheme Identification Private Ids (cdtrSchmeId Id prvtId) ought to specify 'SEPA'. This is detailed in row 3 of page 12 of the SEPA (Single Euro Payments Area) B2B (Business-to-Business) Direct Debit C2B (Customer-to-Bank) Implementation Guidelines.
+
+In case the credit scheme identification is undefined or not provided (cdtrSchmeId.oclIsUndefined()), then any private identification (prvtId) provided should have their other identification type (othrId.idTp) specified as 'SEPA'.

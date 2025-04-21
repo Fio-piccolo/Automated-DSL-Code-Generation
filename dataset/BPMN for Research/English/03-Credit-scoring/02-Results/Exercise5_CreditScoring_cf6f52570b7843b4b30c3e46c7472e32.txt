@@ -1,0 +1,4 @@
+业务逻辑描述：
+银行前端（Banking Frontend）发起新的评分请求（New scoring case），该请求传递给评分（Bank）流程中的“Raise scoring request”任务（task），此任务完成后进入事件基于网关（eventBasedGateway），根据不同的条件进行分支。如果是特定条件，会触发“Level1 Scoring received”中间捕获事件（intermediateCatchEvent），之后进入排他网关（exclusiveGateway）。如果是另一种条件，会触发“Scoring1 Delay Message received”中间捕获事件，然后进入“Send Delay Message”任务，该任务完成后又回到排他网关。在排他网关处根据不同的输入继续进行流程，最终完成所有任务后到达结束事件（Done）。
+
+信用保护机构（Scoring (Credit protection agency)）的流程开始于“Scoring request”开始事件，进入“Run Level1 scoring”任务，完成后进入排他网关，根据结果进行分支，分别进入不同的后续任务，最终到达“Send &quot;Delay&quot; message”任务或其他任务，完成相应操作后流程结束。两个流程之间通过消息流（messageFlow）进行交互，如银行前端到某个中间节点的消息流等。

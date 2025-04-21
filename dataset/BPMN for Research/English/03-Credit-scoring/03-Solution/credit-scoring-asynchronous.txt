@@ -1,0 +1,17 @@
+在这个BPMN流程中，涉及三个参与者：credit scoring frontend (bank)、credit scoring (bank)和scoring service。
+
+首先，credit scoring frontend (bank)收到“scoring request received”消息后，触发Task_16winvj，即“request credit score”任务。任务完成后，流程进入EventBasedGateway_02s95tm。
+
+EventBasedGateway_02s95tm根据不同情况决定流程走向：
+- 如果收到“credit score received”消息（通过IntermediateCatchEvent_0yg7cuh），则流程走向ExclusiveGateway_11dldcm，进行条件判断。
+- 如果收到“delay information received”消息（通过IntermediateCatchEvent_0ujob24），则流程走向Task_0l942o9，即“report delay”任务，然后回到IntermediateCatchEvent_0a8iz14等待“credit score received”消息。
+
+在ExclusiveGateway_11dldcm中，根据条件判断结果，走向Task_1fzfxey，即“send credit score”任务，最终到达“scoring request handled”的EndEvent_0rp5trg。
+
+scoring service中，StartEvent_0o849un接收到“scoring request received”消息后，触发Task_1r15hqs，即“compute credit score (level 1)”任务，然后进入ExclusiveGateway_0rtdod4进行条件判断：
+- 如果条件为“no”，走向Task_01ouvha，即“report delay”任务，然后到Task_02m68xj，即“compute credit score (level 2)”任务，最后到Task_06dqs9t，即“send credit score”任务，再进入ExclusiveGateway_125lzox进行条件判断。
+- 如果条件为“yes”，走向Task_07vbn2i，即“send credit score”任务，然后进入ExclusiveGateway_125lzox进行条件判断。
+
+在ExclusiveGateway_125lzox中，根据条件走向EndEvent_0khk0tq，即“scoring request handled”。
+
+此外，还有消息流在各参与者和任务之间传递，以触发相应事件和任务的执行。

@@ -1,0 +1,5 @@
+业务需求如下：这是一个关于货物运输的业务流程。首先是“Warenversand”（货物发送）的起始事件，之后通过一个排他网关进行分支。若货物数量大（Sonderversand），则执行“3 Angebote einholen”（获取3个报价）的任务；若货物数量小（Postversand），则执行“Paketschein ausfüllen”（填写包裹单）的任务。
+
+对于“获取3个报价”的任务，完成后通过并行网关进一步分支，分别执行“Angebot 1”“Angebot 2”“Angebot 3”这三个任务。这三个任务完成后，进入“Angebot wählen”（选择报价）的任务，选择后执行“Menge festlegen”（确定数量）的任务，然后回到排他网关。
+
+对于“填写包裹单”的任务，完成后进入“Versicherung”（保险）的排他网关。若选择购买保险（ja），则执行“Versicherung abschließen”（完成保险）的任务；若不购买保险（nein），则直接进入后续流程。完成保险相关任务后，与其他相关任务流程汇聚，之后执行“Spediteur beauftragen”（委托运输商）的任务，再经过一些并行网关和任务的流转，最终到达结束事件。期间还包括“Verpackung der Ware”（包装货物）、“zur Abholung bereitstellen”（准备好取货）等任务。

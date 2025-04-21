@@ -1,0 +1,12 @@
+1. 流程开始于“Versandauftrag erhalten”（收到发货订单）。
+2. 订单进入“Menge prüfen”（检查数量）任务，由Sekretariat（秘书处）处理。
+3. 经过“Menge?”（数量？）的排他网关，根据数量大小（“groß”或“klein”）分支处理：
+    - 若数量大（“groß”），进入“3 Angebote einholen”（获取3个报价）任务，接着是“Angebot auswählen”（选择报价）和“Spediteur beauftragen”（委托运输商）任务。
+    - 若数量小（“klein”），进入“Paketschein ausfüllen”（填写包裹单）任务，然后是“Versicherungsbedarf prüfen”（检查保险需求）任务。
+4. 在“Versicherung benötigt?”（需要保险？）的排他网关，根据是否需要保险（“JA”或“NEIN”）分支处理：
+    - 若需要保险（“JA”），进入“Versicherung abschließen”（签订保险）任务。
+    - 若不需要保险（“NEIN”），直接进入后续流程。
+5. 两个分支（保险相关和运输商委托相关）通过排他网关（“B1CB22AC”）和“3CA94A69”排他网关汇聚。
+6. 并行网关（“5A5D33FD”）分出一条并行路径，进入“Ware verpacken”（包装货物）任务（由Lagerarbeiter（仓库工人）处理）。
+7. 上述两条路径（数量检查处理路径和包装货物路径）通过并行网关（“AB1A8215”）汇聚，进入“Ware bereitstellen”（提供货物）任务（由Lagerarbeiter（仓库工人）处理）。
+8. 最终流程结束于“Ware bereitgestellt”（货物已提供）。

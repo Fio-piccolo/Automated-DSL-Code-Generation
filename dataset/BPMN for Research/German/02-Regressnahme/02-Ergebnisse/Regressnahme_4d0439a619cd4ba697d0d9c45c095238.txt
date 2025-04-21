@@ -1,0 +1,1 @@
+业务需求如下：该流程围绕“Regress”相关业务展开。首先是“Regress”开始事件触发流程，接着“Regressverdacht gemeldet”中间抛出事件被触发，随后进入“Regress prüfen”任务。任务完成后，通过排他网关进行分流，若“Regress nein”则进入“Regress beendet”结束事件；若“Regress ja”，则进入“Zahlungsaufforderung”相关的中间捕获事件，之后有一系列操作，包括“Geld ja”分支下的“Geld verbuchen”任务，以及“Wiederspruch VM”分支下的相关检查任务等，流程中还有可能触发各种事件定义，如取消事件定义、终止事件定义、消息事件定义、定时器事件定义等，最终根据不同条件进入不同的结束事件或执行相应任务。

@@ -1,0 +1,4 @@
+业务需求如下：
+该业务流程主要围绕“Regressnahme”（可能的对VN的退回）展开。首先有一个“möglicher Regress gegen VN”的开始事件，流程由此启动。接着进入“Regress prüfen”（检查退回）任务，完成检查后，流转至“Regress berechtigt”（退回是否有权限）的排他网关。若判定有权限（走“ja”的路径），则执行“VN zur Zahlung auffordern”（要求VN付款）任务，之后进行“Vorgang auf Wiedervorlage setzen”（将流程设置为重新提交）任务。
+若出现“Zahlung eingegangen”（收到付款）的情况，流程进入“Zahlung buchen”（记录付款）任务；若“Wiedervorlagefrist verstrichen”（重新提交期限过期），则执行“Inkasso beauftragen”（委托收款）任务。
+若收到“Widerspruch eingegangen”（收到异议），需先进行“Widerspruch prüfen”（检查异议）任务，然后通过“Widerspruch gerechtfertigt?”（异议是否合理）的排他网关进行判断。若判断为合理（走“ja”的路径），则流程继续推进直至结束；若判断为不合理（走“nein”的路径），则可能重新执行“Inkasso beauftragen”任务或直接结束流程。最终，当满足相应条件后，流程以“Vorgang abgeschlossen”（流程完成）的结束事件告终。

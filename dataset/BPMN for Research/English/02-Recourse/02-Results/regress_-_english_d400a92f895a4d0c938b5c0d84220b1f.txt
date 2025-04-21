@@ -1,0 +1,2 @@
+业务逻辑如下：
+首先从开始事件开始，触发发送请求支付的任务，完成后进入事件基于网关。事件基于网关根据条件进行分支，若进入“got response”中间捕获事件，则后续可进入两个任务，分别是“Forward to Collection agency”和“Forward to collection agency”（若满足相应条件）；若进入“No responce”中间捕获事件，则进入一个任务。“Forward to Collection agency”任务完成后会有相应的流程分支。在中间捕获事件中，会根据定时器事件定义进行定时处理。各个任务完成后会根据条件进入不同的网关进行进一步的流程走向，最终到达结束事件。

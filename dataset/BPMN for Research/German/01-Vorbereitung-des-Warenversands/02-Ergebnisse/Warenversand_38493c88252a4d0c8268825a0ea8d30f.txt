@@ -1,0 +1,14 @@
+该业务流程主要涉及电脑硬件经销商的发货流程，从确定发货物品开始，经过一系列任务和决策，最终完成货物发货。具体流程如下：
+1. 起始点为“Was soll versandt werden”（确定要发货的物品），由此开始流程。
+2. 接着进入“Versand klären”（明确发货事宜）任务。
+3. “Menge”（数量）决策点根据货物数量进行分支：
+    - 若数量大，进入“Drei Angebote einholen”（获取三个报价）任务。
+    - 若数量小，则进入“Paketschein ausfüllen”（填写包裹单）任务。
+4. “Drei Angebote einholen”任务完成后，进入“Ein Angebot auswählen”（选择一个报价）任务。
+5. “Paketschein ausfüllen”任务完成后，进入“Ware verpacken”（包装货物）任务。
+6. “Ein Angebot auswählen”任务完成后，进入“Spediteur beauftragen”（委托快递公司）任务。
+7. “Ware verpacken”任务完成后，进入“Ware zur Abholung bereitstellen”（准备好货物以供取件）任务。
+8. “Spediteur beauftragen”任务完成后，进入“Versicherung abschließen”（购买保险）任务（存在条件分支，如果需要保险则执行此任务）。
+9. 两个并行的任务流（一个是经过购买保险相关流程，另一个是未经过购买保险流程）在“Inclusive Gateway”（包含网关）处汇聚。
+10. 之后通过“Parallel Gateway”（并行网关）继续流程。
+11. 最后到达“Ware ist versandt”（货物已发货）的结束点，表示整个流程结束。

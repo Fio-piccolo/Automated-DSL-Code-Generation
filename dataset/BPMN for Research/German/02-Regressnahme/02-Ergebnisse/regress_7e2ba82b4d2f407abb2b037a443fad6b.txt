@@ -1,0 +1,12 @@
+业务需求如下：
+1. 流程以“Empfang Meldung VN möglicherweise in Regress”事件开始。
+2. 接着检查“Fall & Möglichkeite zu Regress”任务。
+3. 通过“Regress möglich?”排他网关进行分支判断。
+    - 如果判断结果为“JA”，则执行“Zahlungsaufforderung an VN schicken”任务，然后执行“Vorgang auf Wiedervorlage setzen”任务。
+    - 如果判断结果为“NEIN”，则直接执行“Vorgang auf Wiedervorlage setzen”任务。
+4. 执行完“Vorgang auf Wiedervorlage setzen”任务后，经过“eventBasedGateway”网关进行分支。
+    - 可能会到达“Zahlungseingang stattgefunden”中间捕获事件，之后执行“Zahlungs eingang verbuchen”任务，再执行“Vorgang abschließen und Wiedervorlage löschen”任务，最后流程结束。
+    - 可能会到达“Widerspruch VN eingetroffen”中间捕获事件，接着检查“Wiederspruch”任务。
+        - 若“Zahlungsverweigerung gerechtfertigt?”判断为“JA”，则执行“Vorgang abschließen und Wiedervorlage löschen”任务，然后流程结束。
+        - 若“Zahlungsverweigerung gerechtfertigt?”判断为“NEIN”，则执行“Weitergabe an Inkasso DL und Wiedervorlage löschen”任务，之后流程结束。
+    - 还可能会到达“Wiedervorlagefrist abgelaufen ”中间捕获事件，然后执行“Weitergabe an Inkasso DL und Wiedervorlage löschen”任务，最后流程结束。

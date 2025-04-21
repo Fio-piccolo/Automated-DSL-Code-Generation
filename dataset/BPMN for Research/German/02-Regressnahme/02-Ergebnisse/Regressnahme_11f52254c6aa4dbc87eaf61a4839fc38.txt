@@ -1,0 +1,9 @@
+业务需求如下：
+1. 流程从“VN im Regress”开始。
+2. 首先执行“Regress Prüfen”任务。
+3. 执行完“Regress Prüfen”任务后，通过排他网关进行分支，若条件为“Ja”，则执行“Zahlungsaufforderung senden.”任务；若条件为“Nein”，则执行“Vorgang schließen”任务。
+4. 执行“Zahlungsaufforderung senden.”任务后，执行“Wiedervorlage einstellen”任务。
+5. 执行“Wiedervorlage einstellen”任务后，通过事件驱动网关进行分支，可能会触发“Geld eingegangen”“Widerspruch eingegangen”“Wiedervorlagefrist ist abgelaufen”等事件。
+6. 若触发“Geld eingegangen”事件，则执行“Geldeingang verbuchen”任务；若触发“Widerspruch eingegangen”事件，则执行“Widerspruch prüfen”任务；若触发“Wiedervorlagefrist ist abgelaufen”事件，则执行“Inkasso beauftragen”任务。
+7. 执行“Widerspruch prüfen”任务后，通过“Gerechtfertigt”排他网关进行分支，若条件为“Ja”，则执行“Vorgang schließen”任务；若条件为“Nein”，则执行“Inkasso beauftragen”任务。
+8. 执行完相关任务后，最终通过“Vorgang schließen”任务结束流程。

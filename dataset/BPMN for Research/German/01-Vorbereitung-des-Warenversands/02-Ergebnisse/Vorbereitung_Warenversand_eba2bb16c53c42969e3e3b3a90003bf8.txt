@@ -1,0 +1,11 @@
+该业务流程主要围绕货物运输展开，涉及多个角色和任务，具体流程如下：
+1. 流程从开始事件启动。
+2. 秘书处执行“Klaeren Menge”任务。
+3. 之后通过排他网关进行分支决策。
+4. 并行网关将流程分成多个并行路径：
+    - 一条路径上，秘书处继续执行相关任务，然后又是排他网关决策，接着执行“Standard Packetschein ausfuellen”任务，之后通过排他网关进行判断。
+    - 另一条路径上，由“Spediteur 3”执行“Einholen Angebot”任务。
+    - 还有路径是“Lagerarbeiter”执行“Verpacken Ware”任务，之后货物准备好。
+    - 以及“Logistikleiter”执行“Versicherung abschliessen”任务。
+5. 多个并行路径的任务完成后，通过并行网关汇聚。
+6. 最后到达结束事件，流程结束。

@@ -1,0 +1,6 @@
+业务需求如下：
+首先是仓库工人（Lagerarbeiter）执行“Ware verpacken”任务，然后进入并行网关（parallelGateway），接着执行“Ware für Abholung beritstellen”任务，之后到达结束事件（endEvent）“Ware zum Versand bereitgestellt”。
+同时，秘书（Sekretariat）执行“Angebote von 3 Spediteuren einholen”任务，之后进入排他网关（exclusiveGateway），有两条流出路径，分别是“grosse Menge”和另一条路径。
+物流主管（Logistikleiter）执行“Versicherung abschliessen”任务，其输入来自另一个排他网关的流出。
+在流程开始时，有“Ware für Versand bereitgestellt”的开始事件，之后进入并行网关，有两条流出路径分别连接到不同任务。
+各个任务之间通过序列流（sequenceFlow）进行连接，如从一个任务到另一个任务的流程推进，并且在一些节点有标记（如排他网关和并行网关的方向等）以及相关的扩展元素（如 signavio:signavioMetaData 中的各种属性）来进一步说明流程的细节和状态。

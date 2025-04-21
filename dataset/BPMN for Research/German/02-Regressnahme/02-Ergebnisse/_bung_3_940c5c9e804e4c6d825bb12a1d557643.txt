@@ -1,0 +1,8 @@
+业务需求如下：
+1. 流程从“Regress-Option”开始，接着进行“Fall prüfen”任务。
+2. 完成“Fall prüfen”后，通过“ExclusiveGateway”进行决策，可能有不同走向。
+3. 若满足特定条件，执行“Zahlungsaufforderung verschicken”任务，之后可能有多种情况，比如等待“Zahlungseingang?”事件，或者出现“Widerspruch?”等情况。
+4. 对于“Widerspruch?”，进行“Widerspruch prüfen”，根据结果可能走向“gerechtfertigter Widerspruch”或其他路径。
+5. 流程中涉及“Zahlung verbuchen”“Vorgang schließen”等任务，最终到达“geschlossen”结束事件。
+6. 存在多个中间事件和任务，如“Wider-vorlage”“Widervorlageprüfen”“Wiedervorlagefrist abgelaufen”等，以处理各种业务情况和决策。
+7. 整个流程在“Versicherung”的业务环境下，由“Sachbearbeiter”角色参与执行相关任务和决策。

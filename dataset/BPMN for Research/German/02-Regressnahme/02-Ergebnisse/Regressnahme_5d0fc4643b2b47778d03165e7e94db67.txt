@@ -1,0 +1,12 @@
+业务需求如下：
+1. 流程从“Regressmeldung”开始事件触发。
+2. 首先执行“Fall prüfen”任务。
+3. 执行完“Fall prüfen”任务后，通过排他网关“Regressmöglichkeit besteht”进行分支判断：
+   - 如果条件为“ja”，则执行“Zahlungsaufforderung senden”任务，接着执行“Fall auf Wiedervorlage setzen”任务，再执行“Eingang verbuchen”任务，之后经过汇聚排他网关，再执行“Vorgang schließen”任务，最终到达“Vorgang geschlossen”结束事件。
+   - 如果条件为“nein”，则执行“Vorgang schließen”任务，最终到达“Vorgang geschlossen”结束事件。
+4. 在执行“Fall auf Wiedervorlage setzen”任务后，通过基于事件的排他网关进行分支判断：
+   - 若触发“Geldeingang”中间捕获事件，执行“Eingang verbuchen”任务。
+   - 若触发“Widerspruch”中间捕获事件，执行“Widerspruch prüfen”任务，然后通过排他网关“Widerspruch gerechtfertigt?”进行分支判断：
+     - 若条件为“ja”，则执行“Inkasso verstehen”任务，最终到达“Inkasso informiert”结束事件。
+     - 若条件为“nein”，则经过汇聚排他网关，再执行“Inkasso verstehen”任务，最终到达“Inkasso informiert”结束事件。
+   - 若触发“Wiedervorlage - frist abgelaufen”中间捕获事件，则经过汇聚排他网关，再执行“Inkasso verstehen”任务，最终到达“Inkasso informiert”结束事件。

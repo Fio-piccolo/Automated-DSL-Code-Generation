@@ -1,0 +1,14 @@
+业务需求如下：
+1. 流程开始于一个起始事件。
+2. 起始事件之后是一个排他网关，用于判断“RegressFall Ja/Nein”，有两个输出流向。
+3. 如果排他网关判断为“Nein”，则流程直接进入结束事件。
+4. 如果排他网关判断为其他情况（这里未明确具体条件），则进入任务“Zahlungsaufforderung versenden”。
+5. 任务“Zahlungsaufforderung versenden”完成后，进入一个排他网关类型的事件驱动网关，该网关有三个输出流向。
+6. 从事件驱动网关出来后，如果进入“Wiedervorlage”任务，完成此任务后进入中间捕获事件“Frist”，此事件带有定时器。
+7. 中间捕获事件“Frist”之后是一个排他网关“Frist abgelaufen Ja/Nein”，有两个输出流向。
+8. 如果“Frist abgelaufen Ja/Nein”网关判断为“Ja”，则进入另一个排他网关“gerechtfertigt Ja/Nein”。
+9. 如果“gerechtfertigt Ja/Nein”网关判断为“Ja”，则流程进入结束事件。
+10. 如果“gerechtfertigt Ja/Nein”网关判断为“Nein”，则流程进入结束事件“weiterleiten an Inkasso”。
+11. 如果“Frist abgelaufen Ja/Nein”网关判断为“Nein”，则流程也进入结束事件“weiterleiten an Inkasso”。
+12. 从事件驱动网关出来的另一个流向是，如果进入“Widerspruch eingegangen”中间捕获事件（此事件为消息事件定义），之后进入“gerechtfertigt Ja/Nein”排他网关，后续流程同步骤8 - 10。
+13. 从事件驱动网关出来的第三个流向是，如果进入“bezahlt”流向的任务（未明确具体任务），则进入结束事件“Fall abgeschlossen da VN bezahlt”。

@@ -1,0 +1,13 @@
+当有货物需要发送时，首先启动流程，进入“Umfang prüfen”任务，检查货物的规模。根据检查结果，通过排他网关分支：
+- 如果是小批量货物，进入“Packschein ausfüllen”任务，填写装箱单；
+- 如果是大批量货物，进入“3 Angebote einholen”任务，获取三个报价。
+
+获取报价后，通过中间抛出事件“alle Angebote da”触发“Angebot auswählen”任务，选择一个报价，接着进入“Spediteur beauftragen”任务，委托货运代理。
+
+同时，在“Umfang prüfen”任务之后，也可通过并行网关分支：
+- 若需要保险，则进入“Versicherung abschließen”任务，完成保险手续；
+- 若不需要保险，则直接进行后续流程。
+
+获取报价并选择后，以及完成保险手续后，通过包含网关汇聚，进入“Ware verpacken”任务进行货物包装。
+
+包装完成后，通过并行网关汇聚，进入“Ware versenden”任务将货物发送出去，最后流程结束于“Ware versandt”事件。在委托货运代理和包装完成后，也可通过排他网关汇聚，决定后续操作。

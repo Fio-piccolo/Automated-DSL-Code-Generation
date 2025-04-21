@@ -1,0 +1,19 @@
+业务需求如下：
+1. 流程开始于“kann möglicherweis e in Regress genommen werden”事件。
+2. 接着执行“kann in Regress genommen werden”任务。
+3. 然后进行“Prüfen des Falls”任务。
+4. 之后通过“Kann in Regress genommen werden?”排他网关进行分支。
+    - 如果条件为“ja”，则执行“Zahlungsaufforderung schicken”任务，之后进行“Auf Wiedervorlage legen”任务，最后流程到达“Fall auf Wiedervorlage”结束事件。
+    - 如果条件为“nein”，则进入后续流程。
+5. 当“Wiedervorlage abgelaufen”事件触发时，执行“Auf Wiedervorlage legen”任务，之后流程到达“Fall auf Wiedervorlage”结束事件。
+6. “Geldeingang”事件触发后，执行“Eingang verbuchen”任务。
+7. 当“Wiederspruch des VN”事件触发时，执行“Wiederspruch prüfen”任务。
+8. 通过“Zahlungs - verweigerung gerechtfertigt?”排他网关进行分支。
+    - 如果条件为“ja”，则执行“Fall abschließen”任务，之后流程到达“Fall abgeschlossen”结束事件。
+    - 如果条件为“nein”，则执行“An Inkasso abgeben”任务。
+9. 通过“Geldeingang vorhanden?”排他网关进行分支。
+    - 如果条件为“ja”，则执行“Eingang verbuchen”任务。
+    - 如果条件为“nein”，则进入后续流程。
+10. 通过“Wiederspruch von VN liegt vor?”排他网关进行分支。
+    - 如果条件为“ja”，则执行“An Inkasso abgeben”任务。
+    - 如果条件为“nein”，则执行“Fall abschließen”任务，之后流程到达“Fall abgeschlossen”结束事件。

@@ -1,0 +1,15 @@
+该业务流程描述了一家小型IT零售商的货物发送流程，具体如下：
+1. 流程从“Ware kann versandt werden”（货物可以发送）这一事件开始。
+2. 流程通过并行网关分成两条并行路径：
+   - 路径一：
+     - 货物由仓库工人（Lagerarbeiter）进行“Ware verpacken”（货物包装）。
+     - 包装完成后，进行“Ware versandfertig bereitstellen”（准备好货物以便发货）。
+   - 路径二：
+     - 由秘书处（Sekretariat）判断是否需要“sonderversand”（特殊运输），如果需要（Ja），则“Angebote von Spediteuren anfordern”（要求运输商报价）；如果不需要（Nein），则“Paketschein ausfüllen”（填写包裹单）。
+     - 在“Angebote von Spediteuren anfordern”（要求运输商报价）后，会将报价请求发送给运输商（Spedition1）进行“Angebot zusenden”（发送报价）。
+     - 在“Paketschein ausfüllen”（填写包裹单）后，进行“Prüfung Versicherung erforderlich”（检查是否需要保险）。
+     - 若需要保险（Ja），由物流经理（Logistikleiter）进行“Versicherung abschließen”（签订保险）；若不需要保险（Nein），则直接进入下一步。
+     - 在“Versicherung abschließen”（签订保险）或不需要保险直接跳过这一步后，准备“Dokumente für Postversand vorbereitet”（准备邮寄文件）。
+3. 两条并行路径在并行网关处汇合。
+4. 然后，秘书处进行“Angebot auswählen”（选择报价），之后“Spediteur beauftragen”（委托运输商）。
+5. 最后，进行“Versand duchführen”（执行发货），流程结束。

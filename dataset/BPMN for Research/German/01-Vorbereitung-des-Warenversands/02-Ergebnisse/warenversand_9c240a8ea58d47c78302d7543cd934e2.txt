@@ -1,0 +1,1 @@
+业务需求如下：流程从一个无名称的开始事件启动，之后数据流向“Auftrag prüfen ”任务进行订单检查。接着经过并行网关分为四条分支，分别流向“Standardversand ”任务进行标准发货、“Standardversand mit Versicherung”任务进行带保险的标准发货、“Sonderversand”任务进行特殊发货以及后续经过一系列操作流向其他特殊发货相关任务（如“Sonderversand Angebot 1”“Sonderversand Angebot 2”“Sonderversand Angebot 3 ”等）。各分支任务完成后，通过排他网关等汇聚操作，将数据汇总到“Ware bereitgestellt versenden”任务进行货物准备发送，最后流向无名称的结束事件，完成整个流程。

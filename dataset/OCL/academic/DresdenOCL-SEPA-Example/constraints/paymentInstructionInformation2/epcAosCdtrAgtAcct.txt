@@ -1,0 +1,5 @@
+Here is the requirement described in the OCL code:
+
+A warning has been provided that the element, 'CdrAgtAcct', in Payment Information (PmtInf) is only applicable to the AOS community. Banks that are not part of this community might reject messages containing these elements. You can refer to section 1.2 of the SEPA B2B Direct Debit C2B Implementation Guidelines for more details. 
+
+In the context of PaymentInstructionInformation2, there's an invariant EPC_AOS_CdtrAgtAcct. This rule states that the size of the collection 'cdtrAgtAcct' should be equal to zero. This implies, for PaymentInstructionInformation2 object, there should not exist an instance of 'cdtrAgtAcct'.

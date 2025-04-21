@@ -1,0 +1,6 @@
+当有货物运输需求时，首先进行数量评估。若数量大，则直接填写包裹单；若数量不大，需获取三家托运商的报价。获取报价后，选择并委托一家托运商。之后，若需要保险，购买保险；若不需要，则直接进行货物包装和准备。最后，完成货物发货。具体如下：
+1. 开始事件“Warenversand gewünscht”触发流程。
+2. 并行网关“sid-1AED156C-32BF-42C4-A947-B03B3FF96438”分支，一路径进入任务“Menge evaluieren”进行数量评估，完成后通过顺序流回到排他网关“sid-EB9D5447-0A1E-4093-BE9C-EC09AB9215D3”；另一路径同时进入三个并行任务，分别是“Angebot Spediteur 3 einholen”“Angebot Spediteur 1 einholen”“Angebot Spediteur 2 einholen”，获取三家托运商报价。
+3. 三个获取报价任务完成后，通过并行网关“sid-99DF44ED-1918-4BC7-9C53-92029524B960”汇聚，进入任务“Spediteur auswählen und beauftragen”选择并委托托运商。
+4. 委托托运商任务完成后，通过并行网关“sid-AA99ED44-6016-46A0-8974-F4D93F1003D8”分支，一路径进入任务“Paketschein ausfüllen”填写包裹单，完成后通过顺序流到排他网关“sid-2182164C-75D5-4B6E-9DAE-4CBA307F6585”；另一路径进入任务“Ware verpacken”进行货物包装，完成后进入任务“Ware bereitstellen”准备货物，最后到达结束事件。
+5. 在填写包裹单后，排他网关“sid-2182164C-75D5-4B6E-9DAE-4CBA307F6585”判断是否需要保险。若需要，进入任务“Versicherung abschließen”购买保险，完成后通过排他网关“sid-B8BD79BC-4D32-4913-A7DF-963C3292FD49”汇聚到并行网关“sid-AA99ED44-6016-46A0-8974-F4D93F1003D8”的汇聚路径；若不需要，直接通过排他网关“sid-B8BD79BC-4D32-4913-A7DF-963C3292FD49”汇聚到并行网关“sid-AA99ED44-6016-46A0-8974-F4D93F1003D8”的汇聚路径。

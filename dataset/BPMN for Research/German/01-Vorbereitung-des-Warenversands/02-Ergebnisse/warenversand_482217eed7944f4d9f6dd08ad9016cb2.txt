@@ -1,0 +1,13 @@
+1. 流程开始于“Ware bereitgestellt ver”事件。
+2. 检查货物数量是否达到大量，若达到则通过“große Menge”排他网关进入后续流程。
+3. 从“große Menge”排他网关分出三条路径，分别向三家公司（Firma 1、Firma 2、Firma 3）发送货物需求请求，即执行“Angebotsanfrage Firma 1”“Angebotsanfrage Firma 2”“Angebotsanfrage Firma 3”任务。
+4. 这三个任务完成后，进行“günstigstes Angebot auswählen”任务，选择最优惠的报价。
+5. 选择完优惠报价后，执行“Spediteur beauftragen”任务，委托运输商。
+6. 并行执行“Ware verpacken”任务，对货物进行包装。
+7. 包装完成后，执行“Paketschein ausfuellen”任务，填写包裹单。
+8. 填写完包裹单后，通过“Ist eine Versicherung nötig?”排他网关判断是否需要保险。
+    - 若不需要保险，则直接进入后续流程。
+    - 若需要保险，则执行“Versicherung abschließen”任务，购买保险。
+9. 两个分支流程在“Ware verschickt”事件前汇合。
+10. 货物准备好后，执行“Ware ist zur Abholung bereit ”任务，通知货物已准备好提货。
+11. 最终，货物被发送出去，流程结束于“Ware verschickt”事件。

@@ -1,0 +1,7 @@
+The requirement is as follows:
+
+In the context of PaymentInstructionInformation2, a guideline stipulates that the "UltimateCreditor" field in the Direct Debit Information might only be present if it differs from the "Creditor" field. Note that only one instance of "prvtId" is allowed in "ultmtCdtr" and "cdtr".
+
+This means that for each direct debit transaction, if the "Ultimate Creditor's" name, identification numbers, and other defined fields are present, they should differ from the corresponding fields of the "Creditor". The fields to be checked and differ include but are not limited to the name, Bank Identifier Code (BIC), Issuer Identification Number (IIN), Employer Identification Number (EIN), Electronic Data Interchange Party Identifier (EDIPartyIdentifier), Universal Standard Products and Services Classification (USPS), Data Universal Numbering System (DUNS), Bank Party Identification, Tax Identification Number, Proprietary Identification, and various private identifications such as driver’s license number, customer number, social security number, alien registration number, passport number, identification card number, employee identification number, and other identification.
+
+The basic principle is that the presence of a certain identifier in the creditor and ultimate creditor fields implies that the value of that identifier must not be the same in both fields. The one exception being the "other identification number" (othrId), where either the identifier or identifier type not matching is sufficient.

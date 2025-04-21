@@ -1,0 +1,16 @@
+1. 当收到发货订单时，流程开始。
+2. 订单被同时分配给物流主管（Logistikleiter）和仓库工人（Lagerarbeiter）。
+3. 物流主管（Logistikleiter）需要完成保险手续（Versicherung abschließen）。
+4. 仓库工人（Lagerarbeiter）负责包装货物（Ware verpacken）。
+5. 同时，秘书部门（Sekretariat）开始处理订单：
+   - 检查货物数量（Menge prüfen）。
+   - 根据数量大小（通过“Menge?”网关判断）：
+     - 如果数量小（klein），填写包裹单（Paketschein ausfüllen），然后检查保险需求（Versicherungsbedarf prüfen）。
+     - 如果数量大（groß），获取3个报价（3 Angebote einholen），选择报价（Angebot auswählen），委托运输商（Spediteur beauftragen）。
+   - 根据保险需求（通过“Versichungsbedarf?”网关判断）：
+     - 如果有保险需求（JA），完成保险手续（Versicherung abschließen）。
+     - 如果没有保险需求（NEIN），继续下一步。
+6. 物流主管（Logistikleiter）完成保险手续（Versicherung abschließen）后，与秘书部门（Sekretariat）的无保险需求路径汇合（通过“00559C29”网关）。
+7. 秘书部门（Sekretariat）的委托运输商（Spediteur beauftragen）路径与物流主管（Logistikleiter）的路径汇合（通过“821A817A”网关）。
+8. 仓库工人（Lagerarbeiter）包装货物（Ware verpacken）后，与上述汇合路径汇合（通过“EC4FFA00”网关）。
+9. 最后，仓库工人（Lagerarbeiter）准备货物（Ware bereitstellen），流程结束（Versandauftrag bearbeitet）。

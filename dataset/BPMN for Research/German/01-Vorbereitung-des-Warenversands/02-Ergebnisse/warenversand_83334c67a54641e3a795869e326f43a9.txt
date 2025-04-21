@@ -1,0 +1,7 @@
+自然语言的需求描述：
+
+1. 流程开始后，同时执行两个主要任务：一是“Ware verpacken”，二是判断“Versandart?”。
+2. 如果“Versandart?”选择“Postversand”，则执行“Paketschein ausfüllen”，之后进行“Versicherung prüfen”。
+3. 如果“Versandart?”选择“Sonderversand”，则进入并行处理，同时执行“Angebot 1 einholen”、“Angebot 2 einholen”和“Angebot 3 einholen”，之后汇合到“Spediteur beauftragen”。
+4. 在“Versicherung prüfen”之后，判断“Versicherung erforderlich?”，如果需要，则执行“Versicherung abschließen”。
+5. 所有并行路径完成后，执行“Ware bereitstellen”并结束流程。

@@ -1,0 +1,11 @@
+业务流程开始于“Ware ist zu versenden”（货物待发送）。首先，由“Sekretariat”（秘书处）选择“Versandart wählen”（选择运输方式）。接着，通过“exclusiveGateway”（排他网关）根据运输方式（如“Sonderversand”（特殊运输）或“Postversand”（邮政运输））进行分流。
+
+若为“Sonderversand”：
+ - “Sekretariat”执行“Spediteurangebote einholen”（获取货运报价）、“Spediteur auswählen”（选择货运商）、“gewähleten Spediteur beauftragen”（委托选定的货运商）。
+ - 同时，“Logistikleiter”（物流主管）执行“Prüfen ob Versicherung erforderlich”（检查是否需要保险），若需要（“Versicherung erforderlich”），则执行“Versicherung abschließen”（签订保险），然后“Sekretariat”执行“Paketschein asufüllen”（填写包裹单）。
+ - 最后，“Lagerarbeiter”（仓库工人）执行“Ware in Paket verpacken”（将货物包装成包裹）、“Verpacken der Ware für Spediteur”（为货运商包装货物），通过“parallelGateway”（并行网关）汇聚后，“Lagerarbeiter”执行“Zur Abholung bereitstellen”（准备取货），流程结束于“Ware ist bereitgestellt”（货物已准备好）。
+
+若为“Postversand”：
+ - “Logistikleiter”执行“Prüfen ob Versicherung erforderlich”（检查是否需要保险），若需要（“Versicherung erforderlich”），则执行“Versicherung abschließen”（签订保险），然后“Sekretariat”执行“Paketschein asufüllen”（填写包裹单）。
+ - 同时，“Lagerarbeiter”执行“Ware in Paket verpacken”（将货物包装成包裹）。
+ - 通过“exclusiveGateway”（排他网关）汇聚后，“Lagerarbeiter”执行“Zur Abholung bereitstellen”（准备取货），流程结束于“Ware ist bereitgestellt”（货物已准备好）。

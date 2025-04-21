@@ -1,0 +1,7 @@
+业务流程从开始事件开始，首先进入一个排他网关“Can be subrogated”，根据此网关的判断结果，有两条分支路径。如果判断结果为“是（Yes）”，流程会进入另一个排他网关“Insurant Correct?”；如果判断结果为“否（No）”，流程会进入中间抛出事件“Request Money”。
+
+在“Insurant Correct?”这个排他网关处，又有两条分支路径，分别是“是（Yes）”和“否（No）”。如果是“是（Yes）”，流程会到达结束事件“Close Case”；如果是“否（No）”，流程会进入下一个中间抛出事件“Request Money”。
+
+中间抛出事件“Request Money”有多个接收事件，包括“7 days since last request”“Payment Received”“Payment Rejected”等。当收到“7 days since last request”事件时，会进入中间捕获事件“7 days since last request”，然后触发一个定时事件，经过一定时间后会有相应的操作；当收到“Payment Received”事件时，会进入中间捕获事件“Payment Received”，然后流程会进入任务“Make a booking”；当收到“Payment Rejected”事件时，会进入中间捕获事件“Payment Rejected”，然后流程会进入下一个中间抛出事件“Request Money”。
+
+任务“Make a booking”完成后，流程会进入结束事件“Close Case”。此外，还有一些其他的中间捕获事件和定时事件，如“1 Month Since First Payment Request”等，它们也会在特定时间或条件触发相应的操作。整个流程围绕着这些事件和网关的判断，不断推进和执行相应的任务。

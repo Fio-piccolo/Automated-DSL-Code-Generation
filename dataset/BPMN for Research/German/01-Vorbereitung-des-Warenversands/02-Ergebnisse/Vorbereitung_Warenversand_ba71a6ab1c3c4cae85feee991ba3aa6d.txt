@@ -1,0 +1,5 @@
+当接收到“Warenversand erforderlich”（货物运输必要）的消息后，流程开始。首先，“Computerhandel”参与者中的“Logistikleiter”（物流主管）角色负责“Ware verpacken”（包装货物）任务，完成后将货物传递给“Ware bereitstellen”（准备货物）任务，此任务由“Logistikleiter”或其他相关角色执行，完成后货物被标记为“Ware bereitgestellt”（货物已准备好）。
+
+同时，“Sekretatiat”（秘书处）角色负责“Versand-übernahme abklären”（澄清运输承接）任务，之后进入“große Menge?”（大量？）的排他网关判断。如果判断结果为“Ja”（是），则“Angebote anfordern”（请求报价）任务被执行，接着进行“Angebot auswählen”（选择报价）和“Spediteur beauftragen”（委托承运人）操作；如果判断结果为“Nein”（否），则执行“Paketschein ausfüllen”（填写包裹单）和“Versicherungsbedarf prüfen”（检查保险需求）任务。
+
+在“Versicherungsbedarf prüfen”任务后，进入“Versicherung erforderlich?”（需要保险？）的排他网关判断。若判断为“Ja”，则执行“Versicherung abschließen”（购买保险）任务；若判断为“Nein”，则直接进入后续流程。完成保险相关操作后，流程继续进行，最终完成整个货物运输流程。

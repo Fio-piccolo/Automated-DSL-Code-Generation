@@ -1,0 +1,29 @@
+该BPMN流程描述了一个餐厅点餐和用餐的业务逻辑，主要涉及顾客、员工和厨师三个角色，具体流程如下：
+1. **顾客流程**：
+   - 顾客感到饥饿（Hungry），开始点餐流程。
+   - 顾客选择菜品（Choose a dish）。
+   - 顾客下单（Place order）。
+   - 顾客支付（Pay）。
+   - 顾客收到收据（Receipt received）。
+   - 顾客收到 buzzer（Buzzer received）。
+   - 顾客等待 buzzer（Wait for buzzer）。
+   - 顾客取餐（Pick up meal）。
+   - 顾客用餐（Eat meal）。
+   - 顾客饥饿感得到满足（Hunger satisfied），流程结束。
+2. **员工流程**：
+   - 员工收到订单（Order），开始处理订单流程。
+   - 员工输入订单（Enter order）。
+   - 员工收钱（Collect money）。
+   - 员工收到钱（Money received）。
+   - 员工设置 buzzer（Set up a buzzer）。
+   - 员工收到 meal ready 信号（Meal ready）。
+   - 员工触发 buzzer（Set off buzzer）。
+   - 员工等待取餐（wait for pick up）。
+   - 员工等待 5 分钟（5 mins）。
+   - 员工叫顾客（Call guest）。
+   - 员工完成订单（Order fullfiled），流程结束。
+3. **厨师流程**：
+   - 厨师收到订单（Order），开始准备餐食流程。
+   - 厨师准备餐食（Prepare meal）。
+   - 厨师将餐食放在服务窗口（Place meal in service hatch）。
+   - 厨师完成餐食准备（Meal prepared），流程结束。

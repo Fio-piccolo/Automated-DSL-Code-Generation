@@ -1,0 +1,7 @@
+该业务流程主要围绕一个项目展开，从项目启动到结束，涉及多个任务和决策点。
+1. **项目启动**：从开始事件启动流程，首先执行“Menge ermitteln”（确定数量）任务。
+2. **数量判断与分支**：根据确定的数量进行判断，如果是小数量，则执行“Paketschein ausfüllen”（填写包裹单）任务；如果是大数量，则进入并行网关。
+3. **填写包裹单后的流程**：完成“Paketschein ausfüllen”任务后，进入排他网关。若需要保险，则执行“Versicherung abschließen”（完成保险）任务；若不需要保险，则直接进入后续流程。
+4. **大数量下的并行任务**：大数量时进入并行网关后，并行执行“Angebot 1 einholen”（获取报价1）、“Angebot 2 einholen”（获取报价2）和“Angebot 3 einholen”（获取报价3）任务。
+5. **并行任务后的汇聚**：这三个并行任务完成后，进入并行网关进行汇聚，然后执行“günstigsten Spediteur beauftragen”（委托最优惠的托运人）任务。
+6. **后续流程**：接着执行“Ware verpacken”（包装货物）任务，之后进入排他网关进行汇聚。汇聚后再进入并行网关，执行“Ware zur Abholung bereitstellen”（准备货物以供取货）任务，最后流程到达结束事件。

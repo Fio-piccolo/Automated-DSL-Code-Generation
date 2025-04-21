@@ -1,0 +1,35 @@
+该BPMN流程图描述了一个餐厅用餐的业务流程，涉及顾客、员工和厨师三个参与者，具体如下：
+
+1. **顾客流程**：
+   - 顾客感到饥饿（Hunger noticed）。
+   - 进入餐厅（Enter Restaurant）。
+   - 选择餐品（Choose Meal）。
+   - 等待叫号（Wait Turn）。
+   - 下单（Place Order）。
+   - 支付订单（Pay for Order）。
+   - 收到 buzzer 和取餐指示（Buzzer Received with Instructions）。
+   - 听到 buzzer 响起（Buzzer Rings）。
+   - 注意到 buzzer（Notice Buzzer）。
+   - 取餐（Pick Up Meal）。
+   - 收到餐品（Meal Received）。
+
+2. **员工流程**：
+   - 收到订单（Order Received）。
+   - 将订单输入 POS 系统（Enter Order into POS）。
+   - 收款（Collect Money）。
+   - 设置 buzzer（Set Up Buzzer）。
+   - 激活 buzzer（Activate Buzzer）。
+   - 通知厨师（Inform Chef）。
+   - 告知员工餐品已准备好（Informed of Meal）。
+   - 给予 buzzer 和指示（Give Buzzer with Instructions）。
+   - 给予餐品（Give Meal）。
+   - 餐品已给予（Meal Given）。
+
+3. **厨师流程**：
+   - 收到订单（Order Received）。
+   - 准备餐品（Prepare Meal）。
+   - 将餐品放入取餐口（Put Meal in Hatch）。
+   - 通知员工餐品已准备好（Inform Employee）。
+   - 订单已完成（Order Fulfilled）。
+
+整个流程从顾客感到饥饿开始，经过进入餐厅、选择餐品、下单、支付等步骤，最终顾客取到餐品，流程结束。员工在这个过程中负责接收订单、输入系统、收款、设置 buzzer、通知厨师等工作，而厨师则负责准备餐品并通知员工。

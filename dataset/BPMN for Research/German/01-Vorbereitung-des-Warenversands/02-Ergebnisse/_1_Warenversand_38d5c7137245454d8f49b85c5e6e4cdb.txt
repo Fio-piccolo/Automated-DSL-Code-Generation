@@ -1,0 +1,13 @@
+该BPMN流程主要描述了一个货物发货的业务流程，从接收发货订单开始，到最终货物发货结束，包含了多个任务、网关和事件。具体如下：
+1. **开始事件**：流程从“Eingang Auftrag für Versand（接收发货订单）”开始。
+2. **任务1：接受订单**：执行“Auftrag annehmen（接受订单）”任务。
+3. **并行网关1**：订单接受后，通过并行网关（sid - B60BD40A）分解为两个并行分支。
+    - **分支1：货物包装**：执行“Ware verpacken（货物包装）”任务，包装完成后货物进入“zur Abhol bereitstellen（准备好待取货）”状态。
+    - **分支2：发货方式选择**：进入“Sonderversand oder Postversand?（特殊发货还是邮政发货？）”的排他网关，根据发货量判断选择不同分支。
+        - **分支2.1：大宗货物/特殊发货**：如果是大宗货物或特殊发货（“große Mengen / Sonderversand”），执行“Angebot einfordern（索取报价）”任务，之后进入并行网关（sid - 802FD0FC），该网关又分解为三个并行的“Spedition（货运公司）”任务，即“Spedition 1”、“Spedition 2”、“Spedition 3”。这三个任务完成后，通过汇聚排他网关（sid - 7AADD568）汇聚，然后执行“günstigstes Angebot auswählen（选择最佳报价）”任务，接着执行“Beauftragung der Spedition（委托货运公司）”任务。
+        - **分支2.2：小批量/包裹发货**：如果是小批量或包裹发货（“kleine Mengen / Paketversand”），执行“Prüfung ob Versicherung erforderlich（检查是否需要保险）”任务，通过排他网关（sid - 77ACC1AA）判断是否需要保险：
+            - **需要保险**：如果需要保险（“ja”），执行“Versicherung abschließen（签订保险）”任务。
+            - **不需要保险**：如果不需要保险（“nein”），直接进入后续流程。
+        保险相关任务结束后，与其他分支汇聚于排他网关（sid - C16BF52F），之后执行“Paketschein ausfüllen（填写包裹单）”任务。
+4. **汇聚与后续任务**：各个分支任务完成后，通过多个排他网关汇聚（sid - CCAFA388），然后执行“Paketübergabe an Spedition（将包裹交给货运公司）”任务。
+5. **结束事件**：最后到达“Versand abgeschickt（发货完成）”结束事件，整个发货流程结束。

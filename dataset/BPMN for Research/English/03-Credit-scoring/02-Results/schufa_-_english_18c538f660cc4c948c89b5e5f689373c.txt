@@ -1,0 +1,20 @@
+在银行业务流程中，涉及“Banking Frontend”、“Scoring (Credit Agency)”和“Scoring (Bank)”三个主要参与者。
+
+### 1. 业务发起
+“Banking Frontend”接收到一个评分请求后，向“Scoring (Credit Agency)”发送评分请求消息。
+
+### 2. “Scoring (Credit Agency)”流程
+- 首先，“Scoring (Credit Agency)”收到评分请求（通过“Scoring request recieved”开始事件）。
+- 接着进入“Level 1 scoring”任务，对请求进行第一层评分。
+- 之后进入“Takes long time”排他网关，根据判断结果：
+    - 如果判断结果为“是”，则触发“发送延迟信号”中间抛出事件，进入延迟处理流程。
+    - 如果判断结果为“否”，则进入“Level 2 Scoring”任务，进行第二层评分。
+- 完成第二层评分后，通过“发送 Level 2 result”结束事件发送结果。
+
+### 3. “Scoring (Bank)”流程
+- “Banking Frontend”接收到评分请求后，向“Scoring (Bank)”发送评分请求消息。
+- “Scoring (Bank)”接收到请求后，发送请求给“Scoring (Credit Agency)”（“Send the request to the agency”任务）。
+- 等待“Scoring (Credit Agency)”返回结果（“Result recieved”中间捕获事件）。
+- 接收到结果后，通过“Result recived”排他网关判断：
+    - 如果判断结果为“否”，则进入“Level 2 result”中间捕获事件处理第二层结果。
+    - 根据第二层结果，分别通过不同路径向相应的“发送结果”结束事件发送结果。

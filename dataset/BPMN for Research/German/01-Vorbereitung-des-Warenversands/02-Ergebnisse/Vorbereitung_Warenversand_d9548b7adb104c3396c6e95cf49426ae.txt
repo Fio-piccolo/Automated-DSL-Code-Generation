@@ -1,0 +1,11 @@
+该业务流程主要围绕电脑经销商发货展开。起始事件为有货物需要发货，随后进入发货流程的具体处理环节，包含多个任务和决策点，最终以货物准备好交付作为结束。具体如下：
+1. **保险办理**：由“Logistikleiter”角色执行“Vesicherung abschliessen”任务，完成后进入后续流程。
+2. **发货方式决策**：通过“Versandart?”这个排他网关，根据条件判断选择“Postversand”（邮政发货）或“Sonderversand”（特殊发货）。
+3. **邮政发货流程**：
+    - “Sekretariat”角色执行“Drei Angebote einholen”任务，获取三个报价。
+    - 完成后，“Sekretariat”执行“Paketschein ausfüllen”任务，填写包裹单。
+    - 之后进行“Angebote auswerten und Spediteur beauftragen”任务，评估报价并委托托运人。
+    - 包裹单填写完成后，经过一个并行网关，流程分为两路。一路进行“Ware verpacken”任务，由“Lagerarbeiter”负责包装货物；另一路进行保险相关决策。
+    - 保险决策通过“Versicherung?”排他网关，如果需要保险，返回“Vesicherung abschliessen”任务；如果不需要，则直接进入后续流程。
+4. **特殊发货流程**：直接进入“Ware verpacken”任务，由“Lagerarbeiter”负责包装货物。
+5. **货物交付准备**：包装完成后，货物进入“Ware zur Abholung bereitstellen”任务，最终到达“Ware bereitgestellt”的结束事件，表示货物已准备好交付。

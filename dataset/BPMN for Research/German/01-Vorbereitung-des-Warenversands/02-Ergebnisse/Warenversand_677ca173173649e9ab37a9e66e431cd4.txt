@@ -1,0 +1,7 @@
+该BPMN流程描述了一家硬件经销商（Hardwarehändler）的业务流程。流程从“开始事件”开始，首先遇到一个排他网关“Sonderversand?”，根据是否为特殊运输分为两条路径：如果是特殊运输，进入“Spediteur-Angebote einholen”任务；如果不是，则进入“Standard Paketschein ausfüllen”任务。
+
+如果选择了特殊运输，接下来遇到“Versicherung gewünscht?”排他网关，根据是否需要保险分为不同路径。若需要保险，进入“Versicherung abschließen”任务；若不需要保险，则进入后续并行网关等一系列任务，包括让不同的发货员（Spediteur 1、Spediteur 2、Spediteur 3）创建报价，之后经过并行网关汇聚，再进行“Angebot auswählen”选择合适报价，接着“Spediteur beauftragen”委托发货员，完成后达到“Vorbereitungen abgeschlossen”中间抛出事件，最后到达结束事件。
+
+如果是“Standard Paketschein ausfüllen”任务路径，会进行“Ware verpacken”包装货物，“Ware zur Abholung bereitstellen”准备货物取货，最后到达结束事件。
+
+涉及的角色包括秘书处、仓库工人、三位发货员和物流主管，各角色在相应任务中发挥作用。

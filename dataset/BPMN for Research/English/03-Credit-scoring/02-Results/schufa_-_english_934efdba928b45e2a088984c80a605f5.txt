@@ -1,0 +1,24 @@
+### 合作流程概述
+该BPMN图描述了一个涉及“Banking Frontend”、“Scoring (Credit Agency)”和“Scoring (Bank)”三方的业务流程协作。通过消息流在各方之间传递信息，以完成信贷评分相关的业务操作。
+
+### 信贷机构评分流程（Scoring (Credit Agency)）
+1. 流程开始于名为“Start Level 1 scoring”的任务，该任务被触发后，进入一个排他网关（Exclusive Gateway）。
+2. 排他网关根据不同条件决定流程走向：
+   - 一部分流程进入“Start Level 2 Scoring”任务。
+   - 另一部分流程进入“Inform with the delay”任务。
+3. “Start Level 2 Scoring”任务完成后，信息传递至“0B728B73-E594-46F3-A120-2CA281FA0E33”任务，即“Inform with the delay”。
+4. “Inform with the delay”任务完成后，进入一个排他网关（Exclusive Gateway），最终到达“Send Result”中间抛出事件，将结果发送出去。
+
+### 银行评分流程（Scoring (Bank)）
+1. 流程始于名为“Scoring Request received”的开始事件，触发后进入一个事件驱动网关（Event Based Gateway）。
+2. 事件驱动网关根据不同条件决定流程走向：
+   - 一部分流程进入“Received scoring result”中间捕获事件。
+   - 另一部分流程进入“Receive the Delay time”中间捕获事件。
+3. “Received scoring result”中间捕获事件触发后，进入一个排他网关（Exclusive Gateway）。
+4. “Receive the Delay time”中间捕获事件触发后，进入“Send information with delay to client”任务。
+5. 两个排他网关的结果最终汇聚至“Send Result”中间抛出事件，将结果发送出去。
+
+### 消息传递
+- “Banking Frontend”与“Scoring (Credit Agency)”之间通过消息流进行信息交互。
+- “Banking Frontend”与“Scoring (Bank)”之间也通过消息流进行信息交互。
+- “Scoring (Credit Agency)”与“Scoring (Bank)”之间同样通过消息流传递相关信息。

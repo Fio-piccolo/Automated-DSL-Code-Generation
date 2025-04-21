@@ -1,0 +1,13 @@
+业务需求如下：
+1. 流程从“Waren Versand bereit”这个开始事件启动。
+2. 经过一个未命名的排他网关，根据条件“Bestellung > X”或“Bestellung < X”走不同路径。
+    - 若“Bestellung > X”，进入一个未命名的包含网关，然后分别有任务“Lagerarbeiter”、两个未命名任务、“Spediteur 1”、“Spediteur 2”、“Spediteur 3”并行执行。
+        - “Lagerarbeiter”任务完成后，输出“verpackte Ware”。
+        - “Spediteur 1”任务完成后，输出到一个未命名的汇聚包含网关。
+        - “Spediteur 2”任务完成后，输出到同一个未命名的汇聚包含网关。
+        - “Spediteur 3”任务完成后，输出到同一个未命名的汇聚包含网关。
+    - 若“Bestellung < X”，进入一个未命名的排他网关，判断“keine Versicherung nötig”，若为真，进入“Post”任务；若为假，进入“Logistikleiter schliesst Versicherung ab”任务。
+        - “Post”任务完成后，输出相关内容到结束事件“Ware beim Kunden”。
+        - “Logistikleiter schliesst Versicherung ab”任务完成后，输出相关内容到一个未命名的汇聚排他网关。
+3. 从不同并行任务输出的路径汇聚到一个未命名的汇聚包含网关，然后再到结束事件“Ware beim Kunden”。
+4. 流程最终在“Ware beim Kunden”这个结束事件结束，表示货物已到达客户处。

@@ -1,0 +1,5 @@
+The requirement is as follows:
+
+The application checks that within a single 'Payment Information' block, all transactions should have the same 'Creditor Scheme Identification'. All fields have to be equal except for postal addresses and DateAndPlaceOfBirth. This primarily includes fields like the name, Organisation Identification details, including BIC, IBEI, BEI, EANGLN, USCHU, DUNS, bank party ID, tax ID number, Proprietary ID with its issuer, and individual Identification details like driver's license number, customer number, social security number, alien registration number, passport number, tax ID number, identity card number, employer ID number, other ID with its type, issuer, and country of residence. 
+
+This condition is enforced on every pair of Direct Debit transactions in the Payment Instruction Information context. The rule does not apply to the Nm, postal address, and OrgId fields for the AOS community, and these fields along with all prvtId fields (excluding othrId) are excluded in PACS3. This requirement is referenced from page 11, row 14 of the SEPA C2B Implementation Guidelines.

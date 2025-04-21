@@ -1,0 +1,2 @@
+业务需求如下：
+该业务流程主要涉及Scoringsystem Bank、Schufaservice和Kreditvergabe Frontend三个参与方。首先，Scoringsystem Bank流程开始，发起评分需求。接着向Schufaservice发送请求进行一级评分，之后根据评分结果进行分支判断。若有评分结果，将结果传递给Kreditvergabe Frontend进行后续处理；若出现延迟，则将延迟信息传递给Kreditvergabe Frontend。Kreditvergabe Frontend根据接收到的信息进一步处理，可能会进行二级评分等操作，最终完成评分流程并结束。在Schufaservice流程中，首先发起流程，进行一级评分，然后根据评分结果判断是否确定，若确定则返回结果，若不确定则报告延迟并进行二级评分，最后返回结果并结束流程。整个业务流程通过消息流在各参与方之间传递信息，以完成评分相关的业务操作。

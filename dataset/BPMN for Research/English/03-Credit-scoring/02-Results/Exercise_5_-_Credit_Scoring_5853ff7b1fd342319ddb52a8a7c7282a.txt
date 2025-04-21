@@ -1,0 +1,5 @@
+银行前端（Banking Frontend）发起评分请求，触发评分流程（Scoring (Bank)）开始事件（Scoring needed），随后将请求发送给评分系统（Send request）。评分系统收到请求后进行处理，先接收快速评分 Level 1（Quick scoring Level 1），若结果为 Level 1 则进入排他网关（Exclusive Gateway），根据结果决定后续流程，如果结果不是 Level 1 则进行延迟处理（Result will be delayed）。
+
+同时，信用保护机构（Scoring (Credit Protection Agency)）收到请求（Request received）后进行快速评分 Level 1，若结果为 Level 1 则进入排他网关，根据结果决定后续流程，如果结果不是 Level 1 则进行其他相关处理（Inform of delay 等）。
+
+评分系统在处理过程中会依次接收结果 Level 2（Result Level 2 received）、延迟相关结果等，并最终将结果发送出去（Send result），整个流程结束（End of process）。

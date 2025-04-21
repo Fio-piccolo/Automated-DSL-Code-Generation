@@ -1,0 +1,7 @@
+流程从“Start”开始，随后由秘书处进行“Entscheidung:”决策。
+
+若决策为“kl. Menge”（小数量），则秘书处执行“Ausfüllen des Paketscheins”（填写包裹单），之后秘书处进行“Entscheidung Versicherung”（保险决策）。若该保险决策后，根据“inclusiveGateway”（包含网关），可能会走向“Logistikleiter: Versicherung erforderlich ”（物流经理：需要保险）或“Lager: Ware verpacken”（仓库：包装货物）。
+
+若决策为“gr. Menge”（大数量），则通过“parallelGateway”（并行网关）并行开展三项任务：“Anfrage Sped 1”（向运输商1询价）、“Anfrage Sped 3”（向运输商3询价）、“Anfrage Sped 2”（向运输商2询价）。这三项任务完成后，在另一个“parallelGateway”（并行网关）处汇聚，之后由秘书处确定运输商，即“Sekretariat bestimmt Sped”。
+
+在确定运输商后，任务流继续推进，在不同分支任务完成后，分别在相应的“parallelGateway”（并行网关）处汇聚，最终仓库执行“Ware zur Abholung bereitstellen”（准备好货物以供取货），流程结束于“endEvent”。

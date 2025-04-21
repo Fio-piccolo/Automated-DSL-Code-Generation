@@ -1,0 +1,9 @@
+业务需求如下：流程始于开始事件，随后通过并行网关分为两个并行分支。一个分支进入“Versand klären”任务，完成后进入排他网关“ Sonderversand?” 。若判断为 “Ja”，则进入并行网关，该并行网关再分为三个分支，分别进入“Angebot beim Spediteur 1 einholen”“Angebot beim Spediteur 2 einholen”“Angebot beim Spediteur 3 einholen”任务；若判断为 “Nein”，则进入“Paketschein ausfüllen”任务。
+
+另一个并行分支进入“Ware verpacken”任务，完成后与“Versand klären”任务后续流程合并于并行网关。
+
+“Angebot beim Spediteur 1 einholen”“Angebot beim Spediteur 2 einholen”“Angebot beim Spediteur 3 einholen”任务完成后，在并行网关汇聚，随后进入“Angebot auswählen”任务。
+
+“Angebot auswählen”任务完成后进入“Spediteur beauftragen”任务，完成后进入排他网关。同时，“Paketschein ausfüllen”任务完成后进入排他网关“Versicherung notwendig?” ，若判断为 “Ja”，则进入“Versicherung abschliessen”任务，完成后进入上述排他网关；若判断为 “Nein” ，也进入该排他网关。
+
+上述排他网关汇聚后，进入“Ware zur Abholung bereitstellen”任务，完成后流程结束于结束事件 。

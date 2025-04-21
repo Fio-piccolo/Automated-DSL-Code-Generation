@@ -1,0 +1,15 @@
+流程从“Ware soll versendet werden”（货物应发送至何处）的开始事件启动。
+
+随后，流程通过并行网关分成两条并行路径：
+- 一条路径是“Ware wird verpackt”（货物被包装）任务，完成后发出“Ware bereitgestellt”（货物已准备好）事件。
+- 另一条路径是“Sekretariat klärt Versandweg”（秘书处明确运输方式）任务，之后进入“Versandart?”（运输类型？）的排他网关。
+
+排他网关根据运输类型进行分支：
+- 如果是“Großversand”（大批量运输），则进入“Angebot 3 Speditionen einholen”（获取3家货运公司的报价）任务。接着通过并行网关分成三条并行路径分别执行“Angebot Spedition 1 erhalten”（获取货运公司1的报价）、“Angebot Spedition 2 erhalten”（获取货运公司2的报价）和“Angebot Spedition 3 erhalten”（获取货运公司3的报价）任务。完成后在并行网关汇聚，然后进入“Spedition auswählen”（选择货运公司）任务，完成后发出“Versandweg geklärt”（运输方式已明确）事件。
+- 如果是“Normalversand”（正常运输），则进入“Paketschein erstellen”（创建包裹单）任务，之后进入“Versicherung erforderlich?”（需要保险吗？）的排他网关。
+
+此排他网关继续分支：
+- 如果需要保险（ja），则进入“Versicherung abschließen”（签订保险）任务，完成后发出“Versandweg geklärt”（运输方式已明确）事件。
+- 如果不需要保险（nein），直接发出“Versandweg geklärt”（运输方式已明确）事件。
+
+最后，“Ware bereitgestellt”（货物已准备好）和“Versandweg geklärt”（运输方式已明确）这两个事件在并行网关汇聚，流程结束于“Ware steht zum Versand bereit”（货物已准备好发送）的结束事件。

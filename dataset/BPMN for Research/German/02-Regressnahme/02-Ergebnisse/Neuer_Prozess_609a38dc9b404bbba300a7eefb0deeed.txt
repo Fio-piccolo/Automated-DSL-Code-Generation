@@ -1,0 +1,1 @@
+业务需求如下：首先进入“Regress möglich?”的判断环节，若条件满足（返回“ja”），则流程会通过并行网关分成两路。一路执行“Zahlunngsaufforderung verschicken”任务，完成后进入汇聚并行网关；另一路执行“Auf Wiedervorlage setzen”任务，完成后也进入汇聚并行网关。之后，流程等待“Geld ist eingegangen”事件触发，触发后执行“Eingang verbuchen”任务。与此同时，在一个事件驱动的排他网关处，流程有多个分支。若“Widerspruch eingegangen”事件触发，先执行“Widerspruch prüfen”任务；若“Wiedervorlagefrist abgelaufen”事件触发，则进入后续流程。最终，所有相关任务完成后流程结束。

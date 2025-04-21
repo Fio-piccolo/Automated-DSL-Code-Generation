@@ -1,0 +1,16 @@
+该业务流程主要围绕货物运输展开，从货物准备到发货的一系列操作。首先准备发货的货物，接着进行保险购买、生成并审核报价，之后根据审核结果进行打包、准备运输文件等操作，最后完成订单下达和发货。
+1. **货物准备发货**：流程开始于“Ware zum Versand”（货物准备发货）事件。
+2. **保险购买**：随后执行“Versicherung abschließen”（购买保险）任务。
+3. **生成报价**：
+    - 进行“F1 - Angebot erstellen”（生成F1报价）任务。
+    - 进行“F2 - Angebot erstellen”（生成F2报价）任务。
+    - 进行“F3 - Angebot erstellen”（生成F3报价）任务。
+4. **报价审核**：完成报价生成后，执行“Angebote prüfen”（审核报价）任务。
+5. **货物打包与运输文件准备**：
+    - 执行“Ware verpacken”（货物打包）任务。
+    - 执行“Transportpapiere fertig stellen”（准备运输文件）任务，该任务会接收来自“Ware verpacken”任务以及“Versicherung abschließen”任务和其他相关任务的输入。
+6. **发货流程后续操作**：
+    - “Versandart prüfen”（检查运输方式）任务，基于“Ware zum Versand”事件的输出。
+    - “Angebote einholen”（获取报价）任务，根据“检查运输方式”任务的结果进行分支处理。
+    - 根据“获取报价”任务的不同输出分支，可能会执行“Paketschein ausfüllen”（填写包裹单）任务或直接下达“Auftrag erteilen”（下达订单）任务。
+7. **结束**：最终完成订单下达或相关任务后，流程结束。

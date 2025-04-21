@@ -1,0 +1,1 @@
+业务需求如下：流程从“开始事件”启动，首先执行“check the case”任务，之后通过“resource possibility”排他网关进行分支。若条件满足走“yes”路径，发送提醒消息并执行相关任务；若不满足走“no”路径，执行“Close Case”任务。流程中还有其他任务如“Check the Reason”“Booked”“disagree”等，以及“Simple Case”排他网关、“Received Money”“due date”开始事件等，不同路径和任务相互关联，最终流程以“close the Event”或“Closed case”等结束事件告终，其中还涉及到与“Collection Agency”相关的任务交接等操作。

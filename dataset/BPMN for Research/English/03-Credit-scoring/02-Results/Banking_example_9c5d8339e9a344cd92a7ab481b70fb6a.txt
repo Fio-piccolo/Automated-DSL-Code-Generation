@@ -1,0 +1,3 @@
+业务逻辑如下：
+银行（Bank）开始事件（startEvent）触发后，通过序列流（sequenceFlow）将请求发送给任务（task）“Send request for scoring”，该任务完成后通过序列流连接到事件基于网关（eventBasedGateway）。事件基于网关根据条件进行分支，一部分通过序列流连接到中间捕获事件（intermediateCatchEvent）“delay report received”，另一部分通过序列流连接到中间捕获事件“Report level 2 report returned”，还有一部分通过序列流连接到中间捕获事件“Report Level 1 report returned”。
+信用保护机构（Credit protection agency）开始事件触发后，通过序列流将请求发送给任务“Start first scoring”，该任务完成后通过序列流连接到排他网关（exclusiveGateway）“delay?”，根据条件，“Yes”路径通过序列流连接到任务“Send ´delay eport”，该任务完成后通过序列流连接到任务“Start second scoring”，此任务完成后通过序列流连接到任务“Sending result”。“No”路径通过序列流连接到另一个任务“Send scoring level 1”。各个中间捕获事件完成后通过相应的序列流连接到排他网关，最终排他网关根据条件进行汇聚，通过序列流连接到任务“Send scoring”，该任务完成后通过序列流连接到结束事件（endEvent）。整个流程涉及银行和信用保护机构之间的多个任务和事件的交互与流转。

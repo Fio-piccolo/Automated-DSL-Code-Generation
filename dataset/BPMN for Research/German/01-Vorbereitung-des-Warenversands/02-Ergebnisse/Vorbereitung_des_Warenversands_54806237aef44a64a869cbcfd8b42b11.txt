@@ -1,0 +1,13 @@
+当需要发送货物时，首先启动“Ware soll versendet werden”（货物应被发送）事件。接着，流程进入并行网关“Diverging”，在此处分为两个分支：
+1. 一个分支是“gewünschter Spediteur beauftragen”（委托期望的运输商）任务，完成此任务后进入后续流程。
+2. 另一个分支是“Versandart bestimmen”（确定运输方式）任务，完成后进入“Exclusive Gateway”（排他网关）。
+
+在排他网关“Diverging”中，根据条件判断进入不同的任务：
+1. 如果是特殊运输（“Sonderversand”），则执行“Paketschein ausfüllen”（填写包裹单）任务。
+2. 之后流程汇聚到“Exclusive Gateway”（汇聚网关），然后继续进行后续流程。
+
+在流程中，还存在关于保险的判断：
+1. 在“Versicherung nötig?”（需要保险吗？）排他网关中，如果需要保险（回答“ja”），则执行“Versicherung abschliessen”（完成保险）任务；如果不需要保险（回答“nein”），则直接进入后续流程。
+2. 执行“Versicherungs - bedarf klären”（澄清保险需求）任务后，根据结果决定是否需要保险，从而进入相应的流程分支。
+
+最后，经过一系列任务，如“Ware verpacken”（包装货物）、“Ware bereitstellen”（准备货物）等，直到“Ware bereitgestellt”（货物已准备好）事件结束整个流程。

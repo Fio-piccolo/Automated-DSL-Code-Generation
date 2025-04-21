@@ -1,0 +1,9 @@
+业务需求如下：
+1. 流程开始于“Regressnahme möglich”（退货可行）的开始事件。
+2. 首先执行“Fall prüfen”（检查案例）任务。
+3. 完成任务后，进入“Regress?”（是否退货？）的排他网关，根据条件判断走不同路径。
+4. 如果判断结果为是（“ja”），则执行“Zahlungsaufforderung schicken”（发送付款要求）任务；若为否（“nein”），则直接进入“Vorgang geschlossen”（流程结束）的结束事件。
+5. 执行“Zahlungsaufforderung schicken”任务后，接着执行“Vorgang auf Wiedervorlage stzen”（将流程恢复到重新提交）任务。
+6. 之后进入一个中间捕获事件，可能是“Frist abgelaufen”（期限已过）、“Widerspruch VN”（来自VN的反对意见）等情况。
+7. 对于不同的中间捕获事件，会有不同的后续流程，例如出现反对意见后可能进行“Prüfung Widerspruch”（检查反对意见），之后根据“Widerspruch gerechtfertigt?”（反对意见是否合理？）和“Widerspruch vorhanden?”（是否存在反对意见？）的排他网关判断，决定后续走向。
+8. 最终流程可能以“Vorgang geschlossen”结束，或者在某些情况下进入“Beauftragung Inkasso”（委托收款）的结束事件。

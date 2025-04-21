@@ -1,0 +1,27 @@
+### 经销商“Computer-Discounter”业务流程
+
+#### 流程开始
+流程从“Start ”开始事件启动。
+
+#### 处理报价
+1. 首先进入“Offerten prüfen”任务，由秘书处执行，对收到的报价进行检查。
+2. 然后根据检查结果，通过“Versandart?”排他网关进行判断：
+   - 如果是标准运输（Standard-V.），流程走向“Sped Auftrag erteilen”任务，由秘书处执行，向物流公司发出发货订单。
+   - 如果是特殊运输（Sonder-V.），流程走向并行网关“Versicherung notwendig?”。
+
+#### 并行处理
+在并行网关“Versicherung notwendig?”处，流程分为三条路径：
+1. 一条路径回到“Offerten prüfen”任务重新处理。
+2. 一条路径走向“Versicherung abschliessen”任务，由物流部门执行，完成保险手续。
+3. 一条路径走向“Ware SPED verpacken”任务，由物流部门执行，对货物进行包装准备通过SPED发送。
+
+#### 处理包装与发货
+1. “Paketschein ausfüllen”任务由秘书处执行，填写包裹单。
+2. 根据“Versicherung notwendig?”的判断结果：
+   - 如果需要保险（JA），先执行“Versicherung abschliessen”任务，再执行“Ware SPED verpacken”任务，之后通过“Standard-Versand”消息流通知物流公司进行标准运输，物流公司执行“Ware SPED verpacken”任务后，将货物交给物流公司“Ware versenden”任务进行发送。
+   - 如果不需要保险（Nein），执行“Ware POST verpacken”任务，由物流部门执行，对货物进行包装准备通过POST发送，之后执行“Ware versenden”任务进行发送。
+
+### 物流公司业务流程
+
+#### 接收订单
+物流公司从经销商处接收“Offerte erstellen”任务的结果，由物流部门执行创建报价任务，然后进入“Auftrag”任务，等待接收经销商的订单。

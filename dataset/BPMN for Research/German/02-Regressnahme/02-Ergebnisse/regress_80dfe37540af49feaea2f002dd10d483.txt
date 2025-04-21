@@ -1,0 +1,1 @@
+业务需求如下：首先是“Regressmeldung”的起始事件，触发后进入“Regress prüfen”任务。完成该任务后，流程流转到“eingetreten?”的排他网关进行判断。若判断结果为“Nein”，则流程结束；若为“Ja”，则进入“Zahlungsaufforderung an VN senden”任务，之后再到“Vorgang auf Wiedervorlage setzen”任务，接着到达“Vorgang geschlossen”的结束事件。另外，存在“Geldeingang”的中间捕获事件，当触发此事件后，会进入“Vorgang schliessen”任务，最终到达“Vorgang geschlossen”的结束事件。还有“Wiederspruch eingegangen”的中间捕获事件，用于处理可能出现的相反情况。

@@ -1,0 +1,6 @@
+业务需求如下：
+首先有一个名为“Warenversand”的协作流程，包含一个名为“Warenversand”的参与者，其关联的流程为“sid-4172A1C5-BF28-4518-B41F-B5CC197D1D1B”。该流程包含多个车道，分别是“Sekretariat”“Post”“Logistikleiter”。
+从起始事件“gk-Warenversand”开始，流程进入一个排他网关“Mengenkategorie?”，根据不同的条件（gross 或 klein）分流到不同的路径。如果是“gross”，则进入子流程“ Sonderversand”；如果是“klein”，则进入“Postschein ausfüllen”任务。
+“Postschein ausfüllen”任务完成后进入另一个排他网关“Versicherung erforderlich?”，根据“ja”或“nein”再次分流。“ja”时进入“Versicherung abschliessen”任务，“nein”时进入与其他路径汇合的流程。
+在其他路径中，“Mengenkategorie bestimmen”任务完成后进入并行网关，分别流向“Versicherung abschliessen”任务和回到排他网关“Mengenkategorie?”。
+“Versicherung abschliessen”任务完成后与其他路径汇合，最终到达结束事件“Ware bereitgestellt”。整个流程中各个任务和网关之间通过序列流连接，形成了一个复杂的业务流程。

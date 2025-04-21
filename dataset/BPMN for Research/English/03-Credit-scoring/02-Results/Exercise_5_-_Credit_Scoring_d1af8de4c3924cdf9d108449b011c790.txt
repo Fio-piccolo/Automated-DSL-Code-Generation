@@ -1,0 +1,5 @@
+银行前端（Banking Frontend）发起评分请求（Send Request），该请求通过消息流（messageFlow）传递给银行的评分流程（Scoring (Bank)）。银行的评分流程首先遇到一个开始事件（Start Event）“Scoring needed”，随后进入一个事件基于网关（Event Based Gateway），根据条件进行分支。一部分流程通过中间抛出事件（Intermediate Throw Event）“Send Immediate Results”将消息传递给另一个中间捕获事件（Intermediate Catch Event）“Receive Immediate Result”，然后继续后续流程；另一部分流程通过中间抛出事件“Send Delay”将消息传递给信用保护机构的评分流程（Scoring (Credit Protection Agency)）。
+
+信用保护机构的评分流程从开始事件“Scoring Requested”开始，经过一个排他网关（Exclusive Gateway）“Immediate Results Possible?”，根据条件进行分支。如果是“是”（Yes），则通过中间抛出事件“Send Immediate Result”将消息传递出去；如果是“否”（No），则经过一系列任务和中间抛出事件等流程进行处理。
+
+银行的评分流程在经过各种中间事件和流程后，最终到达结束事件（End Event）。信用保护机构的评分流程也在经过一系列中间事件和流程后到达结束事件。整个流程涉及银行和信用保护机构两个参与者，通过消息流进行交互和协调。

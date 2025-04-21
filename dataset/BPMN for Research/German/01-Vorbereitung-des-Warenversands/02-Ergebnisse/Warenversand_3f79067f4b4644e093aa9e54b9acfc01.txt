@@ -1,0 +1,7 @@
+该业务流程始于“Warenversand”（货物运输）事件，首先进入“Versandart”（运输方式）的排他网关进行分支选择。若选择“Sonderversand”（特殊运输），则执行“Drei Spediteur - Angebote einholen”（获取三家运输商报价）任务；若选择“Normaler Versand”（普通运输），则执行“Paketschein ausfüllen”（填写包裹单）任务。
+
+“Drei Spediteur - Angebote einholen”任务完成后，触发“Angebote liegen vor”（有报价）的中间抛出事件，之后执行“Angebot auswählen und beauftragen”（选择并委托报价）任务。“Paketschein ausfüllen”任务完成后，进入“Versicherung notwendig?”（是否需要保险）的排他网关进行判断。
+
+若判断结果为“ja”（是），则执行“Versicherung abschliessen”（完成保险）任务；若为“nein”（否），则直接流转。
+
+“Versicherung abschliessen”任务完成后与“Angebot auswählen und beauftragen”任务完成后的路径合并，之后进入“Ware verpacken”（包装货物）任务，再到“Ware bereitstellen”（准备货物）任务，最终以“Ware steht bereit”（货物准备好）事件结束整个流程。

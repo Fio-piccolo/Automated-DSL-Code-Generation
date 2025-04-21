@@ -1,0 +1,9 @@
+当有货物需要发送时，首先由“Ware soll versendet werden”（Ware wird versendet）开始事件启动流程。接着，“Klärung des Versenders”（Klärung des Versenders）任务由Secretariat（秘书处）处理，以明确发货方的相关信息。之后进入一个排他网关“sid-590BF7A8-EFBA-451D-B146-529ABAA16C11”，根据发货量大小（分为“große Menge”（大量）和“kleine Menge”（少量））走向不同的路径。
+
+若为大量发货，进入“sid-2910180C-1020-4D42-80FB-B64A22516A3D”并行网关，分别向“Angebot von Versender 1 einholen”（Angebot von Versender 1 einholen）、“Angebot von Versender 3 einholen”（Angebot von Versender 3 einholen）和“Angebot von Versender 2 einholen”（Angebot von Versender 2 einholen）任务发送分支，由不同部门获取不同发货方的报价。若为少量发货，则进入“sid-F9345CD0-BAFA-4B3C-AA5F-0BB960F9F066”任务“Paketschein ausfüllen”（Paketschein ausfüllen），由Secretariat填写包裹单。
+
+之后，所有获取报价的任务和填写包裹单任务完成后，进入“Angebote auswählen”（Angebote auswählen）任务，由Secretariat挑选合适的报价。接着“Spediteur beauftragen”（Spediteur beauftragen）任务由Secretariat委托货运代理。
+
+在“Versicherung abschließen”（Versicherung abschließen）任务中，Logistikleiter（物流主管）处理保险事宜，之后进入一个排他网关判断是否需要保险，若需要保险，进入“sid-0641924E-E8A7-4355-A9F7-EC6092F492B1”并行网关，分为两条路径，一条到“sid-2C608615-D138-4687-8DF5-389148A05A75”任务“Versicherung abschließen”（Versicherung abschließen）继续保险相关处理，另一条到“sid-8A07E1A9-46A5-4771-910A-7B3ECE4E9371”任务“Ware verpacken”（Ware verpacken）进行货物包装。
+
+货物包装完成后进入“sid-3518D307-42E4-47FE-912C-3B1AF5861907”并行网关进行汇聚，之后进入“Ware zur Abholung bereit”（Ware zur Abholung bereit）结束事件，表示货物准备好接收。若保险不需要，直接进入“sid-8A07E1A9-46A5-4771-910A-7B3ECE4E9371”任务“Ware verpacken”（Ware verpacken）进行包装，之后同样进入“sid-3518D307-42E4-47FE-912C-3B1AF5861907”并行网关汇聚，最终进入“Ware wird versendet”（Ware wird versendet）结束事件，表示货物已发送。

@@ -1,0 +1,11 @@
+业务需求如下：
+1. 流程开始于“möglicher Regress gegen VN”事件。
+2. 接着执行“Fall wird geprüft”任务。
+3. 之后通过排他网关进行分支，若“Regress möglich”，则执行“Zahlungsaufforderung an VN”任务；若“kein Regress”，则执行“Vorgang schließen”任务。
+4. “Zahlungsaufforderung an VN”任务后执行“Vorgang auf Wiedervorlage setzen”任务。
+5. “Vorgang auf Wiedervorlage setzen”任务后通过事件驱动网关进行分支，可能会触发“Wiederspruch”中间捕获事件。
+6. 若捕获到“Wiederspruch”，则执行“Prüfung des Wiederspruchs”任务。
+7. “Prüfung des Wiederspruchs”任务后再通过排他网关进行分支，若“nicht gerechtfertigt”，则执行“Abgabe an Inkassobüro”任务；若其他情况（文档未明确），可能有其他后续流程。
+8. “Abgabe an Inkassobüro”任务后通过汇聚网关进行汇聚，之后执行“Vorgang schließen”任务。
+9. 最后流程结束于结束事件。
+10. 此外，流程中还存在其他可能的中间捕获事件，如“Zahlungseingang”和“Frist abgelaufen”，它们分别会执行相应的后续任务，并最终也会通过汇聚网关进行汇聚后执行“Vorgang schließen”任务，完成整个流程。

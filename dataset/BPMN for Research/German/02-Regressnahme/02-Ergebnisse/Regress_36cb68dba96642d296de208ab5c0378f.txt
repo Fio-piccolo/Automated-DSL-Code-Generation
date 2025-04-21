@@ -1,0 +1,14 @@
+业务需求如下：
+1. 流程开始于“Get the info”事件，获取相关信息。
+2. 接着执行“Check the case for the possibility”任务，检查案例的可能性。
+3. 之后通过“Exclusive Gateway”进行分支判断：
+   - 如果条件满足（以“Y”表示），则执行“send request for payment”任务，发送付款请求。
+   - 如果条件不满足（以“N”表示），则执行“Close the case”任务，关闭案例。
+4. 发送付款请求后，进入“Exclusive Event - Based Gateway”进行进一步分支：
+   - 若收到钱（“money received”事件），则执行“Make booking & Close the case”任务，进行预订并关闭案例。
+   - 若投保人不同意（“insurant disaggrees”事件），则执行“Check the reasoning if acceptable”任务，检查推理是否可接受。
+   - 若达到截止日期（“deadline reached”事件），则进入后续流程。
+5. 对于“Check the reasoning if acceptable”任务的结果，再次通过“Exclusive Gateway”进行判断：
+   - 如果结果为“Y”，则执行“Close the case”任务，关闭案例。
+   - 如果结果为“N”，则执行“Forward to collection agency”任务，转交给收款机构。
+6. 当“Make booking & Close the case”任务、“Close the case”任务（由“Check the reasoning if acceptable”任务结果为“Y”触发）以及“Forward to collection agency”任务完成后，分别对应的案例关闭、案例发送给收款机构等事件发生，最终流程结束。

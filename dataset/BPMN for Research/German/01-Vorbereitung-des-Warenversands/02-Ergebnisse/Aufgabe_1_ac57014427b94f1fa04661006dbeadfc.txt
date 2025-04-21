@@ -1,0 +1,1 @@
+流程由“Unternehmen”企业发起，包含“Logistikleiter”（物流经理）、“Sektretariat”（秘书处）、“Lagerarbeiter”（仓库工人）三个角色。流程从开始事件出发，先由物流经理进行“Anfrage”（询问）任务，然后通过并行网关分三路，分别是物流经理的“Spedition 1”（运输1）、“Spedition 2”（运输2）、“Spedition 3”（运输3）任务。还有一路经并行网关到物流经理的“große Menge”（大量）任务，完成后回到“Anfrage”任务。同时，流程开始后经并行网关还有一路到物流经理的“große Menge”任务。另外，秘书处有“Versicherung abschliießen”（签订保险）任务，仓库工人有“Ware verpacken”（包装货物）任务。

@@ -1,0 +1,12 @@
+业务需求如下：
+1. 流程开始于“VN in Regress nehmen”事件。
+2. 首先执行“Vorgang prüfen”任务。
+3. 接着通过“in Regress nehmen?”排他网关进行决策，如果选择“ja”，则执行“Zahlungsaufforderung an VN”任务；如果选择“nein”，则执行“Vorgang schliessen”任务。
+4. 在“Zahlungsaufforderung an VN”任务之后，进入“Wiedervorlage warten bis X”中间捕获事件，等待一段时间。
+5. 然后执行“Geldeingang prüfen”任务。
+6. 再通过“Geld eingegangen?”排他网关进行决策，如果选择“ja”，则执行“Verbuchen”任务；如果选择“nein”，则执行“Inkasso übergeben”任务。
+7. 在“Verbuchen”任务之后，流程结束。
+8. 在“Inkasso übergeben”任务之后，流程也结束。
+9. 如果在“Wiedervorlage warten bis X”事件中收到消息，流程会跳转到“Widerspruch VN”中间捕获事件。
+10. 执行“Widerspruch prüfen”任务。
+11. 通过“gerechtfertigt?”排他网关进行决策，如果选择“ja”，则执行“Vorgang schliessen”任务；如果选择“nein”，则执行“Inkasso übergeben”任务。

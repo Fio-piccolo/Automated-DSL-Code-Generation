@@ -1,0 +1,2 @@
+业务需求如下：
+从起始事件开始，首先经过一个并行网关，然后根据条件判断进入不同的路径。如果满足“Mengen?”的条件，进入一个排他网关，再根据后续条件分别执行不同的任务，如“Paketschein ausfüllen”等；如果不满足该条件，则直接进入另一个流程。在后续的流程中，还会根据各种条件判断和并行网关的分支，执行诸如“Versand-Angebote einholen”“Versicherung abschliessen”“Angebot erstellen”“Ware verpacken”等任务，最后经过一系列的流程节点完成整个业务流程。各个参与方如“Sekretariat”“Logistikleiter”“Spediteur”“Lagerarbeiter”等在不同的流程节点上进行协作。

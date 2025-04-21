@@ -1,0 +1,7 @@
+该业务流程起始于一个开始事件，随后进入“Klärung Versandart”（明确运输方式）任务。接着通过一个排他网关（“Sonderversand erforderlich?”，即“是否需要特殊运输？”）进行分支判断。
+
+如果不需要特殊运输，流程进入“Angebot von Spediteuren einholen”（从供应商获取报价）任务，之后经过一个并行网关进行分流，分别到“Spediteur 1”“Spediteur 2”“Spediteur 3”对应的“Angebot abgeben”（提交报价）任务。每个“Spediteur”提交报价后，进入“Auswahl des Angebots”（选择报价）任务，然后再次通过排他网关进行条件判断，根据不同条件分别进入“Auftrag erhalten”（获得订单）任务或者回到开始重新执行流程。
+
+若在排他网关判断需要特殊运输，则进入“Angebot einholen”（获取报价）任务，之后进行“Prüfung Versicherung erforderlich?”（检查是否需要保险）的判断。若需要保险，进入“Versicherung abschließen”（购买保险）任务，之后流程继续进行；若不需要保险，则直接继续后续流程。
+
+流程中还涉及“Ware verpacken”（包装货物）、“Ware bereitstellen”（准备货物）等任务，最后通过一系列的网关和任务流转，最终到达结束事件。整个流程围绕着业务活动的开展、决策判断以及任务执行的先后顺序，确保业务流程的有序进行和不同环节之间的有效衔接。

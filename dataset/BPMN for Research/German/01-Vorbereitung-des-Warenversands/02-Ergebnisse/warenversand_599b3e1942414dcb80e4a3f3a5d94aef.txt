@@ -1,0 +1,11 @@
+流程从“Ware soll versendet werden”（货物应发送至何处）开始，随后进入并行网关，并行执行两个任务分支。
+
+其中一个分支首先遇到“große oder kleine Menge?”（大批量还是小批量？）的排他网关：
+ - 若为小批量，执行“Standard - isierten Paketschein ausfüllen”（填写标准包裹单）任务，之后进入“Versicherung notwendig?”（是否需要保险？）的排他网关：
+    - 如果需要保险，由物流经理执行“Versicherung wird durch Logistikleiter abgeschlossen”（保险由物流经理完成）任务。
+    - 如果不需要保险，直接进入后续流程。
+ - 若为大批量，执行“Einholgen von 3 Angeboten”（获取3个报价）任务，然后执行“Auswahl und Beauftragung einer Spedition”（选择并委托一家货运公司）任务。
+
+另一个分支执行“Verpacken der Ware”（包装货物）任务。
+
+上述不同路径的流程分别通过排他网关和并行网关进行汇聚，最终到达“Ware versandbereit”（货物准备好发货）的结束事件。

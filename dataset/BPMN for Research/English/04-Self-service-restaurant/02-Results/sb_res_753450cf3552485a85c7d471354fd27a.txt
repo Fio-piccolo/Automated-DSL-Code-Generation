@@ -1,0 +1,28 @@
+The business process described in the BPMN diagram involves three main participants: Guest, Employee, and Chef. The process outlines the steps taken when a guest feels hungry, places an order, and eventually receives their meal. Here's the natural language description of the process:
+
+1. **Guest's Process:**
+   - The process starts when the guest feels hungry.
+   - The guest chooses a dish from the menu.
+   - The guest waits for their turn.
+   - Once it's their turn, the guest places the order.
+   - The guest waits for the order to be ready.
+   - Once the order is ready, the guest picks up the meal.
+   - The guest eats the meal.
+   - The process ends when the guest's hunger is satisfied.
+
+2. **Employee's Process:**
+   - When a new order is received, the employee enters the order into the POS system.
+   - The employee then receives the money from the guest.
+   - The employee gives the customer a buzzer.
+   - The employee sends the order to the Chef.
+   - The employee waits for the order to be ready.
+   - Once the order is ready, the employee sets off the guest's buzzer.
+   - If the guest picks up the meal within 5 minutes, the order is completed. If not, the process continues to wait.
+
+3. **Chef's Process:**
+   - When a new order is received, the Chef prepares the meal.
+   - Once the meal is prepared, it is placed in the service hatch.
+   - The Chef then notifies that the order is ready.
+   - The process ends once the order is complete.
+
+This process ensures that the guest's order is efficiently managed from the moment they feel hungry until they are satisfied after eating their meal.

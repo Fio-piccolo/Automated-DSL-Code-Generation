@@ -1,0 +1,22 @@
+业务需求如下：
+1. 流程开始，首先由秘书处发起任务“3 Angebote anfordern”（获取3个报价）。
+2. 当所有报价都收到后，进入“Entscheid welches Angebot”（决定选择哪个报价）任务。
+3. 根据选择的报价数量，若数量大则进入“3 Angebote anfordern”任务；若数量小则进入“standard Paketschein ausfüllen”（填写标准包裹单）任务。
+4. “standard Paketschein ausfüllen”任务完成后，判断是否需要保险。若需要保险，则进入“Versicherung abschliessen”（完成保险）任务；若不需要保险，则进入“Ware verpacken”（包装货物）任务。
+5. “Versicherung abschliessen”任务完成后，进入“Spediteur beauftragen”（委托运输商）任务。
+6. “Ware verpacken”任务完成后，进入“Ware versenden mit Spediteur”（通过运输商发货）任务。
+7. “Spediteur beauftragen”任务完成后，进入“Ware versenden mit Spediteur”任务。
+8. “Ware versenden mit Spediteur”任务完成后，进入“normaler Postversand”（普通邮政发货）任务。
+9. “normaler Postversand”任务完成后，流程结束。
+10. 同时，有一个并行分支，从流程开始后，会进入“Versicherung abschliessen”任务（可能与上述保险判断后的任务并行）。
+11. 还有一个判断任务“Versicherung erfoderlich?”（是否需要保险），根据判断结果决定进入“Versicherung abschliessen”任务或者跳过该任务直接进入“Ware verpacken”任务。
+12. 在“Entscheid welches Angebot”任务前有一个“Alle Angebote eingetroffen”（所有报价已收到）的中间抛出事件。
+13. 在“3 Angebote anfordern”任务前有一个开始事件。
+14. 在“选择运输方式”任务后有一个排他网关，根据条件决定进入“获取3个报价”任务或者“填写标准包裹单”任务。
+15. 在“填写标准包裹单”任务后有一个排他网关，根据条件决定进入“是否需要保险”判断任务。
+16. 在“是否需要保险”判断任务后有两个分支，分别进入“完成保险”任务和直接进入“包装货物”任务。
+17. 在“完成保险”任务后进入“委托运输商”任务。
+18. 在“委托运输商”任务后进入“通过运输商发货”任务。
+19. 在“包装货物”任务后进入“普通邮政发货”任务。
+20. 在“普通邮政发货”任务后流程结束。
+21. 整个流程涉及秘书处、物流主管、仓库工人等角色。

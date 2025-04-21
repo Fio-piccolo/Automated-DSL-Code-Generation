@@ -1,0 +1,21 @@
+该BPMN流程图描述了一个贸易公司的业务流程，具体步骤如下：
+
+1. **开始**：流程从开始事件开始。
+2. **准备货物**：进入"Ware zum Versand"（准备发货）任务。
+3. **特殊运输判断**：通过"Sonderversand?"（特殊运输？）的排他网关判断是否需要特殊运输。
+   - 如果不需要特殊运输，流程继续。
+   - 如果需要特殊运输，进入"Angebote einholen"（获取报价）任务。
+4. **获取报价（如果需要特殊运输）**：进入"Angebote einholen"（获取报价）任务，然后生成报价并提交。
+5. **选择报价（如果需要特殊运输）**：进入"1 Angebot auswählen"（选择一个报价）任务。
+6. **创建并分配订单**：进入"Auftrag anlegen und erteilen"（创建并分配订单）任务。
+7. **接收订单**：进入"Auftrag entgegennehmen"（接收订单）任务。
+8. **取货并交付**：进入"Ware abholen und ausliefern"（取货并交付）任务，然后流程结束。
+9. **填写包裹单**：进入"Paketschein ausfüllen"（填写包裹单）任务。
+10. **保险需求判断**：通过"Versicherung erforderlich?"（需要保险？）的排他网关判断是否需要保险。
+    - 如果需要保险，进入"Versicherung abschliessen"（签订保险）任务。
+    - 如果不需要保险，流程继续。
+11. **包装货物**：进入"Ware verpacken"（包装货物）任务。
+12. **准备货物待取**：进入"Ware zur Abholung bereit"（准备货物待取）任务。
+13. **发送通知**：进入"Nachricht an Kunde Ware abholberreit"（通知客户货物已准备好取货）任务，然后流程结束。
+
+该流程涉及多个角色，包括物流经理、秘书处、快递员和仓库工人。

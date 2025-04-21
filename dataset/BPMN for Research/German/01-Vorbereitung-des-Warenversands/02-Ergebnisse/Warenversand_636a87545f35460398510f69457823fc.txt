@@ -1,0 +1,5 @@
+该业务流程是“Warenversand（货物配送）”流程，涉及“Sekretariat（秘书处）”、“Lagerarbeiter（仓库工人）”和“Logistikleiter（物流主管）”三个角色。流程从“StartEvent（开始事件）”启动，进入“ExclusiveGateway（排他网关）”判断是否为特殊配送（Sonderversand?），若为“ja（是）”则进入“Drei Angebote einholen（获取三个报价）”任务，之后依次进行“Angebot auswählen（选择报价）”、“Paketschein ausfüllen（填写包裹单）”、“Spedition beautragen（安排货运）”；若为“nein（否）”则直接进入“Paketschein ausfüllen（填写包裹单）”。
+
+之后通过“ParallelGateway（并行网关）”同时进行不同任务，其中一条路径进入“ExclusiveGateway（排他网关）”判断是否需要保险（Versicherung erforderlich?），若为“ja（是）”进入“Ware versichern（为货物保险）”，若为“nein（否）”进入“Ware verpacken（包装货物）”。两条路径在“ExclusiveGateway（排他网关）”汇聚后，进行“Status benachrichtigen（通知状态）”。
+
+“Lagerarbeiter（仓库工人）”负责“Ware bereitstellen（准备货物）”任务，货物准备好后到达“Ware bereitgestellt（货物已准备好）”的“EndEvent（结束事件）”。同时，包装货物和保险货物的流程在“ParallelGateway（并行网关）”汇聚后继续进行后续操作。

@@ -1,0 +1,13 @@
+业务需求如下：
+1. 流程开始于“Regress möglich”的开始事件，此事件可能会产生中断。
+2. 接着进入“Fall prüfen”任务，检查相关情况。
+3. 之后通过排他网关进行分支判断。
+    - 如果满足某种条件，流程会走向“Info an VN”的中间抛出事件，发送信息给VN。
+    - 如果不满足该条件，流程会走向另一个排他网关。
+4. 在“Info an VN”事件后，可能会进行“Geldeingang verbuchen”任务，记录资金收入。
+5. 经过一些其他的排他网关和任务，如“Widerspruch prüfen”（检查异议）、“Zahlungsverweigerung”（支付拒绝）等。
+    - 在“Zahlungsverweigerung”网关后，根据不同情况又会有分支。
+        - 若判定为“gerechtfertigt”（合理），会进入“Widerspruch bearbeiten”任务处理异议。
+        - 若判定为“nicht gerechtfertigt”（不合理），则会进入其他相关流程。
+    - 后续还包括“Inkasso-DL einschalten”（启动收款DL）、“Geldeingang prüfen”（检查资金收入）等任务。
+6. 流程最终会到达结束事件，可能有多个结束事件，根据具体流程走向而定。

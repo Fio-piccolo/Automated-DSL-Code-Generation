@@ -1,0 +1,7 @@
+流程从“Warenversand”（货物发送）开始事件启动。
+
+随后通过并行网关分为两条并行路径：
+ - 左侧路径：首先执行“Versand - umfang prüfen”（检查发货范围）任务，之后经过排他网关“Große Menge?”（大批量？）进行判断。若为“Nein”（否），则执行“Paketschein ausfüllen”（填写包裹单）任务，然后进行“Versicherungs - pflicht prüfen”（检查保险义务）任务，接着通过排他网关“Versicherung erforderlich?”（需要保险？）判断，若为“Ja”（是），由物流经理执行“Versicherung abschließen”（签订保险）任务，若为“Nein”（否）则直接流转；若在“Große Menge?”判断为“Ja”（是），则执行“Angebot von 3 Spediteuren einholen”（获取3家货运公司的报价）任务，之后执行“Spediteur auswählen”（选择货运公司）任务。这两条分支最终都通过排他网关汇聚，再通过另一个排他网关汇聚到后续流程。
+ - 右侧路径：执行“Ware verpacken”（包装货物）任务，之后通过并行网关与左侧路径汇聚。
+
+汇聚后执行“Verpackte Ware zur Abholung bereitstellen”（准备好包装好的货物以供取货）任务，最后到达“Ware versendet”（货物发送）结束事件，流程结束。

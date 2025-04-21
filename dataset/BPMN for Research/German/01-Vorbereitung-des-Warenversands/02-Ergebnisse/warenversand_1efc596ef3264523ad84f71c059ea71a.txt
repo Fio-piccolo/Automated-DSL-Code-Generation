@@ -1,0 +1,9 @@
+1. 当发起“Warenversand beauftragt”（货物运输委托）事件后，流程开始。
+2. 首先进入“Menge prüfen”（检查数量）任务，完成后根据条件判断数量情况。
+3. 若数量大（groß），则执行“3 Spediteure anfragen”（询问3个托运人）任务；若数量不符合大的条件，则执行“Paketschein ausfüllen”（填写包裹单）任务。
+4. 执行“3 Spediteure anfragen”任务后，接着进行“Angebot auswählen”（选择报价）任务，再执行“Spediteur beauftragen”（委托托运人）任务。
+5. 执行“Paketschein ausfüllen”任务后，进行“Versicherungsbedarf prüfen”（检查保险需求）任务，然后根据保险需求判断是否需要保险。
+6. 若需要保险，则执行“Versicherung abschließen”（完成保险）任务，之后流程汇合；若不需要保险，则直接流程汇合。
+7. 在执行“Spediteur beauftragen”任务的同时，执行“Paketschein ausfüllen”任务，二者完成后流程汇合。
+8. 并行执行“Ware verpacken”（包装货物）任务和“Versicherung abschließen”（完成保险）任务，二者完成后分别进入后续流程。
+9. “Ware verpacken”任务完成后，执行“Ware bereitstellen”（准备货物）任务，最终以“Ware bereitgestellt”（货物准备好）事件结束流程。

@@ -1,0 +1,4 @@
+当需要发送货物（Ware muss versandt werden）时，首先进行发货方式检查（Versandart prüfen）。如果需要特殊发货（Sonderversand erforderlich?），则进行询价（Angebot einholen），之后安排快递（Spediteur beauftragen）；如果不需要特殊发货，则填写包裹单（Paketschein ausfüllen）。
+同时，从流程开始，有一个并行分支，一部分进入包装货物（Ware verpacken）步骤。
+在填写包裹单之后，检查是否需要保险（Versicherung erforderlich?），若需要保险，有三条分支，其中“ja”分支进入处理保险（Versicherung abschließen），“nein”分支进入后续合并步骤。处理完保险或未选择保险的情况后，进行合并（sid-1C2C2EE1-9C99-4D93-AC1D-766C5873954F），再进入另一个并行分支。
+包装货物和安排快递后的结果也会进入一个排他网关进行判断，判断结果进入后续的并行合并（sid-0495EB11-95E0-46DE-9D08-6018E78B9287），最后将货物准备好取货（Ware zur Abholung bereitstellen）并标记货物已发送或已取走（Ware wurde versendet/angeholt）。

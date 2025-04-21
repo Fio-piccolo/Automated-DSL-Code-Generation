@@ -1,0 +1,5 @@
+The requirements are as follows:
+
+Within the 'Direct Debit Transaction Information Ultimate Debtor Identification' (referred to as 'drctDbtTxInf Ultmt dbtr Id orgId') for the ISO 20022 pain.008.001.01 specification, it is presumed that the 'orgId' attribute will only contain one of the following sub-elements: BIC, IBEI, BEI, EANGLN, USCHU, DUNS, BkPtyId, TaxIdNb, or prtryId.
+
+In other words, though the 'orgId' attribute might contain multiple values, the sum of the values across these sub-elements should not exceed one. If the 'orgId' attribute contains only one entry, it must be one of the sub-elements listed above.

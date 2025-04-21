@@ -1,0 +1,1 @@
+该业务流程始于“Ware versandbereit”事件，接着进入“Versandart?”的排他网关。若选择“Standardversand”，则检查保险需求，若不需要保险，跳过保险相关任务，直接进行“Paketschein ausfüllen”任务；若需要保险，再判断是否需要特定保险类型，若不需要则进行“Versicherung abschliessen”任务，之后也进行“Paketschein ausfüllen”任务。若选择“Sonderversand”，则先“Angebote einholen”，获取报价后，通过另一个排他网关进行不同报价对应的任务，分别是“Angebot1”“Angebot2”“Angebot3”，完成这些任务后，所有分支汇聚到一起，最终流程结束于一个结束事件。

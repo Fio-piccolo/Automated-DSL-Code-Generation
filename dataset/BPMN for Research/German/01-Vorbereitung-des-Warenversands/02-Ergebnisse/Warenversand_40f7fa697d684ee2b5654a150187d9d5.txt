@@ -1,0 +1,13 @@
+该业务流程主要围绕商品发货准备展开，涵盖了从确定发货负责人到选择合适物流方案以及最终完成货物交付的一系列操作。
+1. 流程开始于“Ware soll versendet werden”（商品需要发货）事件。
+2. 首先要确定“Wer übernimmt den Versand?”（谁来承担发货），此任务完成后进入后续流程。
+3. 接着通过“Exclusive Gateway”（排他网关）进行分支决策，如果是“Postversand”（邮政发货），则执行“Füllt standardisierten Paketschein aus.”（填写标准化包裹单）任务；若是“Sonderversand”（特殊发货），则执行“Holt Angebote von Spediteuren ein.”（从运输商处获取报价）任务。
+4. 获取报价后，经过“Parallel Gateway”（并行网关）进行并发处理。一方面，不同的运输商（Spediteur 1、Spediteur 2、Spediteur 3）提供报价并等待接收；另一方面，“Liefert Angebot ab”（提供报价）任务执行后，流程继续进行。
+5. 之后，通过“Exclusive Gateway”判断是否需要保险。如果不需要保险，直接进行后续流程；如果需要保险，则执行“Schließt Versicherung ab.”（完成保险）任务。
+6. 接着，从多个运输商的报价中选择合适的方案，执行“Wählt günstigstes Angebot aus.”（选择最优惠的报价）任务。
+7. 选定报价后，确定负责发货的运输商，执行“Beauftragt ausgewählten Spediteur”（委托选定的运输商）任务。
+8. 运输商接到委托后，执行“Liefert Angebot ab”（提供报价）任务。
+9. 随后，执行“Prüfung,ob Versicherung erforderlich ist?”（检查是否需要保险）任务。
+10. 如果需要保险，执行“Schließt Versicherung ab.”（完成保险）任务；如果不需要保险，则直接进行后续流程。
+11. 之后，执行“Verpackte Ware wird zur Abholung bereit gestellt.”（准备好包装好的货物以供取货）任务。
+12. 最后，流程在“Ware wird abgeholt.”（货物被取走）事件中结束。

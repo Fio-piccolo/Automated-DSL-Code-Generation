@@ -1,0 +1,11 @@
+The requirement is as follows:
+
+1. All the authors of any student paper must have at least one author who is a student.
+
+2. At least one paper out of all papers must be a student paper. And the total number of student papers cannot exceed 4.
+
+3. The word count for all papers must be less than 10,000.
+
+4. No researcher can review their own submission.
+
+5. For all papers, their assigned referees must not include any students.

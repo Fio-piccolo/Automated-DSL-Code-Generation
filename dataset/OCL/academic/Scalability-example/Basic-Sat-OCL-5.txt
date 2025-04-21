@@ -1,0 +1,11 @@
+The requirements are as follows:
+
+1. For any instances of A2 in Package_1, the value of attribute 'at' should always be greater than or equal to the 'at' value of the corresponding A1 instance.
+
+2. For any instances of A3 in Package_1, the value of attribute 'at' should always be greater than or equal to the 'at' value of the corresponding A2 instance.
+
+3. For any instances of A4 in Package_1, the value of attribute 'at' should always be greater than or equal to the 'at' value of the corresponding A3 instance.
+
+4. For any instances of A5 in Package_1, the value of attribute 'at' should always be greater than or equal to the 'at' value of the corresponding A4 instance.
+
+5. For any instances of A1 in Package_1, the value of attribute 'at' should always be greater than or equal to the 'at' value of the corresponding A5 instance.

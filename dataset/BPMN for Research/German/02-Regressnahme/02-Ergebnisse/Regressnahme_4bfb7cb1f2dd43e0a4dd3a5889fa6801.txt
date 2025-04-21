@@ -1,0 +1,1 @@
+业务需求如下：该业务流程主要围绕将某个事务（VN）纳入回归流程展开。首先启动“VN wird in Regress genommen”事件，接着对相关情况进行检查（“Fall prüfen”）。若检查通过（“Regressnahme gerechtfertigt”），则向VN发送支付要求（“Zahlungsaufforderung schicken an VN”）；若未通过则有其他分支。之后根据是否收到付款、是否收到VN的反对意见等情况进行不同的处理，如登记收入、检查反对意见、完成相关任务等，最终根据不同结果走向相应的结束事件，整个流程中还涉及一些待办事项的标注。

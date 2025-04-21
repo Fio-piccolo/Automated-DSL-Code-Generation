@@ -1,0 +1,9 @@
+The requirements are as follows:
+
+1. In the context of a Paper entity, the author of every paper designated as a "studentPaper" must be a student. This means that there should be at least one author who is a student for every paper marked as a student paper.
+
+2. There should be at least one paper marked as a "studentPaper" in the system. However, the total number of papers marked as "studentPaper" should be less than five.
+
+3. The word count for any paper within the system must be less than 10,000 words.
+
+4. In the context of a Paper entity, none of the referees reviewing any paper should be a student. This means that not a single reviewer assigned to a paper should be a student.

@@ -1,0 +1,13 @@
+该业务流程围绕货物发送展开，涉及物流负责人、秘书、仓库工人等角色。首先是货物发送启动，秘书记录发货数据，明确发货人后分情况处理。数量少则进行邮政发货并填写包裹单，数量多则选择快递公司并获取报价后发货。发货前需购买保险，之后进行包装和准备货物，最后完成货物交付。
+1. 开始事件：“Ware soll versendet werden”（货物应被发送）触发流程。
+2. 秘书任务：
+    - “Versandtdaten aufnehmen”（记录发货数据），承接开始事件。
+    - “Klären wer Versandt übernimmt”（确定谁负责发货），后续连接分支。
+3. 分支选择：
+    - 若选择“kleine Menge”（小数量），执行“Postversandt - Paketschein ausfüllen”（邮政发货 - 填写包裹单）。
+    - 若选择“große Menge”（大数量），执行“Angebot der Spediteure einholen & Einen wählen”（获取快递公司报价并选择一个）。
+4. 保险任务：“Versicherung abschließen”（购买保险）在发货前执行。
+5. 并行任务：
+    - “Ware verpacken ”（包装货物）。
+    - 与其他流程汇合后执行“Ware bereitstellen”（准备货物）。
+6. 结束事件：“Ware bereitgestellt”（货物准备好）标志流程结束。

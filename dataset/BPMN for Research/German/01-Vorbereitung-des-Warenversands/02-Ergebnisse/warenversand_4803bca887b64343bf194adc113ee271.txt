@@ -1,0 +1,11 @@
+该业务流程主要围绕货物发送展开，具体如下：
+1. 首先是“Ware zu versenden”（待发送货物）的起始事件，此事件触发后进入“Versandmenge bestimmen”（确定发货量）任务。
+2. 完成发货量确定后，流程通过“exclusiveGateway”（排他网关）进行分支。
+3. 其中一支经“parallelGateway”（并行网关）分成三路，分别去执行“Angebot 1 einholen”（获取报价1）、“Angebot 2 einholen”（获取报价2）和“Angebot 3 einholen”（获取报价3）这三个任务。
+4. 这三个任务完成后，通过“parallelGateway”汇聚，接着执行“Günstigsten Spediteur beauftragen”（委托最优惠的运输商）任务。
+5. 另一支则执行“Paketschein ausfüllen”（填写包裹单）任务，之后该任务与上述并行网关汇聚后的流程再次分支。
+6. 其中一支经“parallelGateway”分成两路，一路执行“Ware verpacken”（包装货物）任务，完成后执行“Ware bereitstellen”（准备货物）任务；另一路执行“Versicherung abschließen”（购买保险）任务（这里有条件判断，如果满足特定条件则无需购买保险）。
+7. 这两路任务最终汇聚，之后通过“exclusiveGateway”进行条件判断。
+8. 判断后再经过一些任务和网关的流转，最终到达“Ware verschickt”（货物已发送）的结束事件。
+9. 在流程中，不同任务由不同角色负责，如“Sekretariat”（秘书处）、“Lagerarbeiter”（仓库工人）、“Logistikleiter”（物流经理）等。
+10. 还存在一些文本注释，对运输方式（如“via Spedition” - 通过货运公司，“via normaler Post” - 通过普通邮政）以及保险需求（“Transportversicherung benötigt” - 需要运输保险，“Transportversicherung nicht benötigt” - 不需要运输保险）进行说明。

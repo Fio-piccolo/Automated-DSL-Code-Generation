@@ -1,0 +1,17 @@
+该业务流程围绕货物运输展开，从接收运输订单开始，历经多个环节的检查、判断、选择和操作，最终完成运输任务。具体步骤如下：
+1. **接收运输订单**：“Sekretariat”角色收到“Versandauftrag bekommen”（运输订单）。
+2. **检查货物数量**：“Sekretariat”角色执行“Menge prüfen”（检查数量）任务。
+3. **判断是否为大宗运输**：经过“Großversand?”（是否为大宗运输？）的判断。
+    - 若不是大宗运输，执行“Paketschein ausfüllen”（填写包裹单）任务。
+    - 若是大宗运输，执行多个任务。
+4. **判断是否需要保险**：进行“Versicherung nötig?”（是否需要保险？）的判断。
+    - 若需要保险，执行“Versicherung abschließen”（购买保险）任务。
+    - 若不需要保险，流程继续。
+5. **并行处理多项任务**：
+    - “Sekretariat”角色并行执行“Angebot Spediteur 1 inholen”（获取快递1报价）、“Angebot Spediteur 2 inholen”（获取快递2报价）和“Angebot Spediteur 3 inholen”（获取快递3报价）任务。
+6. **选择快递**：完成报价获取后，执行“Angebot auswählen”（选择报价）任务。
+7. **委托快递**：根据选择的报价，“Sekretariat”角色执行“Spediteur beauftragen”（委托快递）任务。
+8. **检查保险需求**：执行“Versicherungsbedarf prüfen”（检查保险需求）任务。
+9. **包装货物**：“Lagerarbeiter”（仓库工人）角色执行“Ware verpacken”（包装货物）任务。
+10. **准备货物**：“Lagerarbeiter”角色执行“Ware bereitstellen”（准备货物）任务。
+11. **完成运输订单**：最终，“Versandauftrag bearbeitet”（运输订单完成）。

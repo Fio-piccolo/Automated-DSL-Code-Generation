@@ -1,0 +1,14 @@
+该业务流程主要围绕货物发货展开，从确定发货地点开始，历经货物包装、运输路线确定、选择运输方式、保险评估及相关操作，最终完成货物交付准备。具体步骤如下：
+1. 起始事件“Ware soll versendet werden”触发流程，货物准备发货。
+2. 经过并行网关“Diverging”，流程分支为两条路径：
+    - 一路进行“Ware verpacken”任务，对货物进行包装。
+    - 另一路执行“Versandweg klären”任务，明确运输路线。
+3. 完成上述两个任务后，流程在并行网关“Converging”处汇聚，随后执行“Ware zur Abholung bereitstellen”任务，准备货物以便取货。
+4. 到达“Welcher Versandweg?”排他网关，根据货物数量决定运输方式：
+    - 若货物数量大，选择“Angbote bei Spediteuren einholen”任务，向多家货运公司收集报价。
+    - 若货物数量小，则执行“Standard-paketschein ausfüllen”任务，填写标准包裹单。
+5. 对于收集报价的情况：
+    - 执行“Angebot auswählen & Spediteur beauftragen”任务，选择报价并委托货运公司。
+    - 之后进行“Notwendigkeit einer Versicherung ermitteln”任务，评估是否需要保险。
+    - 若需要保险，执行“Versicherung abschließen”任务购买保险；若不需要，则直接进入后续流程。
+6. 最后，所有任务完成后，到达结束事件“Ware ist bereitgestellt”，货物准备就绪。

@@ -1,0 +1,11 @@
+流程开始后，首先通过并行网关分为两个并行执行的分支：一个分支由“Sekretariat klärt Versandart”（秘书处确定运输方式）处理，另一个分支由“Ware verpacken”（包装货物）处理。
+
+在“Sekretariat klärt Versandart”完成后，进入排他网关，根据运输量分为两种情况：若为“kleine Menge”（小批量），则执行“Paketschein ausfüllen”（填写包裹单）；若为“große Menge”（大批量），则执行“Angebote einholen”（收集报价）。
+
+对于小批量路径：“Paketschein ausfüllen”完成后进入“Versicherung nötig”（需要保险吗？）排他网关，若“Ja”（需要），则由“Logisitikleiter schließt Versicherung ab”（物流主管签订保险）处理；若“Nein”（不需要），则直接进入后续汇聚。
+
+对于大批量路径：“Angebote einholen”完成后依次执行“Angebot auswählen”（选择报价）和“Spediteur beauftragen”（委托运输商），之后进入汇聚。
+
+两个分支的汇聚网关（小批量路径的保险处理后或不需要保险，大批量路径的委托运输商后）完成后，进入另一个并行网关，等待“Ware verpacken”分支完成（“Ware verpacken”完成后也进入此并行网关）。
+
+所有并行分支完成后，执行“Lagerarbeiter stellt die Ware bereit”（仓库工人准备货物），最终流程结束。

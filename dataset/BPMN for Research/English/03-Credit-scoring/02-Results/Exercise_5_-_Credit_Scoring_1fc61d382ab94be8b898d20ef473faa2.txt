@@ -1,0 +1,3 @@
+银行前端（Banking Frontend）发起“评分需求”（Scoring needed）的开始事件，触发提交给评分系统（Submit to scoring）的任务，该任务完成后通过事件网关（eventBasedGateway）进行分支，一部分流程到达延迟事件（Delay），另一部分流程到达评分接收事件（Scoring received）。评分接收事件触发提交给前端的任务（Submit to frontend），此任务完成后通知评分系统（Inform Scoring to frontend）。
+
+同时，信用保护机构（Scoring (Credit Protection Agency)）发起“评分请求”（Scoring request）的开始事件，经过一系列任务和网关的流转，包括不同级别的评分任务（如 Level 1 scoring、Level 2 scoring）以及相关的判断和消息传递，最终完成“评分提交”（Scoring submitted）的结束事件。整个流程中存在多个中间捕获事件（intermediateCatchEvent）和中间抛出事件（intermediateThrowEvent），用于在流程中进行消息的传递和等待特定事件的发生。

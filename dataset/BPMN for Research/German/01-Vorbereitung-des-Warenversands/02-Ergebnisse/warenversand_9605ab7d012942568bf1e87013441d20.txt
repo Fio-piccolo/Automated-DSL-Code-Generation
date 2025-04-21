@@ -1,0 +1,57 @@
+业务需求如下：
+
+### 整体流程概述
+这是一个涉及多个角色的业务流程，主要处理与货物运输相关的一系列任务，包括填写包裹单、获取报价、准备货物、签订保险、确认订单等操作，最终完成订单或因某些条件导致没有订单。
+
+### 流程详细步骤
+1. **流程启动**
+    - **开始事件（sid - 14FD41F8 - 81AD - 42D3 - 95F6 - 3ED5AC0A9079）**：流程从“Start”开始，然后通过序列流（sid - A50D4270 - 3A94 - 4248 - 9E92 - C88409F150FD）流向排他网关（sid - F7C13785 - 52C8 - 4C85 - A422 - AD707AEAC165）。
+2. **根据货物量的不同路径**
+    - **排他网关（sid - F7C13785 - 52C8 - 4C85 - A422 - AD707AEAC165）**：根据货物量判断走不同路径。
+        - **货物量少（wenig）的情况**
+            - 通过序列流（sid - B1918AF3 - CB6F - 4123 - B81A - 1545498D1933）流向任务“Paketschein ausfüllen（sid - 320A2CA7 - 4C92 - 4683 - B2C8 - A0C82B8D81B5）”，即填写包裹单。
+            - 填写包裹单完成后，通过序列流（sid - 5E62740F - 1743 - 4B1D - A89C - DCF3D01C80E4）流向另一个排他网关（sid - 35F3B91C - 69DD - 41DB - 92F2 - C621E6ECDE3D）。
+        - **货物量多（viel）的情况**
+            - 通过序列流（sid - 362F93ED - 2D81 - 49BF - B6E5 - 34470396DB1B）流向任务“Angebote anfordern（sid - 5F804864 - 9983 - 415E - 85F5 - FE6691360BD0）”，即获取报价。
+3. **获取报价后的分支**
+    - **任务“Angebote anfordern（sid - 5F804864 - 9983 - 415E - 85F5 - FE6691360BD0）”**：该任务完成后有多个输出的序列流。
+        - 通过序列流（sid - 183DD37B - 8598 - 47B6 - 816D - 9BD09BDE82D9）流向任务“Angebot schreiben（sid - D000C344 - 8CBF - 4D1D - 894D - F7A2E815E6D4）”（由Spediteur 1完成），即编写报价。
+        - 通过序列流（sid - 66F5A956 - 2B47 - 4865 - 8E87 - F5554E6B13B5）流向任务“Angebot schreiben（sid - 798DF303 - FD87 - 4F25 - AB36 - 5A56483914B3）”（由Spediteur 2完成），即编写报价。
+        - 通过序列流（sid - 716AE4C5 - 7143 - 462A - 8529 - E80CFFA34AAC）流向任务“Angebot schreiben（sid - 2350F2BF - 69AB - 4AD2 - 89A0 - 0B8E375483B4）”（由Spediteur 3完成），即编写报价。
+        - 通过序列流（sid - BF63D508 - 99DE - 48F1 - 9E7B - A42F11E8486E）流向排他网关（sid - CEA2EA2E - A25B - 4046 - 8E8D - 570A31529F02）。
+4. **保险相关决策**
+    - **排他网关（sid - 35F3B91C - 69DD - 41DB - 92F2 - C621E6ECDE3D）**：判断是否需要保险。
+        - **需要保险（ja）的情况**
+            - 通过序列流（sid - 5CF2EC9F - F476 - 443F - 8563 - 62C73EAD061A）流向任务“Versicherung abschließen（sid - 916AA35F - 6B7B - 49F7 - B53F - 2808B8FE04B2）”，即签订保险，由Logistikleiter完成。
+            - 签订保险完成后，通过序列流（sid - 4B4CDDEE - 1ACC - 4F5C - 876B - D18334443EAB）流向任务“Ware mit Etikett des Spediteurs versehen（sid - 0D3CE88F - 31A0 - 4F86 - A425 - 15C237346B24）”，即给货物贴上运输商的标签，由Lagerarbeiter完成。
+        - **不需要保险（nein）的情况**
+            - 通过序列流（sid - ED4D19F0 - 486F - 40AD - B005 - 4286964906D0）也流向任务“Ware mit Etikett des Spediteurs versehen（sid - 0D3CE88F - 31A0 - 4F86 - A425 - 15C237346B24）”。
+5. **选择报价**
+    - **排他网关（sid - CEA2EA2E - A25B - 4046 - 8E8D - 570A31529F02）**：进行报价选择，综合多个输入的序列流（包括来自不同运输商编写报价后的序列流等）。
+        - 通过序列流（sid - E3A10602 - 4884 - 4FCD - 9997 - 75840BE24C45）流向结束事件（sid - 989FACB5 - CCC4 - 49FB - 9898 - EF9214772AB0），表示没有订单（可能是报价选择后不符合条件等情况）。
+        - 通过序列流（sid - 2B13F7C9 - E5BA - 45E8 - 883A - 778FB3FBB79D）进行后续操作（具体未明确，但可能是继续处理有订单的情况）。
+6. **货物准备与运输相关操作**
+    - **任务“Ware mit Etikett des Spediteurs versehen（sid - 0D3CE88F - 31A0 - 4F86 - A425 - 15C237346B24）”**：完成后通过序列流（sid - 29931324 - D9B7 - 4AB0 - B78F - 8532A7FF2865）流向任务“Ware bereitstellen（sid - E5BE8890 - F299 - 46A7 - A556 - 0B73E5197A46）”，即准备货物，由Lagerarbeiter完成。
+    - **任务“Ware bereitstellen（sid - E5BE8890 - F299 - 46A7 - A556 - 0B73E5197A46）”**：完成后通过序列流（sid - 6E5B3FCD - 8466 - 4289 - 91E5 - 73A45200F5ED）流向任务“Auftrag abholen（sid - B38AC20C - 71CE - 4BCF - B93C - ED1A9A00E0DA）”，即提取订单，由Spediteur 1完成。
+    - **任务“Angebot schreiben（sid - D000C344 - 8CBF - 4D1D - 894D - F7A2E815E6D4）”**：完成后通过序列流（sid - 430E85ED - 46E2 - 4D64 - 9CE5 - C08D5ACE8DAA）流向排他网关（sid - CEA2EA2E - A25B - 4046 - 8E8D - 570A31529F02）。
+    - **任务“Auftrag bestätigen（sid - FA01C665 - ED04 - 4C88 - 8F39 - 586E374FFA29）”**：有输入序列流（具体未明确来源，但可能是与订单确认相关的前置操作），完成后有两个输出序列流。
+        - 通过序列流（sid - 044058D7 - 6826 - 4AB7 - 83A9 - 1DC56EA07DD5）流向任务“Auftrag abholen（sid - B38AC20C - 71CE - 4BCF - B93C - ED1A9A00E0DA）”。
+        - 通过序列流（sid - 156E729E - A3C9 - 40CD - 8376 - D0A009FB6003）流向任务“Ware mit Etikett des Spediteurs versehen（sid - 0D3CE88F - 31A0 - 4F86 - A425 - 15C237346B24）”。
+7. **流程结束**
+    - **结束事件（sid - 44105F6E - D3F7 - 4349 - A092 - 09BD50AFD441）**：通过任务“Auftrag abholen（sid - B38AC20C - 71CE - 4BCF - B93C - ED1A9A00E0DA）”完成后，通过序列流（sid - 015BEB25 - B3F1 - 4CF7 - A98B - 8E6B404376A2）到达结束事件“Ende”，表示整个流程成功结束。
+    - **结束事件（sid - DB2847AC - 5873 - 48F3 - 89E2 - EFCE43023394和sid - 989FACB5 - CCC4 - 49FB - 9898 - EF9214772AB0）**：分别表示没有订单的不同结束情况。
+
+
+### 涉及角色及任务分配
+1. **Sekretariat（秘书）**
+    - 负责填写包裹单（Paketschein ausfüllen）等任务。
+2. **Lagerarbeiter（仓库工人）**
+    - 负责给货物贴上运输商的标签（Ware mit Etikett des Spediteurs versehen）和准备货物（Ware bereitstellen）等任务。
+3. **Spediteur 1（运输商1）**
+    - 负责编写报价（Angebot schreiben）、确认订单（Auftrag bestätigen）、提取订单（Auftrag abholen）等任务。
+4. **Logistikleiter（物流主管）**
+    - 负责签订保险（Versicherung abschließen）等任务。
+5. **Spediteur 3（运输商3）**
+    - 负责编写报价（Angebot schreiben）等任务。
+6. **Spediteur 2（运输商2）**
+    - 负责编写报价（Angebot schreiben）等任务。

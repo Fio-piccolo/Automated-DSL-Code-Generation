@@ -1,0 +1,1 @@
+业务需求如下：流程从开始事件开始，首先进行“Ware vorhanden und soll versendet werden”任务，完成后进入并行网关，分为三条路径。一条路径是进行“Ware wird verpackt”任务，然后进入另一个并行网关；另一条路径是进行“Sekreteriat prüft die Ware”任务，之后进入排他网关“Ist Sonderversand nötig? Menge?”。在该排他网关处，如果选择“ja”，则进行“Sonderversand”任务，否则进行“Standardversand”任务。在并行网关处，相关任务完成后会汇聚到后续的流程节点，依次经过各种任务和排他网关等，最终到达结束事件。整个流程包含了对货物的各种处理操作以及不同情况下的决策路径。

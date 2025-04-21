@@ -1,0 +1,1 @@
+该业务流程从“Ware zum Versand”事件开始，首先确定发货数量，然后通过排他网关根据某种条件进行分支。若条件满足“klein”，则执行“Versand per Post”任务；否则，进入并行网关，并行执行获取三个报价（“Angebot 1 einholen”、“Angebot 3 einholen”、“Angebot 3 einholen”）的任务。之后，通过并行汇聚网关将三个报价汇聚，再从中选择一个报价，最后委托货代发货，完成整个业务流程。

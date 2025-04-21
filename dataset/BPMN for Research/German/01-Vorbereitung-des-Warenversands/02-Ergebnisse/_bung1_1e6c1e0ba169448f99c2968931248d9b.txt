@@ -1,0 +1,7 @@
+该BPMN流程主要描述了货物运输的业务流程，涉及秘书处、仓库工人和物流主管三个角色，具体业务逻辑如下：
+1. **流程启动**：以“Warenversand nötig（需要货物运输）”这一事件作为起始点，开启整个业务流程。
+2. **获取报价**：流程启动后进入“Angebote einholen（获取报价）”任务，由秘书处负责执行。
+3. **运输方式决策**：完成报价获取后，流程来到一个排他网关。根据不同条件，可能走向“Paketschein ausfüllen（填写包裹单）”任务（对应“Postversand（邮政运输）”路径），也可能回到“Angebote einholen（获取报价）”任务（对应“Sonderversand（特殊运输）”路径）。
+4. **选择报价与并行任务开启**：若选择了“Paketschein ausfüllen（填写包裹单）”，完成该任务后进入“Angebot auswählen（选择报价）”任务。之后通过并行网关，同时开启“Ware verpacken（包装货物）”和“Spediteur beauftragen（委托运输商）”两个并行任务，其中“Ware verpacken（包装货物）”由仓库工人负责，“Spediteur beauftragen（委托运输商）”由秘书处负责。 
+5. **货物准备与汇合**：仓库工人在完成“Ware verpacken（包装货物）”任务后，执行“Ware bereitstellen（准备货物）”任务。之后经过一个并行网关，在此处“Ware bereitstellen（准备货物）”任务的输出与“Spediteur beauftragen（委托运输商）”任务的输出进行汇合。 
+6. **保险决策与流程结束**：汇合后流程进入一个排他网关，根据是否需要保险进行分支。若不需要保险（“Versichung unnötig”路径），则流程直接走向结束事件“Ware bereitgestellt（货物已准备好）”；若需要保险（“Versicherung nötig”路径），则进入“Versicherung abschließen（完成保险）”任务，该任务由物流主管负责，完成此任务后最终到达结束事件“Ware bereitgestellt（货物已准备好）” 。

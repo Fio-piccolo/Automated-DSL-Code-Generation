@@ -1,0 +1,9 @@
+1. 流程开始于一个起始事件。
+2. 起始事件后，进入“Prüfen ob Sonderversand”任务，检查是否为特殊运输。
+3. 根据“Prüfen ob Sonderversand”任务的结果，通过排他网关进行分支。
+4. 如果不是特殊运输，进入“Paketschein ausfüllen”任务，填写包裹单。
+5. 之后进入“Prüfung, ob Versicherung erforderlich”任务，检查是否需要保险。
+6. 根据“Prüfung, ob Versicherung erforderlich”任务的结果，再次通过排他网关进行分支。
+7. 如果需要保险，进入“Versicherung abschließen”任务，完成保险手续。
+8. 最后可能会有一个中间抛出事件。
+9. 整个流程属于“Versandabteilung”（运输部门），该部门下分为“Spetiteur1”、“Sekretariat”（秘书处）、“Spediteur 2”、“Spediteur 3”、“Logistikleiter”（物流主管）等工作区域，其中“Spetiteur1”负责一个未命名任务，“Sekretariat”负责多个任务，“Logistikleiter”负责“Versicherung abschließen”任务。

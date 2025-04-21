@@ -1,0 +1,5 @@
+业务流程从“Subrogated case raised”开始事件触发，随后进入“Review information”任务节点进行信息审核。接着进入“recourse possible?”排他网关，根据判断结果分为两条路径：如果可能进行追偿，进入“Get Information”任务节点获取信息，然后回到“recourse possible?”排他网关；如果不可能进行追偿，进入“Close case”任务节点关闭案件，最终流程结束于“case closed - recourse not possible”结束事件。
+
+在可能进行追偿的路径中，若收到钱则进入“Make booking”任务节点进行预订，之后进入“case closed successfully”结束事件；若保险方不同意，则进入“Check reasoning”任务节点检查理由，然后进入“Is insurant correct?”排他网关，根据判断结果再次分为两条路径：如果保险方正确，进入“Send to collection agency”任务节点发送给催收机构，最终流程结束于“case still open”结束事件；如果保险方不正确，回到“Is insurant correct?”排他网关的另一个出口，同样进入“Send to collection agency”任务节点发送给催收机构，最终流程结束于“case still open”结束事件。
+
+在整个流程中，存在一些中间捕获事件，如“receive money”“insurant disagrees”等，用于在特定条件下触发相应的后续流程。同时，还有一些定时事件，如“set reminder”等，用于设置提醒等操作。整个流程由多个任务节点和网关组成，通过序列流连接，按照一定的顺序执行。

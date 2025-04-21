@@ -1,0 +1,13 @@
+该业务流程主要围绕物品发送展开，涉及多个角色和任务。具体如下：
+1. **开始**：流程从“Artikel zu versenden”（发送物品）的开始事件启动。
+2. **包装任务**：“Lagerarbeiter”（仓库工人）负责“Ware verpacken”（包装货物）。
+3. **提供货物任务**：“Lagerarbeiter”还需执行“Ware zur Abholung bereitstellen”（准备好货物以供取货）。
+4. **保险任务**：“Logistikleiter”（物流主管）进行“Versicherung abschließen”（办理保险）。
+5. **特殊发货判断**：进入“ExclusiveGateway”（排他网关）“Sonderversand?”（特殊发货？），根据条件分支。
+    - 若选择“ja”（是），“Lagerarbeiter”要“3 Angebote einholen”（获取3个报价）。
+    - 若选择“nein”（否），进入后续流程。
+6. **填写包裹单任务**：相关人员进行“Paketschein ausfüllen”（填写包裹单）。
+7. **委托运输商任务**：“Spediteur beauftragen”（委托运输商）。
+8. **确定运输方式任务**：进行“Versandart klären”（确定运输方式）。
+9. **汇聚**：通过“ParallelGateway”（并行网关）和“ExclusiveGateway”（排他网关）汇聚流程。
+10. **结束**：流程以“结束事件”告终。

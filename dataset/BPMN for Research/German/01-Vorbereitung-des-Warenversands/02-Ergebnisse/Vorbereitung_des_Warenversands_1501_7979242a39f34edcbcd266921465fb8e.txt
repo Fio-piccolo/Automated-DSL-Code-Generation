@@ -1,0 +1,10 @@
+该业务流程主要围绕货物发货展开，具体包括确定发货地点后，依据货物数量进行不同操作，如数量大则进行特殊发货，数量小则进行邮政发货。之后需完成一系列任务，包括填写包裹单、获取三个报价、选择并委托货运商、决定是否购买保险，最后准备好货物待取，实现货物发货准备就绪。
+1. 流程始于“Ware soll versendet werden”（货物应被发送）的开始事件。
+2. 进入“Menge klären”（澄清数量）的排他网关，根据数量进行分流：
+    - 若数量大，通过“Große Menge”（大量）的顺序流，触发“Sonderversand”（特殊发货）的中间抛出事件，然后进入“3 Angebote einholen”（获取三个报价）的任务。
+    - 若数量小，通过“Kleine Menge”（少量）的顺序流，触发“Postversand”（邮政发货）的中间抛出事件，接着进入“Paketschein ausfüllen”（填写包裹单）的任务。
+3. “Paketschein ausfüllen”（填写包裹单）任务完成后，进入“Versicherung abschließen”（购买保险）任务，之后经过“Versicherung erforderlich?”（需要保险吗？）的排他网关：
+    - 若不需要保险，通过“Nein”（否）的顺序流，流程继续。
+    - 若需要保险，通过“Ja”（是）的顺序流，进入“Versicherung abschließen”（购买保险）任务。
+4. “3 Angebote einholen”（获取三个报价）任务完成后，进入“Spediteur auswählen und beauftragen”（选择并委托货运商）任务，该任务完成后，流程继续。
+5. 之后进入“Ware verpacken”（包装货物）任务，完成后进入“Ware zur Abholung bereitstellen”（准备好货物待取）任务，最终到达“Ware versandbereit”（货物发货准备就绪）的结束事件。

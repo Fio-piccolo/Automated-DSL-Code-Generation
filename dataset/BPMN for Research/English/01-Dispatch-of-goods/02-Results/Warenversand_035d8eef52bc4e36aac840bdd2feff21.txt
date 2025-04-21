@@ -1,0 +1,1 @@
+流程从开始事件启动，首先进行“Check Order”任务。然后通过排他网关根据条件判断。若条件为“no”，则进行“Order Production”任务；若条件为“yes”，则进行“Inform Warehouse”任务。“Order Production”任务完成后通过并行网关分成两条路径，一条路径进行“Adjust PR”任务，另一条路径通过排他网关与“Inform Warehouse”任务的输出汇合后进行“Settle Insurance”任务。“Adjust PR”任务和“Settle Insurance”任务完成后通过包容网关汇合，然后进行“Ship Order”任务，最后流程结束。

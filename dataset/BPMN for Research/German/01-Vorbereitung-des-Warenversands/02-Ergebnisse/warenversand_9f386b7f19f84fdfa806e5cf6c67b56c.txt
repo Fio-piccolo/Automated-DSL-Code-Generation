@@ -1,0 +1,6 @@
+业务需求如下：整个业务流程围绕“Firma”展开，涉及多个不同角色所在的车道（lane）协同完成一系列任务操作，具体如下：
+首先从“Sekretariat”车道的起始事件开始，接着在“Bestellmenge prüfen”任务中检查订单数量，完成后根据条件在“exclusiveGateway”处进行分流。
+若满足某条件会进入“Paketschein”任务生成包裹单，之后进入“Angebote einholen /anfragen”任务获取报价或进行询问；若不满足则走另一条分支（此处未明确另一条分支后续详细情况）。
+获取报价询问后进入“parallelGateway”进行并行分流，多条分支分别触发不同车道的任务，如“Spedition”车道的“Anbieten”任务、“Sped 2”车道的“Anbieten”任务、“Sped 3”车道的“Anbieten”任务以及其他后续相关任务等，这些任务完成后会在另一个“parallelGateway”处汇聚。
+汇聚后进入“Auswählen beauftragen”任务进行相关委托操作，完成后又在一个“exclusiveGateway”处再次分流，分别进入不同车道的“Auftrag annehmen und abholen”任务以及后续其他任务，如“Packen”“Versenden”等任务。
+期间还有一些任务如“Prüfen”用于检查，在其之后也会根据条件在“exclusiveGateway”处分流，经过如“Versichern”等任务后，再通过“inclusiveGateway”进行汇聚，最终走向结束事件完成整个业务流程。各任务之间通过不同的“sequenceFlow”进行流转衔接，确保业务按流程顺序推进。

@@ -1,0 +1,25 @@
+该业务流程主要围绕货物运输展开，涵盖了从货物准备到交付的一系列环节，涉及多个角色协同工作，确保货物安全、准确、及时地送达目的地。具体流程如下：
+1. **货物准备**：以“Ware zum Versand”作为起始事件，表示有货物准备进行运输。
+2. **任务分配**：
+    - 起始事件连接至“parallelGateway”，该网关会同时向三个方向发散。
+    - 其中一条路径指向名为“Wer übernimmt Versand”的任务，此任务由“Sekretariat”角色负责，旨在确定由谁来承担运输任务。
+    - 另一条路径指向一个未命名的任务，该任务完成数量为1，起始数量也为1。
+    - 还有一条路径指向“Ware verpacken”任务，由“Lagerarbeiter”角色执行，负责对货物进行包装。
+3. **运输安排**：
+    - “Wer übernimmt Versand”任务完成后，连接至“exclusiveGateway”。
+    - 若货物数量少（“kleine Menge”），则流程进入“Paketschein ausfüllen”任务，可能是填写包裹单据等操作。
+    - 若货物数量多（“große Menge”），则会执行“Angebot einholen”任务，即获取报价。
+    - 获取报价后，进入“parallelGateway”，此网关再次向三个方向发散。
+    - 一条路径指向“Spediteur 1”任务，由其负责运输相关事宜。
+    - 一条路径指向“Spediteur 2”任务。
+    - 还有一条路径指向“Spediteur 3”任务。
+4. **并行处理**：三个“Spediteur”任务完成后，分别连接至“parallelGateway”进行汇聚。
+5. **后续操作**：
+    - 汇聚后的流程连接至“einen Spediteur beauftragen”任务，可能是指定某个快递员进行运输。
+    - 该任务完成后，进入“Paketschein ausfüllen”任务。
+    - 之后再次进入“exclusiveGateway”。
+    - 若选择“mit Versicherung”（有保险），则进入“Versicherung abschliessen”任务，由“Logistikleiter”角色完成保险相关操作，完成后连接至“Versicherung abgeschlossen”，表示保险已完成。
+    - 若选择“ohne Versicherung”（无保险），则直接进入“Versicherung abgeschlossen”。
+6. **最终交付**：
+    - “Versicherung abgeschlossen”连接至“Ware zur Abholung bereitstellen”任务，由“Lagerarbeiter”角色将货物准备好以供取货。
+    - 此任务完成后，通过“Start Warenversand”结束事件，标志着货物运输流程的完成。

@@ -1,0 +1,8 @@
+货物配送流程：
+1. 流程从“Start”开始。
+2. 秘书执行“Define Volume Amounts”任务。
+3. 经过并行网关，流程分为两支：一支是秘书执行“Logistic Company selection”任务（若金额大，选择物流公司）或“Use normal post shipment”任务（若金额小，使用普通邮寄），然后通过汇聚网关到“prepare for pickup”任务；另一支是仓库管理员执行“Package the goods”任务，然后通过汇聚网关到“Write package label”任务。
+4. 执行“Write package label”任务后，进入“Insurance required?”网关判断。若不需要保险，直接到汇聚网关；若需要保险，物流部门主管执行“take parcel insurance”任务，然后到汇聚网关。
+5. 汇聚后，秘书执行“prepare for pickup”任务。
+6. 物流运输公司执行“Pick up goods”任务。
+7. 流程结束于“End”。

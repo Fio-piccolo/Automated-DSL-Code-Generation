@@ -1,0 +1,12 @@
+该业务流程主要围绕公司员工处理货物发运展开，涵盖了从确认待发货货物开始，到完成货物包装并准备好取货的一系列环节，涉及与不同角色的交互以及多种任务的执行与决策。具体如下：
+1. **开始阶段**：以“Ware zu versenden”（待发货）事件作为起点，启动整个业务流程。
+2. **秘书相关任务**
+    - 秘书首先执行“Versandmenge klären (Se)”（确认发货量）任务。
+    - 之后进入“Sonderversand?”（特殊发货？）的判断环节。若判断结果为否，则流程流转至“25C8E2CF-DEDB-4991-A370-D3A5B5D1073F”节点；若为是，则流程走向“6DA9D9AF-E3CE-4486-B6C8-6F6B7FC2733D”节点。
+3. **多角色并行任务**
+    - **秘书任务并行**：在“7B4CFBDB-937F-45EC-AB07-2BE5739DA791”节点，流程并行分两路。一路由秘书负责，包括向三家货运商获取报价，即依次执行“Angebot einholen Spediteur 1 (Se)”（向货运商1获取报价）、“Angebot einholen Spediteur 2 (Se)”（向货运商2获取报价）、“Angebot einholen Spediteur 3 (Se)”（向货运商3获取报价）这三个任务；之后秘书进行报价选择与委托，执行“Angebot auswählen und beauftragen (Se)”（选择并委托报价）任务。
+    - **其他角色任务并行**：另一路由其他角色负责。“Lagerleiter”（仓库主管）进行“Versicherung abschließen (LL)”（购买保险）操作，之后进行“Versicherung notwendig?”（是否需要保险？）的判断。若判断为是，则购买保险后流程继续；若为否，则直接继续流程。“Lagerarbeiter”（仓库工人）负责“Ware verpacken (LA)”（包装货物）、“Ware zur Abholung bereitstellen (LA)”（准备货物以便取货）任务；同时还有“Kaffeepause”（咖啡休息）和“Skat spielen mit Kollegen”（与同事玩纸牌）的活动。
+4. **后续流程**
+    - 完成相关操作后，进行标准化包裹单填写，即执行“standardisierten Paketschein ausfüllen (Se)”任务。
+    - 之后会有10分钟的咖啡休息时间（“Kaffeepause 10 min”）。
+    - 完成这些步骤后，流程进入后续环节，最终以“Ware abholbereit”（货物准备好取货）事件结束整个业务流程。

@@ -1,0 +1,3 @@
+The requirement is as follows:
+
+In the context of "MandateRelatedInformation1", for the Original Debtor Accounts in mandate related information amendment details (amdmntInfDtls OrgnldbtrAcct Id), only International Bank Account Number (IBAN) is allowed. This means, any details associated with BBAN, proprietary account, universal payment identification code (uPIC), type of account (tp), currency of the account (ccy), and name of the account (nm) should either be undefined or if they are defined, their size should be 0, meaning they should not carry any information.

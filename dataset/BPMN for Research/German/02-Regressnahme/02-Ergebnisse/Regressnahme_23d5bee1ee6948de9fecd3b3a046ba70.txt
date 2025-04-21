@@ -1,0 +1,17 @@
+业务需求如下：
+1. 以“Regressmeldung”（回归报告）作为开始事件。
+2. 开始事件后进入“Prüfung”（审核）任务，该任务完成数量为1，开始数量为1。
+3. “Prüfung”任务完成后进入“Ja/Nein”（是/否）排他网关。
+4. 若排他网关选择“是”的路径，则进入“Rechnung versenden”（发送账单）任务，完成数量为1，开始数量为1；若选择“否”的路径，则进入“Zahlungsfrist >30Tage”（付款期限>30天）中间捕获事件。
+5. “Zahlungsfrist >30Tage”中间捕获事件有一个定时器事件定义，触发后进入“mahnen”（提醒）任务，完成数量为1，开始数量为1。
+6. “Rechnung versenden”任务完成后进入“Zahlungseingang”（付款收到）中间捕获事件。
+7. “Zahlungseingang”中间捕获事件后进入“verbuchen”（记账）任务，完成数量为1，开始数量为1。
+8. “mahnen”任务完成后进入“Zahlungsfrist >10”（付款期限>10天）中间捕获事件，该事件有一个定时器事件定义，触发后进入结束事件。
+9. “verbuchen”任务完成后进入结束事件。
+10. “Zahlungseingang”中间捕获事件还可能进入“Wiederspruch prüfen”（异议检查）任务，完成数量为1，开始数量为1。
+11. “Wiederspruch prüfen”任务完成后进入事件基于网关，该网关有四条路径，分别进入“Zahlungsfrist >30Tage”中间捕获事件、“Zahlungseingang”中间捕获事件、另一个未明确标识的中间捕获事件以及“Zahlungsfrist >10”中间捕获事件。
+12. 另外，有一个名为“VN”的流程，以“Empfang Rechung”（收到账单）作为开始事件。
+13. 开始事件后进入“Rechnung prüfung”（账单审核）任务，完成数量为1，开始数量为1。
+14. “Rechnung prüfung”任务完成后进入“Einspruch?”（有异议？）排他网关。
+15. 若排他网关选择其中一条路径，则进入“zahlen”（付款）任务；若选择另一条路径，则进入“Wiederspruch ”（异议）任务。
+16. “zahlen”任务完成后没有后续流程，“Wiederspruch ”任务完成后也没有后续流程。

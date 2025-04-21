@@ -1,0 +1,1 @@
+业务流程从“Start”开始，之后通过一个并行网关进行分支。一路流程是检查是否需要提供小批量货物配送，如果需要则执行相关操作，如“Logistikleiter: Versicherung abschliessen”任务，然后执行“Paketschein ausfüllen und Postversand beauftragen”任务，最后由“Versand durch Post”完成后流程结束；另一路流程是执行“Spediteur gibt Angebot ab”任务，接着“Sekretariat”接收报价并将订单交给“Versand durch Spediteur”，之后流程结束。如果不需要提供小批量货物配送，则直接执行“Paketschein ausfüllen und Postversand beauftragen”任务，后续流程相同。

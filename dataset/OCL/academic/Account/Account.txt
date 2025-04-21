@@ -1,0 +1,3 @@
+The requirements are as follows:
+
+The "debit" operation needs to be performed on an "Account". The "debit" operation takes in one input, namely the "amount", which is a floating point number. There is a constraint on "amount", which specifies that "amount" has to be greater than 0. After the execution of the "debit" operation, the "balance" of the account is expected to be equal to the original "balance" (before the execution of the "debit" operation) subtracted by the "amount".

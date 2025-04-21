@@ -1,0 +1,1 @@
+The requirement is as follows: In the context of PaymentInstructionInformation2, if the ChargesAccountAgent (chrgsAcctAgt) is present (or, its size is greater than 0), then the ChargesAccount (chrgsAcct) must also be present (or, its size must be greater than 0), as per the reference p.86 of the Payments_Standards-Initiation_updated.pdf document.

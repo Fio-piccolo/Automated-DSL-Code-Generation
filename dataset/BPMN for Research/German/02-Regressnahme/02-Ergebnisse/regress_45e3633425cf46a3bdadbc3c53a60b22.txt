@@ -1,0 +1,5 @@
+业务需求如下：该流程为“Regressnahme”（退回）流程。首先通过一个开始事件启动流程，接着执行“Vorgang prüfen”（检查流程）任务。之后进入“Regressnahme?”（是否退回？）的排他网关进行判断，如果选择“Ja”（是），则执行“Zahlungsaufforderung schicken”（发送付款请求）任务；如果选择“Nein”（否），则直接进入“Vorgang schliessen”（结束流程）的结束事件。
+
+同时，还有另外几个相关流程。一个开始事件启动后有多个分支，分别执行“Zahlungseingang”（收款）、“Widerspurch von VN”（来自VN的异议）、“Widerspruch prüfen”（检查异议）任务，之后进入“Widerspruch korrekt?”（异议是否正确？）的排他网关判断。若选择“Ja”（是），进入结束事件；若选择“Nein”（否），则执行“Inkasso einschalten”（启动托收）任务。
+
+另外，“Wiedervorlage - Frist”（重新提交 - 期限）的开始事件启动后，执行“Zahlungseingang prüfen”（检查收款）任务。整个流程通过不同的任务和网关节点，根据不同条件进行流转，最终完成相应业务操作。

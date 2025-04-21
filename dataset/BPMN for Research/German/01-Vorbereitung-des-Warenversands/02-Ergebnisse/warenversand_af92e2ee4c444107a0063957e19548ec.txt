@@ -1,0 +1,2 @@
+业务需求如下：
+公司 Firma XY 内部有多个参与者，包括 Spediteure（发货员）、Sekretariat（秘书处）、Lagerarbeiter（仓库工人）和 Lagerleiter（仓库主管）。流程从开始事件开始，首先外部获取报价（externe Angebote einholen），然后选择（auswählen），根据选择的结果进行不同的分支流程。如果选择大量（große Menge），则进行后续的相关任务，如委托发货员（Spediteuer beauftragen）、填写包裹单（Paketschein ausfüllen）等；如果选择其他情况，则进行其他相关任务。在流程中，各个任务之间通过顺序流（sequenceFlow）进行连接，并且有多个排他网关（exclusiveGateway）用于决定流程的分支方向，最终到达结束事件。整个流程涉及到多个部门和任务的协同工作，以完成公司的相关业务。

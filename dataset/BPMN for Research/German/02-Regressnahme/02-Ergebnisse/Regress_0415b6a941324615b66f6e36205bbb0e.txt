@@ -1,0 +1,1 @@
+业务需求如下：这是一个名为“Recourse Process”的业务流程，涉及收款、支付、案件处理等环节。首先是“Receive Case”事件开启流程，接着进入“Collect Money”任务进行收款。收款后可能会遇到多种情况，如“Payment Received”“Insurance disagree”“14 days”等事件。若收到款项，会进行相关处理并可能进入“Booking and Close case”任务，最终流程结束于“End”事件。若出现保险不同意或其他特定情况，会经过一系列判断和处理流程，如检查推理、判断被保险人权利等，期间可能会发送支付请求、转发给收款代理等操作，整个流程通过BPMN图详细定义了各个环节的顺序和条件分支。

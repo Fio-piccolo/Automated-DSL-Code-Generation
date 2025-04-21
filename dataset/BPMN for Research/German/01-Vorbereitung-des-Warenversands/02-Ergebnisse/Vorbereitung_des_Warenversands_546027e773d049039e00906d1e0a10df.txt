@@ -1,0 +1,23 @@
+该业务流程是关于货物发送的流程，详细描述了从货物待发送开始，经过确定运输方式、获取运输报价、选择运输商、委托运输商、完成包装、准备交付、选择交付方式到最终货物发送的一系列步骤。
+
+1. **开始**：流程始于“Ware zu versenden”（货物待发送）事件。
+2. **确定运输方式**：通过“Klärung der Versandart”（确定运输方式）任务，明确货物的运输方式。
+3. **分支决策**：进入“exclusiveGateway”（排他网关），根据条件判断运输方式，可能分为特殊运输（“Sonderversand”）和邮政运输（“Postversand”）。
+4. **特殊运输流程**：
+    - 若选择特殊运输，执行“Drei Speditionsangebote einholen”（获取三个运输报价）任务，获取相关报价。
+    - 触发“Spediteur ausgewählt”（运输商已选择）中间抛出事件。
+    - 接着执行“Spediteur beauftragen”（委托运输商）任务，委托选定的运输商。
+5. **邮政运输流程**：
+    - 若选择邮政运输，执行“Paketschein ausfüllen”（填写包裹单）任务。
+    - 再次进入“exclusiveGateway”（排他网关），根据条件判断是否购买保险。
+    - 若不购买保险，直接进入后续流程；若购买保险，执行“Versicherung abschliessen”（完成保险）任务。
+6. **并行处理**：
+    - 在主流程中，货物首先进行包装，即执行“Ware verpacken”（包装货物）任务。
+    - 同时，可能并行执行其他相关任务，如准备交付等。
+7. **后续处理**：
+    - 完成包装后，货物准备好交付，执行“Zur Abholung bereitstellen”（准备好取件）任务。
+    - 进入“exclusiveGateway”（排他网关），根据条件判断交付方式，可能是交给运输商或交给邮局。
+    - 若交给运输商，执行“An Spediteur übergeben”（交给运输商）任务；若交给邮局，执行“An Post übergeben”（交给邮局）任务。
+8. **流程汇合**：
+    - 完成保险（若有）和交付任务后，流程在不同的“exclusiveGateway”（排他网关）汇合。
+    - 最终，流程到达“Ware versendet”（货物已发送）结束事件，标志着货物发送流程完成。

@@ -1,0 +1,1 @@
+The requirement is as follows: In the context of the Pain00800101 object, if the Grouping element under GroupHeader is present and its value equals 'GRPD', then there must be exactly one occurrence of the PaymentInformation element. This rule is referenced on page 79 of the Payments_Standards-Initiation_updated.pdf document.

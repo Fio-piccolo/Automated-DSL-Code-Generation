@@ -1,0 +1,12 @@
+1. 流程开始于“Fa. Computerhandell”公司的流程，由“Sekretariat”（秘书处）的“startEvent”（开始事件）启动。
+2. “Sekretariat”（秘书处）执行“Versandart ermitteln”（确定运输方式）任务。
+3. 任务完成后，通过“parallelGateway”（并行网关）“561F2759-DD98-429E-BF37-1480808107D4”分成两条路径：
+   - 一条路径到“Versandabteilung”（运输部门）的“Ware verpacken”（包装货物）任务。
+   - 另一条路径到“exclusiveGateway”（排他网关）“71983FF1-4F10-4992-837F-132D61386C94”。
+4. 对于“exclusiveGateway”（排他网关）“71983FF1-4F10-4992-837F-132D61386C94”的两条分支：
+   - 一条分支到“Sekretariat”（秘书处）的“Paketschein ausfüllen”（填写包裹单）任务，完成后到“exclusiveGateway”（排他网关）“E471F78A-27A3-487A-A02C-61AF34ED5114”，该网关又有两条分支：
+     - 一条分支直接到“exclusiveGateway”（排他网关）“CCBBFBE7-71C7-4A1B-B7C8-8DF7F3D8DEF8”。
+     - 另一条分支到“Logistikleiter”（物流经理）的“Versicherung abschließen”（办理保险）任务，完成后到“exclusiveGateway”（排他网关）“CCBBFBE7-71C7-4A1B-B7C8-8DF7F3D8DEF8”。
+   - 另一条分支到“Sekretariat”（秘书处）的“Angebot einholen”（获取报价）任务，完成后通过“intermediateThrowEvent”（中间抛出事件）“BAAB00EC-F007-426D-8A1E-34805B38228F”（表示报价已到），然后到“Angebote auswählen”（选择报价）任务，完成后到“exclusiveGateway”（排他网关）“55E4E5F5-973A-4114-91CC-FA51541988FC”。
+5. “exclusiveGateway”（排他网关）“CCBBFBE7-71C7-4A1B-B7C8-8DF7F3D8DEF8”和“55E4E5F5-973A-4114-91CC-FA51541988FC”合并后，通过“E0289C46-568E-4A1B-A92A-662AB478BB5D”连接到“parallelGateway”（并行网关）“F22C5DA6-43E4-4C49-AEB3-6A58D709726B”。
+6. “parallelGateway”（并行网关）“F22C5DA6-43E4-4C49-AEB3-6A58D709726B”合并“Ware verpacken”（包装货物）任务和上述合并后的路径，然后到“Versandabteilung”（运输部门）的“Ware bereitstellen”（准备货物）任务，最后到“endEvent”（结束事件）“Ware versandbereit”（货物准备运输）。

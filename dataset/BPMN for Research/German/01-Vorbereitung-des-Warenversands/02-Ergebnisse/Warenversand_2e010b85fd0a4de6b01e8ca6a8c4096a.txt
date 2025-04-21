@@ -1,0 +1,11 @@
+当收到订单后，流程开始。首先通过一个并行网关进行分流，一路去检查是否需要特殊运输，另一路去检查是否需要保险。如果需要特殊运输，就去询问报价；收到报价后，选择最优报价，然后委托货代。在委托货代的同时，将货物进行包装，并准备货物。货物准备好后，与包装好的货物汇合，再进行发货。如果需要保险，先检查保险需求，若需要则委托保险公司，之后也与其他流程汇合进行发货，最终完成货物发送。具体如下：
+1. 开始：“Bestellung erhalten”（收到订单）。
+2. 并行网关分流：
+    - 一路：检查是否需要特殊运输，若需要则执行“Angebot anfragen”（询问报价）。
+    - 另一路：检查是否需要保险，若需要则执行“Versicherungsbedarf prüfen”（检查保险需求）。
+3. “Angebot anfragen”（询问报价）完成后，执行“günstigstes Angebot auswählen”（选择最优报价），接着执行“Speditor beauftragen”（委托货代）。
+4. 在执行“Speditor beauftragen”（委托货代）的同时，执行“Ware verpacken”（包装货物）和“Ware bereitstellen”（准备货物）。
+5. “Ware verpacken”（包装货物）和“Ware bereitstellen”（准备货物）完成后，通过并行网关汇合。
+6. 若“Versicherungsbedarf prüfen”（检查保险需求）结果为需要保险，则执行“Versicherung beauftragen”（委托保险公司）。
+7. “Versicherung beauftragen”（委托保险公司）完成后，与其他流程汇合。
+8. 所有流程汇合后，执行发货操作，即“Ware versandt”（货物发送），流程结束。

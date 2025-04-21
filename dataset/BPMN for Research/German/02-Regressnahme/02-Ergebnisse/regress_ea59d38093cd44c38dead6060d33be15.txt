@@ -1,0 +1,13 @@
+业务需求如下：
+1. 流程开始于“Regress bearbeiten”事件。
+2. 首先执行“Versicherungungsfall überprüfen ob Regress tatsächlich möglich ist”任务，检查保险案例是否真的可以进行追溯。
+3. 接着通过排他网关进行分支判断：
+   - 如果条件满足（路径名为“Ja”），则执行“Zahlungsaufforderung versenden”任务，发送付款请求。
+   - 如果条件不满足（路径名为“Nein”），则直接进入后续流程。
+4. 当接收到“Zahlungseingang ist gemeldet worden”（付款已收到）的消息时，流程继续。
+5. 同时，流程可能会接收到“Einspruch ist gemeldet worden”（提出异议）的消息，此时需要执行“Einspruch prüfen”任务，检查异议。
+6. 对于异议检查结果，再次通过排他网关进行判断：
+   - 如果异议被认为合理（路径名为“Ja”），则执行“Inkassobüro beauftragen”任务，委托收款办公室。
+   - 如果异议不合理（路径名为“Nein”），则继续后续流程。
+7. 另外，如果在规定时间内未收到“Wiedervorlagefrist abgelaufen”（重新提交期限已过）的消息，则执行“Inkassobüro beauftragen”任务，委托收款办公室。
+8. 流程中各个任务执行完成后，会通过多个排他网关和汇聚网关进行流程的汇聚和判断，最终执行“Vorgang schließen”任务，关闭流程，到达“Regressprüfung und Bearbeitung beendet”结束事件。

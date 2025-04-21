@@ -1,0 +1,7 @@
+硬件经销商的业务流程如下：当“Ware soll versendet werden”（货物需要发货）的起始事件触发后，流程进入“Menge ermitteln”（确定数量）任务，之后进入并行网关“E9F51E98-0758-4A09-B5D8-0195363AB26D”，该并行网关将流程分为两条路径，一条通向“Ware verpacken”（包装货物）任务，另一条通向“Ware zur Abholung bereitstellen”（准备货物供取货）任务。
+
+“Versicherungswert ermitteln”（确定保险价值）任务在“E9F51E98-0758-4A09-B5D8-0195363AB26D”并行网关分支后的其中一路执行，之后进入排他网关“FDBA4A56-E3A6-4981-AC2A-08E4A87707D7”，判断是否需要保险，若为“Ja”（是），则进入“Versicherung abschliessen”（完成保险）任务，再进入另一个排他网关“253575F8-AC89-4917-828A-F02BD7BCA625”进行汇合；若为“Nein”（否），则直接进入“253575F8-AC89-4917-828A-F02BD7BCA625”排他网关。
+
+在并行网关“E9F51E98-0758-4A09-B5D8-0195363AB26D”的另一分支中，进入“Spedition auswählen”（选择运输商）任务，之后进入排他网关“904F5784-81FE-4218-8DA3-CFCC14B4AE3F”，判断是否需要特殊运输，若为“ja”（是），则进入“3 Angebote einholen”（获取3个报价）任务，再进入“Spedition beauftragen”（委托运输商）任务；若为“Nein”（否），则进入“Paketschein ausfüllen”（填写包裹单）任务，之后回到“Versicherungswert ermitteln”（确定保险价值）任务重新循环。
+
+所有任务完成后，通过一系列的并行和排他网关汇合，最终在“Ware ist bereitgestellt”（货物已准备好）的结束事件结束流程。其中“Spedition auswählen”（选择运输商）任务之前还需进行“Sonderversand nötig?”（是否需要特殊运输）判断，“Versicherungswert ermitteln”（确定保险价值）任务之前有“Versicherung nötig?”（是否需要保险）判断。

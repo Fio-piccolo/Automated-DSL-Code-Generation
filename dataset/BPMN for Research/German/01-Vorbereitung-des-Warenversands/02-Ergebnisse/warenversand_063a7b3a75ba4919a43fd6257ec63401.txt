@@ -1,0 +1,1 @@
+业务流程从启动事件开始。首先执行“Bestellung nehmen”（接收订单）任务，之后通过并行网关分成两路。一路执行“Ware verpacken”（包装货物）任务，另一路先执行“Angebote einholen”（获取报价）任务，然后经过一系列决策和选择任务，如选择不同的报价选项（“Angebot1 wählen”“Angebot2 wählen”“Angebot3 wählen”），之后执行“Normalversand”（普通发货）任务，再经过一些流程如生成“Standard Packetschein”（标准包裹单），可能还会涉及购买保险等操作，最后执行“Versenden”（发货）任务，直至结束事件。整个流程中存在多个决策点，根据不同条件会走向不同的任务路径。

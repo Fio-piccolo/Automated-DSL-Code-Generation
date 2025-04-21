@@ -1,0 +1,9 @@
+业务需求如下：
+1. 流程以“Info zum möglichen Regress”事件开始。
+2. 首先执行“Regressnahme prüfen”任务。
+3. 接着通过排他网关进行判断，如果“Regress möglich”，则执行“Zahlungsaufforderung an VN senden”任务。
+4. “Zahlungsaufforderung an VN senden”任务后，进入基于事件的排他网关，可能会有“Widerspruch VN”“Geldeingang”“Widerspruchsfrist abgelaufen”等情况发生。
+5. 当出现“Widerspruch VN”时，执行“Widerspruch prüfen”任务，之后根据判断结果可能执行不同的后续任务。
+6. 若发生“Geldeingang”，则先执行“Geldeingang prüfen”任务，再执行“Geldeingang verbuchen”任务。
+7. 对于“Widerspruchsfrist abgelaufen”，可能执行相关后续任务。
+8. 各任务执行完成后，通过不同的网关汇聚到相应节点，最终执行“Vorgang schließen”任务，流程结束。

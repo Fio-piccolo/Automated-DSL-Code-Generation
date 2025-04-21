@@ -1,0 +1,7 @@
+当收到订单（Bestellung erhalten）后，流程开始。然后通过并行网关（5E3E8060）将流程分为两条路径：一条路径是进行货物包装（Ware verpacken），另一条路径是确定运输方式（Versandart festlegen）。
+
+在货物包装路径中，包装完成后通过并行网关（8C2C3C31）与保险签订（Versicherung abschließen）路径合并，最终到达货物准备好取货（Ware ist zur Abholung bereit）的结束事件。
+
+在确定运输方式路径中，若运输量大（große Menge），则启动特殊运输（Sonderversand einleiten），然后通过并行网关（160E6BE2）生成三个报价（Angebot 1、Angebot 2、Angebot 3），这三个报价通过并行网关（C91DFA03）合并后，选择最便宜的报价（günstigstes Angebot auswählen），然后委托运输商（Spediteur beauftragen），最后通过排他网关（347CC77E）与保险签订路径合并。
+
+若运输量小（kleine Menge），则通过包含网关（78C33A68）决定是否需要保险（Versicherung benötigt），若需要则进行保险签订，然后与填写包裹单（Paketschein ausfüllen）路径通过包含网关（2679789F）合并，最后通过排他网关（347CC77E）与货物包装路径合并。

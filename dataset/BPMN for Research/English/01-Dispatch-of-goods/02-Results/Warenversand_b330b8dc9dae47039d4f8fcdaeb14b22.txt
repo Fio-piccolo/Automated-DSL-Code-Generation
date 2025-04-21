@@ -1,0 +1,1 @@
+流程开始于起始事件，由秘书部门执行“Shipping Clarification”任务。接着进入排他网关，若为特殊运输（特殊运输路径），则执行“Determine logistic co.”任务，之后再进入排他网关，根据不同情况分别执行“choose logistics 1”“choose logistic 2”“choose logistic 3”任务，这些任务的输出通过排他网关和并行网关进行汇聚，然后进入“packaging”任务（仓库人员执行）。若为普通运输（普通路径），则通过并行网关分别执行“prepare label”（秘书部门）和“insurance”（物流部门）任务，这两个任务的输出通过并行网关汇聚，再与前面汇聚的流程通过并行网关汇聚后，由物流合作方执行“pick up and send the goods”任务，最终流程结束于结束事件。

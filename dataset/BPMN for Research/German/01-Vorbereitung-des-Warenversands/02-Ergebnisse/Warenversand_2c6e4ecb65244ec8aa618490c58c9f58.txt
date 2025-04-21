@@ -1,0 +1,8 @@
+该业务流程是关于Computer-Hardware Handlung GmbH公司的一系列操作，具体如下：
+1. 流程开始，进入“Klärung der Menge”（数量澄清）任务。
+2. 完成数量澄清后，进入“Paketschein ausfüllen”（填写包裹单）任务。
+3. 包裹单填写完成后，进入“Angebote einholen/auswählen”（获取/选择报价）任务。
+4. 根据数量澄清结果，若数量大，执行“Spediter 2 beauftragen”（委托快递员2）任务；若数量小，执行“Ware verpacken”（包装货物）任务。
+5. 之后进入一个排他网关，根据条件进行分支。
+6. 若保险需要，执行“Vers. abschließen”（完成保险）任务，完成后进入“Vers. prüfen”（检查保险）任务；若保险不需要，执行其他任务。
+7. 最后流程结束。

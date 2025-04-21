@@ -1,0 +1,10 @@
+业务需求如下：
+1. 流程开始于“Regressnahme ist möglich”事件。
+2. 首先执行“Prüfung Sachverhalt”任务。
+3. 接着通过“Regressnahme ist möglich”排他网关，根据条件分支。
+   - 若条件为“nein”，则执行“Vorgang auf WV legen”任务，之后执行“WV abgelaufen”中间捕获事件，再执行“Abgabe an Inkasso-DL”任务，最后流程结束。
+   - 若条件为“ja”，则执行“Schließung Vorgang”任务，之后执行“Zahlungsaufforderung an VN”任务，再执行“Zahlung erhalten”事件，接着执行“Zahlungseingang verbuchen”任务。
+4. 在执行“Zahlung erhalten”事件后，会并行执行以下任务：
+   - 执行“Kundenwiderspruch prüfen”任务，若客户无异议（条件为“gerechtfertigt”），则流程继续；若有异议（条件为“nicht gerechtfertigt”），则执行“Abgabe an Inkasso-DL”任务，最后流程结束。
+   - 执行“Kundenwiderspruch erhalten”中间捕获事件，之后再执行“Kundenwiderspruch prüfen”任务，后续根据客户异议情况走不同分支，与上述客户有异议情况类似，最终流程结束。
+5. 整个流程最终在“结束”事件结束。

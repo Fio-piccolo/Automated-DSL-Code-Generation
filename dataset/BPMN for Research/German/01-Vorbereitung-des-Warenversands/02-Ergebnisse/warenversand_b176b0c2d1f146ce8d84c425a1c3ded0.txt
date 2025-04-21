@@ -1,0 +1,4 @@
+业务需求如下：
+流程开始于“Start”事件（sid-8BDEB3CD-F4A9-4864-BFDD-7CB004EBC854），然后根据“Liefermenge?”（sid-74185C9F-047D-4335-825D-A6CCE108F156）的判断结果进行分支。如果是“klein”（sid-54E78FD0-FFE6-4AB7-92A3-2BACBBEE81DF），则执行“Paketschein ausfüllen”任务（sid-974F17AA-B862-4A5B-AE26-0F2D741E3ACB）；如果是“groß”（sid-66544A2B-4A43-4871-952B-87BDDEA02CDD），则执行“Angebote einholen”任务（sid-837035E8-819B-483E-ADD2-4011BD512CE6）。
+“Angebote einholen”任务完成后，根据“Spediteur?”（sid-1B3CDF89-64FB-4801-B172-9C22834AA6C4）的判断结果再次分支。分别执行不同的“Spediteur”相关任务，如“Spediteur günstig”（sid-412794E8-9DFD-4022-92F0-2C2F75CDCA4D）、“Spediteur teuer”（sid-388C63E8-2548-4879-94C9-003270BBFA5C）、“Spediteur wucher”（sid-C53F8553-AD73-402E-BDF0-4EC7AF29934D）。
+各“Spediteur”任务完成后，执行“Beauftragung Spediteur”任务（sid-206C2195-7F71-4DC5-8316-73AFB7F6EB35），然后根据后续判断进行流程流转，依次经过多个ExclusiveGateway和Task，最终到达“Versand”结束事件（sid-5BB22C49-E1C5-422D-A687-5395D7160061）。整个流程在不同的节点之间通过SequenceFlow进行连接和控制。

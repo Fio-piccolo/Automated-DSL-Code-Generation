@@ -1,0 +1,1 @@
+业务流程涉及物流（Logistics）、秘书（Secretary）和仓库（Warehouse）三个参与者。秘书流程从开始事件启动，经过并行网关分为两条路径。一条路径是确认发货（Confirm Shipment），之后通过排他网关，若满足条件则获取3个报价（Get 3 Offer），再选择物流公司（Select Logistic Company）；另一条路径通过排他网关后，经包含网关到标签包裹（Label Package）。物流流程有给包裹投保（Insure Parcel）任务。仓库流程有包裹发货（Package Shipment）任务，其输出到并行网关，并行网关接收包裹发货和秘书流程中选择物流公司后的输出，之后准备取货（Prepare Pick up），最后结束。整个流程通过各种网关和任务的衔接，实现不同参与者之间的业务协作和流程推进。

@@ -1,0 +1,9 @@
+该业务流程描述了货物发货的过程，涉及秘书处、仓库工人和物流经理三个角色，具体步骤如下：
+1. 货物发货流程从“Ware zum Versand（货物待发货）”开始。
+2. 流程进入并行分支：
+    - 分支一：货物数量判断，如果是大量货物（große menge? = ja），则由秘书处人员执行“Angebote einholen（获取报价）”任务，之后执行“Angebot auswählen（选择报价）”任务，再执行“Spediteur beauftragen（委托运输商）”任务，最后到达汇聚网关。
+    - 分支二：如果不是大量货物（große menge? = nein），则由秘书处人员执行“Paketschein ausfüllen（填写包裹单）”任务。填写包裹单后，判断是否需要保险（Versicherung notwendig?）：
+        - 如果需要保险（Versicherung notwendig? = ja），则由物流经理执行“Versicherung abschließen（签订保险）”任务，之后到达汇聚网关。
+        - 如果不需要保险（Versicherung notwendig? = nein），则直接到达汇聚网关。
+3. 与此同时，仓库工人执行“Ware verpacken（包装货物）”任务。
+4. 并行分支的任务完成后，在汇聚网关汇合，之后流程结束，货物“zur Abholung bereit gestellt（准备好取货）”。

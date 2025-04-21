@@ -1,0 +1,24 @@
+业务需求如下：
+1. 流程起始于“VN kann in Regress genommen werden”事件，触发“Meldung an mich”任务。
+2. “Meldung an mich”任务完成后，进入“Prüfung des Falles”任务。
+3. “Prüfung des Falles”任务完成后，通过排他网关（ExclusiveGateway）进行分支判断。
+    - 若满足某条件，执行“Zahlungsaufforderung versenden”任务。
+        - “Zahlungsaufforderung versenden”任务完成后，执行“Vorgang auf Wiedervolage setzen”任务。
+        - “Vorgang auf Wiedervolage setzen”任务完成后，通过事件驱动网关（EventBasedGateway）进行进一步分支。
+            - 若满足某条件，抛出中间抛出事件（IntermediateThrowEvent），之后进入“Zahlungseingang”任务。
+            - 若满足另一条件，抛出中间抛出事件，之后进入“Zahlungsverweigerung eingetroffen”任务。
+            - 若满足又一条件，抛出中间抛出事件，之后进入“Widerspruch eingang”任务。
+    - 若不满足上述条件，直接执行“Vorgang schließen”任务。
+4. “Zahlungseingang”任务完成后，进入“Zahlung verbuchen”任务。
+5. “Zahlungsverweigerung eingetroffen”任务完成后，进入“Prüfen des Widerspruch”任务。
+6. “Widerspruch eingang”任务触发“Widerspruch eingang”事件，之后通过排他网关进行分支判断。
+    - 若满足某条件，执行“Übergabe des Vorgangs an Inkasso- DL”任务。
+    - 若不满足上述条件，执行“Vorgang schließen”任务。
+7. “Prüfen des Widerspruch”任务完成后，通过排他网关进行分支判断。
+    - 若满足某条件，执行“Übergabe des Vorgangs an Inkasso- DL”任务。
+    - 若不满足上述条件，执行“Vorgang schließen”任务。
+8. “Vorgang schließen”任务完成后，流程结束于“Vorgang geschlossen”事件。
+9. “Zahlung verbuchen”任务完成后，进入“Vorgang schließen”任务。
+10. “Übergabe des Vorgangs an Inkasso- DL”任务完成后，流程结束于“Vorgang geschlossen”事件。
+11. 当出现“Zahlungsfrist überschritten”事件时，触发流程中的相关任务或判断。
+12. 当出现重复的“Widerspruch eingang”事件时，触发流程中的相关任务或判断。

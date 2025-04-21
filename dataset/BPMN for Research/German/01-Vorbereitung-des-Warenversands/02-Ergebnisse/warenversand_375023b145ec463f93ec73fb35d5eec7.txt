@@ -1,0 +1,12 @@
+该业务流程主要是关于货物运输的流程，具体如下：
+1. 以“Artikel versenden”作为起点，开始货物运输流程。
+2. 进入“Versandart klären”任务，在此明确运输方式。
+3. 经过“parallelGateway”，流程分为两路：
+    - 一路进入“Angebote drei Spediteure”任务，向三家快递公司询价。
+    - 另一路进入“Spediteur Beauftragung”任务，选择并委托一家快递公司。
+4. 在“exclusiveGateway”处根据条件判断：
+    - 若条件为“ja”，进入“Paketschein erstellen”任务，创建包裹单。
+    - 若条件为“nein”，进入“Versicherung?”判断，若需要保险则进入“Vers. abschließen”任务完成运输，若不需要则进入“Ware verpacken”任务进行货物包装。
+5. “Ware verpacken”任务完成后与其他流程汇聚到“parallelGateway”。
+6. 经过“exclusiveGateway”再次汇聚后，进入“Vers. abschließen”任务完成运输。
+7. 最终以“Ware Bereitstellung”作为终点，表示货物已准备好交付。

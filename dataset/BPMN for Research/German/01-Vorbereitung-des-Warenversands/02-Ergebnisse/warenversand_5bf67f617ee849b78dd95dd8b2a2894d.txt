@@ -1,0 +1,13 @@
+货物配送流程开始于“Eingang Bestellung”（订单进入）。
+
+流程分为两个分支：
+1. 左侧分支：
+    - 首先进行“grösse der Warenmenge feststellen”（确定货物数量大小）任务。
+    - 然后通过一个排他网关（Exclusive Gateway）根据“kleine Menge”（小数量）或“grosse Menge”（大数量）进行分流。
+    - 若为“kleine Menge”，则执行“normaler Postversand”（普通邮政配送）任务，接着执行“Paketschein ausfüllen”（填写包裹单）任务，再通过一个排他网关，然后执行“Versicherungsschein ausfüllen”（填写保险单）任务，最后执行一个未命名任务。
+    - 若为“grosse Menge”，则执行“Angebote einholen”（获取报价）任务，然后通过一个排他网关分流到“Spedition 1”、“Spedition 2”或“Spedition 3”任务。
+2. 右侧分支：
+    - 从并行网关（Parallel Gateway）开始，执行“Ware verpacken”（包装货物）任务。
+    - 还有一个任务“Ware bereitstellen”（准备货物），其输入流未明确（可能流程定义缺失部分信息）。
+
+整个流程涉及“Sekretariat”（秘书处）、“Logistikleiter”（物流主管）和“Laberarbeiter”（搬运工人）三个角色，分别在不同任务中参与。

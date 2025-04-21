@@ -18,6 +18,13 @@ from eval_tool.codebleu_compute import codebleu_compute
 # openai: OpenAI API接口
 # argparse: 命令行参数解析
 
+
+if os.environ.get('ARK_API_KEY') is None:
+    os.environ['ARK_API_KEY']="sk-sR8RiK6YYrtk8Rss1b29047069804d108211285c7a25356c"
+if os.environ.get('BASE_URL') is None:
+    os.environ['BASE_URL']="https://api.yesapikey.com/v1"
+
+
 def parser_args():
     # 定义命令行参数解析函数
     parser = ArgumentParser()
@@ -45,18 +52,20 @@ def read_data(args):
 
 
 def get_completion(args, prompt, idx):
-    client = OpenAI(
-        api_key="sk-sR8RiK6YYrtk8Rss1b29047069804d108211285c7a25356c",  # 填写上api-key
-        base_url="https://api.yesapikey.com/v1"
-    )
-    client.base_url = "https://api.yesapikey.com/v1"
     max_retries = 10
     retry_delay = 0.5
+
+    client = OpenAI(
+        base_url=os.environ.get("BASE_URL"),
+        api_key=os.environ.get("ARK_API_KEY")
+    )
 
     for attempt in range(max_retries):
         try:
             response = client.chat.completions.create(
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
                 model=args.model,
                 temperature=0
             )
@@ -68,6 +77,8 @@ def get_completion(args, prompt, idx):
                 retry_delay *= 2  # 指数退避策略
             else:
                 raise
+
+
 
 
 def get_ner_shot_prompt(i, train_data, shot_data, shot_num):
